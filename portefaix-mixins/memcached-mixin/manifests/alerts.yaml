@@ -1,0 +1,22 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: memcached-mixin-alerts
+  labels:
+    k8s-app: prometheus
+    prometheus: k8s
+    role: alert-rules
+spec:
+  groups:
+  - name: memcached
+    rules:
+    - alert: MemcachedDown
+      annotations:
+        message: |
+          Memcached Instance {{ $labels.job }} / {{ $labels.instance }} is down for more than 15mins.
+      expr: |
+        memcached_up == 0
+      for: 15m
+      labels:
+        severity: critical
