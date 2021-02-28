@@ -4,7 +4,7 @@ kind: PrometheusRule
 metadata:
   name: cert-manager-mixin-alerts
   labels:
-    k8s-app: prometheus
+    app: prometheus
     prometheus: k8s
     role: alert-rules
 spec:

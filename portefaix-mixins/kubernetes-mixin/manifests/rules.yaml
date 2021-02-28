@@ -4,7 +4,7 @@ kind: PrometheusRule
 metadata:
   name: kubernetes-mixin-rules
   labels:
-    k8s-app: prometheus
+    app: prometheus
     prometheus: k8s
     role: alert-rules
 spec:
