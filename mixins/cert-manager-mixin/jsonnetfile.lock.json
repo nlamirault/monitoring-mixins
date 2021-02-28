@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://gitlab.com/uneeq-oss/cert-manager-mixin.git",
+          "subdir": ""
+        }
+      },
+      "version": "e62b1814b6f14894897e4b3da772da10bbb928dd",
+      "sum": "8WvaxmYAZ37D554lEi65L2uMuFgIJ5HclIVD6RhUTzQ="
+    }
+  ],
+  "legacyImports": false
+}
