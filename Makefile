@@ -61,9 +61,9 @@ check-%:
 .PHONY: check
 check: check-git check-jsonnet check-jb check-promtool check-promdoc check-jsonnetfmt ## Check requirements
 
-.PHONY: clean
-clean: ## Clean environment
-	rm -fr mixins
+# .PHONY: clean
+# clean: ## Clean environment
+# 	rm -fr monitoring-mixins
 
 .PHONY: test
 test: guard-SERVICE ## Test rules (SERVICE=xxx)
