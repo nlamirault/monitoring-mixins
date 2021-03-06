@@ -105,6 +105,11 @@ function monitoring_mixin_mixtool {
     echo -e "${INFO_COLOR}[minotor-mixin] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
 
+    if [ -f "jsonnetfile.lock.json" ]; then
+        jb update
+    else
+        jb install
+    fi
     mixtool generate all mixin.libsonnet
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     mv alerts.yaml ${output}/${mixin}/prometheus
