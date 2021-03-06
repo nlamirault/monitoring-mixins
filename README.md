@@ -1,6 +1,6 @@
-# Portefaix Mixins
+# Monitoring Mixins
 
-The portefaix-mixins is a collection of reusable and configurable
+The monitoring-mixins is a collection of reusable and configurable
 [Prometheus](https://prometheus.io/) alerts, and [Grafana](https://grafana.com)
 dashboards.
 
