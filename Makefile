@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-APP = P O R T E F A I X  /  M I X I N S
+APP = M O N I T O R I N G  /  M I X I N S
 
 DEBUG ?=
 
@@ -78,8 +78,8 @@ test: guard-SERVICE ## Test rules (SERVICE=xxx)
 
 .PHONY: mixins
 mixins: ## Build mixins
-	@./hack/mixins.sh portefaix-mixins
+	@./hack/mixins.sh monitoring-mixins
 
 .PHONY: dist
 dist: guard-VERSION ## Create an archive
-	@zip -r portefaix-mixins-v$(VERSION).zip portefaix-mixins
+	@zip -r monitoring-mixins-v$(VERSION).zip monitoring-mixins
