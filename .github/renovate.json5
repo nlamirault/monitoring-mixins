@@ -1,0 +1,52 @@
+{
+  "extends": [
+    "config:base",
+    ":gitSignOff"
+  ],
+  "enabled": true,
+  "timezone": "Europe/Paris",
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  // "gitAuthor": "Nicolas Lamirault <nlamirault@users.noreply.github.com>",
+  // "commitBody": "Signed-off-by: Nicolas Lamirault <nlamirault@users.noreply.github.com>",
+  // Do not notify on closed unmerged PRs
+  "suppressNotifications": ["prIgnoreNotification"],
+  // Do not rebase PRs
+  "rebaseWhen": "conflicted",
+  "assignees": ["@nlamirault"],
+  "reviewersFromCodeOwners": true,
+  "packageRules": [
+    // Labels for Terraform
+    {
+      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "updateTypes": ["major"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/high", "size/xs"]
+    },
+    {
+      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "updateTypes": ["minor"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/medium", "size/xs"]
+    },
+    {
+      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "updateTypes": ["patch"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/low", "size/xs"]
+    },
+    // Labels for Terraform-version
+    {
+      "matchPackageNames": ["terraform-version"],
+      "updateTypes": ["major"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/high", "size/xs"]
+    },
+    {
+      "matchPackageNames": ["terraform-version"],
+      "updateTypes": ["minor"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/medium", "size/xs"]
+    },
+    {
+      "matchPackageNames": ["terraform-version"],
+      "updateTypes": ["patch"],
+      "labels": ["area/renovate", "dependency/terraform", "priority/low", "size/xs"]
+    },
+  ]
+}
