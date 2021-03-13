@@ -19,8 +19,8 @@ dashboards.
 | [kube-state-metrics-mixin](https://monitoring.mixins.dev/kube-state-metrics) | `v2.0.0-rc0` |
 | [cert-manager-mixin](https://monitoring.mixins.dev/cert-manager) | `master` |
 | [grafana-mixin](https://github.com/grafana/grafana/tree/master/grafana-mixin) | `v7.4.3` |
-| [loki-mixin](https://github.com/grafana/loki/tree/master/production/loki-mixin) | `v2.1.0`  |
-| [promtail-mixin](https://monitoring.mixins.dev/promtail) | `v2.1.0` |
+| [loki-mixin](https://github.com/grafana/loki/tree/master/production/loki-mixin) | `v2.2.0`  |
+| [promtail-mixin](https://monitoring.mixins.dev/promtail) | `v2.2.0` |
 | [etcd-mixin](https://github.com/etcd-io/etcd/tree/master/Documentation/etcd-mixin) | `v3.4.14` |
 | [memcached-mixin](https://monitoring.mixins.dev/memcached) | `master` |
 
