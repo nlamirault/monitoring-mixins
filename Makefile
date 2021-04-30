@@ -78,7 +78,7 @@ deps: ## Install dependencies
 	go get github.com/google/go-jsonnet/cmd/jsonnet
 	go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
 	go get github.com/brancz/gojsontoyaml
-	
+	GO111MODULE=on go get github.com/monitoring-mixins/mixtool/cmd/mixtool
 
 # ====================================
 # M I X I N S
