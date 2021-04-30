@@ -1,4 +1,4 @@
-local nodeExporter = import "node-mixin/mixin.libsonnet";
+local nodeExporter = import 'node-mixin/mixin.libsonnet';
 
 nodeExporter {
 
@@ -25,8 +25,8 @@ nodeExporter {
     grafana_prefix: 'Node Exporter / ',
 
     grafanaK8s+:: {
-      dashboardNamePrefix: 'Kubernetes Mixin / ',
-      dashboardTags: ['kubernetes', 'infrastucture', "minotor-v4"],
+      dashboardNamePrefix: 'Node Exporter Mixin / ',
+      dashboardTags: ['node-exporter-mixin', '__APP_VERSION__'],
     },
   },
 }

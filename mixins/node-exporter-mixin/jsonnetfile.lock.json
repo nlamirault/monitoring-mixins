@@ -8,8 +8,8 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "daad85cf3fad3580e58029414630e29956aefe21",
-      "sum": "zkOBVXtNSGlOdbm5TRCbEik7c/Jk+btbJqaE9qW8j3Y="
+      "version": "55cf4ee53ced2b6d3ce96ecce9fb813b4465be98",
+      "sum": "4/sUV0Kk+o8I+wlYxL9R6EPhL/NiLfYHk+NXlU64RUk="
     },
     {
       "source": {
@@ -18,7 +18,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "0bd27867f8952f6662d2fadd469a99e88f37dfcb",
+      "version": "dbf1211d003d20c7adcdee942c477e648507a398",
       "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "lib/promgrafonnet"
         }
       },
-      "version": "47cc48fe091adee2bde95eac55d7936f64c6bf63",
+      "version": "39a9cda705b5201c35105bd1f24c83923fa839ef",
       "sum": "zv7hXGui6BfHzE9wPatHI/AGZa4A2WKo6pq7ZdqBsps="
     },
     {
@@ -38,7 +38,7 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "e57f30736caebb4a83f4a308dd439b68a0e85ff3",
+      "version": "cf1e610b7655e98780008d61060843e9b6f1bba8",
       "sum": "cZTNXQMUCLB5FGYpMn845dcqGdkcYt58qCqOFIV/BoQ="
     }
   ],
