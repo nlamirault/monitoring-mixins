@@ -1,4 +1,4 @@
-local promtail = import "promtail-mixin/mixin.libsonnet";
+local promtail = import 'promtail-mixin/mixin.libsonnet';
 
 promtail {
   _config+:: {

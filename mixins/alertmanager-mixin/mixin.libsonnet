@@ -1,4 +1,4 @@
-local alertmanager = import "alertmanager-mixin/mixin.libsonnet";
+local alertmanager = import 'alertmanager-mixin/mixin.libsonnet';
 
 alertmanager {
   _config+:: {

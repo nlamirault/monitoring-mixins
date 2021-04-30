@@ -1,4 +1,4 @@
-local etcd = import "etcd-mixin/mixin.libsonnet";
+local etcd = import 'etcd-mixin/mixin.libsonnet';
 
 etcd {
   _config+:: {
@@ -12,7 +12,7 @@ etcd {
     // scrape_interval_seconds is the global scrape interval which can be
     // used to dynamically adjust rate windows as a function of the interval.
     scrape_interval_seconds: 30,
-    
+
     // runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
   },
 }

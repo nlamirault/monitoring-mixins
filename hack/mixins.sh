@@ -70,7 +70,7 @@ function monitoring_mixin {
     local rules=$4
     local dashboards=$5
 
-    echo -e "${INFO_COLOR}[minotor-mixin] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
     if [ -f "jsonnetfile.lock.json" ]; then
         jb update
@@ -78,20 +78,20 @@ function monitoring_mixin {
         jb install
     fi
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
-    echo -e "${INFO_COLOR}[minotor-mixin] Generate alerts${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Generate alerts${NO_COLOR}"
     if [ -n "${alerts}" ]; then
         jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | gojsontoyaml > ${output}/${mixin}/prometheus/alerts.yaml
     fi
-    echo -e "${INFO_COLOR}[minotor-mixin] Generate rules${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Generate rules${NO_COLOR}"
     if [ -n "${rules}" ]; then
         jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | gojsontoyaml > ${output}/${mixin}/prometheus/rules.yaml
     fi
-    echo -e "${INFO_COLOR}[minotor-mixin] Generate dashboards${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Generate dashboards${NO_COLOR}"
     if [ -n "${dashboards}" ]; then
         jsonnet -J vendor -m ${output}/${mixin}/dashboards -e '(import "mixin.libsonnet").grafanaDashboards'
     fi
     # rm -fr vendor
-    echo -e "${INFO_COLOR}[minotor-mixin] Vendorisation${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Vendorisation${NO_COLOR}"
     for file in $(ls ${output}/${mixin}/prometheus/*.yaml); do
         manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
     done
@@ -102,7 +102,7 @@ function monitoring_mixin_mixtool {
     local mixin=$1
     local output=$2
 
-    echo -e "${INFO_COLOR}[minotor-mixin] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
+    echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
 
     if [ -f "jsonnetfile.lock.json" ]; then
@@ -124,72 +124,72 @@ function monitoring_mixin_mixtool {
 
 function alertmanager_mixin {
     local output=$1
-    echo -e "${OK_COLOR}[minotor-mixin] Alertmanager Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Alertmanager Mixin ${NO_COLOR}"
     monitoring_mixin "alertmanager-mixin" ${output} "alerts" "" ""
 }
 
 function kube_state_metrics_mixin {
     local output=$1
-    echo -e "${OK_COLOR}[minotor-mixin] KubeStateMetrics Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] KubeStateMetrics Mixin ${NO_COLOR}"
     monitoring_mixin "kube-state-metrics-mixin" ${output} "alerts" "" ""
 }
 
 function kubernetes_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Kubernetes Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Kubernetes Mixin ${NO_COLOR}"
     monitoring_mixin "kubernetes-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 function node_exporter_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Node Exporter Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Node Exporter Mixin ${NO_COLOR}"
     monitoring_mixin "node-exporter-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 
 function prometheus_operator_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Prometheus Operator Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Operator Mixin ${NO_COLOR}"
     monitoring_mixin "prometheus-operator-mixin" ${output} "alerts" "" ""
 }
 
 
 function prometheus_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Prometheus Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Mixin ${NO_COLOR}"
     monitoring_mixin "prometheus-mixin" ${output} "alerts" "" "dashboards"
 }
 
 
 function thanos_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Thanos Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Thanos Mixin ${NO_COLOR}"
     monitoring_mixin "thanos-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 
 function cert_manager_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Cert Manager Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Cert Manager Mixin ${NO_COLOR}"
     monitoring_mixin "cert-manager-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 function grafana_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Grafana Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Grafana Mixin ${NO_COLOR}"
     monitoring_mixin_mixtool "grafana-mixin" ${output}
 }
 
 function loki_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Loki Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Loki Mixin ${NO_COLOR}"
     monitoring_mixin "loki-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 function promtail_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Promtail Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Promtail Mixin ${NO_COLOR}"
     monitoring_mixin "promtail-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
 function etcd_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Etcd Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Etcd Mixin ${NO_COLOR}"
     monitoring_mixin "etcd-mixin" ${output} "alerts" "" "dashboards"
 }
 
 function memcached_mixin {
-    echo -e "${OK_COLOR}[minotor-mixin] Setup Memcached Mixin ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Memcached Mixin ${NO_COLOR}"
     monitoring_mixin "memcached-mixin" ${output} "alerts" "" "dashboards"
 }
 

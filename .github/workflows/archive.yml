@@ -38,10 +38,7 @@ jobs:
         run: |
           go get github.com/google/go-jsonnet/cmd/jsonnet
           go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-          echo $GOBIN
-          echo $GOPATH
-          echo $PATH
-
+    
       - name: Build mixins
         run: |
-          ./hack/mixins.sh /tmp/
+          PATH=${PATH}:${HOME}/go/bin /hack/mixins.sh /tmp/
