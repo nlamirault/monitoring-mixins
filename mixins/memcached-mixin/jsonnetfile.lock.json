@@ -8,7 +8,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "0bd27867f8952f6662d2fadd469a99e88f37dfcb",
+      "version": "dbf1211d003d20c7adcdee942c477e648507a398",
       "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
     },
     {
@@ -18,7 +18,7 @@
           "subdir": "memcached-mixin"
         }
       },
-      "version": "0bd27867f8952f6662d2fadd469a99e88f37dfcb",
+      "version": "dbf1211d003d20c7adcdee942c477e648507a398",
       "sum": "f+CdSkCAWabNhghrRAsxyHYCgkajjgQuoMmL3Dt/hBk="
     }
   ],

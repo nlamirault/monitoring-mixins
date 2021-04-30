@@ -1,4 +1,4 @@
-local certmanager = import "cert-manager-mixin/mixin.libsonnet";
+local certmanager = import 'cert-manager-mixin/mixin.libsonnet';
 
 {
   _config+:: {
