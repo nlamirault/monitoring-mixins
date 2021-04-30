@@ -34,7 +34,7 @@ jobs:
 
       - name: Setup JSonnet
         id: setup-jsonnet
-        uses: zendesk/setup-jsonnet@v1
+        uses: zendesk/setup-jsonnet@v7
         with:
           version: v0.17.0
 
@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup JSonnet
         id: setup-jsonnet
-        uses: zendesk/setup-jsonnet@v1
+        uses: zendesk/setup-jsonnet@v7
         with:
           version: v0.17.0
 
