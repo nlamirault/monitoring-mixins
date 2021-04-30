@@ -13,7 +13,7 @@ kubernetes {
 
     grafanaK8s: {
       dashboardNamePrefix: 'Kubernetes / ',
-      dashboardTags: ['kubernetes-mixin', 'minotor-v4.1.0'],
+      dashboardTags: ['kubernetes-mixin', '__APP_VERSION__'],
       linkPrefix: '.',
 
       // The default refresh time for all dashboards, default to 10s
@@ -21,7 +21,6 @@ kubernetes {
       minimumTimeInterval: '1m',
     },
 
-    runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
-
+    runbookURLPattern: 'https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-%s',
   },
 }

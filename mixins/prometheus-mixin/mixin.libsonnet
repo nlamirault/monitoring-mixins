@@ -1,4 +1,4 @@
-local kubernetes = import "prometheus-mixin/mixin.libsonnet";
+local kubernetes = import 'prometheus-mixin/mixin.libsonnet';
 
 kubernetes {
   _config+:: {
@@ -11,12 +11,11 @@ kubernetes {
 
     grafana: {
       prefix: 'Prometheus / ',
-      tags: ['prometheus-mixin', "minotor-v4.1.0"],
+      tags: ['prometheus-mixin', '__APP__VERSION__'],
       // The default refresh time for all dashboards, default to 60s
       refresh: '60s',
     },
 
-    // runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
-
+    runbookURLPattern: 'https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/prometheus-mixin-runbook.md#alert-name-%s',
   },
 }
