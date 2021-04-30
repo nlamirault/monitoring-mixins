@@ -12,20 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Prow / Merge on lgtm label
+name: Project / Size PR
+
 on:
-  schedule:
-  - cron: "0 * * * *"
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  execute:
+  update_labels:
     runs-on: ubuntu-latest
     steps:
-      - uses: jpmcb/prow-github-actions@v1.1.2
-        with:
-          jobs: 'lgtm'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2
 
-          # this configuration is optional and will default to 'merge'
-          # possible options are 'merge', 'rebase', or 'squash'
-          merge-method: 'squash'
+      - uses: actions-ecosystem/action-size@v2
+        id: size
+
+      - uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          labels: ${{ steps.size.outputs.stale_labels }}
+
+      - uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          labels: ${{ steps.size.outputs.new_label }}

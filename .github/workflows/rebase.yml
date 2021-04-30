@@ -12,20 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Prow / Merge on lgtm label
+name: Projet / Rebase
 on:
-  schedule:
-  - cron: "0 * * * *"
-
+  issue_comment:
+    types: [created]
 jobs:
-  execute:
+  rebase:
+    name: Rebase
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase')
     runs-on: ubuntu-latest
     steps:
-      - uses: jpmcb/prow-github-actions@v1.1.2
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
         with:
-          jobs: 'lgtm'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-          # this configuration is optional and will default to 'merge'
-          # possible options are 'merge', 'rebase', or 'squash'
-          merge-method: 'squash'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

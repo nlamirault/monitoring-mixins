@@ -12,20 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Prow / Merge on lgtm label
-on:
-  schedule:
-  - cron: "0 * * * *"
+name: Mixins / Build
+
+# on:
+#   push:
+#     # branches to consider in the event; optional, defaults to all
+#     branches:
+#       - master
+#     paths:
+#       - "mixins/**"
+on: pull_request
 
 jobs:
-  execute:
+  update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      - uses: jpmcb/prow-github-actions@v1.1.2
-        with:
-          jobs: 'lgtm'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: alexdglover/jsonnet-render@v1
+        id: jsonnet-render
 
-          # this configuration is optional and will default to 'merge'
-          # possible options are 'merge', 'rebase', or 'squash'
-          merge-method: 'squash'
+      - name: Build mixins
+        run: |
+          ./hack/mixins.sh monitoring-mixins
