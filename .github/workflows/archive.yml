@@ -24,7 +24,7 @@ name: Mixins / Build
 on: pull_request
 
 jobs:
-  alertmanager_mixin:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,29 +32,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup JSonnet
-        id: setup-jsonnet
-        uses: zendesk/setup-jsonnet@v7
+      - name: Run Jsonnet Updater
+        uses: grafana/jsonnet-updater@v0.4
         with:
-          version: v0.17.0
-
-      - name: Build mixin
-        run: |
-          ./hack/mixins.sh /tmp/ alertmanager-mixin
-
-  cert_manager_mixin:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Setup JSonnet
-        id: setup-jsonnet
-        uses: zendesk/setup-jsonnet@v7
-        with:
-          version: v0.17.0
+          git-user-name: Nicolas Lamirault
+          git-user-email: nicolas.lamirault@gmail.com
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Build mixin
         run: |
