@@ -59,7 +59,7 @@ check-%:
 ##@ Development
 
 .PHONY: check
-check: check-git check-jsonnet check-jb check-promtool check-promdoc check-jsonnetfmt ## Check requirements
+check: check-git check-jsonnet check-jb check-gojsontoyaml check-promtool check-promdoc check-jsonnetfmt ## Check requirements
 
 .PHONY: clean
 clean: ## Clean environment
@@ -72,6 +72,13 @@ test: guard-SERVICE ## Test rules (SERVICE=xxx)
 .PHONY: validate
 validate: ## Execute git-hooks
 	@pre-commit run -a
+
+.PHONY: deps
+deps: ## Install dependencies
+	go get github.com/google/go-jsonnet/cmd/jsonnet
+	go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+	go get github.com/brancz/gojsontoyaml
+	
 
 # ====================================
 # M I X I N S
