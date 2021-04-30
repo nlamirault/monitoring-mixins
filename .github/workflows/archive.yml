@@ -24,12 +24,26 @@ name: Mixins / Build
 on: pull_request
 
 jobs:
-  update_release_draft:
+  alertmanager_mixin:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: alexdglover/jsonnet-render@v1
         id: jsonnet-render
+        with:
+          file: mixins/alertmanager-mixins/jsonnetfile.json
 
-      - name: Build mixins
-        run: |
-          ./hack/mixins.sh monitoring-mixins
+  cert_manager_mixin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: alexdglover/jsonnet-render@v1
+        id: jsonnet-render
+        with:
+          file: mixins/cert-manager-mixins/jsonnetfile.json
