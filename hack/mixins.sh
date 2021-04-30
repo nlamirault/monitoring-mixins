@@ -218,4 +218,3 @@ memcached_mixin ${output}
 # TODO :
 
 # elasticsearch_mixin
-

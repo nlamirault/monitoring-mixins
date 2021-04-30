@@ -11,11 +11,11 @@ dashboards.
 | Mixin | Version |
 |-------|:-------:|
 | [kubernetes-mixin](https://monitoring.mixins.dev/kubernetes) | `release-0.6` |
-| [node-exporter-mixin](https://monitoring.mixins.dev/node-exporter) | `master` | 
+| [node-exporter-mixin](https://monitoring.mixins.dev/node-exporter) | `master` |
 | [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.25.0` |
 | [prometheus-operator-mixin](https://monitoring.mixins.dev/prometheus-operator) | `v0.46.0` |
 | [thanos-mixin](https://monitoring.mixins.dev/thanos) | `v0.18.0` |
-| [alertmanager-mixin](https://monitoring.mixins.dev/alertmanager) | `master` | 
+| [alertmanager-mixin](https://monitoring.mixins.dev/alertmanager) | `master` |
 | [kube-state-metrics-mixin](https://monitoring.mixins.dev/kube-state-metrics) | `v2.0.0-rc0` |
 | [cert-manager-mixin](https://monitoring.mixins.dev/cert-manager) | `master` |
 | [grafana-mixin](https://github.com/grafana/grafana/tree/master/grafana-mixin) | `v7.4.3` |

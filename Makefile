@@ -69,6 +69,9 @@ clean: ## Clean environment
 test: guard-SERVICE ## Test rules (SERVICE=xxx)
 	promtool check rules $(SERVICE)/prometheus/*.yaml
 
+.PHONY: validate
+validate: ## Execute git-hooks
+	@pre-commit run -a
 
 # ====================================
 # M I X I N S
