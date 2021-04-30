@@ -32,14 +32,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run Jsonnet Updater
-        uses: grafana/jsonnet-updater@v0.4
-        with:
-          git-user-name: Nicolas Lamirault
-          git-user-email: nicolas.lamirault@gmail.com
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - uses: actions/setup-go@v2
 
-      - name: Build mixin
+      - name: Install tools
         run: |
-          ./hack/mixins.sh /tmp/ cert-manager-mixin
+          go get github.com/google/go-jsonnet/cmd/jsonnet
+          go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
+
+      - name: Build mixins
+        run: |
+          ./hack/mixins.sh /tmp/
