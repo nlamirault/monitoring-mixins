@@ -33,6 +33,11 @@ repos:
       args:
       - --license-filepath
       - hack/config/licence.txt
+    - id: insert-license
+      files: \.yml
+      args:
+      - --license-filepath
+      - hack/config/licence.txt
 - repo: https://github.com/waisbrot/pre-commit-jsonnet.git
   rev: v1.0
   hooks:

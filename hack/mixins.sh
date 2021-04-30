@@ -193,27 +193,32 @@ function memcached_mixin {
     monitoring_mixin "memcached-mixin" ${output} "alerts" "" "dashboards"
 }
 
+echo $#
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
     usage
     exit 0
 fi
 
 output=$(pwd)/$1
 
-kubernetes_mixin ${output}
-node_exporter_mixin ${output}
-prometheus_operator_mixin ${output}
-prometheus_mixin ${output}
-alertmanager_mixin ${output}
-kube_state_metrics_mixin ${output}
-thanos_mixin ${output}
-cert_manager_mixin ${output}
-grafana_mixin ${output}
-loki_mixin ${output}
-promtail_mixin ${output}
-etcd_mixin ${output}
-memcached_mixin ${output}
+if [ "$#" -eq 2 ]; then
+    $(echo $2 | sed -e "s/-/_/g") ${output}
+else
+    kubernetes_mixin ${output}
+    node_exporter_mixin ${output}
+    prometheus_operator_mixin ${output}
+    prometheus_mixin ${output}
+    alertmanager_mixin ${output}
+    kube_state_metrics_mixin ${output}
+    thanos_mixin ${output}
+    cert_manager_mixin ${output}
+    grafana_mixin ${output}
+    loki_mixin ${output}
+    promtail_mixin ${output}
+    etcd_mixin ${output}
+    memcached_mixin ${output}
+fi
 
 # TODO :
 
