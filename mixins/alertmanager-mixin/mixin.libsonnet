@@ -27,7 +27,7 @@ alertmanager {
     // in alertmanagerClusterLabels above.
     alertmanagerClusterName: '{{$labels.job}}',
 
-    // runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
+    // runbookURLPattern: 'https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/alertmanager-mixin-runbook.md#alert-name-%s',
 
   },
 }
