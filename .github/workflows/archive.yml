@@ -41,4 +41,5 @@ jobs:
     
       - name: Build mixins
         run: |
-          PATH=${PATH}:${HOME}/go/bin /hack/mixins.sh /tmp/
+          export PATH=${PATH}:`go env GOPATH`/bin
+          ./hack/mixins.sh /tmp/
