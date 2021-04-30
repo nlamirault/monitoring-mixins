@@ -1,4 +1,4 @@
-local prometheusOperator = import "mixin/mixin.libsonnet";
+local prometheusOperator = import 'mixin/mixin.libsonnet';
 
 prometheusOperator {
   _config+:: {
