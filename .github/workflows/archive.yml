@@ -34,7 +34,7 @@ jobs:
       - uses: alexdglover/jsonnet-render@v1
         id: jsonnet-render
         with:
-          file: mixins/alertmanager-mixins/jsonnetfile.json
+          file: mixins/alertmanager-mixin/jsonnetfile.json
 
   cert_manager_mixin:
     runs-on: ubuntu-latest
@@ -46,4 +46,4 @@ jobs:
       - uses: alexdglover/jsonnet-render@v1
         id: jsonnet-render
         with:
-          file: mixins/cert-manager-mixins/jsonnetfile.json
+          file: mixins/cert-manager-mixin/jsonnetfile.json
