@@ -13,6 +13,6 @@ etcd {
     // used to dynamically adjust rate windows as a function of the interval.
     scrape_interval_seconds: 30,
 
-    // runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
+    // runbookURLPattern: 'https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/etcd-mixin-runbook.md#alert-name-%s',
   },
 }

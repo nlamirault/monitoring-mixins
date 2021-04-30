@@ -3,6 +3,6 @@ local promtail = import 'promtail-mixin/mixin.libsonnet';
 promtail {
   _config+:: {
 
-    // runbookURLPattern: 'https://doc.skale-5.com/run/runbook.md#alert-name-%s',
+    // runbookURLPattern: 'https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/promtail-mixin-runbook.md#alert-name-%s',
   },
 }
