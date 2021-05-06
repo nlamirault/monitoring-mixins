@@ -3,7 +3,7 @@ local nodeExporter = import 'node-mixin/mixin.libsonnet';
 nodeExporter {
 
   _config+:: {
-    nodeExporterSelector: 'job="node"',
+    nodeExporterSelector: 'job="node-exporter"',
 
     // Available disk space (%) thresholds on which to trigger the
     // 'NodeFilesystemSpaceFillingUp' alerts. These alerts fire if the disk
@@ -26,7 +26,7 @@ nodeExporter {
 
     grafanaK8s+:: {
       dashboardNamePrefix: 'Node Exporter Mixin / ',
-      dashboardTags: ['node-exporter-mixin', '__APP_VERSION__'],
+      dashboardTags: ['node-exporter-mixin', '${app}-v${version}'],
     },
   },
 }
