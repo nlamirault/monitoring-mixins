@@ -15,6 +15,7 @@
   "rebaseWhen": "conflicted",
   "assignees": ["@nlamirault"],
   "reviewersFromCodeOwners": true,
+  "labels": ["area/renovate", "lifecycle/active", "status/review_needed"],
   "packageRules": [
     // Labels for Terraform
     {
