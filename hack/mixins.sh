@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Copyright (C) 2020-2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
-
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -25,9 +25,7 @@ echo -e "${OK_COLOR}[ Monitoring Mixins ]${NO_COLOR}"
 
 MIXINS_DIR="mixins"
 
-KUBE_LABELS="k8s-app: prometheus
-    prometheus: k8s
-    role: alert-rules"
+KUBE_LABELS="app: prometheus"
 
 function usage() {
     echo "usage: $0 <output directory>"
@@ -63,6 +61,15 @@ ${rules}
 EOF
 }
 
+function jsonnet_init {
+    if [ -f "jsonnetfile.lock.json" ]; then
+        jb update
+    else
+        jb install
+    fi
+    envsubst < "mixin.tpl.libsonnet" > "mixin.libsonnet"
+}
+
 
 function monitoring_mixin {
     local mixin=$1
@@ -73,11 +80,9 @@ function monitoring_mixin {
 
     echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
-    if [ -f "jsonnetfile.lock.json" ]; then
-        jb update
-    else
-        jb install
-    fi
+
+    jsonnet_init
+    
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     echo -e "${INFO_COLOR}[monitoring-mixins] Generate alerts${NO_COLOR}"
     if [ -n "${alerts}" ]; then
@@ -106,11 +111,8 @@ function monitoring_mixin_mixtool {
     echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
 
-    if [ -f "jsonnetfile.lock.json" ]; then
-        jb update
-    else
-        jb install
-    fi
+    jsonnet_init
+    
     mixtool generate all mixin.libsonnet
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     mv alerts.yaml ${output}/${mixin}/prometheus
@@ -194,17 +196,20 @@ function memcached_mixin {
     monitoring_mixin "memcached-mixin" ${output} "alerts" "" "dashboards"
 }
 
-echo $#
-
-if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+# echo $#
+if [ "$#" -lt 3 ] || [ "$#" -gt 5 ]; then
     usage
     exit 0
 fi
 
 output=$(pwd)/$1
 
-if [ "$#" -eq 2 ]; then
-    $(echo $2 | sed -e "s/-/_/g") ${output}
+export app=$2
+export version=$3
+echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-v${version} ${NO_COLOR}"
+
+if [ "$#" -eq 4 ]; then
+    $(echo $4 | sed -e "s/-/_/g") ${output}
 else
     kubernetes_mixin ${output}
     node_exporter_mixin ${output}
@@ -220,7 +225,3 @@ else
     etcd_mixin ${output}
     memcached_mixin ${output}
 fi
-
-# TODO :
-
-# elasticsearch_mixin

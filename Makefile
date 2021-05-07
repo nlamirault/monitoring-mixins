@@ -1,5 +1,5 @@
-# Copyright (C) 2020-2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
-
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -87,9 +87,13 @@ deps: ## Install dependencies
 ##@ Mixins
 
 .PHONY: mixins
-mixins: ## Build mixins
-	@./hack/mixins.sh monitoring-mixins
+mixins: guard-APP guard-VERSION ## Build mixins
+	@./hack/mixins.sh monitoring-mixins $(APP) $(VERSION)
 
 .PHONY: dist
 dist: guard-VERSION ## Create an archive
 	@zip -r monitoring-mixins-v$(VERSION).zip monitoring-mixins
+
+.PHONY: dist-tenant
+dist-tenant: guard-APP guard-VERSION ## Create an archive
+	@zip -r monitoring-mixins-$(APP)-v$(VERSION).zip monitoring-mixins
