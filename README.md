@@ -10,7 +10,7 @@ dashboards.
 
 | Mixin | Version |
 |-------|:-------:|
-| [kubernetes-mixin](https://monitoring.mixins.dev/kubernetes) | `release-0.7` |
+| [kubernetes-mixin](https://monitoring.mixins.dev/kubernetes) | `release-0.8` |
 | [node-exporter-mixin](https://monitoring.mixins.dev/node-exporter) | `v1.1.2` |
 | [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.26.0` |
 | [prometheus-operator-mixin](https://monitoring.mixins.dev/prometheus-operator) | `v0.47.0` |
