@@ -201,6 +201,11 @@ function elasticsearch_mixin {
     monitoring_mixin "elasticsearch-mixin" ${output} "" "" "dashboards"
 }
 
+function rabbitmq_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup RabbitMQ Mixin ${NO_COLOR}"
+    monitoring_mixin_mixtool "rabbitmq-mixin" ${output}
+}
+
 # echo $#
 if [ "$#" -lt 3 ] || [ "$#" -gt 5 ]; then
     usage
@@ -230,4 +235,5 @@ else
     etcd_mixin ${output}
     memcached_mixin ${output}
     elasticsearch_mixin ${output}
+    rabbitmq_mixin ${output}
 fi

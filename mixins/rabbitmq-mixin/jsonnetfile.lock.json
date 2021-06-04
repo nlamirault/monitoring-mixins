@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "rabbitmq-mixin"
+        }
+      },
+      "version": "0e1f8c4362c036ae14afafed4f744216b306044d",
+      "sum": "8JpO7v3mEj/1FOVNmThzL+3kXF26eq/XtdyeNFr7MvE="
+    }
+  ],
+  "legacyImports": false
+}
