@@ -24,6 +24,7 @@ dashboards.
 | [etcd-mixin](https://github.com/etcd-io/etcd/tree/master/Documentation/etcd-mixin) | `v3.4.14` |
 | [memcached-mixin](https://monitoring.mixins.dev/memcached) | `master` |
 | [elasticsearch-mixin](https://github.com/grafana/jsonnet-libs/tree/master/elasticsearch-mixin) | `master` |
+| [rabbitmq-mixin](https://github.com/grafana/jsonnet-libs/tree/master/rabbitmq-mixin) | `master` |
 
 ### Mixin
 
