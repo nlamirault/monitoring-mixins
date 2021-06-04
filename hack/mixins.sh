@@ -28,7 +28,7 @@ MIXINS_DIR="mixins"
 KUBE_LABELS="app: prometheus"
 
 function usage() {
-    echo "usage: $0 <output directory>"
+    echo "usage: $0 <output directory> <tenant> <version>"
 }
 
 function jsonnet_tools {
