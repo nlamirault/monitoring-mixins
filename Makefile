@@ -97,3 +97,8 @@ dist: guard-VERSION ## Create an archive
 .PHONY: dist-tenant
 dist-tenant: guard-APP guard-VERSION ## Create an archive
 	@zip -r monitoring-mixins-$(APP)-v$(VERSION).zip monitoring-mixins
+
+.PHONY: release
+release: guard-VERSION ## Create a new release
+	make mixins APP=monitoring-mixins VERSION=$(VERSION)
+	make dist VERSION=$(VERSION)
