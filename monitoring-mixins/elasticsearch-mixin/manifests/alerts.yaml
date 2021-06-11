@@ -1,0 +1,9 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: elasticsearch-mixin-alerts
+  labels:
+    app: prometheus
+spec:
+  null
