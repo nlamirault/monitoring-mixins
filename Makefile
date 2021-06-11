@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-APP = M O N I T O R I N G  /  M I X I N S
+BANNER = M O N I T O R I N G  /  M I X I N S
 
 DEBUG ?=
 
@@ -37,7 +37,7 @@ WARN=[⚠️]
 
 .PHONY: help
 help:
-	@echo -e "$(OK_COLOR)        $(APP)$(NO_COLOR)"
+	@echo -e "$(OK_COLOR)        $(BANNER)$(NO_COLOR)"
 	@echo "------------------------------------------------------------------"
 	@echo ""
 	@awk 'BEGIN {FS = ":.*##"; printf "${ERROR_COLOR}Usage${NO_COLOR}: make ${INFO_COLOR}<target>${NO_COLOR}\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  ${INFO_COLOR}%-25s${NO_COLOR} %s\n", $$1, $$2 } /^##@/ { printf "\n${WHITE_COLOR}%s${NO_COLOR}\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
