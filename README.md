@@ -12,9 +12,9 @@ dashboards.
 |-------|:-------:|
 | [kubernetes-mixin](https://monitoring.mixins.dev/kubernetes) | `release-0.8` |
 | [node-exporter-mixin](https://monitoring.mixins.dev/node-exporter) | `v1.1.2` |
-| [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.26.0` |
-| [prometheus-operator-mixin](https://monitoring.mixins.dev/prometheus-operator) | `v0.47.0` |
-| [thanos-mixin](https://monitoring.mixins.dev/thanos) | `v0.20.0` |
+| [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.27.0` |
+| [prometheus-operator-mixin](https://monitoring.mixins.dev/prometheus-operator) | `v0.48.0` |
+| [thanos-mixin](https://monitoring.mixins.dev/thanos) | `v0.21.0` |
 | [alertmanager-mixin](https://monitoring.mixins.dev/alertmanager) | `v0.22.0` |
 | [kube-state-metrics-mixin](https://monitoring.mixins.dev/kube-state-metrics) | `v2.1.0` |
 | [cert-manager-mixin](https://monitoring.mixins.dev/cert-manager) | `master` |
@@ -31,5 +31,11 @@ dashboards.
 Generate Prometheus rules/alerts for Prometheus and Kubernetes format, and Grafana dashboards
 
 ```shell
-❯ make mixins
+❯ make mixins APP=monitoring-mixins VERSION=0.7.0
+```
+
+Generate a mixin:
+
+```shell
+❯ make mixin APP=monitoring-mixins VERSION=0.7.0 MIXIN=kube-state-metrics-mixin
 ```
