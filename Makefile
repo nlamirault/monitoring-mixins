@@ -86,6 +86,10 @@ deps: ## Install dependencies
 
 ##@ Mixins
 
+.PHONY: mixin
+mixin: guard-MIXIN guard-APP guard-VERSION ## Build a mixin
+	@./hack/mixins.sh monitoring-mixins $(APP) $(VERSION) $(MIXIN)
+
 .PHONY: mixins
 mixins: guard-APP guard-VERSION ## Build mixins
 	@./hack/mixins.sh monitoring-mixins $(APP) $(VERSION)
