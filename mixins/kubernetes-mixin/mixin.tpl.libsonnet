@@ -2,7 +2,7 @@ local kubernetes = import 'kubernetes-mixin/mixin.libsonnet';
 
 kubernetes {
   _config+:: {
-    cadvisorSelector: 'job="cadvisor"',
+    cadvisorSelector: 'job="kubelet"',  // or cadvisor ?
     kubeletSelector: 'job="kubelet"',
     kubeStateMetricsSelector: 'job="kube-state-metrics"',
     nodeExporterSelector: 'job="node-exporter"',
