@@ -15,20 +15,12 @@
 # limitations under the License.
 
 import argparse
-# import fileinput
-import glob
 import logging
-# import os
 from os import path
-# import shutil
-# import zipfile
 
 import coloredlogs
 import requests
 
-
-LINKERD_EDGE_VERSION="edge-21.6.3"
-LINKERD_STABLE_VERSION="xxxxxx"
 LINKERD_URL="https://raw.githubusercontent.com/linkerd/linkerd2"
 LINKERD_DASHBOARDS=[
     "authority",
