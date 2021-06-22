@@ -65,6 +65,11 @@ check: check-git check-jsonnet check-jb check-gojsontoyaml check-promtool check-
 clean: ## Clean environment
 	rm -fr monitoring-mixins
 
+.PHONY: init
+init: ## Initialize environment
+	poetry install
+	$(VENV)/bin/pre-commit install
+
 .PHONY: test
 test: guard-SERVICE ## Test rules (SERVICE=xxx)
 	promtool check rules $(SERVICE)/prometheus/*.yaml

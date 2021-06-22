@@ -67,9 +67,11 @@ function jsonnet_init {
     else
         jb install
     fi
-    envsubst < "mixin.tpl.libsonnet" > "mixin.libsonnet"
+    if [ -f "mixin.tpl.libsonnet" ]; then
+        echo -e "${INFO_COLOR}[monitoring-mixins] Use mixin template${NO_COLOR}"
+        envsubst < "mixin.tpl.libsonnet" > "mixin.libsonnet"
+    fi
 }
-
 
 function monitoring_mixin {
     local mixin=$1
@@ -124,7 +126,6 @@ function monitoring_mixin_mixtool {
     popd
 }
 
-
 function alertmanager_mixin {
     local output=$1
     echo -e "${OK_COLOR}[monitoring-mixins] Alertmanager Mixin ${NO_COLOR}"
@@ -147,24 +148,20 @@ function node_exporter_mixin {
     monitoring_mixin "node-exporter-mixin" ${output} "alerts" "rules" "dashboards"
 }
 
-
 function prometheus_operator_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Operator Mixin ${NO_COLOR}"
     monitoring_mixin "prometheus-operator-mixin" ${output} "alerts" "" ""
 }
-
 
 function prometheus_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Mixin ${NO_COLOR}"
     monitoring_mixin "prometheus-mixin" ${output} "alerts" "" "dashboards"
 }
 
-
 function thanos_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Setup Thanos Mixin ${NO_COLOR}"
     monitoring_mixin "thanos-mixin" ${output} "alerts" "rules" "dashboards"
 }
-
 
 function cert_manager_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Setup Cert Manager Mixin ${NO_COLOR}"
@@ -206,6 +203,16 @@ function rabbitmq_mixin {
     monitoring_mixin_mixtool "rabbitmq-mixin" ${output}
 }
 
+function linkerd_edge_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Linkerd Edge Mixin ${NO_COLOR}"
+    monitoring_mixin "linkerd-edge-mixin" ${output} "alerts" "" "dashboards"
+}
+
+function linkerd_stable_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Linkerd Stable Mixin ${NO_COLOR}"
+    monitoring_mixin "linkerd-stable-mixin" ${output} "alerts" "" "dashboards"
+}
+
 # echo $#
 if [ "$#" -lt 3 ] || [ "$#" -gt 5 ]; then
     usage
@@ -236,4 +243,6 @@ else
     memcached_mixin ${output}
     elasticsearch_mixin ${output}
     rabbitmq_mixin ${output}
+    linkerd_edge_mixin ${output}
+    linkerd_stable_mixin ${output}
 fi

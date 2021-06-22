@@ -6,13 +6,11 @@ dashboards.
 
 ## Description
 
-### Mixins
-
 | Mixin | Version |
 |-------|:-------:|
 | [kubernetes-mixin](https://monitoring.mixins.dev/kubernetes) | `release-0.8` |
 | [node-exporter-mixin](https://monitoring.mixins.dev/node-exporter) | `v1.1.2` |
-| [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.27.0` |
+| [prometheus-mixin](https://monitoring.mixins.dev/prometheus) | `v2.28.0` |
 | [prometheus-operator-mixin](https://monitoring.mixins.dev/prometheus-operator) | `v0.48.0` |
 | [thanos-mixin](https://monitoring.mixins.dev/thanos) | `v0.21.0` |
 | [alertmanager-mixin](https://monitoring.mixins.dev/alertmanager) | `v0.22.0` |
@@ -26,7 +24,7 @@ dashboards.
 | [elasticsearch-mixin](https://github.com/grafana/jsonnet-libs/tree/master/elasticsearch-mixin) | `master` |
 | [rabbitmq-mixin](https://github.com/grafana/jsonnet-libs/tree/master/rabbitmq-mixin) | `master` |
 
-### Mixin
+### Usage
 
 Generate Prometheus rules/alerts for Prometheus and Kubernetes format, and Grafana dashboards
 
