@@ -25,6 +25,7 @@ dashboards.
 | [rabbitmq-mixin](https://github.com/grafana/jsonnet-libs/tree/master/rabbitmq-mixin) | `master` |
 | [linkerd-stable-mixin](https://github.com/nlamirault/monitoring-mixins/tree/master/mixins/linkerd-stable-mixin) | `stable-2.10.2` | 
 | [linkerd-edge-mixin](https://github.com/nlamirault/monitoring-mixins/tree/master/mixins/linkerd-edge-mixin) | `edge-21.6.3` |
+| [coredns-mixin](https://github.com/povilasv/coredns-mixin) | `master` |
 
 ### Usage
 
