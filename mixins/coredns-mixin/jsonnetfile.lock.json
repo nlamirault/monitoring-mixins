@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "3082bfca110166cd69533fa3c0875fdb1b68c329",
+      "sum": "4/sUV0Kk+o8I+wlYxL9R6EPhL/NiLfYHk+NXlU64RUk="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/povilasv/coredns-mixin.git",
+          "subdir": ""
+        }
+      },
+      "version": "dfba2975946008f4b1e51fd5e554607331118fd0",
+      "sum": "2VXzu8ERsmBJRXatQ0vH13Ik0pr7682iairpv3l7tzA="
+    }
+  ],
+  "legacyImports": false
+}
