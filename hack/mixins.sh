@@ -111,6 +111,11 @@ function monitoring_mixin_mixtool {
     local output=$2
 
     echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
+    
+    if [ ! -d "${MIXINS_DIR}/${mixin}" ]; then
+        echo -e "${KO_COLOR} Mixin not found: ${MIXINS_DIR}/${mixin}${NO_COLOR}"
+        exit 1
+    fi
     pushd ${MIXINS_DIR}/${mixin}
 
     jsonnet_init
@@ -141,6 +146,11 @@ function kube_state_metrics_mixin {
 function kubernetes_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Kubernetes Mixin ${NO_COLOR}"
     monitoring_mixin "kubernetes-mixin" ${output} "alerts" "rules" "dashboards"
+}
+
+function coredns_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup CoreDNS Mixin ${NO_COLOR}"
+    monitoring_mixin "coredns-mixin" ${output} "alerts" "" "dashboards"
 }
 
 function node_exporter_mixin {
@@ -213,6 +223,16 @@ function linkerd_stable_mixin {
     monitoring_mixin "linkerd-stable-mixin" ${output} "alerts" "" "dashboards"
 }
 
+function fluxcd_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup FluxCD Mixin ${NO_COLOR}"
+    monitoring_mixin_mixtool "fluxcd-mixin" ${output}
+}
+
+function nginx_ingress_controller_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Nginx Ingress Controller Mixin ${NO_COLOR}"
+    monitoring_mixin_mixtool "nginx-ingress-controller-mixin" ${output}
+}
+
 # echo $#
 if [ "$#" -lt 3 ] || [ "$#" -gt 5 ]; then
     usage
@@ -226,6 +246,7 @@ export version=$3
 echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-v${version} ${NO_COLOR}"
 
 if [ "$#" -eq 4 ]; then
+    # echo -e "Mixin: $4"
     $(echo $4 | sed -e "s/-/_/g") ${output}
 else
     kubernetes_mixin ${output}
@@ -245,4 +266,5 @@ else
     rabbitmq_mixin ${output}
     linkerd_edge_mixin ${output}
     linkerd_stable_mixin ${output}
+    fluxcd_mixin ${output}
 fi
