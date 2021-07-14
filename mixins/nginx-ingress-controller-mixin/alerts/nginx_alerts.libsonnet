@@ -15,7 +15,7 @@
 {
   prometheusAlerts+:: {
     groups+: [{
-      name: 'fluxcd',
+      name: 'ingress-controller',
       rules: [
         {
           alert: 'NGINXConfigFailed',
