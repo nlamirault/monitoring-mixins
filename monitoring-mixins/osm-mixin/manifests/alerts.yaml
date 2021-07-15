@@ -1,0 +1,11 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: osm-mixin-alerts
+  labels:
+    app: prometheus
+spec:
+  groups:
+  - name: osm
+    rules: []

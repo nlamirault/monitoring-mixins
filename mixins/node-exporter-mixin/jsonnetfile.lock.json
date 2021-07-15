@@ -18,7 +18,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "b15ef4e3488ff469cc14e2fc20511dd212c5f072",
+      "version": "7bb1782dec4ba5121e8aad93c22eafccf15a7737",
       "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "lib/promgrafonnet"
         }
       },
-      "version": "e0dc3563dcbf2e54e0ffe8e83f3f51b237ef33be",
+      "version": "b710a868a95621aa93e0b661954f63f4db82aaea",
       "sum": "zv7hXGui6BfHzE9wPatHI/AGZa4A2WKo6pq7ZdqBsps="
     },
     {
