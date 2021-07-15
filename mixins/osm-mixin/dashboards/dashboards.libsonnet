@@ -17,7 +17,7 @@
     'osm-control-plane.json': (import 'osm-control-plane.json'),
     'osm-mesh-envoy-details.json': (import 'osm-mesh-envoy-details.json'),
     'osm-pod.json': (import 'osm-pod.json'),
-    'osm-service-to-servic.json': (import 'osm-service-to-servic.json'),
+    'osm-service-to-servic.json': (import 'osm-service-to-service.json'),
     'osm-workload.json': (import 'osm-workload.json')
   },
 }

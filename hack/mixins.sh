@@ -233,6 +233,11 @@ function nginx_ingress_controller_mixin {
     monitoring_mixin_mixtool "nginx-ingress-controller-mixin" ${output}
 }
 
+function osm_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup OSM Mixin ${NO_COLOR}"
+    monitoring_mixin_mixtool "osm-mixin" ${output}
+}
+
 # echo $#
 if [ "$#" -lt 3 ] || [ "$#" -gt 5 ]; then
     usage
@@ -267,4 +272,5 @@ else
     linkerd_edge_mixin ${output}
     linkerd_stable_mixin ${output}
     fluxcd_mixin ${output}
+    osm_mixin ${output}
 fi
