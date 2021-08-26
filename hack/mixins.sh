@@ -265,7 +265,7 @@ else
     grafana_mixin ${output}
     loki_mixin ${output}
     promtail_mixin ${output}
-    etcd_mixin ${output}
+    # etcd_mixin ${output}
     memcached_mixin ${output}
     elasticsearch_mixin ${output}
     rabbitmq_mixin ${output}

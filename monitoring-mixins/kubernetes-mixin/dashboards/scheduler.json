@@ -134,31 +134,31 @@
                "steppedLine": false,
                "targets": [
                   {
-                     "expr": "sum(rate(scheduler_e2e_scheduling_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (cluster, instance)",
+                     "expr": "sum(rate(scheduler_e2e_scheduling_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (instance)",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} e2e",
+                     "legendFormat": "{{instance}} e2e",
                      "refId": "A"
                   },
                   {
-                     "expr": "sum(rate(scheduler_binding_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (cluster, instance)",
+                     "expr": "sum(rate(scheduler_binding_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (instance)",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} binding",
+                     "legendFormat": "{{instance}} binding",
                      "refId": "B"
                   },
                   {
-                     "expr": "sum(rate(scheduler_scheduling_algorithm_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (cluster, instance)",
+                     "expr": "sum(rate(scheduler_scheduling_algorithm_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (instance)",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} scheduling algorithm",
+                     "legendFormat": "{{instance}} scheduling algorithm",
                      "refId": "C"
                   },
                   {
-                     "expr": "sum(rate(scheduler_volume_scheduling_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (cluster, instance)",
+                     "expr": "sum(rate(scheduler_volume_scheduling_duration_seconds_count{cluster=\"$cluster\", job=\"kube-scheduler\", instance=~\"$instance\"}[5m])) by (instance)",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} volume",
+                     "legendFormat": "{{instance}} volume",
                      "refId": "D"
                   }
                ],
@@ -236,31 +236,31 @@
                "steppedLine": false,
                "targets": [
                   {
-                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_e2e_scheduling_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (cluster, instance, le))",
+                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_e2e_scheduling_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (instance, le))",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} e2e",
+                     "legendFormat": "{{instance}} e2e",
                      "refId": "A"
                   },
                   {
-                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_binding_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (cluster, instance, le))",
+                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_binding_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (instance, le))",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} binding",
+                     "legendFormat": "{{instance}} binding",
                      "refId": "B"
                   },
                   {
-                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_scheduling_algorithm_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (cluster, instance, le))",
+                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_scheduling_algorithm_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (instance, le))",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} scheduling algorithm",
+                     "legendFormat": "{{instance}} scheduling algorithm",
                      "refId": "C"
                   },
                   {
-                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_volume_scheduling_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (cluster, instance, le))",
+                     "expr": "histogram_quantile(0.99, sum(rate(scheduler_volume_scheduling_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-scheduler\",instance=~\"$instance\"}[5m])) by (instance, le))",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "{{cluster}} {{instance}} volume",
+                     "legendFormat": "{{instance}} volume",
                      "refId": "D"
                   }
                ],
@@ -888,7 +888,7 @@
             "multi": false,
             "name": "cluster",
             "options": [ ],
-            "query": "label_values(up{job=\"kube-scheduler\"}, cluster)",
+            "query": "label_values(kube_pod_info, cluster)",
             "refresh": 2,
             "regex": "",
             "sort": 1,

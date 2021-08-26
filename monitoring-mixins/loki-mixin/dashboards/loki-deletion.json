@@ -6,176 +6,35 @@
    "gnetId": null,
    "graphTooltip": 0,
    "hideControls": false,
-   "links": [ ],
+   "links": [
+      {
+         "asDropdown": true,
+         "icon": "external link",
+         "includeVars": true,
+         "keepTime": true,
+         "tags": [
+            "loki"
+         ],
+         "targetBlank": false,
+         "title": "Loki Dashboards",
+         "type": "dashboards"
+      }
+   ],
    "refresh": "10s",
    "rows": [
       {
          "collapse": false,
-         "height": "250px",
+         "height": "100px",
          "panels": [
             {
-               "aliasColors": {
-                  "error": "#E24D42"
-               },
-               "bars": false,
-               "dashLength": 10,
-               "dashes": false,
-               "datasource": "$datasource",
-               "fill": 10,
-               "id": 1,
-               "legend": {
-                  "avg": false,
-                  "current": false,
-                  "max": false,
-                  "min": false,
-                  "show": true,
-                  "total": false,
-                  "values": false
-               },
-               "lines": true,
-               "linewidth": 0,
-               "links": [ ],
-               "nullPointMode": "null as zero",
-               "percentage": false,
-               "pointradius": 5,
-               "points": false,
-               "renderer": "flot",
-               "seriesOverrides": [ ],
-               "spaceLength": 10,
-               "span": 4,
-               "stack": true,
-               "steppedLine": false,
-               "targets": [
-                  {
-                     "expr": "sum by (job) (rate(thanos_replicate_replication_runs_total{result=\"error\", job=\"$job\"}[$interval])) / sum by (job) (rate(thanos_replicate_replication_runs_total{job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "error",
-                     "step": 10
-                  }
-               ],
-               "thresholds": [ ],
-               "timeFrom": null,
-               "timeShift": null,
-               "title": "Rate",
-               "tooltip": {
-                  "shared": false,
-                  "sort": 0,
-                  "value_type": "individual"
-               },
-               "type": "graph",
-               "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": [ ]
-               },
-               "yaxes": [
-                  {
-                     "format": "percentunit",
-                     "label": null,
-                     "logBase": 1,
-                     "max": null,
-                     "min": 0,
-                     "show": true
-                  },
-                  {
-                     "format": "short",
-                     "label": null,
-                     "logBase": 1,
-                     "max": null,
-                     "min": null,
-                     "show": false
-                  }
-               ]
-            },
-            {
                "aliasColors": { },
                "bars": false,
                "dashLength": 10,
                "dashes": false,
                "datasource": "$datasource",
-               "description": "Shows rate of errors.",
-               "fill": 10,
-               "id": 2,
-               "legend": {
-                  "avg": false,
-                  "current": false,
-                  "max": false,
-                  "min": false,
-                  "show": true,
-                  "total": false,
-                  "values": false
-               },
-               "lines": true,
-               "linewidth": 0,
-               "links": [ ],
-               "nullPointMode": "null as zero",
-               "percentage": false,
-               "pointradius": 5,
-               "points": false,
-               "renderer": "flot",
-               "seriesOverrides": [ ],
-               "spaceLength": 10,
-               "span": 4,
-               "stack": true,
-               "steppedLine": false,
-               "targets": [
-                  {
-                     "expr": "sum by (job, result) (rate(thanos_replicate_replication_runs_total{result=\"error\", job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "{{result}}",
-                     "legendLink": null,
-                     "step": 10
-                  }
-               ],
-               "thresholds": [ ],
-               "timeFrom": null,
-               "timeShift": null,
-               "title": "Errors",
-               "tooltip": {
-                  "shared": false,
-                  "sort": 0,
-                  "value_type": "individual"
-               },
-               "type": "graph",
-               "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": [ ]
-               },
-               "yaxes": [
-                  {
-                     "format": "percentunit",
-                     "label": null,
-                     "logBase": 1,
-                     "max": null,
-                     "min": 0,
-                     "show": true
-                  },
-                  {
-                     "format": "short",
-                     "label": null,
-                     "logBase": 1,
-                     "max": null,
-                     "min": null,
-                     "show": false
-                  }
-               ]
-            },
-            {
-               "aliasColors": { },
-               "bars": false,
-               "dashLength": 10,
-               "dashes": false,
-               "datasource": "$datasource",
-               "description": "Shows how long has it taken to run a replication cycle.",
                "fill": 1,
-               "id": 3,
+               "format": "none",
+               "id": 1,
                "legend": {
                   "avg": false,
                   "current": false,
@@ -193,72 +52,30 @@
                "pointradius": 5,
                "points": false,
                "renderer": "flot",
-               "seriesOverrides": [
-                  {
-                     "alias": "p99",
-                     "color": "#FA6400",
-                     "fill": 1,
-                     "fillGradient": 1
-                  },
-                  {
-                     "alias": "p90",
-                     "color": "#E0B400",
-                     "fill": 1,
-                     "fillGradient": 1
-                  },
-                  {
-                     "alias": "p50",
-                     "color": "#37872D",
-                     "fill": 10,
-                     "fillGradient": 0
-                  }
-               ],
+               "seriesOverrides": [ ],
                "spaceLength": 10,
-               "span": 4,
+               "span": 6,
                "stack": false,
                "steppedLine": false,
                "targets": [
                   {
-                     "expr": "histogram_quantile(0.50, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=\"$job\"}[$interval]))) * 1",
+                     "expr": "sum(loki_compactor_pending_delete_requests_count{cluster=~\"$cluster\", namespace=~\"$namespace\"})",
                      "format": "time_series",
+                     "instant": true,
                      "intervalFactor": 2,
-                     "legendFormat": "p50 {{job}}",
-                     "logBase": 10,
-                     "max": null,
-                     "min": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "histogram_quantile(0.90, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=\"$job\"}[$interval]))) * 1",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "p90 {{job}}",
-                     "logBase": 10,
-                     "max": null,
-                     "min": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "histogram_quantile(0.99, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=\"$job\"}[$interval]))) * 1",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "p99 {{job}}",
-                     "logBase": 10,
-                     "max": null,
-                     "min": null,
-                     "step": 10
+                     "refId": "A"
                   }
                ],
-               "thresholds": [ ],
+               "thresholds": "70,80",
                "timeFrom": null,
                "timeShift": null,
-               "title": "Duration",
+               "title": "Number of Pending Requests",
                "tooltip": {
                   "shared": false,
                   "sort": 0,
                   "value_type": "individual"
                },
-               "type": "graph",
+               "type": "singlestat",
                "xaxis": {
                   "buckets": null,
                   "mode": "time",
@@ -268,7 +85,83 @@
                },
                "yaxes": [
                   {
-                     "format": "s",
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": 0,
+                     "show": true
+                  },
+                  {
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": null,
+                     "show": false
+                  }
+               ]
+            },
+            {
+               "aliasColors": { },
+               "bars": false,
+               "dashLength": 10,
+               "dashes": false,
+               "datasource": "$datasource",
+               "fill": 1,
+               "format": "dtdurations",
+               "id": 2,
+               "legend": {
+                  "avg": false,
+                  "current": false,
+                  "max": false,
+                  "min": false,
+                  "show": true,
+                  "total": false,
+                  "values": false
+               },
+               "lines": true,
+               "linewidth": 1,
+               "links": [ ],
+               "nullPointMode": "null as zero",
+               "percentage": false,
+               "pointradius": 5,
+               "points": false,
+               "renderer": "flot",
+               "seriesOverrides": [ ],
+               "spaceLength": 10,
+               "span": 6,
+               "stack": false,
+               "steppedLine": false,
+               "targets": [
+                  {
+                     "expr": "max(loki_compactor_oldest_pending_delete_request_age_seconds{cluster=~\"$cluster\", namespace=~\"$namespace\"})",
+                     "format": "time_series",
+                     "instant": true,
+                     "intervalFactor": 2,
+                     "refId": "A"
+                  }
+               ],
+               "thresholds": "70,80",
+               "timeFrom": null,
+               "timeShift": null,
+               "title": "Oldest Pending Request Age",
+               "tooltip": {
+                  "shared": false,
+                  "sort": 0,
+                  "value_type": "individual"
+               },
+               "type": "singlestat",
+               "xaxis": {
+                  "buckets": null,
+                  "mode": "time",
+                  "name": null,
+                  "show": true,
+                  "values": [ ]
+               },
+               "yaxes": [
+                  {
+                     "format": "short",
                      "label": null,
                      "logBase": 1,
                      "max": null,
@@ -289,14 +182,90 @@
          "repeat": null,
          "repeatIteration": null,
          "repeatRowId": null,
-         "showTitle": true,
-         "title": "Bucket Replicate Runs",
+         "showTitle": false,
+         "title": "Headlines",
          "titleSize": "h6"
       },
       {
          "collapse": false,
          "height": "250px",
          "panels": [
+            {
+               "aliasColors": { },
+               "bars": false,
+               "dashLength": 10,
+               "dashes": false,
+               "datasource": "$datasource",
+               "fill": 1,
+               "id": 3,
+               "legend": {
+                  "avg": false,
+                  "current": false,
+                  "max": false,
+                  "min": false,
+                  "show": true,
+                  "total": false,
+                  "values": false
+               },
+               "lines": true,
+               "linewidth": 1,
+               "links": [ ],
+               "nullPointMode": "null as zero",
+               "percentage": false,
+               "pointradius": 5,
+               "points": false,
+               "renderer": "flot",
+               "seriesOverrides": [ ],
+               "spaceLength": 10,
+               "span": 6,
+               "stack": false,
+               "steppedLine": false,
+               "targets": [
+                  {
+                     "expr": "sum(increase(loki_compactor_delete_requests_received_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1d]))",
+                     "format": "time_series",
+                     "intervalFactor": 2,
+                     "legendFormat": "received",
+                     "legendLink": null,
+                     "step": 10
+                  }
+               ],
+               "thresholds": [ ],
+               "timeFrom": null,
+               "timeShift": null,
+               "title": "Delete Requests Received / Day",
+               "tooltip": {
+                  "shared": false,
+                  "sort": 0,
+                  "value_type": "individual"
+               },
+               "type": "graph",
+               "xaxis": {
+                  "buckets": null,
+                  "mode": "time",
+                  "name": null,
+                  "show": true,
+                  "values": [ ]
+               },
+               "yaxes": [
+                  {
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": 0,
+                     "show": true
+                  },
+                  {
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": null,
+                     "show": false
+                  }
+               ]
+            },
             {
                "aliasColors": { },
                "bars": false,
@@ -324,47 +293,15 @@
                "renderer": "flot",
                "seriesOverrides": [ ],
                "spaceLength": 10,
-               "span": 12,
+               "span": 6,
                "stack": false,
                "steppedLine": false,
                "targets": [
                   {
-                     "expr": "sum by (job) (rate(blocks_meta_synced{state=\"loaded\", job=\"$job\"}[$interval]))",
+                     "expr": "sum(increase(loki_compactor_delete_requests_processed_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1d]))",
                      "format": "time_series",
                      "intervalFactor": 2,
-                     "legendFormat": "meta loads",
-                     "legendLink": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "sum by (job) (rate(blocks_meta_synced{state=\"failed\", job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "partial meta reads",
-                     "legendLink": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "sum by (job) (rate(thanos_replicate_blocks_already_replicated_total{job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "already replicated blocks",
-                     "legendLink": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "sum by (job) (rate(thanos_replicate_blocks_replicated_total{job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "replicated blocks",
-                     "legendLink": null,
-                     "step": 10
-                  },
-                  {
-                     "expr": "sum by (job) (rate(thanos_replicate_objects_replicated_total{job=\"$job\"}[$interval]))",
-                     "format": "time_series",
-                     "intervalFactor": 2,
-                     "legendFormat": "replicated objects",
+                     "legendFormat": "processed",
                      "legendLink": null,
                      "step": 10
                   }
@@ -372,7 +309,7 @@
                "thresholds": [ ],
                "timeFrom": null,
                "timeShift": null,
-               "title": "Metrics",
+               "title": "Delete Requests Processed / Day",
                "tooltip": {
                   "shared": false,
                   "sort": 0,
@@ -410,15 +347,102 @@
          "repeatIteration": null,
          "repeatRowId": null,
          "showTitle": true,
-         "title": "Bucket Replication",
+         "title": "Churn",
+         "titleSize": "h6"
+      },
+      {
+         "collapse": false,
+         "height": "250px",
+         "panels": [
+            {
+               "aliasColors": { },
+               "bars": false,
+               "dashLength": 10,
+               "dashes": false,
+               "datasource": "$datasource",
+               "fill": 1,
+               "id": 5,
+               "legend": {
+                  "avg": false,
+                  "current": false,
+                  "max": false,
+                  "min": false,
+                  "show": true,
+                  "total": false,
+                  "values": false
+               },
+               "lines": true,
+               "linewidth": 1,
+               "links": [ ],
+               "nullPointMode": "null as zero",
+               "percentage": false,
+               "pointradius": 5,
+               "points": false,
+               "renderer": "flot",
+               "seriesOverrides": [ ],
+               "spaceLength": 10,
+               "span": 12,
+               "stack": false,
+               "steppedLine": false,
+               "targets": [
+                  {
+                     "expr": "sum(increase(loki_compactor_load_pending_requests_attempts_total{status=\"fail\", cluster=~\"$cluster\", namespace=~\"$namespace\"}[1h]))",
+                     "format": "time_series",
+                     "intervalFactor": 2,
+                     "legendFormat": "failures",
+                     "legendLink": null,
+                     "step": 10
+                  }
+               ],
+               "thresholds": [ ],
+               "timeFrom": null,
+               "timeShift": null,
+               "title": "Failures in Loading Delete Requests / Hour",
+               "tooltip": {
+                  "shared": false,
+                  "sort": 0,
+                  "value_type": "individual"
+               },
+               "type": "graph",
+               "xaxis": {
+                  "buckets": null,
+                  "mode": "time",
+                  "name": null,
+                  "show": true,
+                  "values": [ ]
+               },
+               "yaxes": [
+                  {
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": 0,
+                     "show": true
+                  },
+                  {
+                     "format": "short",
+                     "label": null,
+                     "logBase": 1,
+                     "max": null,
+                     "min": null,
+                     "show": false
+                  }
+               ]
+            }
+         ],
+         "repeat": null,
+         "repeatIteration": null,
+         "repeatRowId": null,
+         "showTitle": true,
+         "title": "Failures",
          "titleSize": "h6"
       }
    ],
    "schemaVersion": 14,
    "style": "dark",
    "tags": [
-      "thanos-mixin",
-      "monitoring-mixins-v0.10.0"
+      "loki"
    ],
    "templating": {
       "list": [
@@ -437,34 +461,42 @@
             "type": "datasource"
          },
          {
-            "auto": true,
-            "auto_count": 300,
-            "auto_min": "10s",
+            "allValue": null,
             "current": {
-               "text": "5m",
-               "value": "5m"
+               "text": "prod",
+               "value": "prod"
             },
+            "datasource": "$datasource",
             "hide": 0,
-            "label": "interval",
-            "name": "interval",
-            "query": "5m,10m,30m,1h,6h,12h",
-            "refresh": 2,
-            "type": "interval"
+            "includeAll": false,
+            "label": "cluster",
+            "multi": false,
+            "name": "cluster",
+            "options": [ ],
+            "query": "label_values(loki_build_info, cluster)",
+            "refresh": 1,
+            "regex": "",
+            "sort": 2,
+            "tagValuesQuery": "",
+            "tags": [ ],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
          },
          {
             "allValue": null,
             "current": {
-               "text": "all",
-               "value": "$__all"
+               "text": "prod",
+               "value": "prod"
             },
             "datasource": "$datasource",
             "hide": 0,
-            "includeAll": true,
-            "label": "job",
+            "includeAll": false,
+            "label": "namespace",
             "multi": false,
-            "name": "job",
+            "name": "namespace",
             "options": [ ],
-            "query": "label_values(up{job=~\".*thanos-bucket-replicate.*\"}, job)",
+            "query": "label_values(loki_build_info, namespace)",
             "refresh": 1,
             "regex": "",
             "sort": 2,
@@ -505,8 +537,8 @@
          "30d"
       ]
    },
-   "timezone": "UTC",
-   "title": "Thanos / BucketReplicate",
-   "uid": "49f644ecf8e31dd1a5084ae2a5f10e80",
+   "timezone": "utc",
+   "title": "Loki / Deletion",
+   "uid": "deletion",
    "version": 0
 }
