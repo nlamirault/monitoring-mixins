@@ -5,10 +5,10 @@
       "source": {
         "git": {
           "remote": "https://github.com/etcd-io/etcd.git",
-          "subdir": "Documentation/etcd-mixin"
+          "subdir": "contrib/mixin"
         }
       },
-      "version": "v3.4.14"
+      "version": "v3.5.0"
     }
   ],
   "legacyImports": true
