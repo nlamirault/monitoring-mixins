@@ -8,7 +8,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "7bb1782dec4ba5121e8aad93c22eafccf15a7737",
+      "version": "ff22d1d6698573e7cb76228198edfa2b2f632dcc",
       "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
     },
     {
@@ -18,7 +18,7 @@
           "subdir": "mixin-utils"
         }
       },
-      "version": "7bb1782dec4ba5121e8aad93c22eafccf15a7737",
+      "version": "ff22d1d6698573e7cb76228198edfa2b2f632dcc",
       "sum": "v6fuqqQp9rHZbsxN9o79QzOpUlwYZEJ84DxTCZMCYeU="
     },
     {
@@ -28,8 +28,8 @@
           "subdir": "production/loki-mixin"
         }
       },
-      "version": "52e475d955c08f791065e67e3313661661f2377b",
-      "sum": "VpkWRdc7Wtvw0uwPy5RP9optFNnOGuwFowem/RFbkmQ="
+      "version": "299da336d08d99dd8233c839b69071a487cf4fd1",
+      "sum": "O0r9cxUTPmkjcs3e3KIj/TRjkx6Cjvn1Y4ypJyf2DmQ="
     }
   ],
   "legacyImports": false
