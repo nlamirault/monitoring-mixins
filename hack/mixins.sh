@@ -134,7 +134,7 @@ function monitoring_mixin_mixtool {
 function alertmanager_mixin {
     local output=$1
     echo -e "${OK_COLOR}[monitoring-mixins] Alertmanager Mixin ${NO_COLOR}"
-    monitoring_mixin "alertmanager-mixin" ${output} "alerts" "" ""
+    monitoring_mixin_mixtool "alertmanager-mixin" ${output}
 }
 
 function kube_state_metrics_mixin {
@@ -203,6 +203,11 @@ function memcached_mixin {
     monitoring_mixin "memcached-mixin" ${output} "alerts" "" "dashboards"
 }
 
+function minio_mixin {
+    echo -e "${OK_COLOR}[monitoring-mixins] Setup Minio Mixin ${NO_COLOR}"
+    monitoring_mixin "minio-mixin" ${output} "alerts" "" "dashboards"
+}
+
 function elasticsearch_mixin {
     echo -e "${OK_COLOR}[monitoring-mixins] Setup Elasticsearch Mixin ${NO_COLOR}"
     monitoring_mixin "elasticsearch-mixin" ${output} "" "" "dashboards"
@@ -267,6 +272,7 @@ else
     promtail_mixin ${output}
     # etcd_mixin ${output}
     memcached_mixin ${output}
+    minio_mixin ${output}
     elasticsearch_mixin ${output}
     rabbitmq_mixin ${output}
     linkerd_edge_mixin ${output}

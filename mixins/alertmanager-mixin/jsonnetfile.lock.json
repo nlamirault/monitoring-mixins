@@ -4,12 +4,22 @@
     {
       "source": {
         "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "05fb200ee1a1816fc1b4c522071d5606d8dd71c1",
+      "sum": "mEoObbqbyVaXrHFEJSM2Nad31tOvadzIevWuyNHHBgI="
+    },
+    {
+      "source": {
+        "git": {
           "remote": "https://github.com/prometheus/alertmanager.git",
           "subdir": "doc/alertmanager-mixin"
         }
       },
-      "version": "b33ac04a66b0c3e9a58483a303fdbe798e6ed6d2",
-      "sum": "V8jcZQ1Qrlm7AQ6wjbuQQsacPb0NvrcZovKyplmzW5w="
+      "version": "976297c0dc1f924560a7d0f748513a1802bc0b23",
+      "sum": "pep+dHzfIjh2SU5pEkwilMCAT/NoL6YYflV4x8cr7vU="
     }
   ],
   "legacyImports": false
