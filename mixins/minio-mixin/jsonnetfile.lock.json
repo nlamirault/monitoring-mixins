@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana-builder"
+        }
+      },
+      "version": "746874e4836a4bfbb7034d32de0c98ab1282aaae",
+      "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "minio-mixin"
+        }
+      },
+      "version": "746874e4836a4bfbb7034d32de0c98ab1282aaae",
+      "sum": "SwHYR9ppUCC2W58vI/lNuq1/0DFuc1S862FIdm8N4gM="
+    }
+  ],
+  "legacyImports": false
+}
