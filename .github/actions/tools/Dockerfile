@@ -60,14 +60,14 @@ LABEL maintainer="Nicolas Lamirault <nicolas.lamirault@gmail.com>" \
     org.opencontainers.image.source="https://github.com/nlamirault/monitoring-mixins" \
     org.opencontainers.image.version="0.1.0"
 
-RUN apk add --no-cache ca-certificates curl bash tar make jq
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN apk add --no-cache ca-certificates curl bash tar make jq go
 
 # COPY --from=jsonnet-builder /usr/bin/jsonnetfmt /usr/bin
 # COPY --from=jsonnet-builder /usr/bin/jsonnet /usr/bin
 # COPY --from=jb-builder /usr/bin/jb /usr/bin
-COPY --from=mixtool-builder /go/bin/mixtool /usr/bin
+# COPY --from=mixtool-builder /go/bin/mixtool /usr/bin
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
