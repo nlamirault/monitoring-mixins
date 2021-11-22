@@ -28,6 +28,3 @@ echo "$RUNNER_WORKSPACE/$(basename "${GITHUB_REPOSITORY}")/bin" >> "${GITHUB_PAT
 
 # DEBUG
 ls -alFrt "${GITHUB_WORKSPACE}/bin/"
-jsonnet --version
-jb --version
-mixtool --version

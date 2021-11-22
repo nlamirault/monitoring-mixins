@@ -250,6 +250,11 @@ export app=$2
 export version=$3
 echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-v${version} ${NO_COLOR}"
 
+# DEBUG
+jsonnet --version
+jb --version
+mixtool --version
+
 if [ "$#" -eq 4 ]; then
     # echo -e "Mixin: $4"
     $(echo $4 | sed -e "s/-/_/g") ${output}
