@@ -4,11 +4,20 @@
     {
       "source": {
         "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "master"
+    },
+    {
+      "source": {
+        "git": {
           "remote": "https://github.com/grafana/loki.git",
           "subdir": "production/loki-mixin"
         }
       },
-      "version": "v2.3.0"
+      "version": "v2.4.1"
     }
   ],
   "legacyImports": true
