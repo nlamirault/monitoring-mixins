@@ -2,10 +2,9 @@
 
 set -eu
 
-YQ_VERSION="v4.6.1"
+YQ_VERSION="v4.9.3"
 JB_VERSION="v0.4.0"
 JSONNET_VERSION="0.17.0"
-
 
 mkdir -p "${GITHUB_WORKSPACE}/bin"
 cd "${GITHUB_WORKSPACE}/bin"

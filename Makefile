@@ -61,7 +61,7 @@ check-%:
 ##@ Development
 
 .PHONY: check
-check: check-git check-jsonnet check-jb check-gojsontoyaml check-promtool check-promdoc check-jsonnetfmt ## Check requirements
+check: check-git check-jsonnet check-jb check-jq check-yq check-promtool check-promdoc check-jsonnetfmt ## Check requirements
 
 .PHONY: clean
 clean: ## Clean environment
