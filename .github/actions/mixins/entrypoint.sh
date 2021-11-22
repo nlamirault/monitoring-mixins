@@ -29,4 +29,5 @@ set -eu
 # # DEBUG
 # ls -alFrt "${GITHUB_WORKSPACE}/bin/"
 
-make mixins APP=monitoring-mixins VERSION=$1
+[ -z "${VERSION}" ] && echo_fail "Version not satisfied" && exit 1
+make mixins APP=monitoring-mixins VERSION=${VERSION}
