@@ -41,7 +41,8 @@ FROM golang:1.17 AS mixtool-builder
 
 WORKDIR /go/src/app
 
-RUN GO111MODULE=on go get -u github.com/monitoring-mixins/mixtool/cmd/mixtool
+# RUN GO111MODULE=on go get -u github.com/monitoring-mixins/mixtool/cmd/mixtool
+RUN go install github.com/monitoring-mixins/mixtool/cmd/mixtool@latest
 
 # ================================================================
 # Github Action
