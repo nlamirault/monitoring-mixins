@@ -15,39 +15,39 @@
   "rebaseWhen": "conflicted",
   "assignees": ["@nlamirault"],
   "reviewersFromCodeOwners": true,
-  "labels": ["area/renovate", "lifecycle/active", "status/review_needed"],
+  "labels": ["kind/renovate", "lifecycle/active", "status/review_needed"],
   "packageRules": [
-    // Labels for Terraform
+    // Labels for Docker
     {
-      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "datasources": ["docker"],
       "updateTypes": ["major"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/high", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "dependency/docker", "priority/high", "size/xs"]
     },
     {
-      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "datasources": ["docker"],
       "updateTypes": ["minor"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/medium", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "dependency/docker", "priority/medium", "size/xs"]
     },
     {
-      "datasources": ["terraform", "terraform-provider", "terraform-module"],
+      "datasources": ["docker"],
       "updateTypes": ["patch"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/low", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "dependency/docker", "priority/low", "size/xs"]
     },
-    // Labels for Terraform-version
+    // Labels for Github Actions
     {
-      "matchPackageNames": ["terraform-version"],
+      "datasources": ["action"],
       "updateTypes": ["major"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/high", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "area/github", "dependency/github", "priority/high", "size/xs"]
     },
     {
-      "matchPackageNames": ["terraform-version"],
+      "datasources": ["action"],
       "updateTypes": ["minor"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/medium", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "area/github", "dependency/github", "priority/medium", "size/xs"]
     },
     {
-      "matchPackageNames": ["terraform-version"],
+      "datasources": ["action"],
       "updateTypes": ["patch"],
-      "labels": ["area/renovate", "dependency/terraform", "priority/low", "size/xs"]
+      "labels": ["kind/renovate", "lifecycle/active", "status/review_needed", "area/github", "dependency/github", "priority/low", "size/xs"]
     },
   ]
 }
