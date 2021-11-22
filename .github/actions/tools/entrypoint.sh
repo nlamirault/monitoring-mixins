@@ -23,8 +23,8 @@ chmod +x "${GITHUB_WORKSPACE}/bin/jsonnetfmt"
 go install github.com/monitoring-mixins/mixtool/cmd/mixtool@latest
 cp "${HOME}/go/bin/mixtool" "${GITHUB_WORKSPACE}/bin/mixtool"
 
-echo "${GITHUB_WORKSPACE}/bin" >> "${GITHUB_PATH}"
-echo "$RUNNER_WORKSPACE/$(basename "${GITHUB_REPOSITORY}")/bin" >> "${GITHUB_PATH}"
+echo "${GITHUB_WORKSPACE}/bin" >> ${GITHUB_PATH}
+echo "$RUNNER_WORKSPACE/$(basename "${GITHUB_REPOSITORY}")/bin" >> ${GITHUB_PATH}
 
 # DEBUG
 ls -alFrt "${GITHUB_WORKSPACE}/bin/"
