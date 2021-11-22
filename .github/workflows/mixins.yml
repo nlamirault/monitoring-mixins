@@ -28,12 +28,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup tools
-      uses: ./.github/actions/tools
-
-    - name: Generate record rules, alerts and dashboards
-      run: |
-        make mixins APP=monitoring-mixins VERSION=${{ github.event.inputs.version }}
+    - name: Generate mixins
+      uses: ./.github/actions/mixins
+      with:
+        version: ${{ github.event.inputs.version }}
 
     - name: Create pull request for generated mixins
       id: cpr

@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'monitoring-mixins'
-description: 'A GitHub Action for monitoring-mixins'
+name: 'mixins'
+description: 'A GitHub Action for generate monitoring mixins'
 author: 'Nicolas Lamirault'
 branding:
   icon: 'command'
   color: 'blue'
+inputs:
+  version:
+    description: "Application version"
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
