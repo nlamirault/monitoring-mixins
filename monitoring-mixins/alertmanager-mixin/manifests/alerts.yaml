@@ -22,20 +22,23 @@ spec:
         severity: critical
     - alert: AlertmanagerMembersInconsistent
       annotations:
-        description: Alertmanager {{.instance}} has only found {{ $value }} members of the {{.job}} cluster.
-        summary: A member of an Alertmanager cluster has not found all other cluster members.
+        description: Alertmanager {{.instance}} has only found {{ $value }} members
+          of the {{.job}} cluster.
+        summary: A member of an Alertmanager cluster has not found all other cluster
+          members.
       expr: |
         # Without max_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
           max_over_time(alertmanager_cluster_members{job="alertmanager"}[5m])
         < on (job) group_left
           count by (job) (max_over_time(alertmanager_cluster_members{job="alertmanager"}[5m]))
-      for: 10m
+      for: 15m
       labels:
         severity: critical
     - alert: AlertmanagerFailedToSendAlerts
       annotations:
-        description: Alertmanager {{.instance}} failed to send {{ $value | humanizePercentage }} of notifications to {{ $labels.integration }}.
+        description: Alertmanager {{.instance}} failed to send {{ $value | humanizePercentage
+          }} of notifications to {{ $labels.integration }}.
         summary: An Alertmanager instance failed to send notifications.
       expr: |
         (
@@ -49,8 +52,11 @@ spec:
         severity: warning
     - alert: AlertmanagerClusterFailedToSendAlerts
       annotations:
-        description: The minimum notification failure rate to {{ $labels.integration }} sent from any instance in the {{.job}} cluster is {{ $value | humanizePercentage }}.
-        summary: All Alertmanager instances in a cluster failed to send notifications to a critical integration.
+        description: The minimum notification failure rate to {{ $labels.integration
+          }} sent from any instance in the {{.job}} cluster is {{ $value | humanizePercentage
+          }}.
+        summary: All Alertmanager instances in a cluster failed to send notifications
+          to a critical integration.
       expr: |
         min by (job, integration) (
           rate(alertmanager_notifications_failed_total{job="alertmanager", integration=~`.*`}[5m])
@@ -63,8 +69,11 @@ spec:
         severity: critical
     - alert: AlertmanagerClusterFailedToSendAlerts
       annotations:
-        description: The minimum notification failure rate to {{ $labels.integration }} sent from any instance in the {{.job}} cluster is {{ $value | humanizePercentage }}.
-        summary: All Alertmanager instances in a cluster failed to send notifications to a non-critical integration.
+        description: The minimum notification failure rate to {{ $labels.integration
+          }} sent from any instance in the {{.job}} cluster is {{ $value | humanizePercentage
+          }}.
+        summary: All Alertmanager instances in a cluster failed to send notifications
+          to a non-critical integration.
       expr: |
         min by (job, integration) (
           rate(alertmanager_notifications_failed_total{job="alertmanager", integration!~`.*`}[5m])
@@ -77,7 +86,8 @@ spec:
         severity: warning
     - alert: AlertmanagerConfigInconsistent
       annotations:
-        description: Alertmanager instances within the {{.job}} cluster have different configurations.
+        description: Alertmanager instances within the {{.job}} cluster have different
+          configurations.
         summary: Alertmanager instances within the same cluster have different configurations.
       expr: |
         count by (job) (
@@ -89,8 +99,10 @@ spec:
         severity: critical
     - alert: AlertmanagerClusterDown
       annotations:
-        description: '{{ $value | humanizePercentage }} of Alertmanager instances within the {{.job}} cluster have been up for less than half of the last 5m.'
-        summary: Half or more of the Alertmanager instances within the same cluster are down.
+        description: '{{ $value | humanizePercentage }} of Alertmanager instances within
+          the {{.job}} cluster have been up for less than half of the last 5m.'
+        summary: Half or more of the Alertmanager instances within the same cluster
+          are down.
       expr: |
         (
           count by (job) (
@@ -107,8 +119,10 @@ spec:
         severity: critical
     - alert: AlertmanagerClusterCrashlooping
       annotations:
-        description: '{{ $value | humanizePercentage }} of Alertmanager instances within the {{.job}} cluster have restarted at least 5 times in the last 10m.'
-        summary: Half or more of the Alertmanager instances within the same cluster are crashlooping.
+        description: '{{ $value | humanizePercentage }} of Alertmanager instances within
+          the {{.job}} cluster have restarted at least 5 times in the last 10m.'
+        summary: Half or more of the Alertmanager instances within the same cluster
+          are crashlooping.
       expr: |
         (
           count by (job) (

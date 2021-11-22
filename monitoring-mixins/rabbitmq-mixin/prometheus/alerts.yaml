@@ -9,13 +9,15 @@ groups:
           LABELS = {{ $labels }}
       summary: Rabbitmq memory high (instance {{ $labels.instance }})
       title: Instance {{ $labels.instance }} using too much RAM Memory
-    expr: rabbitmq_process_resident_memory_bytes / rabbitmq_resident_memory_limit_bytes * 100 > 90
+    expr: rabbitmq_process_resident_memory_bytes / rabbitmq_resident_memory_limit_bytes
+      * 100 > 90
     for: 2m
     labels:
       severity: warning
   - alert: RabbitmqFileDescriptorsUsage
     annotations:
-      description: A node is using more than 90% of file descriptors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}
+      description: A node is using more than 90% of file descriptors\n  VALUE = {{
+        $value }}\n  LABELS = {{ $labels }}
       summary: Rabbitmq file descriptors usage (instance {{ $labels.instance }})
       title: Instance {{ $labels.instance }} using too much file descriptors
     expr: rabbitmq_process_open_fds / rabbitmq_process_max_fds * 100 > 90
@@ -29,7 +31,8 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
       summary: Rabbitmq unroutable messages (instance {{ $labels.instance }})
-    expr: increase(rabbitmq_channel_messages_unroutable_returned_total[1m]) > 0 or increase(rabbitmq_channel_messages_unroutable_dropped_total[1m]) > 0
+    expr: increase(rabbitmq_channel_messages_unroutable_returned_total[1m]) > 0 or
+      increase(rabbitmq_channel_messages_unroutable_dropped_total[1m]) > 0
     for: 2m
     labels:
       severity: warning

@@ -11,10 +11,13 @@ spec:
     rules:
     - alert: ReconciliationFailure
       annotations:
-        message: '{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing.'
+        message: '{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation
+          has been failing.'
         runbook_url: https://github.com/nlamirault/monitoring-mixin/tree/master/runbook.md#alert-name-reconciliationfailure
         summary: Reconciliation failure.
-      expr: max(gotk_reconcile_condition{status="False",type="Ready"}) by (namespace, name, kind) + on(namespace, name, kind) (max(gotk_reconcile_condition{status="Deleted"}) by (namespace, name, kind)) * 2 == 1
+      expr: max(gotk_reconcile_condition{status="False",type="Ready"}) by (namespace,
+        name, kind) + on(namespace, name, kind) (max(gotk_reconcile_condition{status="Deleted"})
+        by (namespace, name, kind)) * 2 == 1
       for: 10m
       labels:
         severity: warning
