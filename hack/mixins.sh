@@ -88,11 +88,13 @@ function monitoring_mixin {
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     echo -e "${INFO_COLOR}[monitoring-mixins] Generate alerts${NO_COLOR}"
     if [ -n "${alerts}" ]; then
-        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | gojsontoyaml > ${output}/${mixin}/prometheus/alerts.yaml
+        # jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | gojsontoyaml > ${output}/${mixin}/prometheus/alerts.yaml
+        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | yq eval -P > ${output}/${mixin}/prometheus/alerts.yaml
     fi
     echo -e "${INFO_COLOR}[monitoring-mixins] Generate rules${NO_COLOR}"
     if [ -n "${rules}" ]; then
-        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | gojsontoyaml > ${output}/${mixin}/prometheus/rules.yaml
+        # jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | gojsontoyaml > ${output}/${mixin}/prometheus/rules.yaml
+        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | yq eval -P > ${output}/${mixin}/prometheus/rules.yaml
     fi
     echo -e "${INFO_COLOR}[monitoring-mixins] Generate dashboards${NO_COLOR}"
     if [ -n "${dashboards}" ]; then
