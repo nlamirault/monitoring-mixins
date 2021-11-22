@@ -31,7 +31,7 @@ jobs:
     - name: Setup tools
       uses: ./.github/actions/tools
 
-    - name: Update labels
+    - name: Generate record rules, alerts and dashboards
       id: update
       run: |
         make mixins APP=monitoring-mixins VERSION=${{ github.event.inputs.version }}

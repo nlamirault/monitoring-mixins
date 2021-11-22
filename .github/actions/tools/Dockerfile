@@ -64,7 +64,7 @@ RUN apk add --no-cache ca-certificates curl bash tar make jq
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-COPY --from=mixtool /go/bin/mixtool /usr/local/bin/mixtool
+COPY --from=mixtool /go/bin/mixtool-builder /usr/local/bin/mixtool
 # COPY --from=jsonnet-builder /usr/bin/jsonnetfmt /usr/bin
 # COPY --from=jsonnet-builder /usr/bin/jsonnet /usr/bin
 # COPY --from=jb-builder /usr/bin/jb /usr/bin
