@@ -31,13 +31,6 @@ function usage() {
     echo "usage: $0 <output directory> <tenant> <version>"
 }
 
-function jsonnet_tools {
-    go get github.com/google/go-jsonnet/cmd/jsonnet
-    go get github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb
-    go get github.com/brancz/gojsontoyaml
-}
-
-
 function manifest_rules() {
     local mixin=$1
     local file=$2
