@@ -62,7 +62,7 @@ ENV JSONNET_VERSION=0.17.0
 # COPY --from=jb-builder /usr/bin/jb /usr/bin
 COPY --from=mixtool-builder /go/bin/mixtool /usr/bin
 
-RUN apk add --no-cache ca-certificates curl bash tar make jq go
+RUN apk add --no-cache ca-certificates curl bash git tar make jq go
 
 RUN wget -O /usr/bin/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 && \
     chmod +x /usr/bin/yq
