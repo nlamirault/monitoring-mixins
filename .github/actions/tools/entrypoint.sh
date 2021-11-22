@@ -4,6 +4,7 @@ set -eu
 
 YQ_VERSION="v4.6.1"
 JB_VERSION="v0.4.0"
+JSONNET_VERSION="0.17.0"
 
 
 mkdir -p "${GITHUB_WORKSPACE}/bin"
@@ -14,6 +15,11 @@ chmod +x "${GITHUB_WORKSPACE}/bin/yq"
 
 curl -sL "https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/${JB_VERSION}/jb-linux-amd64" -o jb
 chmod +x "${GITHUB_WORKSPACE}/bin/jb"
+
+curl -sL "https://github.com/google/go-jsonnet/releases/download/v${JSONNET_VERSION}/go-jsonnet_${JSONNET_VERSION}_Linux_x86_64.tar.gz" | \
+tar xz
+chmod +x "${GITHUB_WORKSPACE}/bin/jsonnet"
+chmod +x "${GITHUB_WORKSPACE}/bin/jsonnetfmt"
 
 echo "${GITHUB_WORKSPACE}/bin" >> "${GITHUB_PATH}"
 echo "$RUNNER_WORKSPACE/$(basename "${GITHUB_REPOSITORY}")/bin" >> "${GITHUB_PATH}"

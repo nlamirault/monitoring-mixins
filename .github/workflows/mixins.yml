@@ -22,7 +22,7 @@ on:
         required: true
 
 jobs:
-  update_labels:
+  generate:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
