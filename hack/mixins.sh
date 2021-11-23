@@ -28,7 +28,7 @@ MIXINS_DIR="mixins"
 KUBE_LABELS="app: prometheus"
 
 function usage() {
-    echo "usage: $0 <output directory> <tenant> <version>"
+    echo "usage: $0 <output directory> <tenant> <version> [ <mixin> ]"
 }
 
 function manifest_rules() {
@@ -75,7 +75,10 @@ function jsonnet_generate {
     mv rules.yaml ${output}/${mixin}/prometheus
     find dashboards_out -name '*.json' -print0 | xargs -0 -r mv -t ${output}/${mixin}/dashboards
     for file in $(ls ${output}/${mixin}/prometheus/*.yaml); do
-        manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
+        # cat ${file}
+        if [ ! "{}" = "$(cat ${file})" ]; then
+            manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
+        fi
     done
 }
 
@@ -109,7 +112,7 @@ output=$(pwd)/$1
 
 export app=$2
 export version=$3
-echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-v${version} ${NO_COLOR}"
+echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-${version} ${NO_COLOR}"
 
 # DEBUG
 # jsonnet --version
