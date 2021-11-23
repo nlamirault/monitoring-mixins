@@ -40,7 +40,7 @@ function manifest_rules() {
     name=$(echo ${k8s_file%%.*} | sed -e "s/_/\-/g")
     rules=$(cat ${file} | sed -e "s/^/  /g")
 
-    echo "Kubernetes: ${rules_dir}/${k8s_file}"
+    # echo "Kubernetes: ${rules_dir}/${k8s_file}"
     cat <<EOF >${rules_dir}/${k8s_file}
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -84,15 +84,15 @@ function monitoring_mixin_mixtool {
     local output=$2
 
     echo -e "${INFO_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
-    pushd ${MIXINS_DIR}/${mixin}
+    pushd ${MIXINS_DIR}/${mixin} > /dev/null
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
-    popd
+    popd > /dev/null
 }
 
 function generate_mixins {
     local output=$1
-    
+
     echo -e "${OK_COLOR}[monitoring-mixins] Generate all mixins ${NO_COLOR}"
     for mixin in $(ls ${MIXINS_DIR}); do
         monitoring_mixin_mixtool ${mixin} ${output}
@@ -112,9 +112,9 @@ export version=$3
 echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-v${version} ${NO_COLOR}"
 
 # DEBUG
-jsonnet --version
-jb --version
-mixtool --version
+# jsonnet --version
+# jb --version
+# mixtool --version
 
 if [ "$#" -eq 4 ]; then
     monitoring_mixin_mixtool $4 ${output}
