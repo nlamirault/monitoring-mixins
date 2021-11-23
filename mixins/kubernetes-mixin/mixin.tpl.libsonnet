@@ -13,7 +13,7 @@ kubernetes {
 
     grafanaK8s: {
       dashboardNamePrefix: 'Kubernetes / ',
-      dashboardTags: ['kubernetes-mixin', '${app}-v${version}'],
+      dashboardTags: ['kubernetes-mixin', '${app}-${version}'],
       linkPrefix: '.',
 
       // The default refresh time for all dashboards, default to 10s
