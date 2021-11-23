@@ -61,181 +61,42 @@ function jsonnet_init {
         jb install
     fi
     if [ -f "mixin.tpl.libsonnet" ]; then
-        echo -e "${INFO_COLOR}[monitoring-mixins] Use mixin template${NO_COLOR}"
         envsubst < "mixin.tpl.libsonnet" > "mixin.libsonnet"
     fi
 }
 
-function monitoring_mixin {
+function jsonnet_generate {
     local mixin=$1
     local output=$2
-    local alerts=$3
-    local rules=$4
-    local dashboards=$5
 
-    echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
-    pushd ${MIXINS_DIR}/${mixin}
-
-    jsonnet_init
-    
+    mixtool generate all mixin.libsonnet
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
-    echo -e "${INFO_COLOR}[monitoring-mixins] Generate alerts${NO_COLOR}"
-    if [ -n "${alerts}" ]; then
-        # jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | gojsontoyaml > ${output}/${mixin}/prometheus/alerts.yaml
-        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusAlerts)' | yq eval -P > ${output}/${mixin}/prometheus/alerts.yaml
-    fi
-    echo -e "${INFO_COLOR}[monitoring-mixins] Generate rules${NO_COLOR}"
-    if [ -n "${rules}" ]; then
-        # jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | gojsontoyaml > ${output}/${mixin}/prometheus/rules.yaml
-        jsonnet -J vendor -S -e 'std.manifestYamlDoc((import "mixin.libsonnet").prometheusRules)' | yq eval -P > ${output}/${mixin}/prometheus/rules.yaml
-    fi
-    echo -e "${INFO_COLOR}[monitoring-mixins] Generate dashboards${NO_COLOR}"
-    if [ -n "${dashboards}" ]; then
-        jsonnet -J vendor -m ${output}/${mixin}/dashboards -e '(import "mixin.libsonnet").grafanaDashboards'
-    fi
-    # rm -fr vendor
-    echo -e "${INFO_COLOR}[monitoring-mixins] Vendorisation${NO_COLOR}"
+    mv alerts.yaml ${output}/${mixin}/prometheus
+    mv rules.yaml ${output}/${mixin}/prometheus
+    find dashboards_out -name '*.json' -print0 | xargs -0 -r mv -t ${output}/${mixin}/dashboards
     for file in $(ls ${output}/${mixin}/prometheus/*.yaml); do
         manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
     done
-    popd
 }
 
 function monitoring_mixin_mixtool {
     local mixin=$1
     local output=$2
 
-    echo -e "${INFO_COLOR}[monitoring-mixins] Setup Monitoring Mixin: ${mixin} ${NO_COLOR}"
-    
-    if [ ! -d "${MIXINS_DIR}/${mixin}" ]; then
-        echo -e "${KO_COLOR} Mixin not found: ${MIXINS_DIR}/${mixin}${NO_COLOR}"
-        exit 1
-    fi
+    echo -e "${INFO_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin}
-
     jsonnet_init
-    
-    mixtool generate all mixin.libsonnet
-    mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
-    mv alerts.yaml ${output}/${mixin}/prometheus
-    mv rules.yaml ${output}/${mixin}/prometheus
-    mv dashboards_out/*.json ${output}/${mixin}/dashboards
-    for file in $(ls ${output}/${mixin}/prometheus/*.yaml); do
-        manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
-    done
+    jsonnet_generate ${mixin} ${output}
     popd
 }
 
-function alertmanager_mixin {
+function generate_mixins {
     local output=$1
-    echo -e "${OK_COLOR}[monitoring-mixins] Alertmanager Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "alertmanager-mixin" ${output}
-}
-
-function kube_state_metrics_mixin {
-    local output=$1
-    echo -e "${OK_COLOR}[monitoring-mixins] KubeStateMetrics Mixin ${NO_COLOR}"
-    monitoring_mixin "kube-state-metrics-mixin" ${output} "alerts" "" ""
-}
-
-function kubernetes_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Kubernetes Mixin ${NO_COLOR}"
-    monitoring_mixin "kubernetes-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function coredns_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup CoreDNS Mixin ${NO_COLOR}"
-    monitoring_mixin "coredns-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function node_exporter_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Node Exporter Mixin ${NO_COLOR}"
-    monitoring_mixin "node-exporter-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function prometheus_operator_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Operator Mixin ${NO_COLOR}"
-    monitoring_mixin "prometheus-operator-mixin" ${output} "alerts" "" ""
-}
-
-function prometheus_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Prometheus Mixin ${NO_COLOR}"
-    monitoring_mixin "prometheus-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function thanos_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Thanos Mixin ${NO_COLOR}"
-    monitoring_mixin "thanos-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function cert_manager_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Cert Manager Mixin ${NO_COLOR}"
-    monitoring_mixin "cert-manager-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function grafana_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Grafana Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "grafana-mixin" ${output}
-}
-
-function loki_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Loki Mixin ${NO_COLOR}"
-    monitoring_mixin "loki-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function promtail_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Promtail Mixin ${NO_COLOR}"
-    monitoring_mixin "promtail-mixin" ${output} "alerts" "rules" "dashboards"
-}
-
-function etcd_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Etcd Mixin ${NO_COLOR}"
-    monitoring_mixin "etcd-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function memcached_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Memcached Mixin ${NO_COLOR}"
-    monitoring_mixin "memcached-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function minio_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Minio Mixin ${NO_COLOR}"
-    monitoring_mixin "minio-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function elasticsearch_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Elasticsearch Mixin ${NO_COLOR}"
-    monitoring_mixin "elasticsearch-mixin" ${output} "" "" "dashboards"
-}
-
-function rabbitmq_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup RabbitMQ Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "rabbitmq-mixin" ${output}
-}
-
-function linkerd_edge_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Linkerd Edge Mixin ${NO_COLOR}"
-    monitoring_mixin "linkerd-edge-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function linkerd_stable_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Linkerd Stable Mixin ${NO_COLOR}"
-    monitoring_mixin "linkerd-stable-mixin" ${output} "alerts" "" "dashboards"
-}
-
-function fluxcd_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup FluxCD Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "fluxcd-mixin" ${output}
-}
-
-function nginx_ingress_controller_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup Nginx Ingress Controller Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "nginx-ingress-controller-mixin" ${output}
-}
-
-function osm_mixin {
-    echo -e "${OK_COLOR}[monitoring-mixins] Setup OSM Mixin ${NO_COLOR}"
-    monitoring_mixin_mixtool "osm-mixin" ${output}
+    
+    echo -e "${OK_COLOR}[monitoring-mixins] Generate all mixins ${NO_COLOR}"
+    for mixin in $(ls ${MIXINS_DIR}); do
+        monitoring_mixin_mixtool ${mixin} ${output}
+    done
 }
 
 # echo $#
@@ -256,27 +117,7 @@ jb --version
 mixtool --version
 
 if [ "$#" -eq 4 ]; then
-    # echo -e "Mixin: $4"
-    $(echo $4 | sed -e "s/-/_/g") ${output}
+    monitoring_mixin_mixtool $4 ${output}
 else
-    kubernetes_mixin ${output}
-    node_exporter_mixin ${output}
-    prometheus_operator_mixin ${output}
-    prometheus_mixin ${output}
-    alertmanager_mixin ${output}
-    kube_state_metrics_mixin ${output}
-    thanos_mixin ${output}
-    cert_manager_mixin ${output}
-    grafana_mixin ${output}
-    loki_mixin ${output}
-    promtail_mixin ${output}
-    # etcd_mixin ${output}
-    memcached_mixin ${output}
-    minio_mixin ${output}
-    elasticsearch_mixin ${output}
-    rabbitmq_mixin ${output}
-    linkerd_edge_mixin ${output}
-    linkerd_stable_mixin ${output}
-    fluxcd_mixin ${output}
-    osm_mixin ${output}
+    generate_mixins ${output}
 fi
