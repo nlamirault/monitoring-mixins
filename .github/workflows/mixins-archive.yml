@@ -49,3 +49,4 @@ jobs:
         with:
           artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.event.inputs.version }}
