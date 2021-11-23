@@ -44,8 +44,8 @@ jobs:
           filename: 'monitoring-mixins-${{ github.event.inputs.version }}.tgz'
           path: monitoring-mixins
 
-      # - name: Upload Release
-      #   uses: ncipollo/release-action@v1.8.10
-      #   with:
-      #     artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
-      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release
+        uses: ncipollo/release-action@v1.8.10
+        with:
+          artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
+          token: ${{ secrets.GITHUB_TOKEN }}
