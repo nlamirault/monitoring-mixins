@@ -21,7 +21,7 @@ KO_COLOR="\e[31m"
 NO_COLOR="\e[39m"
 INFO_COLOR="\e[36m"
 
-echo -e "${OK_COLOR}[ Monitoring Mixins ]${NO_COLOR}"
+# echo -e "${OK_COLOR}[ Monitoring Mixins ]${NO_COLOR}"
 
 MIXINS_DIR="mixins"
 
@@ -40,7 +40,9 @@ function manifest_rules() {
     name=$(echo ${k8s_file%%.*} | sed -e "s/_/\-/g")
     rules=$(cat ${file} | sed -e "s/^/  /g")
 
+    # cat ${file}
     # echo "Kubernetes: ${rules_dir}/${k8s_file}"
+
     cat <<EOF >${rules_dir}/${k8s_file}
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -52,6 +54,17 @@ metadata:
 spec:
 ${rules}
 EOF
+}
+
+function move_prom_file {
+    local prom_file=$1
+    local output=$2
+
+    if [[ $(wc -l <${prom_file}) -ge 2 ]]; then
+        mv ${prom_file} ${output}
+    else
+        rm ${prom_file}
+    fi
 }
 
 function jsonnet_init {
@@ -71,22 +84,21 @@ function jsonnet_generate {
 
     mixtool generate all mixin.libsonnet
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
-    mv alerts.yaml ${output}/${mixin}/prometheus
-    mv rules.yaml ${output}/${mixin}/prometheus
+    move_prom_file "alerts.yaml" "${output}/${mixin}/prometheus"
+    move_prom_file "rules.yaml" "${output}/${mixin}/prometheus"
     find dashboards_out -name '*.json' -print0 | xargs -0 -r mv -t ${output}/${mixin}/dashboards
-    for file in $(ls ${output}/${mixin}/prometheus/*.yaml); do
-        # cat ${file}
-        if [ ! "{}" = "$(cat ${file})" ]; then
+    for file in $(find ${output}/${mixin}/prometheus/ -name "*.yaml"); do
+        if [[ $(wc -l <${file}) -ge 2 ]]; then
             manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
         fi
     done
 }
 
-function monitoring_mixin_mixtool {
+function mixin_build {
     local mixin=$1
     local output=$2
 
-    echo -e "${INFO_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
+    echo -e "${OK_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
@@ -96,9 +108,9 @@ function monitoring_mixin_mixtool {
 function generate_mixins {
     local output=$1
 
-    echo -e "${OK_COLOR}[monitoring-mixins] Generate all mixins ${NO_COLOR}"
+    # echo -e "${OK_COLOR}[monitoring-mixins] Generate all mixins ${NO_COLOR}"
     for mixin in $(ls ${MIXINS_DIR}); do
-        monitoring_mixin_mixtool ${mixin} ${output}
+        mixin_build ${mixin} ${output}
     done
 }
 
@@ -112,7 +124,7 @@ output=$(pwd)/$1
 
 export app=$2
 export version=$3
-echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-${version} ${NO_COLOR}"
+echo -e "${INFO_COLOR}[monitoring-mixins] Release: ${app}-${version} ${NO_COLOR}"
 
 # DEBUG
 # jsonnet --version
@@ -120,7 +132,7 @@ echo -e "${OK_COLOR}[monitoring-mixins] Generate mixins: ${app}-${version} ${NO_
 # mixtool --version
 
 if [ "$#" -eq 4 ]; then
-    monitoring_mixin_mixtool $4 ${output}
+    mixin_build $4 ${output}
 else
     generate_mixins ${output}
 fi

@@ -1,0 +1,123 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: coredns-mixin-alerts
+  labels:
+    app: prometheus
+spec:
+  groups:
+  - name: coredns
+    rules:
+    - alert: CoreDNSDown
+      annotations:
+        message: CoreDNS has disappeared from Prometheus target discovery.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsdown
+      expr: |
+        absent(up{job="kube-dns"} == 1)
+      for: 15m
+      labels:
+        severity: critical
+    - alert: CoreDNSLatencyHigh
+      annotations:
+        message: CoreDNS has 99th percentile latency of {{ $value }} seconds for server
+          {{ $labels.server }} zone {{ $labels.zone }} .
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednslatencyhigh
+      expr: |
+        histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket{job="kube-dns"}[5m])) by(server, zone, le)) > 4
+      for: 10m
+      labels:
+        severity: critical
+    - alert: CoreDNSErrorsHigh
+      annotations:
+        message: CoreDNS is returning SERVFAIL for {{ $value | humanizePercentage }}
+          of requests.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednserrorshigh
+      expr: |
+        sum(rate(coredns_dns_responses_total{job="kube-dns",rcode="SERVFAIL"}[5m]))
+          /
+        sum(rate(coredns_dns_responses_total{job="kube-dns"}[5m])) > 0.03
+      for: 10m
+      labels:
+        severity: critical
+    - alert: CoreDNSErrorsHigh
+      annotations:
+        message: CoreDNS is returning SERVFAIL for {{ $value | humanizePercentage }}
+          of requests.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednserrorshigh
+      expr: |
+        sum(rate(coredns_dns_responses_total{job="kube-dns",rcode="SERVFAIL"}[5m]))
+          /
+        sum(rate(coredns_dns_responses_total{job="kube-dns"}[5m])) > 0.01
+      for: 10m
+      labels:
+        severity: warning
+  - name: coredns_forward
+    rules:
+    - alert: CoreDNSForwardLatencyHigh
+      annotations:
+        message: CoreDNS has 99th percentile latency of {{ $value }} seconds forwarding
+          requests to {{ $labels.to }}.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsforwardlatencyhigh
+      expr: |
+        histogram_quantile(0.99, sum(rate(coredns_forward_request_duration_seconds_bucket{job="kube-dns"}[5m])) by(to, le)) > 4
+      for: 10m
+      labels:
+        severity: critical
+    - alert: CoreDNSForwardErrorsHigh
+      annotations:
+        message: CoreDNS is returning SERVFAIL for {{ $value | humanizePercentage }}
+          of forward requests to {{ $labels.to }}.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsforwarderrorshigh
+      expr: |
+        sum(rate(coredns_forward_responses_total{job="kube-dns",rcode="SERVFAIL"}[5m]))
+          /
+        sum(rate(coredns_forward_responses_total{job="kube-dns"}[5m])) > 0.03
+      for: 10m
+      labels:
+        severity: critical
+    - alert: CoreDNSForwardErrorsHigh
+      annotations:
+        message: CoreDNS is returning SERVFAIL for {{ $value | humanizePercentage }}
+          of forward requests to {{ $labels.to }}.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsforwarderrorshigh
+      expr: |
+        sum(rate(coredns_forward_responses_total{job="kube-dns",rcode="SERVFAIL"}[5m]))
+          /
+        sum(rate(coredns_forward_responses_total{job="kube-dns"}[5m])) > 0.01
+      for: 10m
+      labels:
+        severity: warning
+    - alert: CoreDNSForwardHealthcheckFailureCount
+      annotations:
+        message: CoreDNS health checks have failed to upstream server {{ $labels.to
+          }}.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsforwardhealthcheckfailurecount
+      expr: |
+        sum(rate(coredns_forward_healthcheck_failures_total{job="kube-dns"}[5m])) by (to) > 0
+      for: 10m
+      labels:
+        severity: warning
+    - alert: CoreDNSForwardHealthcheckBrokenCount
+      annotations:
+        message: CoreDNS health checks have failed for all upstream servers.
+        runbook_url: https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsforwardhealthcheckbrokencount
+      expr: |
+        sum(rate(coredns_forward_healthcheck_broken_total{job="kube-dns"}[5m])) > 0
+      for: 10m
+      labels:
+        severity: warning
