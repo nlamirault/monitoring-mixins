@@ -37,16 +37,25 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - name: Archive Release
-        uses: thedoctor0/zip-release@0.6.0
-        with:
-          type: 'tar'
-          filename: 'monitoring-mixins-${{ github.event.inputs.version }}.tgz'
-          path: monitoring-mixins
+      - name: 'Make archive'
+        run: tar -cvf monitoring-mixins-${{ github.event.inputs.version }}.tar monitoring-mixins
 
-      - name: Upload Release
-        uses: ncipollo/release-action@v1.8.10
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2.2.4
         with:
-          artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.inputs.version }}
+          name: monitoring-mixins
+          path: monitoring-mixins-${{ github.event.inputs.version }}.tar
+
+      # - name: Archive Release
+      #   uses: thedoctor0/zip-release@0.6.0
+      #   with:
+      #     type: 'tar'
+      #     filename: 'monitoring-mixins-${{ github.event.inputs.version }}.tgz'
+      #     path: monitoring-mixins
+
+      # - name: Upload Release
+      #   uses: ncipollo/release-action@v1.8.10
+      #   with:
+      #     artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag: ${{ github.event.inputs.version }}
