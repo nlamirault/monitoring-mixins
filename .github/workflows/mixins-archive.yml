@@ -42,4 +42,10 @@ jobs:
         with:
           type: 'tar'
           filename: 'monitoring-mixins-${{ github.event.inputs.version }}.tgz'
-          directory: monitoring-mixins
+          path: monitoring-mixins
+
+      # - name: Upload Release
+      #   uses: ncipollo/release-action@v1.8.10
+      #   with:
+      #     artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
