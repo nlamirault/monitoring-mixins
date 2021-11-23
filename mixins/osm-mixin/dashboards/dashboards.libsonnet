@@ -18,6 +18,6 @@
     'osm-mesh-envoy-details.json': (import 'osm-mesh-envoy-details.json'),
     'osm-pod.json': (import 'osm-pod.json'),
     'osm-service-to-servic.json': (import 'osm-service-to-service.json'),
-    'osm-workload.json': (import 'osm-workload.json')
+    'osm-workload.json': (import 'osm-workload.json'),
   },
 }

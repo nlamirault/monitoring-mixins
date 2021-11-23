@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 
+#
 # # Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

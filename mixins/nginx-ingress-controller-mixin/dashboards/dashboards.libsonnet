@@ -15,6 +15,6 @@
 {
   grafanaDashboards: {
     'nginx.json': (import 'nginx.json'),
-    'request-handling-performance.json': (import 'request-handling-performance.json')
+    'request-handling-performance.json': (import 'request-handling-performance.json'),
   },
 }

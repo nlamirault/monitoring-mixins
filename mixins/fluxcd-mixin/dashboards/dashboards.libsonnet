@@ -15,6 +15,6 @@
 {
   grafanaDashboards: {
     'cluster.json': (import 'cluster.json'),
-    'control-plane.json': (import 'control-plane.json')
+    'control-plane.json': (import 'control-plane.json'),
   },
 }
