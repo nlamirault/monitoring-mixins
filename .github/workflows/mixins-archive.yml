@@ -15,6 +15,8 @@
 name: Mixins / Bundle
 
 on:
+  # release:
+  #   types: [published]
   workflow_dispatch:
     inputs:
       version:
@@ -37,22 +39,9 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - name: 'Upload Artifact'
+      - name: Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
+          # name: monitoring-mixins-${{ github.event.release.name }}
           name: monitoring-mixins-${{ github.event.inputs.version }}
           path: monitoring-mixins
-
-      # - name: Archive Release
-      #   uses: thedoctor0/zip-release@0.6.0
-      #   with:
-      #     type: 'tar'
-      #     filename: 'monitoring-mixins-${{ github.event.inputs.version }}.tgz'
-      #     path: monitoring-mixins
-
-      # - name: Upload Release
-      #   uses: ncipollo/release-action@v1.8.10
-      #   with:
-      #     artifacts: "monitoring-mixins-${{ github.event.inputs.version }}.tgz"
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag: ${{ github.event.inputs.version }}
