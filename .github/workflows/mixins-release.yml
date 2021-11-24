@@ -12,14 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Mixins / Bundle
+name: Mixins / Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version"
-        required: true
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -40,5 +37,5 @@ jobs:
       - name: Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: monitoring-mixins-${{ github.event.inputs.version }}
+          name: monitoring-mixins-${{ github.event.release.name }}
           path: monitoring-mixins
