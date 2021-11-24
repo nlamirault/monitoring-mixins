@@ -37,14 +37,11 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - name: 'Make archive'
-        run: tar -cvf monitoring-mixins-${{ github.event.inputs.version }}.tar monitoring-mixins
-
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: monitoring-mixins
-          path: monitoring-mixins-${{ github.event.inputs.version }}.tar
+          name: monitoring-mixins-${{ github.event.inputs.version }}
+          path: monitoring-mixins
 
       # - name: Archive Release
       #   uses: thedoctor0/zip-release@0.6.0
