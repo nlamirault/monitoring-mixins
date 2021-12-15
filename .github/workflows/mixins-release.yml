@@ -35,7 +35,7 @@ jobs:
           version: ${{ github.event.inputs.version }}
 
       - name: Artifact
-        uses: actions/upload-artifact@v2.3.0
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: monitoring-mixins-${{ github.event.release.name }}
           path: monitoring-mixins
