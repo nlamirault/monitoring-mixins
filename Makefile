@@ -66,6 +66,7 @@ check: check-git check-jsonnet check-jb check-jq check-yq check-promtool check-p
 .PHONY: clean
 clean: ## Clean environment
 	rm -fr monitoring-mixins
+	find . -name "*.lock.json" | xargs rm -fr {} \;
 
 .PHONY: init
 init: ## Initialize environment
