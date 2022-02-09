@@ -1,0 +1,64 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: promtail-mixin-alerts
+  labels:
+    app: prometheus
+spec:
+  groups:
+  - name: promtail_alerts
+    rules:
+    - alert: PromtailRequestsErrors
+      annotations:
+        message: |
+          {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}% errors.
+      expr: |
+        100 * sum(rate(promtail_request_duration_seconds_count{status_code=~"5..|failed"}[1m])) by (namespace, job, route, instance)
+          /
+        sum(rate(promtail_request_duration_seconds_count[1m])) by (namespace, job, route, instance)
+          > 10
+      for: 15m
+      labels:
+        severity: critical
+    - alert: PromtailRequestLatency
+      annotations:
+        message: |
+          {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}s 99th percentile latency.
+      expr: |
+        job_status_code_namespace:promtail_request_duration_seconds:99quantile > 1
+      for: 15m
+      labels:
+        severity: critical
+    - alert: PromtailFileLagging
+      annotations:
+        message: |
+          {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} has been lagging by more than 10 seconds for more than 15m.
+      expr: |
+        promtail_stream_lag_seconds > 10
+      for: 5m
+      labels:
+        severity: warning
+    - alert: PromtailFileMissing
+      annotations:
+        message: |
+          {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} matches the glob but is not being tailed.
+      expr: |
+        promtail_file_bytes_total unless promtail_read_bytes_total
+      for: 15m
+      labels:
+        severity: critical

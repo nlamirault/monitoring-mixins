@@ -1,0 +1,82 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rabbitmq-mixin-alerts
+  labels:
+    app: prometheus
+spec:
+  groups:
+  - name: ClusterAlerts
+    rules:
+    - alert: RabbitmqMemoryHigh
+      annotations:
+        description: |-
+          A node is using more than 90% of allocated RAM
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Rabbitmq memory high (instance {{ $labels.instance }})
+        title: Instance {{ $labels.instance }} using too much RAM Memory
+      expr: rabbitmq_process_resident_memory_bytes / rabbitmq_resident_memory_limit_bytes
+        * 100 > 90
+      for: 2m
+      labels:
+        severity: warning
+    - alert: RabbitmqFileDescriptorsUsage
+      annotations:
+        description: A node is using more than 90% of file descriptors\n  VALUE = {{
+          $value }}\n  LABELS = {{ $labels }}
+        summary: Rabbitmq file descriptors usage (instance {{ $labels.instance }})
+        title: Instance {{ $labels.instance }} using too much file descriptors
+      expr: rabbitmq_process_open_fds / rabbitmq_process_max_fds * 100 > 90
+      for: 2m
+      labels:
+        severity: warning
+    - alert: RabbitmqUnroutableMessages
+      annotations:
+        description: |-
+          A queue has unroutable messages
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Rabbitmq unroutable messages (instance {{ $labels.instance }})
+      expr: increase(rabbitmq_channel_messages_unroutable_returned_total[1m]) > 0 or
+        increase(rabbitmq_channel_messages_unroutable_dropped_total[1m]) > 0
+      for: 2m
+      labels:
+        severity: warning
+    - alert: RabbitmqNodeNotDistributed
+      annotations:
+        description: |-
+          Distribution link state is not 'up'
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Rabbitmq node not distributed (instance {{ $labels.instance }})
+      expr: erlang_vm_dist_node_state < 3
+      for: 0m
+      labels:
+        severity: critical
+    - alert: RabbitmqNodeDown
+      annotations:
+        description: |-
+          Less than 3 nodes running in RabbitMQ cluster
+            VALUE = {{ $value }}
+            LABELS = {{ $labels }}
+        summary: Rabbitmq node down (instance {{ $labels.instance }})
+      expr: sum by (rabbitmq_cluster) (rabbitmq_identity_info)
+      for: 0m
+      labels:
+        severity: critical
