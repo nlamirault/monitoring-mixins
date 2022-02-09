@@ -11,7 +11,7 @@ kubernetes {
 
     grafana: {
       prefix: 'Prometheus / ',
-      tags: ['prometheus-mixin', 'foo-0.0.0'],
+      tags: ['prometheus-mixin', 'monitoring-mixins-v0.14.0'],
       // The default refresh time for all dashboards, default to 60s
       refresh: '60s',
     },
