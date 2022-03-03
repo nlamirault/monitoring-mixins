@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/bitnami-labs/sealed-secrets.git",
+          "subdir": "contrib/prometheus-mixin"
+        }
+      },
+      "version": "0e95ffaf9a0f814c19abb36a64edd86eda90bbef",
+      "sum": "qDct2mK6dgO7KPi63Vlmfloti1unmtGSgbG89ZoJlRc="
+    }
+  ],
+  "legacyImports": false
+}
