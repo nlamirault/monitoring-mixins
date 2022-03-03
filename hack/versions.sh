@@ -69,6 +69,8 @@ while read LINE; do
     elif [ "${LINE}" == "${STARTFLAG}" ]; then
             START="true"
             echo "${STARTFLAG}" >> ${tmpfile}
+            echo "| Mixin | Version |" >> ${tmpfile}
+            echo "|-------|:-------:|" >> ${tmpfile}
             continue
     else
         echo "${LINE}" >> ${tmpfile}

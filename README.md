@@ -20,9 +20,9 @@ Generate a mixin:
 
 ## Description
 
+<!-- BEGIN_MIXINS_DOC -->
 | Mixin | Version |
 |-------|:-------:|
-<!-- BEGIN_MIXINS_DOC -->
 | alertmanager-mixin | "https://github.com/prometheus/alertmanager.git - `v0.23.0"` <br> |
 | cert-manager-mixin | "https://gitlab.com/uneeq-oss/cert-manager-mixin.git - `master"` <br> |
 | coredns-mixin | "https://github.com/povilasv/coredns-mixin.git - `master"` <br> |
