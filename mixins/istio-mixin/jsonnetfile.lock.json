@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "istio-mixin"
+        }
+      },
+      "version": "c805327ecfd7cd9709c0dc338ef6b34696021d42",
+      "sum": "flklm5mQAbbOzudX+x5oAsbiQc/XkXiqOtjy2vLBfrk="
+    }
+  ],
+  "legacyImports": false
+}
