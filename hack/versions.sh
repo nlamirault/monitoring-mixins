@@ -47,7 +47,7 @@ function mixin_version() {
         for i in "${data[@]}"; do
             git=$(echo ${i} | awk -F" " '{ print $1 }')
             version=$(echo ${i} | awk -F" " '{ print $2 }')
-            echo -n "${git} - \`${version}\` , " >> ${tmpfile}
+            echo -n "${git} - \`${version}\` <br> " >> ${tmpfile}
         done
         echo "|" >> ${tmpfile}
     fi
