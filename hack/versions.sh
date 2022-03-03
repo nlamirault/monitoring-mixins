@@ -45,9 +45,9 @@ function mixin_version() {
         read -ra data <<< "${deps}"
         echo -n "| ${mixin} | " >> ${tmpfile}
         for i in "${data[@]}"; do
-            git=$(echo ${i} | awk -F" " '{ print $1 }')
-            version=$(echo ${i} | awk -F" " '{ print $2 }')
-            echo -n "${git} - \`${version}\` , " >> ${tmpfile}
+            git=$(echo ${i} | sed -e 's/"//g' | awk -F" " '{ print $1 }')
+            version=$(echo ${i} | sed -e 's/"//g' | awk -F" " '{ print $2 }')
+            echo -n "${git} - \`${version}\` <br> " >> ${tmpfile}
         done
         echo "|" >> ${tmpfile}
     fi
@@ -69,6 +69,8 @@ while read LINE; do
     elif [ "${LINE}" == "${STARTFLAG}" ]; then
             START="true"
             echo "${STARTFLAG}" >> ${tmpfile}
+            echo "| Mixin | Version |" >> ${tmpfile}
+            echo "|-------|:-------:|" >> ${tmpfile}
             continue
     else
         echo "${LINE}" >> ${tmpfile}

@@ -33,6 +33,11 @@ jobs:
       with:
         version: ${{ github.event.inputs.version }}
 
+    - name: Update documentation
+      id: update
+      run: |
+        ./hack/versions.sh
+
     - name: Create pull request for generated mixins
       id: cpr
       uses: peter-evans/create-pull-request@v3.14.0
