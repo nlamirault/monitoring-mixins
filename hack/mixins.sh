@@ -98,6 +98,10 @@ function mixin_build {
     local mixin=$1
     local output=$2
 
+    if [ ! -d "${MIXINS_DIR}/${mixin}" ]; then
+        echo -e "${KO_COLOR}[monitoring-mixins] Not found: ${mixin} ${NO_COLOR}"
+        exit 1
+    fi
     echo -e "${OK_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
     jsonnet_init
