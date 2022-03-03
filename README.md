@@ -18,7 +18,7 @@ Generate a mixin:
 ❯ make mixin APP=monitoring-mixins VERSION=0.7.0 MIXIN=kube-state-metrics-mixin
 ```
 
-## Description
+## Mixins
 
 <!-- BEGIN_MIXINS_DOC -->
 | Mixin | Version |
