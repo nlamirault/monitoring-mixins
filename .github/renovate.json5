@@ -1,6 +1,7 @@
 {
   "extends": [
     "config:base",
+    ":dependencyDashboard",
     ":gitSignOff"
   ],
   "enabled": true,
