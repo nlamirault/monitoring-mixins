@@ -1,100 +1,114 @@
 {
-      "__inputs": [ ],
-      "__requires": [ ],
       "annotations": {
          "list": [ ]
       },
-      "editable": false,
+      "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
       "hideControls": false,
-      "id": null,
       "links": [ ],
-      "refresh": "60s",
+      "refresh": "10s",
       "rows": [
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
-                  "cacheTimeout": null,
-                  "colorBackground": false,
-                  "colorValue": false,
-                  "colors": [
-                     "#299c46",
-                     "rgba(237, 129, 40, 0.89)",
-                     "#d44a3a"
-                  ],
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
                   "datasource": "$datasource",
-                  "format": "none",
-                  "gauge": {
-                     "maxValue": 100,
-                     "minValue": 0,
-                     "show": false,
-                     "thresholdLabels": false,
-                     "thresholdMarkers": true
+                  "description": "Shows rate of requests against Query Frontend for the given time.",
+                  "fill": 10,
+                  "id": 1,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
                   },
-                  "gridPos": { },
-                  "id": 2,
-                  "interval": null,
+                  "lines": true,
+                  "linewidth": 0,
                   "links": [ ],
-                  "mappingType": 1,
-                  "mappingTypes": [
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [
                      {
-                        "name": "value to text",
-                        "value": 1
+                        "alias": "/1../",
+                        "color": "#EAB839"
                      },
                      {
-                        "name": "range to text",
-                        "value": 2
-                     }
-                  ],
-                  "maxDataPoints": 100,
-                  "nullPointMode": "connected",
-                  "nullText": null,
-                  "postfix": "",
-                  "postfixFontSize": "50%",
-                  "prefix": "",
-                  "prefixFontSize": "50%",
-                  "rangeMaps": [
+                        "alias": "/2../",
+                        "color": "#37872D"
+                     },
                      {
-                        "from": "null",
-                        "text": "N/A",
-                        "to": "null"
+                        "alias": "/3../",
+                        "color": "#E0B400"
+                     },
+                     {
+                        "alias": "/4../",
+                        "color": "#1F60C4"
+                     },
+                     {
+                        "alias": "/5../",
+                        "color": "#C4162A"
                      }
                   ],
-                  "span": 2,
-                  "sparkline": {
-                     "fillColor": "rgba(31, 118, 189, 0.18)",
-                     "full": false,
-                     "lineColor": "rgb(31, 120, 193)",
-                     "show": false
-                  },
-                  "tableColumn": "",
+                  "spaceLength": 10,
+                  "span": 3,
+                  "stack": true,
+                  "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(up{cluster=\"$cluster\", job=\"kube-controller-manager\"})",
+                        "expr": "sum by (job, handler, code) (rate(http_requests_total{job=~\"$job\", handler=\"query-frontend\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "",
-                        "refId": "A"
+                        "legendFormat": "{{job}} {{handler}} {{code}}",
+                        "step": 10
                      }
                   ],
-                  "thresholds": "",
-                  "title": "Up",
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Rate of requests",
                   "tooltip": {
-                     "shared": false
+                     "shared": false,
+                     "sort": 2,
+                     "value_type": "individual"
                   },
-                  "type": "singlestat",
-                  "valueFontSize": "80%",
-                  "valueMaps": [
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
                      {
-                        "op": "=",
-                        "text": "N/A",
-                        "value": "null"
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
                      }
-                  ],
-                  "valueName": "min"
+                  ]
                },
                {
                   "aliasColors": { },
@@ -102,52 +116,146 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Shows rate of queries passing through Query Frontend",
+                  "fill": 10,
+                  "id": 2,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 0,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [
+                     {
+                        "alias": "/1../",
+                        "color": "#EAB839"
+                     },
+                     {
+                        "alias": "/2../",
+                        "color": "#37872D"
+                     },
+                     {
+                        "alias": "/3../",
+                        "color": "#E0B400"
+                     },
+                     {
+                        "alias": "/4../",
+                        "color": "#1F60C4"
+                     },
+                     {
+                        "alias": "/5../",
+                        "color": "#C4162A"
+                     }
+                  ],
+                  "spaceLength": 10,
+                  "span": 3,
+                  "stack": true,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum by (job, handler, code) (rate(thanos_query_frontend_queries_total{job=~\"$job\", op=\"query_range\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{job}} {{handler}} {{code}}",
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Rate of queries",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               },
+               {
+                  "aliasColors": {
+                     "error": "#E24D42"
+                  },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "description": "Shows ratio of errors compared to the the total number of handled requests against Query Frontend.",
+                  "fill": 10,
                   "id": 3,
                   "legend": {
-                     "alignAsTable": true,
                      "avg": false,
-                     "current": true,
+                     "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": true,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
-                     "values": true
+                     "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 10,
-                  "stack": false,
+                  "span": 3,
+                  "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(workqueue_adds_total{cluster=\"$cluster\", job=\"kube-controller-manager\", instance=~\"$instance\"}[5m])) by (instance, name)",
+                        "expr": "sum by (job) (rate(http_requests_total{job=~\"$job\", handler=\"query-frontend\",code=~\"5..\"}[$interval])) / sum by (job) (rate(http_requests_total{job=~\"$job\", handler=\"query-frontend\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} {{name}}",
-                        "refId": "A"
+                        "legendFormat": "error",
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Work Queue Add Rate",
+                  "title": "Errors",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -160,88 +268,112 @@
                   },
                   "yaxes": [
                      {
-                        "format": "ops",
+                        "format": "percentunit",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "ops",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
-               }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
-         },
-         {
-            "collapse": false,
-            "collapsed": false,
-            "panels": [
+               },
                {
                   "aliasColors": { },
                   "bars": false,
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
+                  "description": "Shows how long has it taken to handle requests in quantiles.",
                   "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
                   "id": 4,
                   "legend": {
-                     "alignAsTable": true,
                      "avg": false,
-                     "current": true,
+                     "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": true,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
-                     "values": true
+                     "values": false
                   },
                   "lines": true,
                   "linewidth": 1,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
-                  "seriesOverrides": [ ],
+                  "seriesOverrides": [
+                     {
+                        "alias": "p99",
+                        "color": "#FA6400",
+                        "fill": 1,
+                        "fillGradient": 1
+                     },
+                     {
+                        "alias": "p90",
+                        "color": "#E0B400",
+                        "fill": 1,
+                        "fillGradient": 1
+                     },
+                     {
+                        "alias": "p50",
+                        "color": "#37872D",
+                        "fill": 10,
+                        "fillGradient": 0
+                     }
+                  ],
                   "spaceLength": 10,
-                  "span": 12,
+                  "span": 3,
                   "stack": false,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(workqueue_depth{cluster=\"$cluster\", job=\"kube-controller-manager\", instance=~\"$instance\"}[5m])) by (instance, name)",
+                        "expr": "histogram_quantile(0.50, sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~\"$job\", handler=\"query-frontend\"}[$interval]))) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} {{name}}",
-                        "refId": "A"
+                        "legendFormat": "p50 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "histogram_quantile(0.90, sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~\"$job\", handler=\"query-frontend\"}[$interval]))) * 1",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "p90 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "histogram_quantile(0.99, sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~\"$job\", handler=\"query-frontend\"}[$interval]))) * 1",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "p99 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Work Queue Depth",
+                  "title": "Duration",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -254,7 +386,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "short",
+                        "format": "s",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -266,8 +398,8 @@
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": 0,
-                        "show": true
+                        "min": null,
+                        "show": false
                      }
                   ]
                }
@@ -275,14 +407,13 @@
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
+            "showTitle": true,
+            "title": "Query Frontend API",
+            "titleSize": "h6"
          },
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
                   "aliasColors": { },
@@ -290,52 +421,48 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Show rate of cache requests.",
+                  "fill": 10,
                   "id": 5,
                   "legend": {
-                     "alignAsTable": true,
                      "avg": false,
-                     "current": true,
+                     "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": true,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
-                     "values": true
+                     "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 12,
-                  "stack": false,
+                  "span": 3,
+                  "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(workqueue_queue_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-controller-manager\", instance=~\"$instance\"}[5m])) by (instance, name, le))",
+                        "expr": "sum by (job, tripperware) (rate(cortex_cache_request_duration_seconds_count{job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} {{name}}",
-                        "refId": "A"
+                        "legendFormat": "{{job}} {{tripperware}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Work Queue Latency",
+                  "title": "Requests",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -348,109 +475,79 @@
                   },
                   "yaxes": [
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
-               }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
-         },
-         {
-            "collapse": false,
-            "collapsed": false,
-            "panels": [
+               },
                {
                   "aliasColors": { },
                   "bars": false,
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Show rate of Querier cache gets vs misses.",
+                  "fill": 10,
                   "id": 6,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 4,
-                  "stack": false,
+                  "span": 3,
+                  "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(rest_client_requests_total{job=\"kube-controller-manager\", instance=~\"$instance\",code=~\"2..\"}[5m]))",
+                        "expr": "sum by (job, tripperware) (rate(querier_cache_gets_total{job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "2xx",
-                        "refId": "A"
+                        "legendFormat": "Cache gets - {{job}} {{tripperware}}",
+                        "legendLink": null,
+                        "step": 10
                      },
                      {
-                        "expr": "sum(rate(rest_client_requests_total{job=\"kube-controller-manager\", instance=~\"$instance\",code=~\"3..\"}[5m]))",
+                        "expr": "sum by (job, tripperware) (rate(querier_cache_misses_total{job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "3xx",
-                        "refId": "B"
-                     },
-                     {
-                        "expr": "sum(rate(rest_client_requests_total{job=\"kube-controller-manager\", instance=~\"$instance\",code=~\"4..\"}[5m]))",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "4xx",
-                        "refId": "C"
-                     },
-                     {
-                        "expr": "sum(rate(rest_client_requests_total{job=\"kube-controller-manager\", instance=~\"$instance\",code=~\"5..\"}[5m]))",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "5xx",
-                        "refId": "D"
+                        "legendFormat": "Cache misses - {{job}} {{tripperware}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Kube API Request Rate",
+                  "title": "Querier cache gets vs misses",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -463,20 +560,20 @@
                   },
                   "yaxes": [
                      {
-                        "format": "ops",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "ops",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
                },
@@ -486,52 +583,48 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Shows rate of cortex fetched keys.",
+                  "fill": 10,
                   "id": 7,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 8,
-                  "stack": false,
+                  "span": 3,
+                  "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(rest_client_request_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-controller-manager\", instance=~\"$instance\", verb=\"POST\"}[5m])) by (verb, url, le))",
+                        "expr": "sum by (job, tripperware) (rate(cortex_cache_fetched_keys{job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{verb}} {{url}}",
-                        "refId": "A"
+                        "legendFormat": "{{job}} {{tripperware}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Post Request Latency 99th Quantile",
+                  "title": "Cortex fetched keys",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -544,7 +637,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -552,80 +645,63 @@
                         "show": true
                      },
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": 0,
-                        "show": true
+                        "min": null,
+                        "show": false
                      }
                   ]
-               }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
-         },
-         {
-            "collapse": false,
-            "collapsed": false,
-            "panels": [
+               },
                {
                   "aliasColors": { },
                   "bars": false,
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Shows rate of cortex cache hits.",
+                  "fill": 10,
                   "id": 8,
                   "legend": {
-                     "alignAsTable": true,
                      "avg": false,
-                     "current": true,
+                     "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": true,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
-                     "values": true
+                     "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 12,
-                  "stack": false,
+                  "span": 3,
+                  "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(rest_client_request_duration_seconds_bucket{cluster=\"$cluster\", job=\"kube-controller-manager\", instance=~\"$instance\", verb=\"GET\"}[5m])) by (verb, url, le))",
+                        "expr": "sum by (job, tripperware) (rate(cortex_cache_hits{job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{verb}} {{url}}",
-                        "refId": "A"
+                        "legendFormat": "{{job}} {{tripperware}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Get Request Latency 99th Quantile",
+                  "title": "Cortex cache hits",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -638,7 +714,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -646,12 +722,12 @@
                         "show": true
                      },
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": 0,
-                        "show": true
+                        "min": null,
+                        "show": false
                      }
                   ]
                }
@@ -659,14 +735,13 @@
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
+            "showTitle": true,
+            "title": "Cache Operations",
+            "titleSize": "h6"
          },
          {
-            "collapse": false,
-            "collapsed": false,
+            "collapse": true,
+            "height": "250px",
             "panels": [
                {
                   "aliasColors": { },
@@ -675,30 +750,24 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
                   "id": 9,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
                   "linewidth": 1,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
                   "span": 4,
@@ -706,20 +775,61 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "process_resident_memory_bytes{cluster=\"$cluster\", job=\"kube-controller-manager\",instance=~\"$instance\"}",
+                        "expr": "go_memstats_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}}",
-                        "refId": "A"
+                        "legendFormat": "alloc all {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "alloc heap {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "alloc rate all {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "alloc rate heap {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "inuse heap {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "inuse stack {{instance}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Memory",
+                  "title": "Memory Used",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -736,16 +846,16 @@
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "bytes",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
                },
@@ -756,30 +866,24 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
                   "id": 10,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
                      "show": true,
-                     "sideWidth": null,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
                   "linewidth": 1,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
                   "span": 4,
@@ -787,92 +891,12 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "rate(process_cpu_seconds_total{cluster=\"$cluster\", job=\"kube-controller-manager\",instance=~\"$instance\"}[5m])",
+                        "expr": "go_goroutines{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
-                        "refId": "A"
-                     }
-                  ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "CPU usage",
-                  "tooltip": {
-                     "shared": false,
-                     "sort": 0,
-                     "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     }
-                  ]
-               },
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
-                  "id": 11,
-                  "legend": {
-                     "alignAsTable": false,
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "rightSide": false,
-                     "show": true,
-                     "sideWidth": null,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "repeat": null,
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
-                  "span": 4,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                     {
-                        "expr": "go_goroutines{cluster=\"$cluster\", job=\"kube-controller-manager\",instance=~\"$instance\"}",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{instance}}",
-                        "refId": "A"
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
@@ -881,7 +905,7 @@
                   "title": "Goroutines",
                   "tooltip": {
                      "shared": false,
-                     "sort": 0,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -898,7 +922,7 @@
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
@@ -907,7 +931,83 @@
                         "logBase": 1,
                         "max": null,
                         "min": null,
+                        "show": false
+                     }
+                  ]
+               },
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 1,
+                  "id": 11,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 4,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "go_gc_duration_seconds{job=~\"$job\"}",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{quantile}} {{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "GC Time Quantiles",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
                         "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
                      }
                   ]
                }
@@ -915,16 +1015,15 @@
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
-            "showTitle": false,
-            "title": "Dashboard Row",
-            "titleSize": "h6",
-            "type": "row"
+            "showTitle": true,
+            "title": "Resources",
+            "titleSize": "h6"
          }
       ],
       "schemaVersion": 14,
       "style": "dark",
       "tags": [
-         "kubernetes-mixin",
+         "thanos-mixin",
          "monitoring-mixins-v0.16.0"
       ],
       "templating": {
@@ -935,7 +1034,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": null,
+               "label": "Data Source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",
@@ -944,39 +1043,37 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
-               "current": { },
-               "datasource": "$datasource",
-               "hide": 2,
-               "includeAll": false,
-               "label": "cluster",
-               "multi": false,
-               "name": "cluster",
-               "options": [ ],
-               "query": "label_values(kube_pod_info, cluster)",
+               "auto": true,
+               "auto_count": 300,
+               "auto_min": "10s",
+               "current": {
+                  "text": "5m",
+                  "value": "5m"
+               },
+               "hide": 0,
+               "label": "interval",
+               "name": "interval",
+               "query": "5m,10m,30m,1h,6h,12h",
                "refresh": 2,
-               "regex": "",
-               "sort": 1,
-               "tagValuesQuery": "",
-               "tags": [ ],
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "type": "interval"
             },
             {
                "allValue": null,
-               "current": { },
+               "current": {
+                  "text": "all",
+                  "value": "$__all"
+               },
                "datasource": "$datasource",
                "hide": 0,
                "includeAll": true,
-               "label": null,
+               "label": "job",
                "multi": false,
-               "name": "instance",
+               "name": "job",
                "options": [ ],
-               "query": "label_values(process_cpu_seconds_total{cluster=\"$cluster\", job=\"kube-controller-manager\"}, instance)",
-               "refresh": 2,
+               "query": "label_values(up{job=~\".*thanos-query-frontend.*\"}, job)",
+               "refresh": 1,
                "regex": "",
-               "sort": 1,
+               "sort": 2,
                "tagValuesQuery": "",
                "tags": [ ],
                "tagsQuery": "",
@@ -1015,7 +1112,7 @@
          ]
       },
       "timezone": "UTC",
-      "title": "Kubernetes / Controller Manager",
-      "uid": "72e0e05bef5099e5f049b05fdc429ed4",
+      "title": "Thanos / Query Frontend",
+      "uid": "7c68ed2ef2355474f058dd27f0471f7a",
       "version": 0
    }
