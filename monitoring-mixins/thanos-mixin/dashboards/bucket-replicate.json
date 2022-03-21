@@ -1,73 +1,143 @@
 {
-      "__inputs": [ ],
-      "__requires": [ ],
       "annotations": {
          "list": [ ]
       },
-      "editable": false,
+      "editable": true,
       "gnetId": null,
-      "graphTooltip": 1,
+      "graphTooltip": 0,
       "hideControls": false,
-      "id": null,
       "links": [ ],
-      "refresh": "30s",
+      "refresh": "10s",
       "rows": [
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
+               {
+                  "aliasColors": {
+                     "error": "#E24D42"
+                  },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 10,
+                  "id": 1,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 0,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 4,
+                  "stack": true,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum by (job) (rate(thanos_replicate_replication_runs_total{result=\"error\", job=~\"$job\"}[$interval])) / sum by (job) (rate(thanos_replicate_replication_runs_total{job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "error",
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Rate",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "percentunit",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               },
                {
                   "aliasColors": { },
                   "bars": false,
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
+                  "description": "Shows rate of errors.",
+                  "fill": 10,
                   "id": 2,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
-                     "show": false,
-                     "sideWidth": null,
+                     "show": true,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
-                  "linewidth": 1,
+                  "linewidth": 0,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
                   "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "span": 6,
+                  "span": 4,
                   "stack": true,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(alertmanager_alerts{job=\"$job\"}) by (job,instance)",
+                        "expr": "sum by (job, result) (rate(thanos_replicate_replication_runs_total{result=\"error\", job=~\"$job\"}[$interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}}",
-                        "refId": "A"
+                        "legendFormat": "{{result}}",
+                        "legendLink": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Alerts",
+                  "title": "Errors",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 0,
+                     "shared": false,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -80,20 +150,20 @@
                   },
                   "yaxes": [
                      {
-                        "format": "none",
+                        "format": "percentunit",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "none",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
                },
@@ -103,253 +173,89 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
+                  "description": "Shows how long has it taken to run a replication cycle.",
                   "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
                   "id": 3,
                   "legend": {
-                     "alignAsTable": false,
                      "avg": false,
                      "current": false,
                      "max": false,
                      "min": false,
-                     "rightSide": false,
-                     "show": false,
-                     "sideWidth": null,
+                     "show": true,
                      "total": false,
                      "values": false
                   },
                   "lines": true,
                   "linewidth": 1,
                   "links": [ ],
-                  "nullPointMode": "null",
+                  "nullPointMode": "null as zero",
                   "percentage": false,
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
-                  "repeat": null,
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
-                  "span": 6,
-                  "stack": true,
-                  "steppedLine": false,
-                  "targets": [
+                  "seriesOverrides": [
                      {
-                        "expr": "sum(rate(alertmanager_alerts_received_total{job=\"$job\"}[5m])) by (job,instance)",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Received",
-                        "refId": "A"
+                        "alias": "p99",
+                        "color": "#FA6400",
+                        "fill": 1,
+                        "fillGradient": 1
                      },
                      {
-                        "expr": "sum(rate(alertmanager_alerts_invalid_total{job=\"$job\"}[5m])) by (job,instance)",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Invalid",
-                        "refId": "B"
+                        "alias": "p90",
+                        "color": "#E0B400",
+                        "fill": 1,
+                        "fillGradient": 1
+                     },
+                     {
+                        "alias": "p50",
+                        "color": "#37872D",
+                        "fill": 10,
+                        "fillGradient": 0
                      }
                   ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "Alerts receive rate",
-                  "tooltip": {
-                     "shared": true,
-                     "sort": 0,
-                     "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "ops",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                     },
-                     {
-                        "format": "ops",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                     }
-                  ]
-               }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": true,
-            "title": "Alerts",
-            "titleSize": "h6",
-            "type": "row"
-         },
-         {
-            "collapse": false,
-            "collapsed": false,
-            "panels": [
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
-                  "id": 4,
-                  "legend": {
-                     "alignAsTable": false,
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "rightSide": false,
-                     "show": false,
-                     "sideWidth": null,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "repeat": "integration",
-                  "seriesOverrides": [ ],
                   "spaceLength": 10,
-                  "stack": true,
-                  "steppedLine": false,
-                  "targets": [
-                     {
-                        "expr": "sum(rate(alertmanager_notifications_total{job=\"$job\", integration=\"$integration\"}[5m])) by (integration,job,instance)",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Total",
-                        "refId": "A"
-                     },
-                     {
-                        "expr": "sum(rate(alertmanager_notifications_failed_total{job=\"$job\", integration=\"$integration\"}[5m])) by (integration,job,instance)",
-                        "format": "time_series",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Failed",
-                        "refId": "B"
-                     }
-                  ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "$integration: Notifications Send Rate",
-                  "tooltip": {
-                     "shared": true,
-                     "sort": 0,
-                     "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "ops",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                     },
-                     {
-                        "format": "ops",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                     }
-                  ]
-               },
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": { },
-                  "id": 5,
-                  "legend": {
-                     "alignAsTable": false,
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "rightSide": false,
-                     "show": false,
-                     "sideWidth": null,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "repeat": "integration",
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
+                  "span": 4,
                   "stack": false,
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99,\n  sum(rate(alertmanager_notification_latency_seconds_bucket{job=\"$job\", integration=\"$integration\"}[5m])) by (le,job,instance)\n) \n",
+                        "expr": "histogram_quantile(0.50, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=~\"$job\"}[$interval]))) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} 99th Percentile",
-                        "refId": "A"
+                        "legendFormat": "p50 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50,\n  sum(rate(alertmanager_notification_latency_seconds_bucket{job=\"$job\", integration=\"$integration\"}[5m])) by (le,job,instance)\n) \n",
+                        "expr": "histogram_quantile(0.90, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=~\"$job\"}[$interval]))) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Median",
-                        "refId": "B"
+                        "legendFormat": "p90 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
                      },
                      {
-                        "expr": "sum(rate(alertmanager_notification_latency_seconds_sum{job=\"$job\", integration=\"$integration\"}[5m])) by (job,instance)\n/\nsum(rate(alertmanager_notification_latency_seconds_count{job=\"$job\", integration=\"$integration\"}[5m])) by (job,instance)\n",
+                        "expr": "histogram_quantile(0.99, sum by (job, le) (rate(thanos_replicate_replication_run_duration_seconds_bucket{result=\"success\",  job=~\"$job\"}[$interval]))) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{instance}} Average",
-                        "refId": "C"
+                        "legendFormat": "p99 {{job}}",
+                        "logBase": 10,
+                        "max": null,
+                        "min": null,
+                        "step": 10
                      }
                   ],
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "$integration: Notification Duration",
+                  "title": "Duration",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 0,
+                     "shared": false,
+                     "sort": 2,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -366,16 +272,16 @@
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": 0,
                         "show": true
                      },
                      {
-                        "format": "s",
+                        "format": "short",
                         "label": null,
                         "logBase": 1,
                         "max": null,
                         "min": null,
-                        "show": true
+                        "show": false
                      }
                   ]
                }
@@ -384,26 +290,145 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": true,
-            "title": "Notifications",
-            "titleSize": "h6",
-            "type": "row"
+            "title": "Bucket Replicate Runs",
+            "titleSize": "h6"
+         },
+         {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 1,
+                  "id": 4,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 12,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum by (job) (rate(blocks_meta_synced{state=\"loaded\", job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "meta loads",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "sum by (job) (rate(blocks_meta_synced{state=\"failed\", job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "partial meta reads",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "sum by (job) (rate(thanos_replicate_blocks_already_replicated_total{job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "already replicated blocks",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "sum by (job) (rate(thanos_replicate_blocks_replicated_total{job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "replicated blocks",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "sum by (job) (rate(thanos_replicate_objects_replicated_total{job=~\"$job\"}[$interval]))",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "replicated objects",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Metrics",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "Bucket Replication",
+            "titleSize": "h6"
          }
       ],
       "schemaVersion": 14,
       "style": "dark",
       "tags": [
-         "alertmanager-mixin",
+         "thanos-mixin",
          "monitoring-mixins-v0.16.0"
       ],
       "templating": {
          "list": [
             {
                "current": {
-                  "text": "Prometheus",
-                  "value": "Prometheus"
+                  "text": "default",
+                  "value": "default"
                },
                "hide": 0,
-               "label": null,
+               "label": "Data Source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",
@@ -412,27 +437,19 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
+               "auto": true,
+               "auto_count": 300,
+               "auto_min": "10s",
                "current": {
-                  "text": "",
-                  "value": ""
+                  "text": "5m",
+                  "value": "5m"
                },
-               "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
-               "label": null,
-               "multi": false,
-               "name": "job",
-               "options": [ ],
-               "query": "label_values(alertmanager_alerts, job)",
+               "label": "interval",
+               "name": "interval",
+               "query": "5m,10m,30m,1h,6h,12h",
                "refresh": 2,
-               "regex": "",
-               "sort": 1,
-               "tagValuesQuery": "",
-               "tags": [ ],
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "type": "interval"
             },
             {
                "allValue": null,
@@ -441,16 +458,16 @@
                   "value": "$__all"
                },
                "datasource": "$datasource",
-               "hide": 2,
+               "hide": 0,
                "includeAll": true,
-               "label": null,
+               "label": "job",
                "multi": false,
-               "name": "integration",
+               "name": "job",
                "options": [ ],
-               "query": "label_values(alertmanager_notifications_total{integration=~\".*\"}, integration)",
-               "refresh": 2,
+               "query": "label_values(up{job=~\".*thanos-bucket-replicate.*\"}, job)",
+               "refresh": 1,
                "regex": "",
-               "sort": 1,
+               "sort": 2,
                "tagValuesQuery": "",
                "tags": [ ],
                "tagsQuery": "",
@@ -488,8 +505,8 @@
             "30d"
          ]
       },
-      "timezone": "utc",
-      "title": "Alertmanager / Overview",
-      "uid": "alertmanager-overview",
+      "timezone": "UTC",
+      "title": "Thanos / BucketReplicate",
+      "uid": "65ffb86cd2688b9e4db4d1ea231a5a9a",
       "version": 0
    }
