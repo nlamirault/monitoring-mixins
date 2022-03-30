@@ -30,12 +30,13 @@ Generate a mixin:
 | fluxcd-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | grafana-mixin | https://github.com/grafana/grafana.git - `v8.4.4` <br> |
 | istio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| kube-state-metrics-mixin | https://github.com/kubernetes/kube-state-metrics.git - `v2.4.2` <br> |
 | kubernetes-mixin | https://github.com/kubernetes-monitoring/kubernetes-mixin.git - `master` <br> |
+| kube-state-metrics-mixin | https://github.com/kubernetes/kube-state-metrics.git - `v2.4.2` <br> |
 | linkerd-edge-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | linkerd-stable-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | loki-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.4.2` <br> |
 | memcached-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
+| mimir-mixin | https://github.com/grafana/mimir.git - `mimir-2.0.0` <br> |
 | minio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | nginx-ingress-controller-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | node-exporter-mixin | https://github.com/prometheus/node_exporter.git - `v1.3.1` <br> |
