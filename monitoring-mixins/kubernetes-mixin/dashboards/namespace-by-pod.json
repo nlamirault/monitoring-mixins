@@ -1128,7 +1128,7 @@
       "style": "dark",
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v0.16.0"
+         "monitoring-mixins-v0.17.0"
       ],
       "templating": {
          "list": [
@@ -1138,7 +1138,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": null,
+               "label": "Data Source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",
@@ -1156,7 +1156,7 @@
                "multi": false,
                "name": "cluster",
                "options": [ ],
-               "query": "label_values(kube_pod_info, cluster)",
+               "query": "label_values(up{job=\"kubelet\"}, cluster)",
                "refresh": 2,
                "regex": "",
                "sort": 0,
