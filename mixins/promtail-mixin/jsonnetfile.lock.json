@@ -38,8 +38,8 @@
           "subdir": "production/loki-mixin"
         }
       },
-      "version": "c26061a368fee0482bdb32ae1116c41daf0edf48",
-      "sum": "JQ/Hdfv0ti6qRE6K/ivz9FVXjyrmZUtVOLNtL6s6YfQ="
+      "version": "161cf90fef184fcab86da59ddf9c8fa97c74878b",
+      "sum": "4kLTr8ocNZqwm89gBjxccnPtFstxPof9E5H3yFWwFh4="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": "production/promtail-mixin"
         }
       },
-      "version": "c26061a368fee0482bdb32ae1116c41daf0edf48",
-      "sum": "0TATXyaeE9H0Yuj62PkBC+W/iNS+g1zYQIFDDaF61/E="
+      "version": "161cf90fef184fcab86da59ddf9c8fa97c74878b",
+      "sum": "fjiXUGTK77oo0659blocnqcr7gAs/x5U8Gy71oEBWVk="
     }
   ],
   "legacyImports": false
