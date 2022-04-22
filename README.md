@@ -28,23 +28,24 @@ Generate a mixin:
 | coredns-mixin | https://github.com/povilasv/coredns-mixin.git - `master` <br> |
 | elasticsearch-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | fluxcd-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| grafana-mixin | https://github.com/grafana/grafana.git - `v8.4.4` <br> |
+| grafana-mixin | https://github.com/grafana/grafana.git - `v8.5.0` <br> |
 | istio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| kubernetes-mixin | https://github.com/kubernetes-monitoring/kubernetes-mixin.git - `master` <br> |
 | kube-state-metrics-mixin | https://github.com/kubernetes/kube-state-metrics.git - `v2.4.2` <br> |
+| kubernetes-mixin | https://github.com/kubernetes-monitoring/kubernetes-mixin.git - `master` <br> |
 | linkerd-edge-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | linkerd-stable-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| loki-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.4.2` <br> |
+| loki-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.5.0` <br> |
 | memcached-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | mimir-mixin | https://github.com/grafana/mimir.git - `mimir-2.0.0` <br> |
 | minio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | nginx-ingress-controller-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | node-exporter-mixin | https://github.com/prometheus/node_exporter.git - `v1.3.1` <br> |
 | osm-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.34.0` <br> |
+| postgres-mixin | https://github.com/prometheus-community/postgres_exporter.git - `v0.10.1` <br> |
+| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.35.0` <br> |
 | prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.55.1` <br> |
-| promtail-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.4.2` <br> https://github.com/grafana/loki.git - `v2.4.2` <br> |
+| promtail-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.5.0` <br> https://github.com/grafana/loki.git - `v2.5.0` <br> |
 | rabbitmq-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| sealed-secrets-mixin | https://github.com/bitnami-labs/sealed-secrets.git - `v0.17.4` <br> |
+| sealed-secrets-mixin | https://github.com/bitnami-labs/sealed-secrets.git - `v0.17.5` <br> |
 | thanos-mixin | https://github.com/thanos-io/thanos.git - `v0.25.2` <br> |
 <!-- END_MIXINS_DOC -->
