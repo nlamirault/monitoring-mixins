@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v0.17.0"
+               "monitoring-mixins-0.17.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -631,7 +631,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(cortex_bigtable_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_bigtable_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
@@ -707,7 +707,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_operation:cortex_bigtable_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_operation:loki_bigtable_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
@@ -715,7 +715,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_operation:cortex_bigtable_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_operation:loki_bigtable_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
@@ -723,7 +723,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(cluster_job_operation:cortex_bigtable_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"}) / sum(cluster_job_operation:cortex_bigtable_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})",
+                        "expr": "1e3 * sum(cluster_job_operation:loki_bigtable_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"}) / sum(cluster_job_operation:loki_bigtable_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", operation=\"/google.bigtable.v2.Bigtable/MutateRows\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
@@ -968,7 +968,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v0.17.0"
+         "monitoring-mixins-0.17.0"
       ],
       "templating": {
          "list": [
@@ -1065,6 +1065,6 @@
       },
       "timezone": "utc",
       "title": "Loki / Writes",
-      "uid": "",
+      "uid": "writes",
       "version": 0
    }

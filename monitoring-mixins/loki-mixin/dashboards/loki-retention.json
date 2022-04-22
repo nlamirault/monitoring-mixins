@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v0.17.0"
+               "monitoring-mixins-0.17.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -282,7 +282,7 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": true,
-            "title": "Ressource Usage",
+            "title": "Resource Usage",
             "titleSize": "h6"
          },
          {
@@ -1427,7 +1427,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v0.17.0"
+         "monitoring-mixins-0.17.0"
       ],
       "templating": {
          "list": [

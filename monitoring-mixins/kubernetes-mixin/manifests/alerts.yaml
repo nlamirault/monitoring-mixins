@@ -1,3 +1,17 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -198,15 +212,16 @@ spec:
       for: 15m
       labels:
         severity: warning
-    - alert: KubeJobCompletion
+    - alert: KubeJobNotCompleted
       annotations:
         description: Job {{ $labels.namespace }}/{{ $labels.job_name }} is taking more
-          than 12 hours to complete.
-        runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubejobcompletion
+          than {{ "43200" | humanizeDuration }} to complete.
+        runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubejobnotcompleted
         summary: Job did not complete in time
       expr: |
-        kube_job_spec_completions{job="kube-state-metrics"} - kube_job_status_succeeded{job="kube-state-metrics"}  > 0
-      for: 12h
+        time() - max by(namespace, job_name) (kube_job_status_start_time{job="kube-state-metrics"}
+          and
+        kube_job_status_active{job="kube-state-metrics"} > 0) > 43200
       labels:
         severity: warning
     - alert: KubeJobFailed
@@ -408,6 +423,52 @@ spec:
         kubelet_volume_stats_used_bytes{job="kubelet"} > 0
         and
         predict_linear(kubelet_volume_stats_available_bytes{job="kubelet"}[6h], 4 * 24 * 3600) < 0
+        unless on(namespace, persistentvolumeclaim)
+        kube_persistentvolumeclaim_access_mode{ access_mode="ReadOnlyMany"} == 1
+        unless on(namespace, persistentvolumeclaim)
+        kube_persistentvolumeclaim_labels{label_excluded_from_alerts="true"} == 1
+      for: 1h
+      labels:
+        severity: warning
+    - alert: KubePersistentVolumeInodesFillingUp
+      annotations:
+        description: The PersistentVolume claimed by {{ $labels.persistentvolumeclaim
+          }} in Namespace {{ $labels.namespace }} only has {{ $value | humanizePercentage
+          }} free inodes.
+        runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubepersistentvolumeinodesfillingup
+        summary: PersistentVolumeInodes are filling up.
+      expr: |
+        (
+          kubelet_volume_stats_inodes_free{job="kubelet"}
+            /
+          kubelet_volume_stats_inodes{job="kubelet"}
+        ) < 0.03
+        and
+        kubelet_volume_stats_inodes_used{job="kubelet"} > 0
+        unless on(namespace, persistentvolumeclaim)
+        kube_persistentvolumeclaim_access_mode{ access_mode="ReadOnlyMany"} == 1
+        unless on(namespace, persistentvolumeclaim)
+        kube_persistentvolumeclaim_labels{label_excluded_from_alerts="true"} == 1
+      for: 1m
+      labels:
+        severity: critical
+    - alert: KubePersistentVolumeInodesFillingUp
+      annotations:
+        description: Based on recent sampling, the PersistentVolume claimed by {{ $labels.persistentvolumeclaim
+          }} in Namespace {{ $labels.namespace }} is expected to run out of inodes within
+          four days. Currently {{ $value | humanizePercentage }} of its inodes are free.
+        runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubepersistentvolumeinodesfillingup
+        summary: PersistentVolumeInodes are filling up.
+      expr: |
+        (
+          kubelet_volume_stats_inodes_free{job="kubelet"}
+            /
+          kubelet_volume_stats_inodes{job="kubelet"}
+        ) < 0.15
+        and
+        kubelet_volume_stats_inodes_used{job="kubelet"} > 0
+        and
+        predict_linear(kubelet_volume_stats_inodes_free{job="kubelet"}[6h], 4 * 24 * 3600) < 0
         unless on(namespace, persistentvolumeclaim)
         kube_persistentvolumeclaim_access_mode{ access_mode="ReadOnlyMany"} == 1
         unless on(namespace, persistentvolumeclaim)

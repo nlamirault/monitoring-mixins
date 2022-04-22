@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/prometheus-community/postgres_exporter.git",
+          "subdir": "postgres_mixin"
+        }
+      },
+      "version": "167f5f051abcca7d37ac6a5351df7a2b8ea99be8",
+      "sum": "0Kz185DwXwm6gX/G9/dlJRM+YpdXgW+db+tLyynjNQ0="
+    }
+  ],
+  "legacyImports": false
+}

@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-0.0.0"
+               "monitoring-mixins-0.17.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -2229,7 +2229,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-0.0.0"
+         "monitoring-mixins-0.17.0"
       ],
       "templating": {
          "list": [

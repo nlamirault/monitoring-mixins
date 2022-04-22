@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v0.17.0"
+               "monitoring-mixins-0.17.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -819,7 +819,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(cortex_bigtable_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_bigtable_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
@@ -895,7 +895,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le) (job_operation:cortex_bigtable_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le) (job_operation:loki_bigtable_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
@@ -903,7 +903,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le) (job_operation:cortex_bigtable_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le) (job_operation:loki_bigtable_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
@@ -911,7 +911,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(job_operation:cortex_bigtable_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"}) / sum(job_operation:cortex_bigtable_request_duration_seconds_count:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})",
+                        "expr": "1e3 * sum(job_operation:loki_bigtable_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"}) / sum(job_operation:loki_bigtable_request_duration_seconds_count:sum_rate{job=~\"($namespace)/querier\", operation=\"/google.bigtable.v2.Bigtable/ReadRows\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
@@ -1007,7 +1007,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_boltdb_shipper_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"QUERY\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(loki_boltdb_shipper_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"Shipper.Query\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
@@ -1083,7 +1083,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(loki_boltdb_shipper_request_duration_seconds_bucket{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"QUERY\"}[$__rate_interval])) by (le)) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum(rate(loki_boltdb_shipper_request_duration_seconds_bucket{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"Shipper.Query\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
@@ -1091,7 +1091,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum(rate(loki_boltdb_shipper_request_duration_seconds_bucket{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"QUERY\"}[$__rate_interval])) by (le)) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum(rate(loki_boltdb_shipper_request_duration_seconds_bucket{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"Shipper.Query\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
@@ -1099,7 +1099,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "sum(rate(loki_boltdb_shipper_request_duration_seconds_sum{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"QUERY\"}[$__rate_interval])) * 1e3 / sum(rate(loki_boltdb_shipper_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"QUERY\"}[$__rate_interval]))",
+                        "expr": "sum(rate(loki_boltdb_shipper_request_duration_seconds_sum{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"Shipper.Query\"}[$__rate_interval])) * 1e3 / sum(rate(loki_boltdb_shipper_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(querier|index-gateway)\", operation=\"Shipper.Query\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
@@ -1156,7 +1156,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v0.17.0"
+         "monitoring-mixins-0.17.0"
       ],
       "templating": {
          "list": [
@@ -1253,6 +1253,6 @@
       },
       "timezone": "utc",
       "title": "Loki / Reads",
-      "uid": "",
+      "uid": "reads",
       "version": 0
    }
