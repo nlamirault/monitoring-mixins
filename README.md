@@ -43,7 +43,7 @@ Generate a mixin:
 | osm-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | postgres-mixin | https://github.com/prometheus-community/postgres_exporter.git - `v0.10.1` <br> |
 | prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.35.0` <br> |
-| prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.55.1` <br> |
+| prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.56.0` <br> |
 | promtail-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.5.0` <br> https://github.com/grafana/loki.git - `v2.5.0` <br> |
 | rabbitmq-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | sealed-secrets-mixin | https://github.com/bitnami-labs/sealed-secrets.git - `v0.17.5` <br> |
