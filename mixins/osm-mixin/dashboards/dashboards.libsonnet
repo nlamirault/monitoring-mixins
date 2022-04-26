@@ -15,9 +15,11 @@
 {
   grafanaDashboards: {
     'osm-control-plane.json': (import 'osm-control-plane.json'),
+    'osm-data-plane-performance.json': (import 'osm-data-plane-performance.json'),
     'osm-mesh-envoy-details.json': (import 'osm-mesh-envoy-details.json'),
-    'osm-pod.json': (import 'osm-pod.json'),
-    'osm-service-to-servic.json': (import 'osm-service-to-service.json'),
-    'osm-workload.json': (import 'osm-workload.json'),
+    'osm-pod-to-service.json': (import 'osm-pod-to-service.json'),
+    'osm-service-to-service.json': (import 'osm-service-to-service.json'),
+    'osm-workload-to-service.json': (import 'osm-workload-to-service.json'),
+    'osm-workload-to-workload.json': (import 'osm-workload-to-workload.json'),
   },
 }

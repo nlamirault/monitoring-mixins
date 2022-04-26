@@ -1,4 +1,59 @@
 {
+      "__elements": [ ],
+      "__inputs": [
+         {
+            "description": "",
+            "label": "prometheus",
+            "name": "DS_PROMETHEUS",
+            "pluginId": "prometheus",
+            "pluginName": "Prometheus",
+            "type": "datasource"
+         }
+      ],
+      "__requires": [
+         {
+            "id": "gauge",
+            "name": "Gauge",
+            "type": "panel",
+            "version": ""
+         },
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.3.3"
+         },
+         {
+            "id": "graph",
+            "name": "Graph (old)",
+            "type": "panel",
+            "version": ""
+         },
+         {
+            "id": "heatmap",
+            "name": "Heatmap",
+            "type": "panel",
+            "version": ""
+         },
+         {
+            "id": "prometheus",
+            "name": "Prometheus",
+            "type": "datasource",
+            "version": "1.0.0"
+         },
+         {
+            "id": "stat",
+            "name": "Stat",
+            "type": "panel",
+            "version": ""
+         },
+         {
+            "id": "text",
+            "name": "Text",
+            "type": "panel",
+            "version": ""
+         }
+      ],
       "annotations": {
          "list": [
             {
@@ -44,7 +99,7 @@
                "rgba(237, 129, 40, 0.89)",
                "#299c46"
             ],
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "decimals": null,
             "format": "percentunit",
             "gauge": {
@@ -129,7 +184,7 @@
                "rgba(237, 129, 40, 0.89)",
                "#d44a3a"
             ],
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "decimals": null,
             "format": "none",
             "gauge": {
@@ -214,7 +269,7 @@
                "rgba(237, 129, 40, 0.89)",
                "#d44a3a"
             ],
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "decimals": null,
             "format": "none",
             "gauge": {
@@ -311,7 +366,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 1,
             "gridPos": {
                "h": 7,
@@ -398,7 +453,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 0,
             "gridPos": {
                "h": 7,
@@ -492,7 +547,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 1,
             "gridPos": {
                "h": 7,
@@ -610,7 +665,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 1,
             "gridPos": {
                "h": 7,
@@ -697,7 +752,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 0,
             "gridPos": {
                "h": 7,
@@ -790,7 +845,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "fill": 1,
             "gridPos": {
                "h": 7,
@@ -886,7 +941,7 @@
                   "text": "All",
                   "value": "$__all"
                },
-               "datasource": "prometheus",
+               "datasource": "${DS_PROMETHEUS}",
                "definition": "",
                "hide": 0,
                "includeAll": false,
