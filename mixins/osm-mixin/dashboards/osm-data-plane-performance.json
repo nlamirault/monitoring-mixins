@@ -60,15 +60,15 @@
         }
       ]
     },
-    "title": "OSM Service to Service Metrics",
-    "description": "Compatible with OSM v1.0.0. This dashboard lets you view the traffic metrics from a given source service to a given destination service.",
-    "uid": "OSMServiceToServiceMetrics",
-    "version": 2,
+    "title": "OSM Data Plane Performance Metrics",
+    "description": "Compatible with OSM v1.0.0. This dashboard lets you view the performance of OSM’s data plane.",
+    "uid": "OSMDataPlanePerformanceMetrics",
+    "version": 3,
     "editable": true,
-    "gnetId": 11776,
+    "gnetId": null,
     "graphTooltip": 0,
-    "id": 6,
-    "iteration": 1591749761183,
+    "id": 8,
+    "iteration": 1632179652682,
     "links": [],
     "panels": [
       {
@@ -80,9 +80,9 @@
           "x": 0,
           "y": 0
         },
-        "id": 22,
+        "id": 5,
         "panels": [],
-        "title": "Request Count - HTTP",
+        "title": "Envoy sidecar",
         "type": "row"
       },
       {
@@ -91,341 +91,6 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": "${DS_PROMETHEUS}",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {
-              "align": null
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 1
-        },
-        "hiddenSeries": false,
-        "id": 24,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": []
-        },
-        "percentage": false,
-        "pluginVersion": "8.2.2",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"2\",source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m])",
-            "legendFormat": "Time (per minute)",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Success Count",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "timeseries",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "${DS_PROMETHEUS}",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {
-              "align": null
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 1
-        },
-        "hiddenSeries": false,
-        "id": 25,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": []
-        },
-        "percentage": false,
-        "pluginVersion": "8.2.2",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class!=\"2\",source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m])",
-            "interval": "",
-            "legendFormat": "Time (per minute)",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Failure Count",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "timeseries",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "collapsed": false,
-        "datasource": "${DS_PROMETHEUS}",
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 18
-        },
-        "id": 10,
-        "panels": [],
-        "title": "Traffic",
-        "type": "row"
-      },
-      {
-        "datasource": "${DS_PROMETHEUS}",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {
-              "align": null
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 0,
-          "y": 19
-        },
-        "id": 4,
-        "interval": "",
-        "options": {
-          "dataLinks": []
-        },
-        "pluginVersion": "8.2.2",
-        "targets": [
-          {
-            "expr": "sum(envoy_cluster_upstream_cx_active{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"})",
-            "legendFormat": "Connections",
-            "refId": "A"
-          }
-        ],
-        "title": "Active Connections between services",
-        "type": "timeseries",
-        "timeFrom": null,
-        "timeShift": null,
-        "renderer": "flot",
-        "yaxes": [
-          {
-            "label": null,
-            "show": true,
-            "logBase": 1,
-            "min": null,
-            "max": null,
-            "format": "short"
-          },
-          {
-            "label": null,
-            "show": true,
-            "logBase": 1,
-            "min": null,
-            "max": null,
-            "format": "short"
-          }
-        ],
-        "xaxis": {
-          "show": true,
-          "mode": "time",
-          "name": null,
-          "values": [],
-          "buckets": null
-        },
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        },
-        "lines": true,
-        "fill": 1,
-        "fillGradient": 0,
-        "linewidth": 1,
-        "dashes": false,
-        "hiddenSeries": false,
-        "dashLength": 10,
-        "spaceLength": 10,
-        "points": false,
-        "pointradius": 2,
-        "bars": false,
-        "stack": false,
-        "percentage": false,
-        "legend": {
-          "show": true,
-          "values": false,
-          "min": false,
-          "max": false,
-          "current": false,
-          "total": false,
-          "avg": false
-        },
-        "nullPointMode": "null",
-        "steppedLine": false,
-        "tooltip": {
-          "value_type": "individual",
-          "shared": true,
-          "sort": 0
-        },
-        "aliasColors": {},
-        "seriesOverrides": [],
-        "thresholds": [],
-        "timeRegions": []
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "${DS_PROMETHEUS}",
-        "description": "",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -435,10 +100,212 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 8,
-          "y": 19
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 1
+        },
+        "hiddenSeries": false,
+        "id": 3,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "dataLinks": []
+        },
+        "percentage": false,
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "irate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"$pod\", container=\"envoy\"}[1m])",
+            "interval": "",
+            "legendFormat": "{{pod}}:{{container}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Envoy CPU usage",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "timeseries",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "${DS_PROMETHEUS}",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "hiddenSeries": false,
+        "id": 8,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "dataLinks": []
+        },
+        "percentage": false,
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "container_memory_rss{namespace=~\"$namespace\", pod=~\"$pod\", container=\"envoy\"}",
+            "interval": "",
+            "legendFormat": "{{pod}}:{{container}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Envoy RSS usage",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "timeseries",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 10
+        },
+        "id": 7,
+        "panels": [],
+        "title": "Other containers",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "${DS_PROMETHEUS}",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 11
         },
         "hiddenSeries": false,
         "id": 2,
@@ -467,21 +334,17 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(irate(envoy_cluster_upstream_cx_tx_bytes_total{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Bytes sent",
+            "expr": "irate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}[1m])",
+            "interval": "",
+            "legendFormat": "{{pod}}:{{container}}",
             "refId": "A"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_cx_rx_bytes_total{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Bytes received",
-            "refId": "B"
           }
         ],
         "thresholds": [],
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Traffic from source service perspective",
+        "title": "Container CPU usage",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -497,7 +360,7 @@
         },
         "yaxes": [
           {
-            "format": "decbytes",
+            "format": "short",
             "label": null,
             "logBase": 1,
             "max": null,
@@ -533,22 +396,18 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 16,
-          "y": 19
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 11
         },
         "hiddenSeries": false,
-        "id": 26,
+        "id": 9,
         "legend": {
-          "alignAsTable": false,
           "avg": false,
           "current": false,
-          "hideEmpty": false,
-          "hideZero": false,
           "max": false,
           "min": false,
-          "rightSide": false,
           "show": true,
           "total": false,
           "values": false
@@ -569,51 +428,17 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "sum(irate(envoy_cluster_upstream_cx_destroy_remote_with_active_rq{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Connection destroyed by the client",
+            "expr": "container_memory_rss{namespace=~\"$namespace\", pod=~\"$pod\", container=~\"$container\"}",
+            "interval": "",
+            "legendFormat": "{{pod}}:{{container}}",
             "refId": "A"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_cx_connect_timeout{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Connection timeout",
-            "refId": "B"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_cx_destroy_local_with_active_rq{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Connection destroyed by local Envoy",
-            "refId": "C"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_rq_pending_failure_eject{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Pending failure ejection",
-            "refId": "D"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_rq_pending_overflow{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Pending overflow",
-            "refId": "E"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_rq_timeout{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Request timeout",
-            "refId": "F"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_rq_rx_reset{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Response reset",
-            "refId": "G"
-          },
-          {
-            "expr": "sum(irate(envoy_cluster_upstream_rq_tx_reset{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name=\"$destination_service\"}[1m]))",
-            "legendFormat": "Request reset",
-            "refId": "H"
           }
         ],
         "thresholds": [],
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Connection/Requests errors from source service perspective",
+        "title": "Container RSS usage",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -659,16 +484,20 @@
       "list": [
         {
           "allValue": null,
-          "current": {},
+          "current": {
+            "selected": false,
+            "text": "redis-c9e6-client",
+            "value": "redis-c9e6-client"
+          },
           "datasource": "${DS_PROMETHEUS}",
-          "definition": "label_values(envoy_server_live{}, source_namespace)",
+          "definition": "label_values(source_namespace)",
           "hide": 0,
-          "includeAll": false,
-          "label": "Source Namespace",
+          "includeAll": true,
+          "label": "Namespace",
           "multi": false,
-          "name": "source_namespace",
+          "name": "namespace",
           "options": [],
-          "query": "label_values(envoy_server_live{}, source_namespace)",
+          "query": "label_values(source_namespace)",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
@@ -681,16 +510,20 @@
         },
         {
           "allValue": null,
-          "current": {},
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
           "datasource": "${DS_PROMETHEUS}",
-          "definition": "label_values(envoy_server_live{source_namespace=\"$source_namespace\"}, source_service)",
+          "definition": "label_values(envoy_server_live{source_namespace=~\"$namespace\"}, source_pod_name)",
           "hide": 0,
-          "includeAll": false,
-          "label": "Source service",
+          "includeAll": true,
+          "label": "Pod",
           "multi": false,
-          "name": "source_service",
+          "name": "pod",
           "options": [],
-          "query": "label_values(envoy_server_live{source_namespace=\"$source_namespace\"}, source_service)",
+          "query": "label_values(envoy_server_live{source_namespace=~\"$namespace\"}, source_pod_name)",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
@@ -703,16 +536,20 @@
         },
         {
           "allValue": null,
-          "current": {},
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
           "datasource": "${DS_PROMETHEUS}",
-          "definition": "label_values(envoy_cluster_upstream_cx_active{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name!~\"osm-controller|envoy-metrics-cluster|.*-local|envoy-tracing-cluster|passthrough-outbound\"}, envoy_cluster_name)",
+          "definition": "label_values(envoy_server_live{source_namespace=~\"$namespace\", source_pod_name=~\"$pod\"}, source_workload_name)",
           "hide": 0,
-          "includeAll": false,
-          "label": "Destination Service",
+          "includeAll": true,
+          "label": "Container",
           "multi": false,
-          "name": "destination_service",
+          "name": "container",
           "options": [],
-          "query": "label_values(envoy_cluster_upstream_cx_active{source_service=\"$source_service\",source_namespace=\"$source_namespace\",envoy_cluster_name!~\"osm-controller|envoy-metrics-cluster|.*-local|envoy-tracing-cluster|passthrough-outbound\"}, envoy_cluster_name)",
+          "query": "label_values(envoy_server_live{source_namespace=~\"$namespace\", source_pod_name=~\"$pod\"}, source_workload_name)",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
