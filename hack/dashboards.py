@@ -44,8 +44,9 @@ class Mixin():
     url = ""
     dashboards = []
 
-    def __init__(self, name):
+    def __init__(self, name, version, dashboards):
         self.name = name
+        logger.info("Setup mixin: %s [%s]. Dashboards: %s", self.name, version, dashboards)
 
     def _download_dashboard(self, dashboard):
         logger.info("Download dashboard: %s", dashboard)
@@ -85,13 +86,20 @@ class MixinLinkerd(Mixin):
         "top-line"
     ]
 
-    def __init__(self, name, version):
-        self.name = name
-        logger.info("Setup mixin: %s. Dashboards: %s", self.name, self.dashboards)
-        if name == "linkerd-stable-mixin":
-            self.url = "%s/%s-%s/grafana/dashboards" % (self._repo, "stable", version)
-        elif name == "linkerd-edge-mixin":
-            self.url = "%s/%s-%s/grafana/dashboards" % (self._repo, "edge", version)
+    def __init__(self, name):
+        super().__init__(name, self._version, self.dashboards)
+        self.url = "%s/%s/grafana/dashboards" % (self._repo, self._version)
+
+class MixinLinkerdStable(MixinLinkerd):
+
+    #datasource=github-tags depName=linkerd/linkerd2
+    _version = "stable-2.11.2"
+
+class MixinLinkerdEdge(MixinLinkerd):
+
+    #datasource=github-tags depName=linkerd/linkerd2
+    _version = "edge-22.3.5"
+
 
 
 class NginxIngressControllerMixin(Mixin):
@@ -102,10 +110,12 @@ class NginxIngressControllerMixin(Mixin):
         "request-handling-performance"
     ]
 
-    def __init__(self, name, version):
-        self.name = name
-        logger.info("Setup mixin: %s. Dashboards: %s", self.name, self.dashboards)
-        self.url = "%s/%s/deploy/grafana/dashboards" % (self._repo, version)
+    #datasource=github-tags depName=kubernetes/ingress-nginx
+    _version = "controller-v1.2.0"
+
+    def __init__(self, name):
+        super().__init__(name, self._version, self.dashboards)
+        self.url = "%s/%s/deploy/grafana/dashboards" % (self._repo, self._version)
 
 class FluxCDMixin(Mixin):
 
@@ -115,10 +125,12 @@ class FluxCDMixin(Mixin):
         "control-plane"
     ]
 
-    def __init__(self, name, version):
-        self.name = name
-        logger.info("Setup mixin: %s. Dashboards: %s", self.name, self.dashboards)
-        self.url = "%s/%s/manifests/monitoring/grafana/dashboards" % (self._repo, version)
+    #datasource=github-tags depName=fluxcd/flux2
+    _version = "v0.29.3"
+
+    def __init__(self, name):
+        super().__init__(name, self._version, self.dashboards)
+        self.url = "%s/%s/manifests/monitoring/grafana/dashboards" % (self._repo, self._version)
 
 
 class OsmMixin(Mixin):
@@ -126,30 +138,34 @@ class OsmMixin(Mixin):
     _repo = "https://raw.githubusercontent.com/openservicemesh/osm"
     dashboards = [
         "osm-control-plane",
+        "osm-data-plane-performance",
         "osm-mesh-envoy-details",
-        "osm-pod",
+        "osm-pod-to-service",
         "osm-service-to-service",
-        "osm-workload"
+        "osm-workload-to-service",
+        "osm-workload-to-workload"
     ]
 
-    def __init__(self, name, version):
-        self.name = name
-        logger.info("Setup mixin: %s. Dashboards: %s", self.name, self.dashboards)
-        self.url = "%s/%s/charts/osm/grafana/dashboards" % (self._repo, version)
+    #datasource=github-tags depName=openservicemesh/osm
+    _version = "v1.1.0"
+
+    def __init__(self, name):
+        super().__init__(name, self._version, self.dashboards)
+        self.url = "%s/%s/charts/osm/grafana/dashboards" % (self._repo, self._version)
 
 
-def main(name, version):
+def main(name):
     mixin = None
     if name == "linkerd-stable-mixin":
-        mixin = MixinLinkerd(name, version)
+        mixin = MixinLinkerdStable(name)
     elif name == "linkerd-edge-mixin":
-        mixin = MixinLinkerd(name, version)
+        mixin = MixinLinkerdEdge(name)
     elif name == "nginx-ingress-controller-mixin":
-        mixin = NginxIngressControllerMixin(name, version)
+        mixin = NginxIngressControllerMixin(name)
     elif name == "fluxcd-mixin":
-        mixin = FluxCDMixin(name, version)
+        mixin = FluxCDMixin(name)
     elif name == "osm-mixin":
-        mixin = OsmMixin(name, version)
+        mixin = OsmMixin(name)
     else:
         raise MixinNotFountError(name)
     mixin.download()
@@ -158,11 +174,10 @@ def main(name, version):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prefix_chars="-")
     parser.add_argument("mixin", type=str, help="Mixin to update")
-    parser.add_argument("version", type=str, help="Linkerd version")
     parser.add_argument("--log", type=str, default="info", help="Log level")
     args = parser.parse_args()
     coloredlogs.install(level=args.log)
     try:
-        main(args.mixin, args.version)
+        main(args.mixin)
     except MixinError as e:
         logger.error(str(e))

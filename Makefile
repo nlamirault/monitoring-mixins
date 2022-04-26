@@ -100,16 +100,16 @@ deps: ## Install dependencies
 .PHONY: dashboards
 dashboards: guard-MIXIN guard-VERSION ## Download dashboards
 	@. $(PYTHON_VENV)/bin/activate \
-		&& ./hack/dashboards.py $(MIXIN) $(VERSION) --log debug
+		&& ./hack/dashboards.py $(MIXIN) --log debug
 
 .PHONY: all-dashboards
 all-dashboards: ## Download all dashboards
 	@. $(PYTHON_VENV)/bin/activate \
-		&& ./hack/dashboards.py osm-mixin v0.9.1 \
-		&& ./hack/dashboards.py fluxcd-mixin v0.16.1 \
-		&& ./hack/dashboards.py linkerd-stable-mixin 2.10.2 \
-		&& ./hack/dashboards.py linkerd-edge-mixin 21.7.2 \
-		&& ./hack/dashboards.py nginx-ingress-controller-mixin v1.0.0-alpha.1
+		&& ./hack/dashboards.py osm-mixin \
+		&& ./hack/dashboards.py fluxcd-mixin \
+		&& ./hack/dashboards.py linkerd-stable-mixin \
+		&& ./hack/dashboards.py linkerd-edge-mixin \
+		&& ./hack/dashboards.py nginx-ingress-controller-mixin
 
 .PHONY: mixin
 mixin: guard-MIXIN guard-APP guard-VERSION ## Build a mixin
