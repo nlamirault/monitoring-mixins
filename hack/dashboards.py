@@ -126,10 +126,12 @@ class OsmMixin(Mixin):
     _repo = "https://raw.githubusercontent.com/openservicemesh/osm"
     dashboards = [
         "osm-control-plane",
+        "osm-data-plane-performance.json"
         "osm-mesh-envoy-details",
-        "osm-pod",
+        "osm-pod-to-service",
         "osm-service-to-service",
-        "osm-workload"
+        "osm-workload-to-service",
+        "osm-workload-to-workload"
     ]
 
     def __init__(self, name, version):
