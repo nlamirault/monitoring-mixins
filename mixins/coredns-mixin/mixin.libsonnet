@@ -2,7 +2,7 @@ local alertmanager = import 'coredns-mixin/mixin.libsonnet';
 
 alertmanager {
   _config+:: {
-    corednsSelector: 'job="coredns"',
+    corednsSelector: 'job="kube-dns"',
     instanceLabel: 'pod',
 
     grafanaDashboardIDs: {
@@ -13,7 +13,7 @@ alertmanager {
     kubernetesPlugin: false,
     grafana: {
       dashboardNamePrefix: 'Kubernetes / ',
-      dashboardTags: ['coredns-mixin', 'monitoring-mixins-v0.19.0'],
+      dashboardTags: ['coredns-mixin', 'monitoring-mixins-v0.20.0'],
 
       // The default refresh time for all dashboards, default to 10s
       refresh: '60s',

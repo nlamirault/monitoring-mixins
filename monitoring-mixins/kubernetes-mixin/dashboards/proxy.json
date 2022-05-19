@@ -1007,7 +1007,7 @@
       "style": "dark",
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v0.19.0"
+         "monitoring-mixins-v0.20.0"
       ],
       "templating": {
          "list": [
