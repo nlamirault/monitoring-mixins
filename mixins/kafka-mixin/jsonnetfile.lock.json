@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "kafka-mixin"
+        }
+      },
+      "version": "b3cff133f709b4c723358730f491ab6f641eab60",
+      "sum": "oMpMKI2w2686WCJeVwny0u3OaB3/sYerxgGXbvFK8h8="
+    }
+  ],
+  "legacyImports": false
+}
