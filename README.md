@@ -28,7 +28,7 @@ Generate a mixin:
 | coredns-mixin | https://github.com/povilasv/coredns-mixin.git - `master` <br> |
 | elasticsearch-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | fluxcd-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| grafana-mixin | https://github.com/grafana/grafana.git - `v8.5.2` <br> |
+| grafana-mixin | https://github.com/grafana/grafana.git - `v8.5.3` <br> |
 | istio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | jaeger-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | kafka-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
