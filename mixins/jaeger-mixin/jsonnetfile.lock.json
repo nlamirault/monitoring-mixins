@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana-builder"
+        }
+      },
+      "version": "b3cff133f709b4c723358730f491ab6f641eab60",
+      "sum": "TieGrr7GyKjURk1+wXHFpdoCiwNaIVfZvyc5mbI9OM0="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "jaeger-mixin"
+        }
+      },
+      "version": "b3cff133f709b4c723358730f491ab6f641eab60",
+      "sum": "OWN6fdpYHER0gJVjl6cr71BCRpLQYvqX/6K+P9JKYi0="
+    }
+  ],
+  "legacyImports": false
+}
