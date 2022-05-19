@@ -2,7 +2,7 @@ local alertmanager = import 'coredns-mixin/mixin.libsonnet';
 
 alertmanager {
   _config+:: {
-    corednsSelector: 'job="kube-dns"',
+    corednsSelector: 'job="coredns"',
     instanceLabel: 'pod',
 
     grafanaDashboardIDs: {

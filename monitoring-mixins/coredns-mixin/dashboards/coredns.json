@@ -73,7 +73,7 @@
                   "tableColumn": "",
                   "targets": [
                      {
-                        "expr": "sum(up{job=\"kube-dns\"})",
+                        "expr": "sum(up{job=\"coredns\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
@@ -150,7 +150,7 @@
                   "tableColumn": "",
                   "targets": [
                      {
-                        "expr": "sum(coredns_panics_total{job=\"kube-dns\"})",
+                        "expr": "sum(coredns_panics_total{job=\"coredns\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
@@ -208,14 +208,14 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(coredns_dns_responses_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (rcode)",
+                        "expr": "sum(rate(coredns_dns_responses_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (rcode)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{rcode}}",
                         "refId": "A"
                      },
                      {
-                        "expr": "sum(rate(coredns_forward_responses_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (rcode)",
+                        "expr": "sum(rate(coredns_forward_responses_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (rcode)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "forward {{rcode}}",
@@ -296,14 +296,14 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (server, zone, le))",
+                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (server, zone, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{server}} {{zone}}",
                         "refId": "A"
                      },
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(coredns_forward_request_duration_seconds_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (to, le))",
+                        "expr": "histogram_quantile(0.99, sum(rate(coredns_forward_request_duration_seconds_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (to, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "forward {{to}}",
@@ -397,7 +397,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(coredns_dns_requests_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (type)",
+                        "expr": "sum(rate(coredns_dns_requests_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (type)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{type}}",
@@ -478,7 +478,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(coredns_dns_requests_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (zone)",
+                        "expr": "sum(rate(coredns_dns_requests_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (zone)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{zone}}",
@@ -559,7 +559,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(coredns_forward_requests_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (to)",
+                        "expr": "sum(rate(coredns_forward_requests_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (to)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{to}}",
@@ -672,7 +672,7 @@
                   "tableColumn": "",
                   "targets": [
                      {
-                        "expr": "sum(coredns_cache_hits_total{job=\"kube-dns\",pod=~\"$instance\"}) / (sum(coredns_cache_misses_total{job=\"kube-dns\",pod=~\"$instance\"}) + sum(coredns_cache_hits_total{job=\"kube-dns\",pod=~\"$instance\"}))",
+                        "expr": "sum(coredns_cache_hits_total{job=\"coredns\",pod=~\"$instance\"}) / (sum(coredns_cache_misses_total{job=\"coredns\",pod=~\"$instance\"}) + sum(coredns_cache_hits_total{job=\"coredns\",pod=~\"$instance\"}))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
@@ -730,14 +730,14 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(coredns_cache_hits_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (type)",
+                        "expr": "sum(rate(coredns_cache_hits_total{job=\"coredns\",pod=~\"$instance\"}[5m])) by (type)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{type}}",
                         "refId": "A"
                      },
                      {
-                        "expr": "sum(rate(coredns_cache_misses_total{job=\"kube-dns\",pod=~\"$instance\"}[5m]))",
+                        "expr": "sum(rate(coredns_cache_misses_total{job=\"coredns\",pod=~\"$instance\"}[5m]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "misses",
@@ -818,7 +818,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(coredns_cache_entries{job=\"kube-dns\",pod=~\"$instance\"}) by (type)",
+                        "expr": "sum(coredns_cache_entries{job=\"coredns\",pod=~\"$instance\"}) by (type)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{type}}",
@@ -931,7 +931,7 @@
                   "tableColumn": "",
                   "targets": [
                      {
-                        "expr": "count(sum(coredns_plugin_enabled{job=\"kube-dns\",pod=~\"$instance\"}) by (name))",
+                        "expr": "count(sum(coredns_plugin_enabled{job=\"coredns\",pod=~\"$instance\"}) by (name))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
@@ -989,14 +989,14 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_request_size_bytes_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
+                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_request_size_bytes_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th {{server}} {{zone}} {{proto}}",
                         "refId": "A"
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum(rate(coredns_dns_request_size_bytes_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
+                        "expr": "histogram_quantile(0.50, sum(rate(coredns_dns_request_size_bytes_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th {{server}} {{zone}} {{proto}}",
@@ -1077,14 +1077,14 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_response_size_bytes_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
+                        "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_response_size_bytes_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th {{server}} {{zone}} {{proto}}",
                         "refId": "A"
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum(rate(coredns_dns_response_size_bytes_bucket{job=\"kube-dns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
+                        "expr": "histogram_quantile(0.50, sum(rate(coredns_dns_response_size_bytes_bucket{job=\"coredns\",pod=~\"$instance\"}[5m])) by (server, zone, proto, le))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th {{server}} {{zone}} {{proto}}",
@@ -1178,7 +1178,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "process_resident_memory_bytes{job=\"kube-dns\",pod=~\"$instance\"}",
+                        "expr": "process_resident_memory_bytes{job=\"coredns\",pod=~\"$instance\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
@@ -1259,7 +1259,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "rate(process_cpu_seconds_total{job=\"kube-dns\",pod=~\"$instance\"}[5m])",
+                        "expr": "rate(process_cpu_seconds_total{job=\"coredns\",pod=~\"$instance\"}[5m])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
@@ -1340,7 +1340,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "go_goroutines{job=\"kube-dns\",pod=~\"$instance\"}",
+                        "expr": "go_goroutines{job=\"coredns\",pod=~\"$instance\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
@@ -1397,7 +1397,7 @@
       "style": "dark",
       "tags": [
          "coredns-mixin",
-         "monitoring-mixins-v0.19.0"
+         "monitoring-mixins-v0.20.1"
       ],
       "templating": {
          "list": [
@@ -1425,7 +1425,7 @@
                "multi": false,
                "name": "instance",
                "options": [ ],
-               "query": "label_values(coredns_build_info{job=\"kube-dns\"}, pod)",
+               "query": "label_values(coredns_build_info{job=\"coredns\"}, pod)",
                "refresh": 2,
                "regex": "",
                "sort": 1,
