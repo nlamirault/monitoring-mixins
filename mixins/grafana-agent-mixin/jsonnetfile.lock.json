@@ -4,6 +4,16 @@
     {
       "source": {
         "git": {
+          "remote": "https://github.com/grafana/agent.git",
+          "subdir": "production/grafana-agent-mixin"
+        }
+      },
+      "version": "8f53719c4a14ccb06daa42c0dfb4da405286cd9d",
+      "sum": "yQGe2eDy3q/31NcHXWQTRUdWatIOSg1b+oDNjqV1ArQ="
+    },
+    {
+      "source": {
+        "git": {
           "remote": "https://github.com/grafana/grafonnet-lib.git",
           "subdir": "grafonnet"
         }
@@ -20,26 +30,6 @@
       },
       "version": "9e9d5cddd4f02a25b9dec09a5910878a8ba8e045",
       "sum": "TieGrr7GyKjURk1+wXHFpdoCiwNaIVfZvyc5mbI9OM0="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/kubernetes-monitoring/kubernetes-mixin.git",
-          "subdir": "lib/promgrafonnet"
-        }
-      },
-      "version": "3422a511bf8f645e3e684632785b27864ee5dc0c",
-      "sum": "zv7hXGui6BfHzE9wPatHI/AGZa4A2WKo6pq7ZdqBsps="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/prometheus/node_exporter.git",
-          "subdir": "docs/node-mixin"
-        }
-      },
-      "version": "db3a0f266aa89fb64d73b75a4f1890d128dc6840",
-      "sum": "MlWDAKGZ+JArozRKdKEvewHeWn8j2DNBzesJfLVd0dk="
     }
   ],
   "legacyImports": false

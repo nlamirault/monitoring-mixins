@@ -4,16 +4,6 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/grafana/grafonnet-lib.git",
-          "subdir": "grafonnet"
-        }
-      },
-      "version": "6db00c292d3a1c71661fc875f90e0ec7caa538c2",
-      "sum": "gF8foHByYcB25jcUOBqP6jxk0OPifQMjPvKY0HaCk6w="
-    },
-    {
-      "source": {
-        "git": {
           "remote": "https://github.com/grafana/jsonnet-libs.git",
           "subdir": "grafana-builder"
         }
@@ -34,12 +24,12 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/grafana/loki.git",
-          "subdir": "production/loki-mixin"
+          "remote": "https://github.com/grafana/tempo.git",
+          "subdir": "operations/tempo-mixin"
         }
       },
-      "version": "4749cb2df6b2c687f3247c612445942c4638cb70",
-      "sum": "4kLTr8ocNZqwm89gBjxccnPtFstxPof9E5H3yFWwFh4="
+      "version": "561f92b3fe2384126708a06e4f1db422d62db986",
+      "sum": "6NTUXG7BvyZccB3xiloUvxPtPyHnSSCP6pdOTCnOU90="
     }
   ],
   "legacyImports": false
