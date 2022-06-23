@@ -4,11 +4,11 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/grafana/jsonnet-libs.git",
-          "subdir": "jaeger-mixin"
+          "remote": "https://github.com/jaegertracing/jaeger",
+          "subdir": "monitoring/jaeger-mixin"
         }
       },
-      "version": "master"
+      "version": "v1.35.2"
     }
   ],
   "legacyImports": true
