@@ -1414,7 +1414,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v0.22.0"
+         "monitoring-mixins-v0.23.0"
       ],
       "templating": {
          "list": [
