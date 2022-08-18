@@ -8,8 +8,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "1aa353b7afc7ce46351b88d52235ae7a17f4ec0e",
-      "sum": "TieGrr7GyKjURk1+wXHFpdoCiwNaIVfZvyc5mbI9OM0="
+      "version": "a2ba95acc8b7653d33bd57075678d8de2a64e5b3",
+      "sum": "1Ge62JmmPDq7fWyDAt3uCTobGEj4sJdbkqxRGWK22p0="
     },
     {
       "source": {
@@ -18,7 +18,7 @@
           "subdir": "memcached-mixin"
         }
       },
-      "version": "1aa353b7afc7ce46351b88d52235ae7a17f4ec0e",
+      "version": "a2ba95acc8b7653d33bd57075678d8de2a64e5b3",
       "sum": "kl5GJvwAVAh0qIKsAFpNXm/jhHhv/8tBbpri7VCpZ2I="
     }
   ],
