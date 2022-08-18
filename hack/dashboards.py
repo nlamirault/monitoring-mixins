@@ -122,7 +122,8 @@ class FluxCDMixin(Mixin):
     _repo = "https://raw.githubusercontent.com/fluxcd/flux2"
     dashboards = [
         "cluster",
-        "control-plane"
+        "control-plane",
+        "logs"
     ]
 
     #datasource=github-tags depName=fluxcd/flux2
@@ -130,7 +131,7 @@ class FluxCDMixin(Mixin):
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
-        self.url = "%s/%s/manifests/monitoring/grafana/dashboards" % (self._repo, self._version)
+        self.url = "%s/%s/manifests/monitoring/monitoring-config/dashboards" % (self._repo, self._version)
 
 
 class OsmMixin(Mixin):
