@@ -17,6 +17,14 @@
   "assignees": ["@nlamirault"],
   "reviewersFromCodeOwners": true,
   "labels": ["kind/renovate", "lifecycle/active", "status/review_needed"],
+  "regexManagers": [
+    {
+      "fileMatch": [".*py$"],
+      "matchStrings": [
+        "datasource=(?<datasource>.*)\\sdepName=(?<depName>.*)\\n.*version:\\s(?<currentValue>.*)"
+      ]
+    }
+  ],
   "packageRules": [
     // Labels for Docker
     {
