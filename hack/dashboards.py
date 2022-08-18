@@ -93,12 +93,12 @@ class MixinLinkerd(Mixin):
 class MixinLinkerdStable(MixinLinkerd):
 
     #datasource=github-tags depName=linkerd/linkerd2
-    _version = "stable-2.11.2"
+    _version = "stable-2.11.4"
 
 class MixinLinkerdEdge(MixinLinkerd):
 
     #datasource=github-tags depName=linkerd/linkerd2
-    _version = "edge-22.3.5"
+    _version = "edge-22.8.2"
 
 
 
@@ -126,7 +126,7 @@ class FluxCDMixin(Mixin):
     ]
 
     #datasource=github-tags depName=fluxcd/flux2
-    _version = "v0.29.3"
+    _version = "v0.32.0"
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
@@ -147,7 +147,7 @@ class OsmMixin(Mixin):
     ]
 
     #datasource=github-tags depName=openservicemesh/osm
-    _version = "v1.1.0"
+    _version = "v1.2.0"
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
