@@ -8,7 +8,7 @@
           "subdir": "documentation/prometheus-mixin"
         }
       },
-      "version": "v2.39.0"
+      "version": "v2.39.1"
     }
   ],
   "legacyImports": true
