@@ -8,7 +8,7 @@
           "subdir": "jsonnet/mixin"
         }
       },
-      "version": "v0.60.0"
+      "version": "v0.60.1"
     }
   ],
   "legacyImports": true
