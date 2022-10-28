@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/bfmatei/apollo-prometheus-exporter.git",
+          "subdir": "apollo-server-mixin"
+        }
+      },
+      "version": "793e99a6924e500fb1970577fe9d94e8223d74b7",
+      "sum": "uDhsLEMH3ggxTR6wl68QY43yijPdnlxcRNkVF8YjpZQ="
+    }
+  ],
+  "legacyImports": false
+}
