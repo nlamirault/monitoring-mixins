@@ -1,4 +1,12 @@
 {
+      "__requires": [
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.0.0"
+         }
+      ],
       "annotations": {
          "list": [ ]
       },
@@ -14,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-1.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -120,7 +128,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit,\n  sum by (user) (\n    cortex_ingester_active_series{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"}\n    / on(cluster, namespace) group_left\n    max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"})\n  )\n)\n",
+                        "expr": "topk($limit,\n  sum by (user) (\n    cortex_ingester_active_series{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"}\n    / on(cluster, namespace) group_left\n    max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"})\n  )\n)\n",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -134,8 +142,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by active series",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -248,7 +256,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit, sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} )\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} )\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"} )\n)\n)",
+                        "expr": "topk($limit, sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} )\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} )\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"} )\n)\n)",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -262,8 +270,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by in-memory series (series created - series removed)",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -338,9 +346,8 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} )\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} )\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"} )\n)\n\nand\ntopk($limit, sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} @ end())\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} @ end())\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"} @ end())\n)\n - sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} @ start())\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"} @ start())\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"} @ start())\n)\n)\n",
+                        "expr": "sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} )\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} )\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"} )\n)\n\nand\ntopk($limit, sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} @ end())\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} @ end())\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"} @ end())\n)\n - sum by (user) (\n  (\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_created_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} @ start())\n      -\n      sum by (user, cluster, namespace) (cortex_ingester_memory_series_removed_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"} @ start())\n  )\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"} @ start())\n)\n)\n",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{ user }}",
                         "legendLink": null,
@@ -352,8 +359,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by in-memory series (series created - series removed) that grew the most between query range start and query range end",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -465,7 +472,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit, sum by (user) (rate(cortex_distributor_received_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"}[5m])))",
+                        "expr": "topk($limit, sum by (user) (rate(cortex_distributor_received_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"}[5m])))",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -479,8 +486,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by received samples rate in last 5m",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -549,6 +556,310 @@
                   "points": false,
                   "renderer": "flot",
                   "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 12,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum by (user) (rate(cortex_distributor_received_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"}[$__rate_interval]))\nand\ntopk($limit,\n  sum by (user) (rate(cortex_distributor_received_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"}[$__rate_interval] @ end()))\n  -\n  sum by (user) (rate(cortex_distributor_received_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"}[$__rate_interval] @ start()))\n)\n",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{ user }}",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Top $limit users by received samples rate that grew the most between query range start and query range end",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 0,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "By samples rate growth",
+            "titleSize": "h6"
+         },
+         {
+            "collapse": true,
+            "height": "250px",
+            "panels": [
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 1,
+                  "id": 7,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "sort": {
+                     "col": 2,
+                     "desc": true
+                  },
+                  "spaceLength": 10,
+                  "span": 12,
+                  "stack": false,
+                  "steppedLine": false,
+                  "styles": [
+                     {
+                        "alias": "Time",
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "pattern": "Time",
+                        "type": "hidden"
+                     },
+                     {
+                        "alias": "samples/s",
+                        "colorMode": null,
+                        "colors": [ ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "link": false,
+                        "linkTargetBlank": false,
+                        "linkTooltip": "Drill down",
+                        "linkUrl": "",
+                        "pattern": "Value #A",
+                        "thresholds": [ ],
+                        "type": "number",
+                        "unit": "short"
+                     },
+                     {
+                        "alias": "",
+                        "colorMode": null,
+                        "colors": [ ],
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                        "decimals": 2,
+                        "pattern": "/.*/",
+                        "thresholds": [ ],
+                        "type": "string",
+                        "unit": "short"
+                     }
+                  ],
+                  "targets": [
+                     {
+                        "expr": "topk($limit, sum by (user) (rate(cortex_discarded_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write)|(distributor|cortex|mimir|mimir-write))\"}[5m])))",
+                        "format": "table",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "legendFormat": "",
+                        "refId": "A",
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Top $limit users by discarded samples rate in last 5m",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 0,
+                     "value_type": "individual"
+                  },
+                  "transform": "table",
+                  "type": "table",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "By discarded samples rate",
+            "titleSize": "h6"
+         },
+         {
+            "collapse": true,
+            "height": "250px",
+            "panels": [
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 1,
+                  "id": 8,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 12,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum by (user) (rate(cortex_discarded_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write)|(distributor|cortex|mimir|mimir-write))\"}[$__rate_interval]))\nand\ntopk($limit,\n  sum by (user) (rate(cortex_discarded_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write)|(distributor|cortex|mimir|mimir-write))\"}[$__rate_interval] @ end()))\n  -\n  sum by (user) (rate(cortex_discarded_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write)|(distributor|cortex|mimir|mimir-write))\"}[$__rate_interval] @ start()))\n)\n",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{ user }}",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Top $limit users by discarded samples rate that grew the most between query range start and query range end",
+                  "tooltip": {
+                     "shared": false,
+                     "sort": 0,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "By discarded samples rate growth",
+            "titleSize": "h6"
+         },
+         {
+            "collapse": true,
+            "height": "250px",
+            "panels": [
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "fill": 1,
+                  "id": 9,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
                   "sort": {
                      "col": 2,
                      "desc": true
@@ -593,7 +904,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit,\n  sum by (user) (\n    cortex_ingester_tsdb_exemplar_series_with_exemplars_in_storage{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir))\"}\n    / on(cluster, namespace) group_left\n    max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"})\n  )\n)\n",
+                        "expr": "topk($limit,\n  sum by (user) (\n    cortex_ingester_tsdb_exemplar_series_with_exemplars_in_storage{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write))\"}\n    / on(cluster, namespace) group_left\n    max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"})\n  )\n)\n",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -607,8 +918,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by series with exemplars",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -658,7 +969,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 1,
-                  "id": 7,
+                  "id": 10,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -721,7 +1032,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit, sum by (user) (rate(cortex_distributor_received_exemplars_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir))\"}[5m])))",
+                        "expr": "topk($limit, sum by (user) (rate(cortex_distributor_received_exemplars_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write))\"}[5m])))",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -735,8 +1046,8 @@
                   "timeShift": null,
                   "title": "Top $limit users by received exemplars rate in last 5m",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -786,7 +1097,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 1,
-                  "id": 8,
+                  "id": 11,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -849,7 +1160,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit, sum by (rule_group, user) (cortex_prometheus_rule_group_rules{cluster=~\"$cluster\", job=~\"($namespace)/((ruler|cortex|mimir))\"}))",
+                        "expr": "topk($limit, sum by (rule_group, user) (cortex_prometheus_rule_group_rules{cluster=~\"$cluster\", job=~\"($namespace)/((ruler|cortex|mimir|mimir-backend))\"}))",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -863,8 +1174,8 @@
                   "timeShift": null,
                   "title": "Top $limit biggest groups",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -914,7 +1225,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 1,
-                  "id": 9,
+                  "id": 12,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -977,7 +1288,7 @@
                   ],
                   "targets": [
                      {
-                        "expr": "topk($limit, sum by (rule_group, user) (cortex_prometheus_rule_group_last_duration_seconds{cluster=~\"$cluster\", job=~\"($namespace)/((ruler|cortex|mimir))\"}))",
+                        "expr": "topk($limit, sum by (rule_group, user) (cortex_prometheus_rule_group_last_duration_seconds{cluster=~\"$cluster\", job=~\"($namespace)/((ruler|cortex|mimir|mimir-backend))\"}))",
                         "format": "table",
                         "instant": true,
                         "intervalFactor": 2,
@@ -991,8 +1302,8 @@
                   "timeShift": null,
                   "title": "Top $limit slowest groups (last evaluation)",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -1036,7 +1347,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-1.0.0"
       ],
       "templating": {
          "list": [

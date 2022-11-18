@@ -1,4 +1,12 @@
 {
+      "__requires": [
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.0.0"
+         }
+      ],
       "annotations": {
          "list": [ ]
       },
@@ -14,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-1.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -33,7 +41,7 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
+                  "fill": 0,
                   "id": 1,
                   "legend": {
                      "avg": false,
@@ -54,8 +62,17 @@
                   "renderer": "flot",
                   "seriesOverrides": [
                      {
+                        "alias": "request",
+                        "color": "#FFC000",
+                        "dashLength": 5,
+                        "dashes": true,
+                        "fill": 0
+                     },
+                     {
                         "alias": "limit",
                         "color": "#E02F44",
+                        "dashLength": 5,
+                        "dashes": true,
                         "fill": 0
                      }
                   ],
@@ -65,20 +82,26 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"(gateway|cortex-gw|cortex-gw-internal)\"}[$__rate_interval]))",
+                        "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
                         "step": 10
                      },
                      {
-                        "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"(gateway|cortex-gw|cortex-gw-internal)\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"(gateway|cortex-gw|cortex-gw-internal)\"})",
+                        "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\",resource=\"cpu\"})",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "request",
                         "legendLink": null,
                         "step": 10
                      }
@@ -123,7 +146,7 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
+                  "fill": 0,
                   "id": 2,
                   "legend": {
                      "avg": false,
@@ -144,275 +167,17 @@
                   "renderer": "flot",
                   "seriesOverrides": [
                      {
-                        "alias": "limit",
-                        "color": "#E02F44",
+                        "alias": "request",
+                        "color": "#FFC000",
+                        "dashLength": 5,
+                        "dashes": true,
                         "fill": 0
-                     }
-                  ],
-                  "spaceLength": 10,
-                  "span": 4,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                     {
-                        "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"(gateway|cortex-gw|cortex-gw-internal)\"})",
-                        "format": "time_series",
-                        "interval": "15s",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
                      },
-                     {
-                        "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"(gateway|cortex-gw|cortex-gw-internal)\"} > 0)",
-                        "format": "time_series",
-                        "interval": "15s",
-                        "intervalFactor": 2,
-                        "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
-                     }
-                  ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "Memory (workingset)",
-                  "tooltip": {
-                     "sort": 2
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "bytes",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": false
-                     }
-                  ]
-               },
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 3,
-                  "legend": {
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "show": true,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null as zero",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
-                  "span": 4,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                     {
-                        "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/((gateway|cortex-gw|cortex-gw-internal))\"})",
-                        "format": "time_series",
-                        "interval": "15s",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
-                     }
-                  ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "Memory (go heap inuse)",
-                  "tooltip": {
-                     "sort": 2
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "bytes",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": false
-                     }
-                  ]
-               }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": true,
-            "title": "Gateway",
-            "titleSize": "h6"
-         },
-         {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 4,
-                  "legend": {
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "show": true,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null as zero",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [
                      {
                         "alias": "limit",
                         "color": "#E02F44",
-                        "fill": 0
-                     }
-                  ],
-                  "spaceLength": 10,
-                  "span": 4,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                     {
-                        "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"}[$__rate_interval]))",
-                        "format": "time_series",
-                        "interval": "15s",
-                        "intervalFactor": 2,
-                        "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
-                     },
-                     {
-                        "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"})",
-                        "format": "time_series",
-                        "interval": "15s",
-                        "intervalFactor": 2,
-                        "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
-                     }
-                  ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
-                  "title": "CPU",
-                  "tooltip": {
-                     "sort": 2
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": false
-                     }
-                  ]
-               },
-               {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 5,
-                  "legend": {
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "show": true,
-                     "total": false,
-                     "values": false
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [ ],
-                  "nullPointMode": "null as zero",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [
-                     {
-                        "alias": "limit",
-                        "color": "#E02F44",
+                        "dashLength": 5,
+                        "dashes": true,
                         "fill": 0
                      }
                   ],
@@ -424,7 +189,6 @@
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -433,9 +197,16 @@
                      {
                         "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"} > 0)",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\",resource=\"memory\"})",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "request",
                         "legendLink": null,
                         "step": 10
                      }
@@ -480,8 +251,8 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 6,
+                  "fill": 0,
+                  "id": 3,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -508,7 +279,6 @@
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/(alertmanager)\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -567,8 +337,8 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 7,
+                  "fill": 0,
+                  "id": 4,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -588,8 +358,17 @@
                   "renderer": "flot",
                   "seriesOverrides": [
                      {
+                        "alias": "request",
+                        "color": "#FFC000",
+                        "dashLength": 5,
+                        "dashes": true,
+                        "fill": 0
+                     },
+                     {
                         "alias": "limit",
                         "color": "#E02F44",
+                        "dashLength": 5,
+                        "dashes": true,
                         "fill": 0
                      }
                   ],
@@ -601,7 +380,6 @@
                      {
                         "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -610,9 +388,16 @@
                      {
                         "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\",resource=\"cpu\"})",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "request",
                         "legendLink": null,
                         "step": 10
                      }
@@ -657,8 +442,8 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 8,
+                  "fill": 0,
+                  "id": 5,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -678,8 +463,17 @@
                   "renderer": "flot",
                   "seriesOverrides": [
                      {
+                        "alias": "request",
+                        "color": "#FFC000",
+                        "dashLength": 5,
+                        "dashes": true,
+                        "fill": 0
+                     },
+                     {
                         "alias": "limit",
                         "color": "#E02F44",
+                        "dashLength": 5,
+                        "dashes": true,
                         "fill": 0
                      }
                   ],
@@ -691,7 +485,6 @@
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -700,9 +493,16 @@
                      {
                         "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\"} > 0)",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
+                        "legendLink": null,
+                        "step": 10
+                     },
+                     {
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager-im\",resource=\"memory\"})",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "request",
                         "legendLink": null,
                         "step": 10
                      }
@@ -747,8 +547,8 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 9,
+                  "fill": 0,
+                  "id": 6,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -775,7 +575,6 @@
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/(alertmanager-im)\"})",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -835,7 +634,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 10,
-                  "id": 10,
+                  "id": 7,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -860,9 +659,8 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by(pod) (rate(container_network_receive_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"alertmanager.*\"}[$__rate_interval]))",
+                        "expr": "sum by(pod) (rate(container_network_receive_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?alertmanager.*\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -874,8 +672,8 @@
                   "timeShift": null,
                   "title": "Receive bandwidth",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -912,7 +710,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 10,
-                  "id": 11,
+                  "id": 8,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -937,9 +735,8 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by(pod) (rate(container_network_transmit_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"alertmanager.*\"}[$__rate_interval]))",
+                        "expr": "sum by(pod) (rate(container_network_transmit_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?alertmanager.*\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null,
@@ -951,8 +748,8 @@
                   "timeShift": null,
                   "title": "Transmit bandwidth",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -1001,7 +798,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 10,
-                  "id": 12,
+                  "id": 9,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -1028,7 +825,6 @@
                      {
                         "expr": "sum by(instance, pod, device) (\n  rate(\n    node_disk_written_bytes_total[$__rate_interval]\n  )\n)\n+\nignoring(pod) group_right() (\n  label_replace(\n    count by(\n      instance,\n      pod,\n      device\n    )\n    (\n      container_fs_writes_bytes_total{\n        cluster=~\"$cluster\", namespace=~\"$namespace\",\n        container=\"alertmanager\",\n        device!~\".*sda.*\"\n      }\n    ),\n    \"device\",\n    \"$1\",\n    \"device\",\n    \"/dev/(.*)\"\n  ) * 0\n)\n\n",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null,
@@ -1040,8 +836,8 @@
                   "timeShift": null,
                   "title": "Writes",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -1078,7 +874,7 @@
                   "dashes": false,
                   "datasource": "$datasource",
                   "fill": 10,
-                  "id": 13,
+                  "id": 10,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -1105,7 +901,6 @@
                      {
                         "expr": "sum by(instance, pod, device) (\n  rate(\n    node_disk_read_bytes_total[$__rate_interval]\n  )\n) + ignoring(pod) group_right() (\n  label_replace(\n    count by(\n      instance,\n      pod,\n      device\n    )\n    (\n      container_fs_writes_bytes_total{\n        cluster=~\"$cluster\", namespace=~\"$namespace\",\n        container=\"alertmanager\",\n        device!~\".*sda.*\"\n      }\n    ),\n    \"device\",\n    \"$1\",\n    \"device\",\n    \"/dev/(.*)\"\n  ) * 0\n)\n\n",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null,
@@ -1117,8 +912,8 @@
                   "timeShift": null,
                   "title": "Reads",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -1166,8 +961,8 @@
                   "dashLength": 10,
                   "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 14,
+                  "fill": 0,
+                  "id": 11,
                   "legend": {
                      "avg": false,
                      "current": false,
@@ -1194,7 +989,6 @@
                      {
                         "expr": "max by(persistentvolumeclaim) (\n  kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"} /\n  kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"}\n)\nand\ncount by(persistentvolumeclaim) (\n  kube_persistentvolumeclaim_labels{\n    cluster=~\"$cluster\", namespace=~\"$namespace\",\n    label_name=\"alertmanager\"\n  }\n)\n",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{persistentvolumeclaim}}",
                         "legendLink": null,
@@ -1206,8 +1000,8 @@
                   "timeShift": null,
                   "title": "Disk space utilization",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -1250,7 +1044,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-1.0.0"
       ],
       "templating": {
          "list": [
@@ -1269,14 +1063,14 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
+               "allValue": ".*",
                "current": {
                   "text": "prod",
                   "value": "prod"
                },
                "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
+               "includeAll": true,
                "label": "cluster",
                "multi": false,
                "name": "cluster",
@@ -1347,6 +1141,6 @@
       },
       "timezone": "utc",
       "title": "Mimir / Alertmanager resources",
-      "uid": "68b66aed90ccab448009089544a8d6c6",
+      "uid": "a6883fb22799ac74479c7db872451092",
       "version": 0
    }

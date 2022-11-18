@@ -1,4 +1,12 @@
 {
+      "__requires": [
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.0.0"
+         }
+      ],
       "annotations": {
          "list": [ ]
       },
@@ -14,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-1.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -139,7 +147,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-1.0.0"
       ],
       "templating": {
          "list": [
@@ -158,14 +166,14 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
+               "allValue": ".*",
                "current": {
                   "text": "prod",
                   "value": "prod"
                },
                "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
+               "includeAll": true,
                "label": "cluster",
                "multi": false,
                "name": "cluster",
@@ -255,6 +263,6 @@
       },
       "timezone": "utc",
       "title": "Mimir / Overrides",
-      "uid": "b5c95fee2e5e7c4b5930826ff6e89a12",
+      "uid": "1e2c358600ac53f09faea133f811b5bb",
       "version": 0
    }
