@@ -1,3 +1,17 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -233,6 +247,8 @@ spec:
     - expr: sum(rate(cortex_query_frontend_queue_duration_seconds_count[1m])) by (cluster,
         job)
       record: cluster_job:cortex_query_frontend_queue_duration_seconds_count:sum_rate
+  - name: mimir_ingester_queries
+    rules:
     - expr: histogram_quantile(0.99, sum(rate(cortex_ingester_queried_series_bucket[1m]))
         by (le, cluster, job))
       record: cluster_job:cortex_ingester_queried_series:99quantile
@@ -466,7 +482,7 @@ spec:
         sum by (cluster, namespace, deployment) (
           label_replace(
             label_replace(
-              container_memory_usage_bytes,
+              container_memory_usage_bytes{image!=""},
               "deployment", "$1", "pod", "(.*)-(?:([0-9]+)|([a-z0-9]+)-([a-z0-9]+))"
             ),
             # The question mark in "(.*?)" is used to make it non-greedy, otherwise it
@@ -556,3 +572,8 @@ spec:
     - expr: |
         sum by (cluster, job) (rate(cortex_alertmanager_partial_state_merges_failed_total[5m]))
       record: cluster_job:cortex_alertmanager_partial_state_merges_failed_total:rate5m
+  - name: mimir_ingester_rules
+    rules:
+    - expr: |
+        sum by(cluster, namespace, pod) (rate(cortex_ingester_ingested_samples_total[1m]))
+      record: cluster_namespace_pod:cortex_ingester_ingested_samples_total:rate1m

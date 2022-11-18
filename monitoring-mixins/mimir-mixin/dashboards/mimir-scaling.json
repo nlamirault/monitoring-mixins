@@ -1,4 +1,12 @@
 {
+      "__requires": [
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.0.0"
+         }
+      ],
       "annotations": {
          "list": [ ]
       },
@@ -14,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-1.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -30,7 +38,7 @@
                {
                   "id": 1,
                   "options": {
-                     "content": "This dashboards shows any services which are not scaled correctly.\nThe table below gives the required number of replicas and the reason why.\nWe only show services without enough replicas.\n\nReasons:\n- **sample_rate**: There are not enough replicas to handle the\n  sample rate.  Applies to distributor and ingesters.\n- **active_series**: There are not enough replicas\n  to handle the number of active series.  Applies to ingesters.\n- **cpu_usage**: There are not enough replicas\n  based on the CPU usage of the jobs vs the resource requests.\n  Applies to all jobs.\n- **memory_usage**: There are not enough replicas based on the memory\n  usage vs the resource requests.  Applies to all jobs.\n- **active_series_limits**: There are not enough replicas to hold 60% of the\n  sum of all the per tenant series limits.\n- **sample_rate_limits**: There are not enough replicas to handle 60% of the\n  sum of all the per tenant rate limits.\n",
+                     "content": "This dashboard identifies scaling-related issues by suggesting services that you might want to scale up.\nThe table that follows contains a suggested number of replicas and the reason why.\nIf the system is failing and depending on the reason, try scaling up to the specified number.\nThe specified numbers are intended as helpful guidelines when things go wrong, rather than prescriptive guidelines.\n\nReasons:\n- **sample_rate**: There are not enough replicas to handle the\n  sample rate.  Applies to distributor and ingesters.\n- **active_series**: There are not enough replicas\n  to handle the number of active series.  Applies to ingesters.\n- **cpu_usage**: There are not enough replicas\n  based on the CPU usage of the jobs vs the resource requests.\n  Applies to all jobs.\n- **memory_usage**: There are not enough replicas based on the memory\n  usage vs the resource requests.  Applies to all jobs.\n- **active_series_limits**: There are not enough replicas to hold 60% of the\n  sum of all the per tenant series limits.\n- **sample_rate_limits**: There are not enough replicas to handle 60% of the\n  sum of all the per tenant rate limits.\n",
                      "mode": "markdown"
                   },
                   "span": 12,
@@ -208,8 +216,8 @@
                   "timeShift": null,
                   "title": "Workload-based scaling",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "transform": "table",
@@ -253,7 +261,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-1.0.0"
       ],
       "templating": {
          "list": [
@@ -352,6 +360,6 @@
       },
       "timezone": "utc",
       "title": "Mimir / Scaling",
-      "uid": "88c041017b96856c9176e07cf557bdcf",
+      "uid": "64bbad83507b7289b514725658e10352",
       "version": 0
    }

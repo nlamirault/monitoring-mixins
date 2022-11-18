@@ -1,4 +1,12 @@
 {
+      "__requires": [
+         {
+            "id": "grafana",
+            "name": "Grafana",
+            "type": "grafana",
+            "version": "8.0.0"
+         }
+      ],
       "annotations": {
          "list": [ ]
       },
@@ -14,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-1.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -61,7 +69,6 @@
                      {
                         "expr": "sum by(component) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{component}}",
                         "legendLink": null,
@@ -73,8 +80,8 @@
                   "timeShift": null,
                   "title": "RPS / component",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -87,7 +94,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "rps",
+                        "format": "reqps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -138,7 +145,6 @@
                      {
                         "expr": "sum by(component) (rate(thanos_objstore_bucket_operation_failures_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])) / sum by(component) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{component}}",
                         "legendLink": null,
@@ -150,8 +156,8 @@
                   "timeShift": null,
                   "title": "Error rate / component",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -227,7 +233,6 @@
                      {
                         "expr": "sum by(operation) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{operation}}",
                         "legendLink": null,
@@ -239,8 +244,8 @@
                   "timeShift": null,
                   "title": "RPS / operation",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -253,7 +258,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "rps",
+                        "format": "reqps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -304,7 +309,6 @@
                      {
                         "expr": "sum by(operation) (rate(thanos_objstore_bucket_operation_failures_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])) / sum by(operation) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "{{operation}}",
                         "legendLink": null,
@@ -316,8 +320,8 @@
                   "timeShift": null,
                   "title": "Error rate / operation",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -393,7 +397,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -402,7 +405,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -411,7 +413,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -423,8 +424,8 @@
                   "timeShift": null,
                   "title": "Op: Get",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -488,7 +489,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get_range\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -497,7 +497,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get_range\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -506,7 +505,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get_range\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"get_range\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -518,8 +516,8 @@
                   "timeShift": null,
                   "title": "Op: GetRange",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -583,7 +581,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"exists\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -592,7 +589,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"exists\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -601,7 +597,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"exists\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"exists\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -613,8 +608,8 @@
                   "timeShift": null,
                   "title": "Op: Exists",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -690,7 +685,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"attributes\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -699,7 +693,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"attributes\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -708,7 +701,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"attributes\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"attributes\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -720,8 +712,8 @@
                   "timeShift": null,
                   "title": "Op: Attributes",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -785,7 +777,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"upload\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -794,7 +785,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"upload\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -803,7 +793,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"upload\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"upload\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -815,8 +804,8 @@
                   "timeShift": null,
                   "title": "Op: Upload",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -880,7 +869,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"delete\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A",
@@ -889,7 +877,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"delete\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B",
@@ -898,7 +885,6 @@
                      {
                         "expr": "sum(rate(thanos_objstore_bucket_operation_duration_seconds_sum{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"delete\"}[$__rate_interval])) * 1e3 / sum(rate(thanos_objstore_bucket_operation_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\",operation=\"delete\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "interval": "15s",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
@@ -910,8 +896,8 @@
                   "timeShift": null,
                   "title": "Op: Delete",
                   "tooltip": {
-                     "shared": true,
-                     "sort": 2,
+                     "shared": false,
+                     "sort": 0,
                      "value_type": "individual"
                   },
                   "type": "graph",
@@ -954,7 +940,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-1.0.0"
       ],
       "templating": {
          "list": [
@@ -1053,6 +1039,6 @@
       },
       "timezone": "utc",
       "title": "Mimir / Object Store",
-      "uid": "d5a3a4489d57c733b5677fb55370a723",
+      "uid": "e1324ee2a434f4158c00a9ee279d3292",
       "version": 0
    }
