@@ -6,7 +6,6 @@
       "gnetId": null,
       "graphTooltip": 0,
       "hideControls": false,
-      "id": 8,
       "iteration": 1583185057230,
       "links": [
          {
@@ -16,7 +15,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v0.24.0"
+               "monitoring-mixins-v1.0.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -720,7 +719,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "$logs",
+            "datasource": "$loki_datasource",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -821,7 +820,7 @@
             }
          },
          {
-            "datasource": "$logs",
+            "datasource": "$loki_datasource",
             "gridPos": {
                "h": 19,
                "w": 24,
@@ -854,7 +853,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v0.24.0"
+         "monitoring-mixins-v1.0.0"
       ],
       "templating": {
          "list": [
@@ -921,7 +920,7 @@
             {
                "hide": 0,
                "label": null,
-               "name": "logs",
+               "name": "loki_datasource",
                "options": [ ],
                "query": "loki",
                "refresh": 1,

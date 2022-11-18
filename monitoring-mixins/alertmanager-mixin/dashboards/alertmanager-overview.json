@@ -393,7 +393,7 @@
       "style": "dark",
       "tags": [
          "alertmanager-mixin",
-         "monitoring-mixins-v0.24.0"
+         "monitoring-mixins-v1.0.0"
       ],
       "templating": {
          "list": [
