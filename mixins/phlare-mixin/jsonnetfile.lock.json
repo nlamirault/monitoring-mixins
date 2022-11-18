@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "30280196507e0fe6fa978a3e0eaca3a62844f817",
+      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana-builder"
+        }
+      },
+      "version": "32101ab7cf57915901a75af9c2cf2442416677f6",
+      "sum": "tDR6yT2GVfw0wTU12iZH+m01HrbIr6g/xN+/8nzNkU0="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "mixin-utils"
+        }
+      },
+      "version": "32101ab7cf57915901a75af9c2cf2442416677f6",
+      "sum": "N1Uz6AJpnQXv4w8F6lxDqMwoT7azPVrpuhJ4N7Oqzcw="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/phlare.git",
+          "subdir": "operations/phlare/jsonnet/phlare-mixin/phlare-mixin"
+        }
+      },
+      "version": "12166fa94c6cf0ec70a1fc87a00dd2545c1476fd",
+      "sum": "a97nlBv+AauxsdLOmTy9NFU1FuF8vKmAsuWb64qQA0E="
+    }
+  ],
+  "legacyImports": false
+}
