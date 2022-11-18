@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/phlare.git",
+          "subdir": "operations/phlare/jsonnet/phlare-mixin/phlare-mixin"
+        }
+      },
+      "version": "v0.1.0"
+    }
+  ],
+  "legacyImports": true
+}
