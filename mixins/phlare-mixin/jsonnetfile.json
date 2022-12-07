@@ -8,7 +8,7 @@
           "subdir": "operations/phlare/jsonnet/phlare-mixin/phlare-mixin"
         }
       },
-      "version": "v0.1.0"
+      "version": "v0.1.1"
     }
   ],
   "legacyImports": true
