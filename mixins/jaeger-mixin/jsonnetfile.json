@@ -8,7 +8,7 @@
           "subdir": "monitoring/jaeger-mixin"
         }
       },
-      "version": "v1.39.0"
+      "version": "v1.40.0"
     }
   ],
   "legacyImports": true
