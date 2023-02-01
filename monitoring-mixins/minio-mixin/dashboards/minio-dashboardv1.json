@@ -51,7 +51,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(disk_storage_used{disk=~\"$disk\", job=~\"$job\"}) by (disk) / sum(disk_storage_total{disk=~\"$disk\", job=~\"$job\"}) by (disk)",
+                        "expr": "sum(disk_storage_used{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk) / sum(disk_storage_total{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance}) by (disk)",
                         "format": "time_series",
                         "instant": true,
                         "intervalFactor": 2,
@@ -1262,16 +1262,17 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
+               "allValue": ".+",
                "current": {
-                  "text": "prod",
-                  "value": "prod"
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
                },
                "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
+               "includeAll": true,
                "label": "job",
-               "multi": false,
+               "multi": true,
                "name": "job",
                "options": [ ],
                "query": "label_values(minio_version_info, job)",

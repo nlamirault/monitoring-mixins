@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "phlare-mixin",
-               "monitoring-mixins-v1.0.0"
+               "monitoring-mixins-v1.1.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -594,13 +594,179 @@
             "showTitle": true,
             "title": "Ingester",
             "titleSize": "h6"
+         },
+         {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "description": "### Head size in bytes per table type\nIngesters maintain a local Head per-tenant. Each\nHead maintains the active profiling series; Then\nthe head gets periodically compacted into a block\non disk. This panel shows the estimated size of\nthe Head in memory for all ingesters.\n\n",
+                  "fill": 1,
+                  "id": 7,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 6,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum(phlare_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/ingester\",}) by (type)",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{type}}",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Head size in bytes per table type",
+                  "tooltip": {
+                     "shared": true,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "bytes",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               },
+               {
+                  "aliasColors": { },
+                  "bars": false,
+                  "dashLength": 10,
+                  "dashes": false,
+                  "datasource": "$datasource",
+                  "description": "### Head size in bytes per pod\nIngesters maintain a local Head per-tenant. Each\nHead maintains the active profiling series; Then\nthe head gets periodically compacted into a block\non disk. This panel shows the estimated size of\nthe Head in memory for all ingesters.\n\n",
+                  "fill": 1,
+                  "id": 8,
+                  "legend": {
+                     "avg": false,
+                     "current": false,
+                     "max": false,
+                     "min": false,
+                     "show": true,
+                     "total": false,
+                     "values": false
+                  },
+                  "lines": true,
+                  "linewidth": 1,
+                  "links": [ ],
+                  "nullPointMode": "null as zero",
+                  "percentage": false,
+                  "pointradius": 5,
+                  "points": false,
+                  "renderer": "flot",
+                  "seriesOverrides": [ ],
+                  "spaceLength": 10,
+                  "span": 6,
+                  "stack": false,
+                  "steppedLine": false,
+                  "targets": [
+                     {
+                        "expr": "sum(phlare_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/ingester\",}) by (instance)",
+                        "format": "time_series",
+                        "intervalFactor": 2,
+                        "legendFormat": "{{instance}}",
+                        "legendLink": null,
+                        "step": 10
+                     }
+                  ],
+                  "thresholds": [ ],
+                  "timeFrom": null,
+                  "timeShift": null,
+                  "title": "Head size in bytes per pod",
+                  "tooltip": {
+                     "shared": true,
+                     "sort": 2,
+                     "value_type": "individual"
+                  },
+                  "type": "graph",
+                  "xaxis": {
+                     "buckets": null,
+                     "mode": "time",
+                     "name": null,
+                     "show": true,
+                     "values": [ ]
+                  },
+                  "yaxes": [
+                     {
+                        "format": "bytes",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": 0,
+                        "show": true
+                     },
+                     {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": false
+                     }
+                  ]
+               }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "Ingester - Head",
+            "titleSize": "h6"
          }
       ],
       "schemaVersion": 14,
       "style": "dark",
       "tags": [
          "phlare-mixin",
-         "monitoring-mixins-v1.0.0"
+         "monitoring-mixins-v1.1.0"
       ],
       "templating": {
          "list": [
