@@ -459,26 +459,26 @@ spec:
       record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate
     - expr: |
         container_memory_working_set_bytes{job="kubelet", image!=""}
-        * on (namespace, pod) group_left(node) topk by(namespace, pod) (1,
-          max by(namespace, pod, node) (kube_pod_info{node!=""})
+        * on (cluster, namespace, pod) group_left(node) topk by(cluster, namespace, pod) (1,
+          max by(cluster, namespace, pod, node) (kube_pod_info{node!=""})
         )
       record: node_namespace_pod_container:container_memory_working_set_bytes
     - expr: |
         container_memory_rss{job="kubelet", image!=""}
-        * on (namespace, pod) group_left(node) topk by(namespace, pod) (1,
-          max by(namespace, pod, node) (kube_pod_info{node!=""})
+        * on (cluster, namespace, pod) group_left(node) topk by(cluster, namespace, pod) (1,
+          max by(cluster, namespace, pod, node) (kube_pod_info{node!=""})
         )
       record: node_namespace_pod_container:container_memory_rss
     - expr: |
         container_memory_cache{job="kubelet", image!=""}
-        * on (namespace, pod) group_left(node) topk by(namespace, pod) (1,
-          max by(namespace, pod, node) (kube_pod_info{node!=""})
+        * on (cluster, namespace, pod) group_left(node) topk by(cluster, namespace, pod) (1,
+          max by(cluster, namespace, pod, node) (kube_pod_info{node!=""})
         )
       record: node_namespace_pod_container:container_memory_cache
     - expr: |
         container_memory_swap{job="kubelet", image!=""}
-        * on (namespace, pod) group_left(node) topk by(namespace, pod) (1,
-          max by(namespace, pod, node) (kube_pod_info{node!=""})
+        * on (cluster, namespace, pod) group_left(node) topk by(cluster, namespace, pod) (1,
+          max by(cluster, namespace, pod, node) (kube_pod_info{node!=""})
         )
       record: node_namespace_pod_container:container_memory_swap
     - expr: |
@@ -652,11 +652,11 @@ spec:
         ))
       record: 'node_namespace_pod:kube_pod_info:'
     - expr: |
-        count by (cluster, node) (sum by (node, cpu) (
-          node_cpu_seconds_total{job="node-exporter"}
-        * on (namespace, pod) group_left(node)
+        count by (cluster, node) (
+          node_cpu_seconds_total{mode="idle",job="node-exporter"}
+          * on (namespace, pod) group_left(node)
           topk by(namespace, pod) (1, node_namespace_pod:kube_pod_info:)
-        ))
+        )
       record: node:node_num_cpu:sum
     - expr: |
         sum(
@@ -670,8 +670,16 @@ spec:
         ) by (cluster)
       record: :node_memory_MemAvailable_bytes:sum
     - expr: |
-        sum(rate(node_cpu_seconds_total{job="node-exporter",mode!="idle",mode!="iowait",mode!="steal"}[5m])) /
-        count(sum(node_cpu_seconds_total{job="node-exporter"}) by (cluster, instance, cpu))
+        avg by (cluster, node) (
+          sum without (mode) (
+            rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal",job="node-exporter"}[5m])
+          )
+        )
+      record: node:node_cpu_utilization:ratio_rate5m
+    - expr: |
+        avg by (cluster) (
+          node:node_cpu_utilization:ratio_rate5m
+        )
       record: cluster:node_cpu:ratio_rate5m
   - name: kubelet.rules
     rules:

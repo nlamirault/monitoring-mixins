@@ -9,7 +9,7 @@ spec:
   groups:
   - name: Kafka_Alerts
     rules:
-    - alert: OfflinePartitonCount
+    - alert: KafkaOfflinePartitonCount
       annotations:
         description: 'Kafka {{ $labels.instance }}: {{ $value }} partitons offline'
         summary: After successful leader election, if the leader for partition dies,
@@ -21,7 +21,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-    - alert: UnderReplicatedPartitionCount
+    - alert: KafkaUnderReplicatedPartitionCount
       annotations:
         description: 'Kafka {{ $labels.instance }}: {{ $value }} under replicated partitons'
         summary: Under-replicated partitions means that one or more replicas are not
@@ -32,7 +32,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-    - alert: ActiveController
+    - alert: KafkaActiveController
       annotations:
         description: 'Kafka {{ $labels.instance }}: No active controller'
         summary: No broker in the cluster is reporting as the active controller in the
@@ -43,10 +43,10 @@ spec:
       for: 5m
       labels:
         severity: critical
-    - alert: UncleanLeaderElection
+    - alert: KafkaUncleanLeaderElection
       annotations:
         description: 'Kafka {{ $labels.instance }}: {{ $value }} unclean leader elections'
-        summary: '{{ $value }} unclean partition leader elections in the cluster reported
+        summary: There is unclean partition leader elections in the cluster reported
           in the last 1 minute interval. When unclean leader election is held among
           out-of-sync replicas, there is a possibility of data loss if any messages
           were not synced prior to the loss of the former leader. So if the number of
@@ -54,13 +54,13 @@ spec:
           why leaders were re-elected, and look for WARN or ERROR messages. Consider
           setting the broker configuration parameter unclean.leader.election.enable
           to false so that a replica outside of the set of in-sync replicas is never
-          elected leader.'
+          elected leader.
       expr: max(rate(kafka_controller_ControllerStats_UncleanLeaderElectionsPerSec{job="integrations/kafka"}[5m]))
         by (instance) != 0
       for: 5m
       labels:
         severity: critical
-    - alert: ISRExpandRate
+    - alert: KafkaISRExpandRate
       annotations:
         description: 'Kafka {{ $labels.instance }}: {{ $value }} ISR Expansion Rate'
         summary: If a broker goes down, ISR for some of the partitions shrink. When
@@ -72,7 +72,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-    - alert: ISRShrinkRate
+    - alert: KafkaISRShrinkRate
       annotations:
         description: 'Kafka {{ $labels.instance }}: {{ $value }} ISR Shrink Rate'
         summary: If a broker goes down, ISR for some of the partitions shrink. When
@@ -84,19 +84,19 @@ spec:
       for: 5m
       labels:
         severity: warning
-    - alert: BrokerCount
+    - alert: KafkaBrokerCount
       annotations:
         description: 'Kafka {{ $labels.instance }}: No Brokers online!'
-        summary: Broker count is 0
+        summary: Broker count is 0.
       expr: count(kafka_server_KafkaServer_BrokerState{job="integrations/kafka"}) by
         (instance) == 0
       for: 5m
       labels:
         severity: critical
-    - alert: ZookeeperSyncConnect
+    - alert: KafkaZookeeperSyncConnect
       annotations:
         description: 'Kafka {{ $labels.instance }}: Zookeeper Sync Disconected'
-        summary: Zookeeper Sync Disconected
+        summary: Zookeeper Sync Disconected.
       expr: avg(kafka_server_SessionExpireListener_ZooKeeperSyncConnectsPerSec{job="integrations/kafka"})
         by (instance) < 1
       for: 5m
