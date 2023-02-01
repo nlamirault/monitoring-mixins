@@ -9,7 +9,7 @@ python = "^3.8"
 pre-commit = "^3.0.0"
 requests = "^2.25.1"
 coloredlogs = "^15.0"
-black = "^22.1"
+black = "^23.1"
 
 [tool.poetry.dev-dependencies]
 
