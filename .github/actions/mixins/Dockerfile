@@ -34,7 +34,7 @@
 
 # ======================================================
 # Build mixtool
-FROM golang:1.19-alpine AS mixtool-builder
+FROM golang:1.20-alpine AS mixtool-builder
 RUN GO111MODULE=on go install github.com/monitoring-mixins/mixtool/cmd/mixtool@latest
 
 # ======================================================
