@@ -7,5 +7,5 @@ metadata:
     app: prometheus
 spec:
   groups:
-  - name: osm
-    rules: []
+      - name: osm
+        rules: []
