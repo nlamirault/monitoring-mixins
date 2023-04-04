@@ -7,13 +7,13 @@ metadata:
     app: prometheus
 spec:
   groups:
-  - name: ApolloServerAlerts
-    rules:
-    - alert: ApolloServerDown
-      annotations:
-        description: Apollo Server {{$labels.job}} on {{$labels.instance}} is not up.
-        summary: Apollo Server not up
-      expr: apollo_server_starting != 1
-      for: 5m
-      labels:
-        severity: critical
+      - name: ApolloServerAlerts
+        rules:
+          - alert: ApolloServerDown
+            annotations:
+              description: Apollo Server {{$labels.job}} on {{$labels.instance}} is not up.
+              summary: Apollo Server not up
+            expr: apollo_server_starting != 1
+            for: 5m
+            labels:
+              severity: critical

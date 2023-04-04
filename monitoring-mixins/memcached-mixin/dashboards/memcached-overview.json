@@ -784,7 +784,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Reads",
+                  "title": "Bytes received",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -800,7 +800,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "bps",
+                        "format": "Bps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -860,7 +860,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Writes",
+                  "title": "Bytes transmitted",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -876,7 +876,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "bps",
+                        "format": "Bps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
