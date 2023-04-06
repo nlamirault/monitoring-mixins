@@ -94,6 +94,22 @@ function jsonnet_generate {
     done
 }
 
+function mixin_version {
+    jsonnetfile=$1
+    deps=$(jq '.dependencies[] | "\(.source.git.remote) \(.version)"' ${jsonnetfile} | tr '\n' ';')
+    IFS=';'
+    read -ra data <<< "${deps}"
+    i="${data[${#data[@]}-1]}" # Last dependencies
+    git=$(echo ${i} | sed -e 's/"//g' | awk -F" " '{ print $1 }')
+    deps_version=$(echo ${i} | sed -e 's/"//g' | awk -F" " '{ print $2 }')
+    if [ ${deps_version} == "master" ]; then
+        version=${deps_version}
+    else 
+        version=$(echo ${deps_version} | sed -e s/[a-z\-]"//g")
+    fi
+    echo $version
+}
+
 function mixin_build {
     local mixin=$1
     local output=$2
@@ -104,6 +120,8 @@ function mixin_build {
     fi
     echo -e "${OK_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
+    version=$(mixin_version "jsonnetfile.json")
+    echo "${version}" > "${output}/${mixin}/.version"
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
     popd > /dev/null
