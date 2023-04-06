@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.2.0"
+               "monitoring-mixins-2.8.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -1236,7 +1236,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.2.0"
+         "monitoring-mixins-2.8.0"
       ],
       "templating": {
          "list": [
