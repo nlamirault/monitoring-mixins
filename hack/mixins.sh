@@ -120,8 +120,8 @@ function mixin_build {
     fi
     echo -e "${OK_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
-    version=$(mixin_version "jsonnetfile.json")
-    echo "${version}" > "${output}/${mixin}/.version"
+    mixin_version=$(mixin_version "jsonnetfile.json")
+    echo "${mixin_version}" > "${output}/${mixin}/.version"
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
     popd > /dev/null
