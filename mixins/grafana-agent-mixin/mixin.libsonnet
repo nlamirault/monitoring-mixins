@@ -2,6 +2,6 @@ local agent = import 'grafana-agent-mixin/mixin.libsonnet';
 
 agent {
   _config+:: {
-    tags: ['grafana-agent-mixin', 'monitoring-mixins-v1.2.0'],
+    tags: ['grafana-agent-mixin', 'monitoring-mixins-v1.3.0'],
   },
 }
