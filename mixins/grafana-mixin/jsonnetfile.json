@@ -8,7 +8,7 @@
           "subdir": "grafana-mixin"
         }
       },
-      "version": "v9.5.3"
+      "version": "v10.0.1"
     }
   ],
   "legacyImports": true
