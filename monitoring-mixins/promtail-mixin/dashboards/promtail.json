@@ -62,8 +62,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Active Targets",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -138,8 +137,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Active Targets",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -226,8 +224,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "logs read",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -302,8 +299,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "lines read",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -361,6 +357,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
                   },
@@ -398,8 +395,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -474,24 +470,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "p99",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "job:promtail_request_duration_seconds:50quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "p50",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "job:promtail_request_duration_seconds:avg{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],

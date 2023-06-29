@@ -48,7 +48,7 @@ spec:
                     VALUE = {{ $value }}
                     LABELS = {{ $labels }}
               summary: RabbitMQ node is down.
-            expr: sum by (rabbitmq_cluster) (rabbitmq_identity_info)
+            expr: sum by (rabbitmq_cluster) (rabbitmq_identity_info) < 3
             for: 0m
             labels:
               severity: critical

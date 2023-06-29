@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -227,8 +227,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "in progress",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -303,8 +302,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "received",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -379,8 +377,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "processed",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -467,8 +464,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -543,8 +539,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": " {{pod}} ",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -619,8 +614,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -707,8 +701,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "failures",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -783,8 +776,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{user}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -874,7 +866,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

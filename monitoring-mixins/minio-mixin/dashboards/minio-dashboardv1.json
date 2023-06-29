@@ -51,7 +51,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(disk_storage_used{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk) / sum(disk_storage_total{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance}) by (disk)",
+                        "expr": "sum(disk_storage_used{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk) / sum(disk_storage_total{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk)",
                         "format": "time_series",
                         "instant": true,
                         "intervalFactor": 2,
@@ -284,8 +284,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -372,8 +371,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -448,8 +446,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -524,8 +521,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -612,8 +608,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{bucket}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -688,8 +683,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{bucket}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -764,8 +758,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{bucket}}-{{object_size}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -852,8 +845,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{api}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -928,8 +920,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{api}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1004,8 +995,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{api}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1092,24 +1082,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(s3_ttfb_seconds_bucket{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "sum(rate(s3_ttfb_seconds_sum{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) * 1e3 / sum(rate(s3_ttfb_seconds_count{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -1185,16 +1172,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Inbound-{{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "rate(internode_tx_bytes_total{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Outbound-{{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],

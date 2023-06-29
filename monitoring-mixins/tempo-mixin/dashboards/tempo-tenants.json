@@ -6,8 +6,21 @@
       "gnetId": null,
       "graphTooltip": 0,
       "hideControls": false,
-      "links": [ ],
-      "refresh": "10s",
+      "links": [
+         {
+            "asDropdown": true,
+            "icon": "external link",
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
+               "tempo"
+            ],
+            "targetBlank": false,
+            "title": "Tempo Dashboards",
+            "type": "dashboards"
+         }
+      ],
+      "refresh": "",
       "rows": [
          {
             "collapse": false,
@@ -69,8 +82,7 @@
                         "instant": true,
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -170,8 +182,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "received",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(\n  max by (cluster, namespace, limit_name) (tempo_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",user=\"$tenant\",limit_name=\"ingestion_rate_limit_bytes\"})\n  or max by (cluster, namespace, limit_name) (tempo_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",limit_name=\"ingestion_rate_limit_bytes\"})\n) by (ingestion_rate_limit_bytes)\n",
@@ -179,8 +190,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(\n  max by (cluster, namespace, limit_name) (tempo_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",user=\"$tenant\",limit_name=\"ingestion_burst_size_bytes\"})\n  or max by (cluster, namespace, limit_name) (tempo_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",limit_name=\"ingestion_burst_size_bytes\"})\n) by (ingestion_burst_size_bytes)\n",
@@ -188,8 +198,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "burst limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -265,8 +274,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "accepted",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum(rate(tempo_discarded_spans_total{cluster=~\"$cluster\", job=~\"($namespace)/distributor\",tenant=\"$tenant\"}[$__rate_interval])) by (reason)",
@@ -274,8 +282,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "refused {{ reason }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -362,8 +369,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "live traces",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(\n  max by (cluster, namespace, limit_name) (tempo_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",user=\"$tenant\",limit_name=\"max_global_traces_per_user\"})\n  or max by (cluster, namespace, limit_name) (tempo_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",limit_name=\"max_global_traces_per_user\"})\n) by (max_global_traces_per_user)\n",
@@ -371,8 +377,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "global limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(\n  max by (cluster, namespace, limit_name) (tempo_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",user=\"$tenant\",limit_name=\"max_local_traces_per_user\"})\n  or max by (cluster, namespace, limit_name) (tempo_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",limit_name=\"max_local_traces_per_user\"})\n) by (max_local_traces_per_user)\n",
@@ -380,8 +385,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "local limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -469,8 +473,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "{{ status }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -546,8 +549,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "{{ status }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -629,8 +631,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "length",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -700,8 +701,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "blocks",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -778,13 +778,12 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(tempo_metrics_generator_bytes_received_total{cluster=~\"$cluster\", job=~\"($namespace)/metrics-generator\",tenant=\"$tenant\"})",
+                        "expr": "sum(rate(tempo_metrics_generator_bytes_received_total{cluster=~\"$cluster\", job=~\"($namespace)/metrics-generator\",tenant=\"$tenant\"}[$__rate_interval]))",
                         "format": "time_series",
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -866,8 +865,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "{{ tenant }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(\n  max by (cluster, namespace, limit_name) (tempo_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",user=\"$tenant\",limit_name=\"metrics_generator_max_active_series\"})\n  or max by (cluster, namespace, limit_name) (tempo_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/compactor\",limit_name=\"metrics_generator_max_active_series\"})\n) by (metrics_generator_max_active_series)\n",
@@ -875,8 +873,7 @@
                         "interval": "1m",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -926,7 +923,9 @@
       ],
       "schemaVersion": 14,
       "style": "dark",
-      "tags": [ ],
+      "tags": [
+         "tempo"
+      ],
       "templating": {
          "list": [
             {
@@ -946,14 +945,15 @@
             {
                "allValue": null,
                "current": {
-                  "text": "prod",
-                  "value": "prod"
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
                },
                "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
+               "includeAll": true,
                "label": "cluster",
-               "multi": false,
+               "multi": true,
                "name": "cluster",
                "options": [ ],
                "query": "label_values(tempo_build_info, cluster)",
@@ -969,14 +969,15 @@
             {
                "allValue": null,
                "current": {
-                  "text": "prod",
-                  "value": "prod"
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
                },
                "datasource": "$datasource",
                "hide": 0,
-               "includeAll": false,
+               "includeAll": true,
                "label": "namespace",
-               "multi": false,
+               "multi": true,
                "name": "namespace",
                "options": [ ],
                "query": "label_values(tempo_build_info{cluster=~'$cluster'}, namespace)",

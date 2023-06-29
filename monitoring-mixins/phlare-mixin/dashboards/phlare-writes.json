@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "phlare-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -59,7 +59,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:phlare_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
+                        "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} 99th Percentile",
@@ -67,7 +67,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:phlare_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
+                        "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} 50th Percentile",
@@ -75,7 +75,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1 * sum(job_type_cluster:phlare_distributor_received_compressed_bytes_sum:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:phlare_distributor_received_compressed_bytes_count:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
+                        "expr": "1 * sum(job_type_cluster:pyroscope_distributor_received_compressed_bytes_sum:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:pyroscope_distributor_received_compressed_bytes_count:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} Average",
@@ -151,7 +151,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:phlare_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
+                        "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} 99th Percentile",
@@ -159,7 +159,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:phlare_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
+                        "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} 50th Percentile",
@@ -167,7 +167,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1 * sum(job_type_cluster:phlare_distributor_received_samples_sum:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:phlare_distributor_received_samples_count:sum_rate{job=~\"($namespace)/distributor\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
+                        "expr": "1 * sum(job_type_cluster:pyroscope_distributor_received_samples_sum:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:pyroscope_distributor_received_samples_count:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ type }} Average",
@@ -230,6 +230,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
                   },
@@ -263,12 +264,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(phlare_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/distributor\", route=~\".*push.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -339,7 +339,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/distributor\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
@@ -347,7 +347,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/distributor\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
@@ -355,7 +355,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(job_route_cluster:phlare_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/distributor\", route=~\".*push.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:phlare_request_duration_seconds_count:sum_rate{job=~\"($namespace)/distributor\", route=~\".*push.*\", cluster=~\"$cluster\"})",
+                        "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
@@ -418,6 +418,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
                   },
@@ -451,12 +452,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(phlare_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/ingester\", route=~\".*push.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -527,7 +527,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/ingester\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
@@ -535,7 +535,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/ingester\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
@@ -543,7 +543,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(job_route_cluster:phlare_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/ingester\", route=~\".*push.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:phlare_request_duration_seconds_count:sum_rate{job=~\"($namespace)/ingester\", route=~\".*push.*\", cluster=~\"$cluster\"})",
+                        "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Average",
@@ -632,12 +632,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(phlare_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/ingester\",}) by (type)",
+                        "expr": "sum(pyroscope_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|ingester)\",}) by (type)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{type}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -709,12 +708,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(phlare_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/ingester\",}) by (instance)",
+                        "expr": "sum(pyroscope_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|ingester)\",}) by (instance)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -766,7 +764,7 @@
       "style": "dark",
       "tags": [
          "phlare-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [
@@ -797,7 +795,7 @@
                "multi": false,
                "name": "cluster",
                "options": [ ],
-               "query": "label_values(phlare_build_info, cluster)",
+               "query": "label_values(pyroscope_build_info, cluster)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -820,7 +818,7 @@
                "multi": false,
                "name": "namespace",
                "options": [ ],
-               "query": "label_values(phlare_build_info{cluster=~\"$cluster\"}, namespace)",
+               "query": "label_values(pyroscope_build_info{cluster=~\"$cluster\"}, namespace)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -863,6 +861,6 @@
       },
       "timezone": "utc",
       "title": "Phlare / Writes",
-      "uid": "writes",
+      "uid": "phlare-writes",
       "version": 0
    }

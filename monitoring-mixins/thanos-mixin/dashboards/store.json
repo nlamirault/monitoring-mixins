@@ -764,8 +764,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{operation}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -841,8 +840,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{operation}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1023,8 +1021,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "block loads",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1178,8 +1175,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "block drops {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1345,8 +1341,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{item_type}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1422,8 +1417,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{item_type}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1499,8 +1493,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{item_type}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1576,8 +1569,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{item_type}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1665,24 +1657,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P99",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_bucket_store_sent_chunk_size_bytes_sum{job=~\"$job\"}[$__rate_interval])) / sum by (job) (rate(thanos_bucket_store_sent_chunk_size_bytes_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "mean",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (job, le) (rate(thanos_bucket_store_sent_chunk_size_bytes_bucket{job=~\"$job\"}[$__rate_interval])))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P50",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1769,24 +1758,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P99",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_bucket_store_series_blocks_queried_sum{job=~\"$job\"}[$__rate_interval])) / sum by (job) (rate(thanos_bucket_store_series_blocks_queried_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "mean {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (rate(thanos_bucket_store_series_blocks_queried{job=~\"$job\"}[$__rate_interval])))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P50",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1862,24 +1848,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P99: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job, data_type) (rate(thanos_bucket_store_series_data_fetched_sum{job=~\"$job\"}[$__rate_interval])) / sum by (job, data_type) (rate(thanos_bucket_store_series_data_fetched_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "mean: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (rate(thanos_bucket_store_series_data_fetched{job=~\"$job\"}[$__rate_interval])))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P50: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1955,24 +1938,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P99: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job, data_type) (rate(thanos_bucket_store_series_data_touched_sum{job=~\"$job\"}[$__rate_interval])) / sum by (job, data_type) (rate(thanos_bucket_store_series_data_touched_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "mean: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (rate(thanos_bucket_store_series_data_touched{job=~\"$job\"}[$__rate_interval])))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P50: {{data_type}} / {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2047,24 +2027,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P99",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_bucket_store_series_result_series_sum{job=~\"$job\"}[$__rate_interval])) / sum by (job) (rate(thanos_bucket_store_series_result_series_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "mean {{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (rate(thanos_bucket_store_series_result_series{job=~\"$job\"}[$__rate_interval])))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "P50",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2517,48 +2494,42 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc all {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc rate all {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc rate heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "inuse heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "inuse stack {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2633,8 +2604,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2709,8 +2679,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{quantile}} {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2762,7 +2731,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [
