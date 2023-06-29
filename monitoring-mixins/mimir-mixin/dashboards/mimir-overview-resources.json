@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -71,8 +71,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -147,8 +146,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -223,8 +221,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -309,8 +306,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -385,8 +381,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -461,8 +456,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{persistentvolumeclaim}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -549,8 +543,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -625,8 +618,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -701,8 +693,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -787,8 +778,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -863,8 +853,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -939,8 +928,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1025,8 +1013,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1101,8 +1088,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1177,8 +1163,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{persistentvolumeclaim}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1230,7 +1215,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

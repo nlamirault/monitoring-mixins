@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -86,24 +86,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\",resource=\"cpu\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "request",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -191,24 +188,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\"} > 0)",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",container=~\"alertmanager\",resource=\"memory\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "request",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -281,8 +275,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -367,8 +360,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -443,8 +435,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -531,8 +522,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -607,8 +597,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}} - {{device}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -695,8 +684,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{persistentvolumeclaim}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -748,7 +736,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -101,32 +101,28 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "in-memory",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"max_global_series_per_user\", user=\"$user\"})\nor\nmax(cortex_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"max_global_series_per_user\"})\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum(\n  cortex_ingester_active_series{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write.*))\", user=\"$user\"}\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write.*))\"})\n)\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "active",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (name) (\n  cortex_ingester_active_series_custom_tracker{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write.*))\", user=\"$user\"}\n  / on(cluster, namespace) group_left\n  max by (cluster, namespace) (cortex_distributor_replication_factor{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write.*))\"})\n) > 0\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "active ({{ name }})",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -196,8 +192,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "series",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -267,8 +262,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "age",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -338,8 +332,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "age",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -421,8 +414,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -504,16 +496,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"request_rate\", user=\"$user\"})\nor\nmax(cortex_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"request_rate\"})\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -589,8 +579,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ reason }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -672,8 +661,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -755,16 +743,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"ingestion_rate\", user=\"$user\"})\nor\nmax(cortex_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"ingestion_rate\"})\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -840,16 +826,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "deduplicated",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum(rate(cortex_distributor_non_ha_samples_received_total{cluster=~\"$cluster\", job=~\"($namespace)/((distributor|cortex|mimir|mimir-write.*))\", user=\"$user\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "non-HA",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -925,16 +909,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ reason }} (distributor)",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (reason) (rate(cortex_discarded_samples_total{cluster=~\"$cluster\", job=~\"($namespace)/((ingester.*|cortex|mimir|mimir-write.*))\", user=\"$user\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ reason }} (ingester)",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1016,8 +998,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1087,8 +1068,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1164,8 +1144,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ reason }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1235,8 +1214,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1324,8 +1302,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ job }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1401,8 +1378,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ job }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1496,16 +1472,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "groups",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_limits_overrides{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"ruler_max_rule_groups_per_tenant\", user=\"$user\"})\nor\nmax(cortex_limits_defaults{cluster=~\"$cluster\", job=~\"($namespace)/((overrides-exporter|mimir-backend.*))\", limit_name=\"ruler_max_rule_groups_per_tenant\"})\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1575,8 +1549,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rules",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1645,8 +1618,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1721,8 +1693,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ rule_group }}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1848,8 +1819,7 @@
                         "instant": true,
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -1964,8 +1934,7 @@
                         "instant": true,
                         "intervalFactor": 2,
                         "legendFormat": "",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -2047,8 +2016,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2119,8 +2087,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "rate",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2207,8 +2174,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Queries / Sec",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2283,8 +2249,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Queue Length",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2371,8 +2336,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Queries / Sec",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2447,8 +2411,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Queue Length",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -2500,7 +2463,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -71,8 +71,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -147,8 +146,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -223,16 +221,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_inflight_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(distributor|ingester|mimir-write).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -307,24 +303,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(sum by(pod) (cortex_tcp_connections{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(distributor|ingester|mimir-write).*\"}))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(cortex_tcp_connections_limit{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(distributor|ingester|mimir-write).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -411,8 +404,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -487,8 +479,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -563,16 +554,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_inflight_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-frontend|querier|ruler-query-frontend|ruler-querier|mimir-read).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -647,24 +636,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(sum by(pod) (cortex_tcp_connections{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-frontend|querier|ruler-query-frontend|ruler-querier|mimir-read).*\"}))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(cortex_tcp_connections_limit{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-frontend|querier|ruler-query-frontend|ruler-querier|mimir-read).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -751,8 +737,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -827,8 +812,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -903,16 +887,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(cortex_inflight_requests{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-scheduler|ruler-query-scheduler|ruler|store-gateway|compactor|alertmanager|overrides-exporter|mimir-backend).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -987,24 +969,21 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "avg",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "max(sum by(pod) (cortex_tcp_connections{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-scheduler|ruler-query-scheduler|ruler|store-gateway|compactor|alertmanager|overrides-exporter|mimir-backend).*\"}))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "highest",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "min(cortex_tcp_connections_limit{cluster=~\"$cluster\", namespace=~\"$namespace\",pod=~\"(.*-mimir-)?(query-scheduler|ruler-query-scheduler|ruler|store-gateway|compactor|alertmanager|overrides-exporter|mimir-backend).*\"})",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "limit",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1056,7 +1035,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

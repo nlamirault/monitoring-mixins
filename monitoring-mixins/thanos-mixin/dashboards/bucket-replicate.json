@@ -127,8 +127,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{result}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -333,40 +332,35 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "meta loads",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(blocks_meta_synced{state=\"failed\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "partial meta reads",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_blocks_already_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "already replicated blocks",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_blocks_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "replicated blocks",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_objects_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "replicated objects",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -418,7 +412,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [

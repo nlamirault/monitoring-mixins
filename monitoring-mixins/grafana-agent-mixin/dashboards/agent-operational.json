@@ -49,8 +49,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -125,8 +124,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -201,8 +199,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -277,8 +274,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -353,8 +349,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -429,8 +424,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -517,8 +511,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -593,8 +586,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -681,8 +673,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -757,8 +748,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{container}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -833,8 +823,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -909,8 +898,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{instance_group_name}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -985,8 +973,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{container}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],

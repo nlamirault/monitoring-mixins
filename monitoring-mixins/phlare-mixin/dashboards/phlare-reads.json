@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "phlare-mixin",
-               "monitoring-mixins-v1.3.0"
+               "monitoring-mixins-v1.4.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -34,6 +34,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
                   },
@@ -67,12 +68,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(phlare_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/querier\", route=~\".*merge.*|.*series.*|.*type.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|querier)\", route=~\".*merge.*|.*series.*|.*type.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -143,7 +143,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} 99th Percentile",
@@ -151,7 +151,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/querier\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} 50th Percentile",
@@ -159,7 +159,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(job_route_cluster:phlare_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/querier\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:phlare_request_duration_seconds_count:sum_rate{job=~\"($namespace)/querier\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
+                        "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(phlare|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(phlare|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} Average",
@@ -222,6 +222,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
                   },
@@ -255,12 +256,11 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(phlare_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/ingester\", route=~\".*merge.*|.*series.*|.*type.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(phlare|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      }
                   ],
                   "thresholds": [ ],
@@ -331,7 +331,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/ingester\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} 99th Percentile",
@@ -339,7 +339,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:phlare_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/ingester\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
+                        "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} 50th Percentile",
@@ -347,7 +347,7 @@
                         "step": 10
                      },
                      {
-                        "expr": "1e3 * sum(job_route_cluster:phlare_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/ingester\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:phlare_request_duration_seconds_count:sum_rate{job=~\"($namespace)/ingester\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
+                        "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{ route }} Average",
@@ -404,7 +404,7 @@
       "style": "dark",
       "tags": [
          "phlare-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [
@@ -435,7 +435,7 @@
                "multi": false,
                "name": "cluster",
                "options": [ ],
-               "query": "label_values(phlare_build_info, cluster)",
+               "query": "label_values(pyroscope_build_info, cluster)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -458,7 +458,7 @@
                "multi": false,
                "name": "namespace",
                "options": [ ],
-               "query": "label_values(phlare_build_info{cluster=~\"$cluster\"}, namespace)",
+               "query": "label_values(pyroscope_build_info{cluster=~\"$cluster\"}, namespace)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -501,6 +501,6 @@
       },
       "timezone": "utc",
       "title": "Phlare / Reads",
-      "uid": "reads",
+      "uid": "phlare-reads",
       "version": 0
    }

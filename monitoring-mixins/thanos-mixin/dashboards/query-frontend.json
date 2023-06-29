@@ -452,8 +452,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -529,16 +528,14 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Cache gets - {{job}} {{tripperware}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "sum by (job, tripperware) (rate(querier_cache_misses_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "Cache misses - {{job}} {{tripperware}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -614,8 +611,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -691,8 +687,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -779,48 +774,42 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc all {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc rate all {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "alloc rate heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "inuse heap {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "inuse stack {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -895,8 +884,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -971,8 +959,7 @@
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{quantile}} {{instance}}",
-                        "legendLink": null,
-                        "step": 10
+                        "legendLink": null
                      }
                   ],
                   "thresholds": [ ],
@@ -1024,7 +1011,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.3.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [
