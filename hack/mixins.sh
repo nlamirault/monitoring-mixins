@@ -119,13 +119,13 @@ function mixin_build {
     local output=$2
 
     if [ ! -d "${MIXINS_DIR}/${mixin}" ]; then
-        echo_info "[monitoring-mixins] Not found: ${mixin}"
+        echo_fail "[monitoring-mixins] Not found: ${mixin}"
         exit 1
     fi
     echo_info "[monitoring-mixins] Build: ${mixin}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
     mixin_version=$(mixin_version "jsonnetfile.json")
-    echo_info "Version: ${version}"
+    echo_info "[monitoring-mixins] Version: ${version}"
     echo "${mixin_version}" > "${output}/${mixin}/.version"
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
