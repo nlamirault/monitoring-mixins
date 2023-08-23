@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/agent.git",
+          "subdir": "production/grafana-agent-mixin"
+        }
+      },
+      "version": "3a840ffcf8f5d2893f5d298f153190dd7cafa131",
+      "sum": "GzFpD2lFD8KyRxv1vWgA5LNImj5jI1953xvaEfwCGE4="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
+      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana-builder"
+        }
+      },
+      "version": "ef364ae521bbb2304f23845e36182a908e295789",
+      "sum": "RJjFQa1n8CDbB6m1fBQQzPye7jhOhGTUbma27Gil81I="
+    }
+  ],
+  "legacyImports": false
+}
