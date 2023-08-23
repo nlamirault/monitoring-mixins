@@ -90,7 +90,7 @@ function jsonnet_generate {
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     move_prom_file "alerts.yaml" "${output}/${mixin}/prometheus"
     move_prom_file "rules.yaml" "${output}/${mixin}/prometheus"
-    find dashboards_out -name '*.json' -print0 | xargs -0 -r mv -t ${output}/${mixin}/dashboards
+    find dashboards_out -name '*.json' -print0 | xargs -0 -r -I file mv "file" ${output}/${mixin}/dashboards
     for file in $(find ${output}/${mixin}/prometheus/ -name "*.yaml"); do
         if [[ $(wc -l <${file}) -ge 2 ]]; then
             manifest_rules "${mixin}" ${file} "${output}/${mixin}/manifests"
@@ -125,7 +125,8 @@ function mixin_build {
     echo_info "[monitoring-mixins] Build: ${mixin}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
     mixin_version=$(mixin_version "jsonnetfile.json")
-    echo_info "[monitoring-mixins] Version: ${version}"
+    echo_info "[monitoring-mixins] Mixin version: ${mixin_version}"
+    mkdir -p "${output}/${mixin}"
     echo "${mixin_version}" > "${output}/${mixin}/.version"
     jsonnet_init
     jsonnet_generate ${mixin} ${output}

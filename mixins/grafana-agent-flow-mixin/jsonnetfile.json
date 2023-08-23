@@ -5,7 +5,7 @@
       "source": {
         "git": {
           "remote": "https://github.com/grafana/agent.git",
-          "subdir": "operations/agent-flow-mixin"
+          "subdir": "production/grafana-agent-mixin"
         }
       },
       "version": "v0.35.4"
