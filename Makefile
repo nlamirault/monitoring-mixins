@@ -71,7 +71,7 @@ clean: ## Clean environment
 .PHONY: init
 init: ## Initialize environment
 	poetry install
-	$(VENV)/bin/pre-commit install
+	pre-commit install
 
 .PHONY: test
 test: guard-SERVICE ## Test rules (SERVICE=xxx)

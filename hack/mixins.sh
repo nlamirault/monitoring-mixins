@@ -16,10 +16,14 @@
 
 set -euo pipefail
 
-OK_COLOR="\e[32m"
-KO_COLOR="\e[31m"
-NO_COLOR="\e[39m"
-INFO_COLOR="\e[36m"
+reset_color="\\e[0m"
+color_red="\\e[31m"
+color_green="\\e[32m"
+color_blue="\\e[36m";
+
+function echo_fail { echo -e "${color_red}✖ $*${reset_color}"; }
+function echo_success { echo -e "${color_green}✔ $*${reset_color}"; }
+function echo_info { echo -e "${color_blue}$*${reset_color}"; }
 
 # echo -e "${OK_COLOR}[ Monitoring Mixins ]${NO_COLOR}"
 
@@ -104,7 +108,7 @@ function mixin_version {
     deps_version=$(echo ${i} | sed -e 's/"//g' | awk -F" " '{ print $2 }')
     if [ ${deps_version} == "master" ]; then
         version=${deps_version}
-    else 
+    else
         version=$(echo ${deps_version} | sed -e s/[a-z\-]"//g")
     fi
     echo $version
@@ -115,12 +119,13 @@ function mixin_build {
     local output=$2
 
     if [ ! -d "${MIXINS_DIR}/${mixin}" ]; then
-        echo -e "${KO_COLOR}[monitoring-mixins] Not found: ${mixin} ${NO_COLOR}"
+        echo_info "[monitoring-mixins] Not found: ${mixin}"
         exit 1
     fi
-    echo -e "${OK_COLOR}[monitoring-mixins] Build: ${mixin} ${NO_COLOR}"
+    echo_info "[monitoring-mixins] Build: ${mixin}"
     pushd ${MIXINS_DIR}/${mixin} > /dev/null
     mixin_version=$(mixin_version "jsonnetfile.json")
+    echo_info "Version: ${version}"
     echo "${mixin_version}" > "${output}/${mixin}/.version"
     jsonnet_init
     jsonnet_generate ${mixin} ${output}
@@ -130,7 +135,7 @@ function mixin_build {
 function generate_mixins {
     local output=$1
 
-    # echo -e "${OK_COLOR}[monitoring-mixins] Generate all mixins ${NO_COLOR}"
+    echo_info "[monitoring-mixins] Generate all mixins"
     for mixin in $(ls ${MIXINS_DIR}); do
         mixin_build ${mixin} ${output}
     done
@@ -146,7 +151,7 @@ output=$(pwd)/$1
 
 export app=$2
 export version=$3
-echo -e "${INFO_COLOR}[monitoring-mixins] Release: ${app}-${version} ${NO_COLOR}"
+echo_info "[monitoring-mixins] Release: ${app}-${version}"
 
 # DEBUG
 # jsonnet --version
