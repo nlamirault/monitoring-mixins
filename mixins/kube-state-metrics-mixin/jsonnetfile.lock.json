@@ -8,7 +8,7 @@
           "subdir": "jsonnet/kube-state-metrics-mixin"
         }
       },
-      "version": "fe5e38f0fed77a33136a6a4092ee80c28dde257d",
+      "version": "25fb4fa0767de7ee314500fcb7481ca7b3a55a35",
       "sum": "qclI7LwucTjBef3PkGBkKxF0mfZPbHnn4rlNWKGtR4c="
     }
   ],
