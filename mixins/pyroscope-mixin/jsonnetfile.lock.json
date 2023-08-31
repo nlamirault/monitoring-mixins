@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet-lib.git",
+          "subdir": "grafonnet"
+        }
+      },
+      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
+      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana-builder"
+        }
+      },
+      "version": "c0abc546c782a095a22c277d36f871bb94ffc944",
+      "sum": "xEFMv4+ObwP5L1Wu0XK5agWci4AJzNApys6iKAQxLlQ="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "mixin-utils"
+        }
+      },
+      "version": "c0abc546c782a095a22c277d36f871bb94ffc944",
+      "sum": "p5hRaq4GhUbgKZHtKqYmC8fgg8FoWJDkCN6PbonEXlk="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/pyroscope.git",
+          "subdir": "operations/pyroscope/jsonnet/pyroscope-mixin/pyroscope-mixin"
+        }
+      },
+      "version": "2217f3a839e6da2c42ce06c0589ba8ea764ccd02",
+      "sum": "iXYTZBw4oRcGBbLDK3uy7RXJF6BZEPjR1Zx+k/94CwQ="
+    }
+  ],
+  "legacyImports": false
+}
