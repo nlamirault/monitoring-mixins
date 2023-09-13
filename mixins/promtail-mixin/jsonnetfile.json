@@ -17,7 +17,7 @@
           "subdir": "production/loki-mixin"
         }
       },
-      "version": "v2.8.4"
+      "version": "v2.9.0"
     },
     {
       "source": {
@@ -26,7 +26,7 @@
           "subdir": "production/promtail-mixin"
         }
       },
-      "version": "v2.8.4"
+      "version": "v2.9.0"
     }
   ],
   "legacyImports": true

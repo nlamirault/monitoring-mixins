@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
         with:
           fetch-depth: 0
 
@@ -38,7 +38,7 @@ jobs:
           version: ${{ github.event.inputs.version }}
 
       - name: Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: monitoring-mixins-${{ github.event.inputs.version }}
           path: monitoring-mixins
