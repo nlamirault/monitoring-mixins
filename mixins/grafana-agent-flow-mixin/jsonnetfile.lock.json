@@ -5,31 +5,11 @@
       "source": {
         "git": {
           "remote": "https://github.com/grafana/agent.git",
-          "subdir": "production/grafana-agent-mixin"
+          "subdir": "operations/agent-flow-mixin"
         }
       },
       "version": "19b92b335e91e8a8c30416490aeffbcf59914553",
-      "sum": "7OGWqk6gx4URlQ+v4fiKWKapfAEf2p83MY5aBVQ+uDU="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/grafana/grafonnet-lib.git",
-          "subdir": "grafonnet"
-        }
-      },
-      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
-      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/grafana/jsonnet-libs.git",
-          "subdir": "grafana-builder"
-        }
-      },
-      "version": "62aec8403a5c38d5dc97ba596703753289b1c33b",
-      "sum": "xEFMv4+ObwP5L1Wu0XK5agWci4AJzNApys6iKAQxLlQ="
+      "sum": "Mv7PXBWqXmvN6LDLRlQB+mfLZ62kQkRH8wN32hLypGc="
     }
   ],
   "legacyImports": false
