@@ -55,7 +55,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "GCs",
+                  "title": "GCs [count/s]",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -130,7 +130,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Go Heap",
+                  "title": "Go Heap In Use",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -280,7 +280,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "CPU",
+                  "title": "CPU Usage [time/s]",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -355,7 +355,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "WSS",
+                  "title": "Working Set Size",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -371,7 +371,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "short",
+                        "format": "decbytes",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -430,7 +430,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Bad Words",
+                  "title": "Promtail Bad Words",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -517,7 +517,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "RX by Pod",
+                  "title": "Received Bytes [B/s]",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -533,7 +533,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "short",
+                        "format": "Bps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -592,7 +592,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "TX by Pod",
+                  "title": "Transmitted Bytes [B/s]",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -608,7 +608,7 @@
                   },
                   "yaxes": [
                      {
-                        "format": "short",
+                        "format": "Bps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
@@ -679,7 +679,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Bytes/Series/Pod",
+                  "title": "Heap Used per Series per Pod",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -754,7 +754,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Bytes/Series",
+                  "title": "Avg Heap Used per Series",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -829,7 +829,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Series/Pod",
+                  "title": "Series Count per Pod",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -904,7 +904,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Series/Config",
+                  "title": "Series per Config",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -979,7 +979,7 @@
                   "thresholds": [ ],
                   "timeFrom": null,
                   "timeShift": null,
-                  "title": "Series",
+                  "title": "Total Series",
                   "tooltip": {
                      "shared": true,
                      "sort": 2,
@@ -1080,7 +1080,7 @@
                "multi": true,
                "name": "namespace",
                "options": [ ],
-               "query": "label_values(agent_build_info, namespace)",
+               "query": "label_values(agent_build_info{cluster=~\"$cluster\"}, namespace)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -1104,7 +1104,7 @@
                "multi": true,
                "name": "container",
                "options": [ ],
-               "query": "label_values(agent_build_info, container)",
+               "query": "label_values(agent_build_info{cluster=~\"$cluster\", namespace=\"$namespace\"}, container)",
                "refresh": 1,
                "regex": "",
                "sort": 2,
@@ -1115,7 +1115,7 @@
                "useTags": false
             },
             {
-               "allValue": "grafana-agent-.*",
+               "allValue": ".+",
                "current": {
                   "selected": true,
                   "text": "All",
@@ -1128,7 +1128,7 @@
                "multi": true,
                "name": "pod",
                "options": [ ],
-               "query": "label_values(agent_build_info{container=~\"$container\", namespace=\"$namespace\"}, pod)",
+               "query": "label_values(agent_build_info{cluster=~\"$cluster\", namespace=\"$namespace\", container=\"$container\"}, pod)",
                "refresh": 1,
                "regex": "",
                "sort": 2,

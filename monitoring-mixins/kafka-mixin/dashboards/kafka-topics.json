@@ -69,7 +69,7 @@
             "steppedLine": false,
             "targets": [
                {
-                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_messagesinpersec{job=~\"$job\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
+                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_messagesinpersec{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
                   "interval": "",
                   "legendFormat": "{{topic}}",
                   "refId": "A"
@@ -165,7 +165,7 @@
             "steppedLine": false,
             "targets": [
                {
-                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_bytesinpersec{job=~\"$job\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
+                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_bytesinpersec{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
                   "interval": "",
                   "legendFormat": "{{topic}}",
                   "refId": "A"
@@ -262,7 +262,7 @@
             "steppedLine": false,
             "targets": [
                {
-                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_bytesoutpersec{job=~\"$job\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
+                  "expr": "sum without(instance) (rate(kafka_server_brokertopicmetrics_bytesoutpersec{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",topic=~\"$topic\"}[$__rate_interval]))",
                   "interval": "",
                   "legendFormat": "{{topic}}",
                   "refId": "A"
@@ -379,7 +379,7 @@
             "pluginVersion": "7.5.6",
             "targets": [
                {
-                  "expr": "kafka_log_log_logstartoffset{job=~\"$job\",instance=~\"$instance\",topic=~\"$topic\"}",
+                  "expr": "kafka_log_log_logstartoffset{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",topic=~\"$topic\"}",
                   "format": "table",
                   "instant": true,
                   "interval": "",
@@ -489,7 +489,7 @@
             "pluginVersion": "7.5.6",
             "targets": [
                {
-                  "expr": "kafka_log_log_logendoffset{job=~\"$job\",instance=~\"$instance\",topic=~\"$topic\"}",
+                  "expr": "kafka_log_log_logendoffset{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",topic=~\"$topic\"}",
                   "format": "table",
                   "instant": true,
                   "interval": "",
@@ -537,80 +537,61 @@
       "templating": {
          "list": [
             {
-               "current": { },
-               "description": null,
-               "error": null,
-               "hide": 0,
-               "includeAll": false,
-               "label": "Data Source",
-               "multi": false,
+               "label": "Data source",
                "name": "datasource",
-               "options": [ ],
                "query": "prometheus",
-               "refresh": 1,
-               "regex": "",
-               "skipUrlSync": false,
                "type": "datasource"
             },
             {
                "allValue": ".+",
-               "current": { },
-               "datasource": "$datasource",
-               "definition": "label_values(kafka_log_log_size, job)",
-               "description": null,
-               "error": null,
-               "hide": 0,
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
                "includeAll": true,
-               "label": "job",
+               "label": "Job",
                "multi": true,
                "name": "job",
-               "options": [ ],
-               "query": {
-                  "query": "label_values(kafka_log_log_size, job)",
-                  "refId": "StandardVariableQuery"
-               },
+               "query": "label_values(kafka_log_log_size{job=\"integrations/kafka\"}, job)",
                "refresh": 2,
-               "regex": "",
-               "skipUrlSync": false,
-               "sort": 0,
-               "tagValuesQuery": "",
-               "tags": [ ],
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "sort": 1,
+               "type": "query"
             },
             {
                "allValue": ".+",
-               "current": { },
-               "datasource": "${datasource}",
-               "definition": "label_values(kafka_log_log_size{job=~\"$job\"},instance)",
-               "description": null,
-               "error": null,
-               "hide": 0,
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
                "includeAll": true,
-               "label": "instance",
+               "label": "Kafka_cluster",
+               "multi": true,
+               "name": "kafka_cluster",
+               "query": "label_values(kafka_log_log_size{job=\"integrations/kafka\",job=~\"$job\"}, kafka_cluster)",
+               "refresh": 2,
+               "sort": 1,
+               "type": "query"
+            },
+            {
+               "allValue": ".+",
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
+               "includeAll": true,
+               "label": "Instance",
                "multi": true,
                "name": "instance",
-               "options": [ ],
-               "query": {
-                  "query": "label_values(kafka_log_log_size{job=~\"$job\"},instance)",
-                  "refId": "Cortex-instance-Variable-Query"
-               },
-               "refresh": 1,
-               "regex": "",
-               "skipUrlSync": false,
-               "sort": 0,
-               "tagValuesQuery": "",
-               "tags": [ ],
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "query": "label_values(kafka_log_log_size{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\"}, instance)",
+               "refresh": 2,
+               "sort": 1,
+               "type": "query"
             },
             {
                "allValue": ".+",
                "current": { },
                "datasource": "${datasource}",
-               "definition": "label_values(kafka_log_log_size{job=~\"$job\"},topic)",
+               "definition": "label_values(kafka_log_log_size{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"},topic)",
                "description": null,
                "error": null,
                "hide": 0,
@@ -620,10 +601,10 @@
                "name": "topic",
                "options": [ ],
                "query": {
-                  "query": "label_values(kafka_log_log_size{job=~\"$job\"},topic)",
+                  "query": "label_values(kafka_log_log_size{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"},topic)",
                   "refId": "StandardVariableQuery"
                },
-               "refresh": 1,
+               "refresh": 2,
                "regex": "",
                "skipUrlSync": false,
                "sort": 0,

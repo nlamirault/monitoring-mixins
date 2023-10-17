@@ -46,7 +46,7 @@
                {
                   "datasource": {
                      "type": "prometheus",
-                     "uid": "PC7A11E9A55DE2B14"
+                     "uid": "${datasource}"
                   },
                   "refId": "A"
                }
@@ -128,7 +128,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "# kafka operator case\ncount(zookeeper_quorumsize{instance=~\"$instance\",job=~\"$job\"})\n# kafka grafana cloud integration case\nor count(zookeeper_status_quorumsize{instance=~\"$instance\",job=~\"$job\"})\n# or single instance case (non-cluster)\nor count(up{instance=~\"$instance\",job=~\"$job\"} == 1)",
+                  "expr": "# kafka operator case\ncount(zookeeper_quorumsize{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"})\n# kafka grafana cloud integration case\nor count(zookeeper_status_quorumsize{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"})\n# or single instance case (non-cluster)\nor count(up{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"} == 1)",
                   "interval": "",
                   "legendFormat": "",
                   "range": true,
@@ -212,7 +212,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "sum(zookeeper_numaliveconnections{instance=~\"$instance\",job=~\"$job\"})",
+                  "expr": "sum(zookeeper_numaliveconnections{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"})",
                   "interval": "",
                   "legendFormat": "",
                   "range": true,
@@ -315,9 +315,9 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "zookeeper_outstandingrequests{instance=~\"$instance\",job=~\"$job\"}",
+                  "expr": "zookeeper_outstandingrequests{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}",
                   "interval": "",
-                  "legendFormat": "{{server_name}}:({{instance}})",
+                  "legendFormat": "{{server_name}}/{{instance}}",
                   "range": true,
                   "refId": "A"
                }
@@ -393,7 +393,7 @@
                      "uid": "${datasource}"
                   },
                   "exemplar": true,
-                  "expr": "avg(zookeeper_inmemorydatatree_nodecount{instance=~\"$instance\",job=~\"$job\"})",
+                  "expr": "avg(zookeeper_inmemorydatatree_nodecount{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"})",
                   "interval": "",
                   "legendFormat": "",
                   "refId": "A"
@@ -474,7 +474,7 @@
                      "uid": "${datasource}"
                   },
                   "exemplar": true,
-                  "expr": "sum(zookeeper_inmemorydatatree_watchcount{instance=~\"$instance\",job=~\"$job\"})",
+                  "expr": "sum(zookeeper_inmemorydatatree_watchcount{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"})",
                   "interval": "",
                   "legendFormat": "",
                   "refId": "A"
@@ -486,7 +486,7 @@
          {
             "datasource": {
                "type": "prometheus",
-               "uid": "PC7A11E9A55DE2B14"
+               "uid": "${datasource}"
             },
             "gridPos": {
                "h": 1,
@@ -499,7 +499,7 @@
                {
                   "datasource": {
                      "type": "prometheus",
-                     "uid": "PC7A11E9A55DE2B14"
+                     "uid": "${datasource}"
                   },
                   "refId": "A"
                }
@@ -598,7 +598,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "# for strimzi operator: remove kafka container java metrics \nirate(process_cpu_seconds_total{job=~\"$job\",instance=~\"$instance\", container!=\"kafka\"}[$__rate_interval])*100",
+                  "expr": "# for strimzi operator: remove kafka container java metrics \nirate(process_cpu_seconds_total{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", container!=\"kafka\"}[$__rate_interval])*100",
                   "interval": "",
                   "legendFormat": "{{instance}}",
                   "range": true,
@@ -700,7 +700,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "sum without(area)(jvm_memory_bytes_used{job=~\"$job\",instance=~\"$instance\", container!=\"kafka\"})",
+                  "expr": "sum without(area)(jvm_memory_bytes_used{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", container!=\"kafka\"})",
                   "interval": "",
                   "legendFormat": "Used:{{instance}}",
                   "range": true,
@@ -712,7 +712,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "jvm_memory_bytes_max{job=~\"$job\",instance=~\"$instance\",area=\"heap\", container!=\"kafka\"}",
+                  "expr": "jvm_memory_bytes_max{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\",area=\"heap\", container!=\"kafka\"}",
                   "interval": "",
                   "legendFormat": "Max:{{instance}}",
                   "range": true,
@@ -815,7 +815,7 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "# for strimzi operator: remove kafka container java metrics\nsum without(gc)(rate(jvm_gc_collection_seconds_sum{job=~\"$job\",instance=~\"$instance\", container!=\"kafka\" }[$__rate_interval]))",
+                  "expr": "# for strimzi operator: remove kafka container java metrics\nsum without(gc)(rate(jvm_gc_collection_seconds_sum{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", container!=\"kafka\" }[$__rate_interval]))",
                   "interval": "",
                   "legendFormat": "{{instance}}",
                   "range": true,
@@ -829,7 +829,7 @@
             "collapsed": false,
             "datasource": {
                "type": "prometheus",
-               "uid": "PC7A11E9A55DE2B14"
+               "uid": "${datasource}"
             },
             "gridPos": {
                "h": 1,
@@ -843,7 +843,7 @@
                {
                   "datasource": {
                      "type": "prometheus",
-                     "uid": "PC7A11E9A55DE2B14"
+                     "uid": "${datasource}"
                   },
                   "refId": "A"
                }
@@ -940,9 +940,9 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "zookeeper_minrequestlatency{instance=~\"$instance\",job=~\"$job\"} * ignoring (minrequestlatency,ticktime)zookeeper_ticktime{job=~\"$job\",instance=~\"$instance\"}",
+                  "expr": "zookeeper_minrequestlatency{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"} * ignoring (minrequestlatency,ticktime)zookeeper_ticktime{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}",
                   "interval": "",
-                  "legendFormat": "{{server_name}}:({{instance}})",
+                  "legendFormat": "{{server_name}}:{{instance}}",
                   "range": true,
                   "refId": "A"
                }
@@ -1039,9 +1039,9 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "zookeeper_avgrequestlatency{instance=~\"$instance\",job=~\"$job\"} * ignoring (avgrequestlatency,ticktime) zookeeper_ticktime{instance=~\"$instance\",job=~\"$job\"}",
+                  "expr": "zookeeper_avgrequestlatency{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"} * ignoring (avgrequestlatency,ticktime) zookeeper_ticktime{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}",
                   "interval": "",
-                  "legendFormat": "{{server_name}}:({{instance}})",
+                  "legendFormat": "{{server_name}}:{{instance}}",
                   "range": true,
                   "refId": "A"
                }
@@ -1137,9 +1137,9 @@
                   },
                   "editorMode": "code",
                   "exemplar": true,
-                  "expr": "zookeeper_maxrequestlatency{job=~\"$job\",instance=~\"$instance\"} * ignoring (maxrequestlatency,ticktime)\n zookeeper_ticktime{job=~\"$job\",instance=~\"$instance\"}",
+                  "expr": "zookeeper_maxrequestlatency{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"} * ignoring (maxrequestlatency,ticktime)\n zookeeper_ticktime{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}",
                   "interval": "",
-                  "legendFormat": "{{server_name}}:({{instance}})",
+                  "legendFormat": "{{server_name}}:{{instance}}",
                   "range": true,
                   "refId": "A"
                }
@@ -1158,76 +1158,55 @@
       "templating": {
          "list": [
             {
-               "hide": 0,
-               "includeAll": false,
-               "label": "Data Source",
-               "multi": false,
+               "label": "Data source",
                "name": "datasource",
-               "options": [ ],
                "query": "prometheus",
-               "refresh": 1,
-               "regex": ".+",
-               "skipUrlSync": false,
                "type": "datasource"
             },
             {
                "allValue": ".+",
                "datasource": {
-                  "uid": "$datasource"
+                  "type": "prometheus",
+                  "uid": "${datasource}"
                },
-               "definition": "label_values(zookeeper_outstandingrequests, job)",
-               "hide": 0,
-               "includeAll": false,
-               "label": "job",
+               "includeAll": true,
+               "label": "Job",
                "multi": true,
                "name": "job",
-               "options": [ ],
-               "query": {
-                  "query": "label_values(zookeeper_outstandingrequests, job)",
-                  "refId": "StandardVariableQuery"
-               },
+               "query": "label_values(zookeeper_outstandingrequests{job=~\"integrations/kafka-zookeeper|integrations/kafka\"}, job)",
                "refresh": 2,
-               "regex": "",
-               "skipUrlSync": false,
-               "sort": 0,
-               "tagValuesQuery": "",
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "sort": 1,
+               "type": "query"
             },
             {
                "allValue": ".+",
-               "current": {
-                  "selected": true,
-                  "text": [
-                     "All"
-                  ],
-                  "value": [
-                     "$__all"
-                  ]
-               },
                "datasource": {
+                  "type": "prometheus",
                   "uid": "${datasource}"
                },
-               "definition": "label_values(zookeeper_outstandingrequests{job=~\"$job\"},instance)",
-               "hide": 0,
                "includeAll": true,
-               "label": "instance",
+               "label": "Kafka_cluster",
+               "multi": true,
+               "name": "kafka_cluster",
+               "query": "label_values(zookeeper_outstandingrequests{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\"}, kafka_cluster)",
+               "refresh": 2,
+               "sort": 1,
+               "type": "query"
+            },
+            {
+               "allValue": ".+",
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+               },
+               "includeAll": true,
+               "label": "Instance",
                "multi": true,
                "name": "instance",
-               "options": [ ],
-               "query": {
-                  "query": "label_values(zookeeper_outstandingrequests{job=~\"$job\"},instance)",
-                  "refId": "StandardVariableQuery"
-               },
-               "refresh": 1,
-               "regex": "",
-               "skipUrlSync": false,
-               "sort": 0,
-               "tagValuesQuery": "",
-               "tagsQuery": "",
-               "type": "query",
-               "useTags": false
+               "query": "label_values(zookeeper_outstandingrequests{job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\"}, instance)",
+               "refresh": 2,
+               "sort": 1,
+               "type": "query"
             }
          ]
       },

@@ -8,8 +8,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "ef364ae521bbb2304f23845e36182a908e295789",
-      "sum": "RJjFQa1n8CDbB6m1fBQQzPye7jhOhGTUbma27Gil81I="
+      "version": "83dbb0480412d92a27c65e3a4461efa690f7263d",
+      "sum": "xEFMv4+ObwP5L1Wu0XK5agWci4AJzNApys6iKAQxLlQ="
     },
     {
       "source": {
@@ -18,7 +18,7 @@
           "subdir": "monitoring/jaeger-mixin"
         }
       },
-      "version": "da7a5abb484eccf7f8918d7b875430b337e39cd1",
+      "version": "30b2a570773f0d0cc911732727df5dadc3293249",
       "sum": "vRZZ2TlJleadwIOx+ui/uaieDL4Em0H1dQt0AOVI7Y4="
     }
   ],

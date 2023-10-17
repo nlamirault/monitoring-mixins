@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.4.0"
+               "monitoring-mixins-1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -130,80 +130,38 @@
                   ]
                },
                {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
                   "datasource": "$datasource",
-                  "description": "### Tenants compaction progress\nIn a multi-tenant cluster, display the progress of tenants that are compacted while compaction is running.\nReset to <tt>0</tt> after the compaction run is completed for all tenants in the shard.\n\n",
-                  "fill": 1,
-                  "id": 2,
-                  "legend": {
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "show": true,
-                     "total": false,
-                     "values": false
+                  "description": "### Tenants compaction progress\nIn a multi-tenant cluster, display the progress of tenants that are compacted while compaction is running.\n\n",
+                  "fieldConfig": {
+                     "defaults": {
+                        "max": 1,
+                        "noValue": 1,
+                        "unit": "percentunit"
+                     }
                   },
-                  "lines": true,
-                  "linewidth": 1,
+                  "id": 2,
                   "links": [ ],
-                  "nullPointMode": "null as zero",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
+                  "options": {
+                     "legend": {
+                        "showLegend": true
+                     },
+                     "tooltip": {
+                        "mode": "single",
+                        "sort": "none"
+                     }
+                  },
                   "span": 3,
-                  "stack": false,
-                  "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "(\n  cortex_compactor_tenants_processing_succeeded{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"} +\n  cortex_compactor_tenants_processing_failed{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"} +\n  cortex_compactor_tenants_skipped{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"}\n)\n/\ncortex_compactor_tenants_discovered{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"}\n",
+                        "expr": "(\n  cortex_compactor_tenants_processing_succeeded{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"} +\n  cortex_compactor_tenants_processing_failed{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"} +\n  cortex_compactor_tenants_skipped{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"}\n)\n/\ncortex_compactor_tenants_discovered{cluster=~\"$cluster\", job=~\"($namespace)/((compactor.*|cortex|mimir|mimir-backend.*))\"} > 0\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
                   ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
                   "title": "Tenants compaction progress",
-                  "tooltip": {
-                     "shared": false,
-                     "sort": 0,
-                     "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "percentunit",
-                        "label": null,
-                        "logBase": 1,
-                        "max": 1,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": false
-                     }
-                  ]
+                  "type": "timeseries"
                },
                {
                   "aliasColors": { },
@@ -1439,79 +1397,38 @@
                   ]
                },
                {
-                  "aliasColors": { },
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
                   "datasource": "$datasource",
-                  "fill": 1,
-                  "id": 14,
-                  "legend": {
-                     "avg": false,
-                     "current": false,
-                     "max": false,
-                     "min": false,
-                     "show": true,
-                     "total": false,
-                     "values": false
+                  "fieldConfig": {
+                     "defaults": {
+                        "max": 1,
+                        "min": 0,
+                        "noValue": "0",
+                        "unit": "percentunit"
+                     }
                   },
-                  "lines": true,
-                  "linewidth": 1,
+                  "id": 14,
                   "links": [ ],
-                  "nullPointMode": "null as zero",
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [ ],
-                  "spaceLength": 10,
+                  "options": {
+                     "legend": {
+                        "showLegend": true
+                     },
+                     "tooltip": {
+                        "mode": "single",
+                        "sort": "none"
+                     }
+                  },
                   "span": 3,
-                  "stack": false,
-                  "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by(operation) (rate(thanos_objstore_bucket_operation_failures_total{cluster=~\"$cluster\", namespace=~\"$namespace\",component=\"compactor\"}[$__rate_interval])) / sum by(operation) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\",component=\"compactor\"}[$__rate_interval]))",
+                        "expr": "sum by(operation) (rate(thanos_objstore_bucket_operation_failures_total{cluster=~\"$cluster\", namespace=~\"$namespace\",component=\"compactor\"}[$__rate_interval])) / sum by(operation) (rate(thanos_objstore_bucket_operations_total{cluster=~\"$cluster\", namespace=~\"$namespace\",component=\"compactor\"}[$__rate_interval])) >= 0",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{operation}}",
                         "legendLink": null
                      }
                   ],
-                  "thresholds": [ ],
-                  "timeFrom": null,
-                  "timeShift": null,
                   "title": "Error rate",
-                  "tooltip": {
-                     "shared": false,
-                     "sort": 0,
-                     "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                     "buckets": null,
-                     "mode": "time",
-                     "name": null,
-                     "show": true,
-                     "values": [ ]
-                  },
-                  "yaxes": [
-                     {
-                        "format": "percentunit",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": 0,
-                        "show": true
-                     },
-                     {
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": false
-                     }
-                  ]
+                  "type": "timeseries"
                },
                {
                   "aliasColors": { },
@@ -2257,7 +2174,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.4.0"
+         "monitoring-mixins-1.4.0"
       ],
       "templating": {
          "list": [

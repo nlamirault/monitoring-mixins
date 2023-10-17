@@ -1,3 +1,17 @@
+# Copyright (C) 2021 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -99,14 +113,14 @@ spec:
         rules:
           - expr: |
               (
-                sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="unary"}[5m]))
+                sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="unary"}[5m]))
               /
                 sum by (job) (rate(grpc_server_started_total{job=~".*thanos-store.*", grpc_type="unary"}[5m]))
               )
             record: :grpc_server_failures_per_unary:sum_rate
           - expr: |
               (
-                sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="server_stream"}[5m]))
+                sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="server_stream"}[5m]))
               /
                 sum by (job) (rate(grpc_server_started_total{job=~".*thanos-store.*", grpc_type="server_stream"}[5m]))
               )

@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.4.0"
+               "monitoring-mixins-1.4.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -266,7 +266,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:cortex_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/((ruler-query-frontend.*))\", route=~\"/httpgrpc.HTTP/Handle|.*api_v1_query\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "99th Percentile",
+                        "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -274,7 +274,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:cortex_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/((ruler-query-frontend.*))\", route=~\"/httpgrpc.HTTP/Handle|.*api_v1_query\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "50th Percentile",
+                        "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -689,7 +689,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le) (cluster_job_route:cortex_querier_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/((ruler-querier.*))\", route=~\"(prometheus|api_prom)_api_v1_.+\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "99th Percentile",
+                        "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -697,7 +697,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le) (cluster_job_route:cortex_querier_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/((ruler-querier.*))\", route=~\"(prometheus|api_prom)_api_v1_.+\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "50th Percentile",
+                        "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -809,7 +809,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.4.0"
+         "monitoring-mixins-1.4.0"
       ],
       "templating": {
          "list": [

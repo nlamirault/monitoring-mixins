@@ -16,10 +16,10 @@
 
 set -euo pipefail
 
-reset_color="\\e[0m"
-color_red="\\e[31m"
-color_green="\\e[32m"
-color_blue="\\e[36m";
+reset_color="\\x1B[0m"
+color_red="\\x1B[0;31m"
+color_green="\\x1B[0;32m"
+color_blue="\\x1B[0;36m";
 
 function echo_fail { echo -e "${color_red}✖ $*${reset_color}"; }
 function echo_success { echo -e "${color_green}✔ $*${reset_color}"; }

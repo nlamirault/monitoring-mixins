@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "phlare-mixin",
-               "monitoring-mixins-v1.4.0"
+               "monitoring-mixins-1.4.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -62,7 +62,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{ type }} 99th Percentile",
+                        "legendFormat": "{{ type }} 99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -70,7 +70,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{ type }} 50th Percentile",
+                        "legendFormat": "{{ type }} 50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -154,7 +154,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{ type }} 99th Percentile",
+                        "legendFormat": "{{ type }} 99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -162,7 +162,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "{{ type }} 50th Percentile",
+                        "legendFormat": "{{ type }} 50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -342,7 +342,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "99th Percentile",
+                        "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -350,7 +350,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "50th Percentile",
+                        "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -530,7 +530,7 @@
                         "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "99th Percentile",
+                        "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
                      },
@@ -538,7 +538,7 @@
                         "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(phlare|ingester)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "intervalFactor": 2,
-                        "legendFormat": "50th Percentile",
+                        "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
                      },
@@ -764,7 +764,7 @@
       "style": "dark",
       "tags": [
          "phlare-mixin",
-         "monitoring-mixins-v1.4.0"
+         "monitoring-mixins-1.4.0"
       ],
       "templating": {
          "list": [
