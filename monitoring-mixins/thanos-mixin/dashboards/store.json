@@ -2729,7 +2729,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-1.4.0"
+         "monitoring-mixins-v1.4.0"
       ],
       "templating": {
          "list": [
