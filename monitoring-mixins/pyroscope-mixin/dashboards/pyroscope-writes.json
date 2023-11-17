@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "pyroscope-mixin",
-               "monitoring-mixins-v1.4.0"
+               "monitoring-mixins-v1.5.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -230,6 +230,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "OK": "#7EB26D",
                      "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
@@ -264,7 +265,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
@@ -418,6 +419,7 @@
                      "3xx": "#6ED0E0",
                      "4xx": "#EF843C",
                      "5xx": "#E24D42",
+                     "OK": "#7EB26D",
                      "cancel": "#A9A9A9",
                      "error": "#E24D42",
                      "success": "#7EB26D"
@@ -452,7 +454,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-z]+)\"))\n",
+                        "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{status}}",
@@ -764,7 +766,7 @@
       "style": "dark",
       "tags": [
          "pyroscope-mixin",
-         "monitoring-mixins-v1.4.0"
+         "monitoring-mixins-v1.5.0"
       ],
       "templating": {
          "list": [
