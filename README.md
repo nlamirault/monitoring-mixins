@@ -44,11 +44,11 @@ Generate a mixin:
 | mimir-mixin | https://github.com/grafana/mimir.git - `mimir-2.9.0` <br> |
 | minio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | nginx-ingress-controller-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
-| node-exporter-mixin | https://github.com/prometheus/node_exporter.git - `v1.6.1` <br> |
+| node-exporter-mixin | https://github.com/prometheus/node_exporter.git - `v1.7.0` <br> |
 | osm-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | phlare-mixin | https://github.com/grafana/phlare.git - `v0.6.1` <br> |
 | postgres-mixin | https://github.com/prometheus-community/postgres_exporter.git - `v0.15.0` <br> |
-| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.47.2` <br> |
+| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.48.0` <br> |
 | prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.69.1` <br> |
 | promtail-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v2.9.2` <br> https://github.com/grafana/loki.git - `v2.9.2` <br> |
 | pyroscope-mixin | https://github.com/grafana/pyroscope.git - `v1.2.0` <br> |
