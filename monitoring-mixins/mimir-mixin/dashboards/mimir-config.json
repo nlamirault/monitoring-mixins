@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.6.0"
+               "monitoring-mixins-v1.7.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -69,7 +69,6 @@
                      {
                         "expr": "count(cortex_config_hash{cluster=~\"$cluster\", namespace=~\"$namespace\"}) by (sha256)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "sha256:{{sha256}}",
                         "legendLink": null
                      }
@@ -156,7 +155,6 @@
                      {
                         "expr": "count(cortex_runtime_config_hash{cluster=~\"$cluster\", namespace=~\"$namespace\"}) by (sha256)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "sha256:{{sha256}}",
                         "legendLink": null
                      }
@@ -210,7 +208,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -220,7 +218,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

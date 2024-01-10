@@ -47,7 +47,6 @@
                      {
                         "expr": "sum by (job, rule_group, strategy) (rate(prometheus_rule_evaluations_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ rule_group }} {{ strategy }}",
                         "legendLink": null
                      }
@@ -122,7 +121,6 @@
                      {
                         "expr": "sum by (job, rule_group, strategy) (rate(prometheus_rule_evaluation_failures_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ rule_group }} {{ strategy }}",
                         "legendLink": null
                      }
@@ -197,7 +195,6 @@
                      {
                         "expr": "sum by (job, rule_group, strategy) (increase(prometheus_rule_group_iterations_missed_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ rule_group }} {{ strategy }}",
                         "legendLink": null
                      }
@@ -272,7 +269,6 @@
                      {
                         "expr": "(\n  sum by(job, rule_group) (prometheus_rule_group_last_duration_seconds{job=~\"$job\"})\n  >\n  sum by(job, rule_group) (prometheus_rule_group_interval_seconds{job=~\"$job\"})\n)\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ rule_group }}",
                         "legendLink": null
                      }
@@ -360,7 +356,6 @@
                      {
                         "expr": "sum by (job, alertmanager) (rate(thanos_alert_sender_alerts_dropped_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{alertmanager}}",
                         "legendLink": null
                      }
@@ -436,7 +431,6 @@
                      {
                         "expr": "sum by (job, alertmanager) (rate(thanos_alert_sender_alerts_sent_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{alertmanager}}",
                         "legendLink": null
                      }
@@ -720,7 +714,6 @@
                      {
                         "expr": "sum by (job) (rate(thanos_alert_queue_alerts_dropped_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}}",
                         "legendLink": null
                      }
@@ -1597,42 +1590,36 @@
                      {
                         "expr": "go_memstats_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse stack {{instance}}",
                         "legendLink": null
                      }
@@ -1707,7 +1694,6 @@
                      {
                         "expr": "go_goroutines{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -1782,7 +1768,6 @@
                      {
                         "expr": "go_gc_duration_seconds{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{quantile}} {{instance}}",
                         "legendLink": null
                      }
@@ -1836,7 +1821,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -1846,7 +1831,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

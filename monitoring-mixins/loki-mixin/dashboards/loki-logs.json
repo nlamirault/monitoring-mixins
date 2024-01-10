@@ -15,7 +15,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.6.0"
+               "monitoring-mixins-v1.7.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -853,7 +853,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -863,7 +863,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

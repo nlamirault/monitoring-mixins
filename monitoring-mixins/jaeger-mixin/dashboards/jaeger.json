@@ -134,7 +134,6 @@
                      {
                         "expr": "sum(rate(jaeger_tracer_reporter_spans_total{result=~\"dropped|err\"}[1m])) by (namespace) / sum(rate(jaeger_tracer_reporter_spans_total[1m])) by (namespace)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{namespace}}",
                         "legendLink": null
                      }
@@ -308,7 +307,6 @@
                      {
                         "expr": "sum(rate(jaeger_agent_reporter_batches_failures_total[1m])) by (cluster) / sum(rate(jaeger_agent_reporter_batches_submitted_total[1m])) by (cluster)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{cluster}}",
                         "legendLink": null
                      }
@@ -482,7 +480,6 @@
                      {
                         "expr": "sum(rate(jaeger_collector_spans_dropped_total[1m])) by (instance) / sum(rate(jaeger_collector_spans_received_total[1m])) by (instance)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -569,7 +566,6 @@
                      {
                         "expr": "jaeger_collector_queue_length",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -644,7 +640,6 @@
                      {
                         "expr": "histogram_quantile(0.95, sum(rate(jaeger_collector_in_queue_latency_bucket[1m])) by (le, instance))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -818,7 +813,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(jaeger_query_latency_bucket[1m])) by (le, instance))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -879,7 +873,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

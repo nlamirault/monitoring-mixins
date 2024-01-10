@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.6.0"
+               "monitoring-mixins-v1.7.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -205,7 +205,6 @@
                         "expr": "sort_desc(\n  cluster_namespace_deployment_reason:required_replicas:count{cluster=~\"$cluster\", namespace=~\"$namespace\"}\n    > ignoring(reason) group_left\n  cluster_namespace_deployment:actual_replicas:count{cluster=~\"$cluster\", namespace=~\"$namespace\"}\n)\n",
                         "format": "table",
                         "instant": true,
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "refId": "A"
                      }
@@ -260,7 +259,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -270,7 +269,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

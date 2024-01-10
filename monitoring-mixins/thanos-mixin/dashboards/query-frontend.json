@@ -449,7 +449,6 @@
                      {
                         "expr": "sum by (job, tripperware) (rate(cortex_cache_request_duration_seconds_count{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
                         "legendLink": null
                      }
@@ -525,14 +524,12 @@
                      {
                         "expr": "sum by (job, tripperware) (rate(querier_cache_gets_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Cache gets - {{job}} {{tripperware}}",
                         "legendLink": null
                      },
                      {
                         "expr": "sum by (job, tripperware) (rate(querier_cache_misses_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Cache misses - {{job}} {{tripperware}}",
                         "legendLink": null
                      }
@@ -608,7 +605,6 @@
                      {
                         "expr": "sum by (job, tripperware) (rate(cortex_cache_fetched_keys_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
                         "legendLink": null
                      }
@@ -684,7 +680,6 @@
                      {
                         "expr": "sum by (job, tripperware) (rate(cortex_cache_hits_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} {{tripperware}}",
                         "legendLink": null
                      }
@@ -771,42 +766,36 @@
                      {
                         "expr": "go_memstats_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse stack {{instance}}",
                         "legendLink": null
                      }
@@ -881,7 +870,6 @@
                      {
                         "expr": "go_goroutines{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -956,7 +944,6 @@
                      {
                         "expr": "go_gc_duration_seconds{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{quantile}} {{instance}}",
                         "legendLink": null
                      }
@@ -1010,7 +997,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -1020,7 +1007,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

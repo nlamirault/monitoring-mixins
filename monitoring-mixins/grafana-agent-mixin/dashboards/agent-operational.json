@@ -47,7 +47,6 @@
                      {
                         "expr": "rate(go_gc_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}[5m])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -122,7 +121,6 @@
                      {
                         "expr": "go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -197,7 +195,6 @@
                      {
                         "expr": "go_goroutines{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -272,7 +269,6 @@
                      {
                         "expr": "rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}[5m])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -347,7 +343,6 @@
                      {
                         "expr": "container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -422,7 +417,6 @@
                      {
                         "expr": "rate(promtail_custom_bad_words_total{cluster=~\"$cluster\", exported_namespace=~\"$namespace\", exported_job=~\"$job\"}[5m])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}}",
                         "legendLink": null
                      }
@@ -509,7 +503,6 @@
                      {
                         "expr": "sum by (pod) (rate(container_network_receive_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"$pod\"}[5m]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -584,7 +577,6 @@
                      {
                         "expr": "sum by (pod) (rate(container_network_transmit_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"$pod\"}[5m]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -671,7 +663,6 @@
                      {
                         "expr": "(sum by (pod) (avg_over_time(go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}[1m])))\n/\n(sum by (pod) (agent_wal_storage_active_series{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}))\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -746,7 +737,6 @@
                      {
                         "expr": "(sum by (container) (avg_over_time(go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}[1m])))\n/\n(sum by (container) (agent_wal_storage_active_series{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}))\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{container}}",
                         "legendLink": null
                      }
@@ -821,7 +811,6 @@
                      {
                         "expr": "sum by (pod) (agent_wal_storage_active_series{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      }
@@ -896,7 +885,6 @@
                      {
                         "expr": "sum by (instance_group_name) (agent_wal_storage_active_series{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance_group_name}}",
                         "legendLink": null
                      }
@@ -971,7 +959,6 @@
                      {
                         "expr": "sum by (container) (agent_wal_storage_active_series{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{container}}",
                         "legendLink": null
                      }
@@ -1034,7 +1021,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

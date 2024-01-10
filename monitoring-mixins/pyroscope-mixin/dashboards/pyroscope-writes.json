@@ -14,10 +14,10 @@
             "keepTime": true,
             "tags": [
                "pyroscope-mixin",
-               "monitoring-mixins-v1.6.0"
+               "monitoring-mixins-v1.7.0"
             ],
             "targetBlank": false,
-            "title": "Phlare Dashboards",
+            "title": "Pyroscope Dashboards",
             "type": "dashboards"
          }
       ],
@@ -61,7 +61,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} 99th percentile",
                         "refId": "A",
                         "step": 10
@@ -69,7 +68,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_compressed_bytes_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} 50th percentile",
                         "refId": "B",
                         "step": 10
@@ -77,7 +75,6 @@
                      {
                         "expr": "1 * sum(job_type_cluster:pyroscope_distributor_received_compressed_bytes_sum:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:pyroscope_distributor_received_compressed_bytes_count:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} Average",
                         "refId": "C",
                         "step": 10
@@ -153,7 +150,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} 99th percentile",
                         "refId": "A",
                         "step": 10
@@ -161,7 +157,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,type) (job_type_cluster:pyroscope_distributor_received_samples_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"})) * 1",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} 50th percentile",
                         "refId": "B",
                         "step": 10
@@ -169,7 +164,6 @@
                      {
                         "expr": "1 * sum(job_type_cluster:pyroscope_distributor_received_samples_sum:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type)  / sum(job_type_cluster:pyroscope_distributor_received_samples_count:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", type=~\".*\", cluster=~\"$cluster\"}) by (type) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{ type }} Average",
                         "refId": "C",
                         "step": 10
@@ -267,7 +261,6 @@
                      {
                         "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{status}}",
                         "refId": "A"
                      }
@@ -342,7 +335,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
@@ -350,7 +342,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
@@ -358,7 +349,6 @@
                      {
                         "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(pyroscope|distributor)\", route=~\".*push.*\", cluster=~\"$cluster\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
                         "step": 10
@@ -456,7 +446,6 @@
                      {
                         "expr": "sum by (status) (\n  label_replace(label_replace(rate(pyroscope_request_duration_seconds_count{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{status}}",
                         "refId": "A"
                      }
@@ -531,7 +520,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "99th percentile",
                         "refId": "A",
                         "step": 10
@@ -539,7 +527,6 @@
                      {
                         "expr": "histogram_quantile(0.50, sum by (le) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "50th percentile",
                         "refId": "B",
                         "step": 10
@@ -547,7 +534,6 @@
                      {
                         "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\", cluster=~\"$cluster\"}) / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*push.*|.*ingest.*\", cluster=~\"$cluster\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C",
                         "step": 10
@@ -636,7 +622,6 @@
                      {
                         "expr": "sum(pyroscope_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|ingester)\",}) by (type)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{type}}",
                         "legendLink": null
                      }
@@ -712,7 +697,6 @@
                      {
                         "expr": "sum(pyroscope_head_size_bytes{cluster=~\"$cluster\",job=~\"($namespace)/(pyroscope|ingester)\",}) by (instance)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -766,7 +750,7 @@
       "style": "dark",
       "tags": [
          "pyroscope-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -776,7 +760,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

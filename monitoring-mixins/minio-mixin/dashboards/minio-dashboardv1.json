@@ -54,7 +54,6 @@
                         "expr": "sum(disk_storage_used{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk) / sum(disk_storage_total{disk=~\"$disk\", job=~\"$job\", instance=~\"$instance\"}) by (disk)",
                         "format": "time_series",
                         "instant": true,
-                        "intervalFactor": 2,
                         "legendFormat": "{{disk}}",
                         "refId": "A"
                      }
@@ -132,7 +131,6 @@
                         "expr": "sum(minio_disks_total{instance=~\"$instance\", job=~\"$job\"}) > 0",
                         "format": "time_series",
                         "instant": true,
-                        "intervalFactor": 2,
                         "refId": "A"
                      }
                   ],
@@ -208,7 +206,6 @@
                         "expr": "sum(minio_disks_offline{instance=~\"$instance\", job=~\"$job\"})",
                         "format": "time_series",
                         "instant": true,
-                        "intervalFactor": 2,
                         "refId": "A"
                      }
                   ],
@@ -282,7 +279,6 @@
                      {
                         "expr": "s3_errors_total{instance=~\"$instance\", job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "legendLink": null
                      }
@@ -369,7 +365,6 @@
                      {
                         "expr": "disk_storage_used{disk=~\"$disk\",instance=~\"$instance\", job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "legendLink": null
                      }
@@ -444,7 +439,6 @@
                      {
                         "expr": "disk_storage_available{disk=~\"$disk\",instance=~\"$instance\", job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "legendLink": null
                      }
@@ -519,7 +513,6 @@
                      {
                         "expr": "disk_storage_total{disk=~\"$disk\",instance=~\"$instance\", job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "legendLink": null
                      }
@@ -606,7 +599,6 @@
                      {
                         "expr": "max(bucket_usage_size{instance=~\"$instance\", job=~\"$job\"}) by (bucket)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{bucket}}",
                         "legendLink": null
                      }
@@ -681,7 +673,6 @@
                      {
                         "expr": "max(bucket_objects_count{instance=~\"$instance\", job=~\"$job\"}) by (bucket)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{bucket}}",
                         "legendLink": null
                      }
@@ -756,7 +747,6 @@
                      {
                         "expr": "max(bucket_objects_histogram{instance=~\"$instance\", job=~\"$job\"}) by (bucket, object_size)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{bucket}}-{{object_size}}",
                         "legendLink": null
                      }
@@ -843,7 +833,6 @@
                      {
                         "expr": "sum(rate(s3_requests_total{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (api)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{api}}",
                         "legendLink": null
                      }
@@ -918,7 +907,6 @@
                      {
                         "expr": "sum(rate(s3_requests_total{api=~\"put.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (api)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{api}}",
                         "legendLink": null
                      }
@@ -993,7 +981,6 @@
                      {
                         "expr": "sum(rate(s3_requests_total{api=~\"delete.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (api)",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{api}}",
                         "legendLink": null
                      }
@@ -1080,21 +1067,18 @@
                      {
                         "expr": "histogram_quantile(0.99, sum(rate(s3_ttfb_seconds_bucket{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "99th Percentile",
                         "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum(rate(s3_ttfb_seconds_bucket{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1e3",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "50th Percentile",
                         "refId": "B"
                      },
                      {
                         "expr": "sum(rate(s3_ttfb_seconds_sum{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) * 1e3 / sum(rate(s3_ttfb_seconds_count{api=~\"get.*|list.*|head.*\",instance=~\"$instance\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Average",
                         "refId": "C"
                      }
@@ -1170,14 +1154,12 @@
                      {
                         "expr": "rate(internode_rx_bytes_total{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Inbound-{{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(internode_tx_bytes_total{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Outbound-{{instance}}",
                         "legendLink": null
                      }
@@ -1238,7 +1220,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",
