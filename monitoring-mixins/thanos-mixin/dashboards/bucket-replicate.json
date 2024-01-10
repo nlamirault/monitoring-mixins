@@ -125,7 +125,6 @@
                      {
                         "expr": "sum by (job, result) (rate(thanos_replicate_replication_runs_total{result=\"error\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{result}}",
                         "legendLink": null
                      }
@@ -330,35 +329,30 @@
                      {
                         "expr": "sum by (job) (rate(blocks_meta_synced{state=\"loaded\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "meta loads",
                         "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(blocks_meta_synced{state=\"failed\", job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "partial meta reads",
                         "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_blocks_already_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "already replicated blocks",
                         "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_blocks_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "replicated blocks",
                         "legendLink": null
                      },
                      {
                         "expr": "sum by (job) (rate(thanos_replicate_objects_replicated_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "replicated objects",
                         "legendLink": null
                      }
@@ -412,7 +406,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -422,7 +416,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

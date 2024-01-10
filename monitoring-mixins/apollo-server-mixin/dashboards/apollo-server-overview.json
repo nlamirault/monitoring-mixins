@@ -635,7 +635,7 @@
             "tableColumn": "version",
             "targets": [
                {
-                  "expr": "nodejs_version_info",
+                  "expr": "nodejs_version_info{job=~\"$job\", instance=~\"$instance\"}",
                   "format": "table",
                   "instant": true,
                   "legendFormat": "",
@@ -723,7 +723,7 @@
             "tableColumn": "version",
             "targets": [
                {
-                  "expr": "apollo_server_starting",
+                  "expr": "apollo_server_starting{job=~\"$job\", instance=~\"$instance\"}",
                   "format": "table",
                   "instant": true,
                   "legendFormat": "",
@@ -1633,7 +1633,7 @@
                "type": "datasource"
             },
             {
-               "allValue": null,
+               "allValue": ".+",
                "current": {
                   "text": "All",
                   "value": [
@@ -1644,7 +1644,7 @@
                "definition": "label_values(apollo_server_starting, job)",
                "hide": 0,
                "includeAll": true,
-               "label": "Job",
+               "label": "job",
                "multi": true,
                "name": "job",
                "options": [ ],
@@ -1660,7 +1660,7 @@
                "useTags": false
             },
             {
-               "allValue": null,
+               "allValue": ".+",
                "current": {
                   "text": "All",
                   "value": [
@@ -1671,7 +1671,7 @@
                "definition": "label_values(apollo_server_starting, instance)",
                "hide": 0,
                "includeAll": true,
-               "label": "Instance",
+               "label": "instance",
                "multi": true,
                "name": "instance",
                "options": [ ],

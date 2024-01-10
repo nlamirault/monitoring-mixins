@@ -246,7 +246,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(http_request_duration_seconds_bucket{handler=\"query\"}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -549,7 +548,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(http_request_duration_seconds_bucket{handler=\"query_range\"}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -904,7 +902,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(grpc_server_handling_seconds_bucket{grpc_type=\"unary\"}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -1259,7 +1256,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(grpc_server_handling_seconds_bucket{grpc_type=\"unary\"}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -1562,7 +1558,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(http_request_duration_seconds_bucket{handler=\"receive\"}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -1675,7 +1670,6 @@
                      {
                         "expr": "sum by (job, alertmanager) (rate(thanos_alert_sender_alerts_sent_total{}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{alertmanager}}",
                         "legendLink": null
                      }
@@ -1845,7 +1839,6 @@
                      {
                         "expr": "histogram_quantile(0.99, sum by (job, le) (rate(thanos_alert_sender_latency_seconds_bucket{}[$interval])))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{job}} P99",
                         "legendLink": null
                      }
@@ -1958,7 +1951,6 @@
                      {
                         "expr": "sum by (job) (rate(thanos_compact_group_compactions_total{}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "compaction {{job}}",
                         "legendLink": null
                      }
@@ -2098,7 +2090,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -2108,7 +2100,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

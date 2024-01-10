@@ -60,7 +60,6 @@
                      {
                         "expr": "sum(promtail_targets_active_total{cluster=~\"$cluster\", namespace=~\"$namespace\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Active Targets",
                         "legendLink": null
                      }
@@ -135,7 +134,6 @@
                      {
                         "expr": "sum(promtail_files_active_total{cluster=~\"$cluster\", namespace=~\"$namespace\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "Active Targets",
                         "legendLink": null
                      }
@@ -222,7 +220,6 @@
                      {
                         "expr": "sum(rate(promtail_read_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1m]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "logs read",
                         "legendLink": null
                      }
@@ -297,7 +294,6 @@
                      {
                         "expr": "sum(rate(promtail_read_lines_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1m]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "lines read",
                         "legendLink": null
                      }
@@ -394,7 +390,6 @@
                      {
                         "expr": "sum by (status) (\n  label_replace(label_replace(rate(promtail_request_duration_seconds_count{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]),\n  \"status\", \"${1}xx\", \"status_code\", \"([0-9])..\"),\n  \"status\", \"${1}\", \"status_code\", \"([a-zA-Z]+)\"))\n",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{status}}",
                         "refId": "A"
                      }
@@ -469,21 +464,18 @@
                      {
                         "expr": "job:promtail_request_duration_seconds:99quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "p99",
                         "legendLink": null
                      },
                      {
                         "expr": "job:promtail_request_duration_seconds:50quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "p50",
                         "legendLink": null
                      },
                      {
                         "expr": "job:promtail_request_duration_seconds:avg{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "avg",
                         "legendLink": null
                      }
@@ -546,7 +538,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

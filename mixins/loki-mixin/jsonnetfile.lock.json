@@ -18,8 +18,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "f56b2115eb7789d0d0506088cd60495abfd2f656",
-      "sum": "aCN8uCrs2PDLR0SzRAuwZ6C5hiKt1KggCUCT7/F8yZ0="
+      "version": "f3b9fbe2d7010c08be332c243a2714a2ac75248f",
+      "sum": "B49EzIY2WZsFxNMJcgRxE/gcZ9ltnS8pkOOV6Q5qioc="
     },
     {
       "source": {
@@ -28,8 +28,8 @@
           "subdir": "mixin-utils"
         }
       },
-      "version": "f56b2115eb7789d0d0506088cd60495abfd2f656",
-      "sum": "p5hRaq4GhUbgKZHtKqYmC8fgg8FoWJDkCN6PbonEXlk="
+      "version": "f3b9fbe2d7010c08be332c243a2714a2ac75248f",
+      "sum": "PGf+vyCHqGxxS6SKNZiN3vR1xPnw6VOESXbeJrA5FaA="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": "operations/mimir-mixin"
         }
       },
-      "version": "da7527d465cd142e63075234730d8cf14887ece6",
-      "sum": "tJpbU6nQeA8DWhO6sxCrTumOiBp56Yr/Ix3nBjvgdHk="
+      "version": "e4a732f4f19ad80ca4920962f4631cb0d3c0522c",
+      "sum": "acZMWgu9b6TO6r2h+RL2GI5tpI1SuAULVtcTXG7NvYE="
     },
     {
       "source": {
@@ -58,7 +58,7 @@
           "subdir": "jsonnet/kube-prometheus/lib"
         }
       },
-      "version": "205aadce9601865b3ccf005e54f7ae685bd25b38",
+      "version": "e7fa2f0b3c7606296dba118cc1759e8055f7215b",
       "sum": "QKRgrgEZ3k9nLmLCrDBaeIGVqQZf+AvZTcnhdLk3TrA="
     }
   ],

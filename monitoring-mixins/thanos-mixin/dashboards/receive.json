@@ -351,7 +351,6 @@
                      {
                         "expr": "sum by (tenant, code) (rate(http_requests_total{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{code}} - {{tenant}}",
                         "legendLink": null
                      }
@@ -426,7 +425,6 @@
                      {
                         "expr": "sum by (tenant, code) (rate(http_requests_total{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\", code!~\"2..\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{code}} - {{tenant}}",
                         "legendLink": null
                      }
@@ -501,7 +499,6 @@
                      {
                         "expr": "sum by (job, tenant) (rate(http_request_duration_seconds_sum{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\"}[$__rate_interval])) / sum by (job, tenant) (http_request_duration_seconds_count{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{tenant}}",
                         "legendLink": null
                      }
@@ -588,7 +585,6 @@
                      {
                         "expr": "sum by (job, tenant) (rate(http_request_size_bytes_sum{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\", code=~\"2..\"}[$__rate_interval])) / sum by (job, tenant) (rate(http_request_size_bytes_count{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\", code=~\"2..\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{tenant}}",
                         "legendLink": null
                      }
@@ -663,7 +659,6 @@
                      {
                         "expr": "sum by (job, tenant) (rate(http_request_size_bytes_sum{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\", code!~\"2..\"}[$__rate_interval])) / sum by (job, tenant) (rate(http_request_size_bytes_count{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\", code!~\"2..\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{tenant}}",
                         "legendLink": null
                      }
@@ -738,7 +733,6 @@
                      {
                         "expr": "sum by (job, tenant, method) (http_inflight_requests{job=~\"$job\", tenant=~\"$tenant\", handler=\"receive\"})",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{method}} - {{tenant}}",
                         "legendLink": null
                      }
@@ -825,7 +819,6 @@
                      {
                         "expr": "sum(rate(thanos_receive_write_timeseries_sum{job=~\"$job\", tenant=~\"$tenant\", code=~\"2..\"}[$__rate_interval])) by (job, tenant) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{tenant}}",
                         "legendLink": null
                      }
@@ -900,7 +893,6 @@
                      {
                         "expr": "sum(rate(thanos_receive_write_timeseries_sum{job=~\"$job\", tenant=~\"$tenant\", code!~\"2..\"}[$__rate_interval])) by (tenant, code) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{code}} - {{tenant}}",
                         "legendLink": null
                      }
@@ -975,7 +967,6 @@
                      {
                         "expr": "sum(rate(thanos_receive_write_samples_sum{job=~\"$job\", tenant=~\"$tenant\", code=~\"2..\"}[$__rate_interval])) by (job, tenant) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{tenant}}",
                         "legendLink": null
                      }
@@ -1050,7 +1041,6 @@
                      {
                         "expr": "sum(rate(thanos_receive_write_samples_sum{job=~\"$job\", tenant=~\"$tenant\", code!~\"2..\"}[$__rate_interval])) by (tenant, code) ",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{code}} - {{tenant}}",
                         "legendLink": null
                      }
@@ -1138,7 +1128,6 @@
                      {
                         "expr": "sum by (job) (rate(thanos_receive_replications_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "all {{job}}",
                         "legendLink": null
                      }
@@ -1304,7 +1293,6 @@
                      {
                         "expr": "sum by (job) (rate(thanos_receive_forward_requests_total{job=~\"$job\"}[$__rate_interval]))",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "all {{job}}",
                         "legendLink": null
                      }
@@ -2573,7 +2561,6 @@
                         "expr": "time() - max by (job, bucket) (thanos_objstore_bucket_last_successful_upload_time{job=~\"$job\"})",
                         "format": "table",
                         "instant": true,
-                        "intervalFactor": 2,
                         "legendFormat": "",
                         "refId": "A"
                      }
@@ -2661,42 +2648,36 @@
                      {
                         "expr": "go_memstats_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_alloc_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_alloc_bytes_total{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate all {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "rate(go_memstats_heap_alloc_bytes{job=~\"$job\"}[30s])",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "alloc rate heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_stack_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse heap {{instance}}",
                         "legendLink": null
                      },
                      {
                         "expr": "go_memstats_heap_inuse_bytes{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "inuse stack {{instance}}",
                         "legendLink": null
                      }
@@ -2771,7 +2752,6 @@
                      {
                         "expr": "go_goroutines{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{instance}}",
                         "legendLink": null
                      }
@@ -2846,7 +2826,6 @@
                      {
                         "expr": "go_gc_duration_seconds{job=~\"$job\"}",
                         "format": "time_series",
-                        "intervalFactor": 2,
                         "legendFormat": "{{quantile}} {{instance}}",
                         "legendLink": null
                      }
@@ -2900,7 +2879,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.6.0"
+         "monitoring-mixins-v1.7.0"
       ],
       "templating": {
          "list": [
@@ -2910,7 +2889,7 @@
                   "value": "default"
                },
                "hide": 0,
-               "label": "Data Source",
+               "label": "Data source",
                "name": "datasource",
                "options": [ ],
                "query": "prometheus",

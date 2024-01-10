@@ -152,7 +152,7 @@ spec:
               message: |
                   Receiving HTTP {{ $labels.status_code }} errors from API in {{ printf "%.2f" $value }}% of cases.
             expr: |
-              100 * sum(rate(agent_remote_config_fetches_total{status_code="(4|5).."}[10m])) by (cluster, namespace)
+              100 * sum(rate(agent_remote_config_fetches_total{status_code=~"(4|5).."}[10m])) by (cluster, namespace)
                 /
               sum(rate(agent_remote_config_fetches_total[10m])) by (cluster, namespace)
                 > 5
@@ -164,7 +164,7 @@ spec:
               message: |
                   Receiving HTTP {{ $labels.status_code }} errors from API in {{ printf "%.2f" $value }}% of cases.
             expr: |
-              100 * sum(rate(agent_remote_config_fetches_total{status_code="(4|5).."}[10m])) by (cluster, namespace)
+              100 * sum(rate(agent_remote_config_fetches_total{status_code=~"(4|5).."}[10m])) by (cluster, namespace)
                 /
               sum(rate(agent_remote_config_fetches_total[10m])) by (cluster, namespace)
                 > 10
