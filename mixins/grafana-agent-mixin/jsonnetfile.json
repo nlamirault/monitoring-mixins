@@ -8,7 +8,7 @@
           "subdir": "production/grafana-agent-mixin"
         }
       },
-      "version": "v0.39.0"
+      "version": "v0.39.1"
     }
   ],
   "legacyImports": true
