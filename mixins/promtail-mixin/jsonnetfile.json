@@ -26,7 +26,7 @@
           "subdir": "production/promtail-mixin"
         }
       },
-      "version": "v2.9.3"
+      "version": "v2.9.5"
     }
   ],
   "legacyImports": true
