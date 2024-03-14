@@ -8,8 +8,8 @@
           "subdir": "gen/grafonnet-v10.0.0"
         }
       },
-      "version": "c13ba17a4d342c0cd23ac55fde640c068a41fe6a",
-      "sum": "5qulX9qHmzzXXA/3aKiu0zPVlhUJA+p/pOMd9RgWZwc="
+      "version": "fe65a22df6d3a897729fff47cff599805a2c5710",
+      "sum": "pt4Lkc1SrZ0afjRGBU3hQrit1YUVyjaZRQEH30lviz8="
     },
     {
       "source": {
@@ -18,8 +18,8 @@
           "subdir": "kafka-mixin"
         }
       },
-      "version": "f3b9fbe2d7010c08be332c243a2714a2ac75248f",
-      "sum": "QA6f2Xg8Z0Nh2J+Xq6GTxroUVB7VdfSC3BRBedR96W0="
+      "version": "0f4cbd9edef69a6e4dc8fa7eb70768ef1cd704e1",
+      "sum": "N7IX3Z334VGyLgGcj1U6hnH5rrU9Ri+jOdBMH1ghsD8="
     },
     {
       "source": {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "80bdea46b69cfbd5a6b57789ad856d3cb525e956",
-      "sum": "eUSd6nmI07Zl4pYuDnhasQ7Ua37HfHcBVItfvroVUGU="
+      "version": "fc2e57a8839902ed4ba6cab5a99d642500f7102b",
+      "sum": "43waffw1QzvpY4rKcWoo3L7Vpee+DCYexwLDd5cPG0M="
     }
   ],
   "legacyImports": false
