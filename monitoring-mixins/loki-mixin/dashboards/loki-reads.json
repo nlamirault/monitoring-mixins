@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.7.0"
+               "monitoring-mixins-v1.7.1"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -146,22 +146,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/query-frontend\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/query-frontend\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/query-frontend\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"}) by (route)  / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/query-frontend\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -416,22 +413,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/querier\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/querier\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/querier\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"}) by (route)  / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/querier\", route=~\"loki_api_v1_series|api_prom_series|api_prom_query|api_prom_label|api_prom_label_name_values|loki_api_v1_query|loki_api_v1_query_range|loki_api_v1_labels|loki_api_v1_label_name_values\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -686,22 +680,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"}) by (route)  / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -956,22 +947,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester-zone.*\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (cluster_job_route:loki_request_duration_seconds_bucket:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester-zone.*\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(cluster_job_route:loki_request_duration_seconds_sum:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester-zone.*\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"}) by (route)  / sum(cluster_job_route:loki_request_duration_seconds_count:sum_rate{cluster=~\"$cluster\", job=~\"($namespace)/ingester-zone.*\", route=~\"/logproto.Querier/Query|/logproto.Querier/Label|/logproto.Querier/Series|/logproto.Querier/QuerySample|/logproto.Querier/GetChunkIDs\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -1642,7 +1630,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.7.0"
+         "monitoring-mixins-v1.7.1"
       ],
       "templating": {
          "list": [

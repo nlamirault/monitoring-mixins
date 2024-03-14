@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "pyroscope-mixin",
-               "monitoring-mixins-v1.7.0"
+               "monitoring-mixins-v1.7.1"
             ],
             "targetBlank": false,
             "title": "Pyroscope Dashboards",
@@ -146,22 +146,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(pyroscope|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(pyroscope|querier)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -331,22 +328,19 @@
                         "expr": "histogram_quantile(0.99, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 99th percentile",
-                        "refId": "A",
-                        "step": 10
+                        "refId": "A"
                      },
                      {
                         "expr": "histogram_quantile(0.50, sum by (le,route) (job_route_cluster:pyroscope_request_duration_seconds_bucket:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"})) * 1e3",
                         "format": "time_series",
                         "legendFormat": "{{ route }} 50th percentile",
-                        "refId": "B",
-                        "step": 10
+                        "refId": "B"
                      },
                      {
                         "expr": "1e3 * sum(job_route_cluster:pyroscope_request_duration_seconds_sum:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route)  / sum(job_route_cluster:pyroscope_request_duration_seconds_count:sum_rate{job=~\"($namespace)/(pyroscope|ingester)\", route=~\".*merge.*|.*series.*|.*type.*\", cluster=~\"$cluster\"}) by (route) ",
                         "format": "time_series",
                         "legendFormat": "{{ route }} Average",
-                        "refId": "C",
-                        "step": 10
+                        "refId": "C"
                      }
                   ],
                   "thresholds": [ ],
@@ -398,7 +392,7 @@
       "style": "dark",
       "tags": [
          "pyroscope-mixin",
-         "monitoring-mixins-v1.7.0"
+         "monitoring-mixins-v1.7.1"
       ],
       "templating": {
          "list": [

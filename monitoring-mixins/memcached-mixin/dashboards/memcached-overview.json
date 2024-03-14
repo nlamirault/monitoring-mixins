@@ -4,7 +4,7 @@
       },
       "editable": true,
       "gnetId": null,
-      "graphTooltip": 0,
+      "graphTooltip": 1,
       "hideControls": false,
       "links": [ ],
       "refresh": "10s",
@@ -1161,7 +1161,7 @@
                "type": "datasource"
             },
             {
-               "allValue": ".+",
+               "allValue": ".*",
                "current": {
                   "selected": true,
                   "text": "All",
