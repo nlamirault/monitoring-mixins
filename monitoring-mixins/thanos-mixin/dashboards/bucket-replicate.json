@@ -406,7 +406,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.7.1"
+         "monitoring-mixins-v1.8.0"
       ],
       "templating": {
          "list": [
