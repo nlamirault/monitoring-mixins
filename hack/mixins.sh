@@ -86,6 +86,7 @@ function jsonnet_generate {
     local mixin=$1
     local output=$2
 
+    echo_info "[monitoring-mixins] Mixtool for: ${mixin}"
     mixtool generate all mixin.libsonnet
     mkdir -p ${output}/${mixin}/{prometheus,manifests,dashboards}
     move_prom_file "alerts.yaml" "${output}/${mixin}/prometheus"
