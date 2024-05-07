@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "phlare-mixin",
-               "monitoring-mixins-v1.8.0"
+               "monitoring-mixins-v1.9.0"
             ],
             "targetBlank": false,
             "title": "Phlare Dashboards",
@@ -738,7 +738,7 @@
       "style": "dark",
       "tags": [
          "phlare-mixin",
-         "monitoring-mixins-v1.8.0"
+         "monitoring-mixins-v1.9.0"
       ],
       "templating": {
          "list": [

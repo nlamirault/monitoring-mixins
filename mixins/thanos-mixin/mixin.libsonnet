@@ -19,7 +19,7 @@ local thanos = import 'mixin/mixin.libsonnet';
 thanos {
   dashboard+:: {
     prefix: 'Thanos / ',
-    tags: ['thanos-mixin', 'monitoring-mixins-v1.8.0'],
+    tags: ['thanos-mixin', 'monitoring-mixins-v1.9.0'],
     namespaceQuery: 'kube_pod_info',
   },
 }
