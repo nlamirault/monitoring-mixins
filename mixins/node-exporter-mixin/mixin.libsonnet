@@ -42,7 +42,7 @@ nodeExporter {
 
     grafanaK8s+:: {
       dashboardNamePrefix: 'Node Exporter Mixin / ',
-      dashboardTags: ['node-exporter-mixin', 'monitoring-mixins-v1.8.0'],
+      dashboardTags: ['node-exporter-mixin', 'monitoring-mixins-v1.9.0'],
     },
   },
 }
