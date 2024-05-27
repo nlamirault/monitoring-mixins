@@ -24,14 +24,15 @@ Generate a mixin:
 | Mixin | Version |
 |-------|:-------:|
 | alertmanager-mixin | https://github.com/prometheus/alertmanager.git - `v0.27.0` <br> |
-| alloy-mixin | https://github.com/grafana/alloy.git - `v1.0.0` <br> |
+| alloy-mixin | https://github.com/grafana/alloy.git - `v1.1.0` <br> |
 | apollo-server-mixin | https://github.com/bfmatei/apollo-prometheus-exporter.git - `v3.0.0` <br> |
 | cert-manager-mixin | https://gitlab.com/uneeq-oss/cert-manager-mixin.git - `master` <br> |
+| cilium-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | coredns-mixin | https://github.com/povilasv/coredns-mixin.git - `master` <br> |
 | elasticsearch-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | fluxcd-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | grafana-agent-flow-mixin | https://github.com/grafana/agent.git - `v0.40.4` <br> |
-| grafana-mixin | https://github.com/grafana/grafana.git - `v10.4.2` <br> |
+| grafana-mixin | https://github.com/grafana/grafana.git - `v11.0.0` <br> |
 | istio-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | jaeger-mixin | https://github.com/jaegertracing/jaeger - `v1.57.0` <br> |
 | kafka-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
@@ -48,12 +49,12 @@ Generate a mixin:
 | osm-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | phlare-mixin | https://github.com/grafana/phlare.git - `v0.6.1` <br> |
 | postgres-mixin | https://github.com/prometheus-community/postgres_exporter.git - `v0.15.0` <br> |
-| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.51.2` <br> |
-| prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.73.2` <br> |
+| prometheus-mixin | https://github.com/prometheus/prometheus.git - `v2.52.0` <br> |
+| prometheus-operator-mixin | https://github.com/prometheus-operator/prometheus-operator.git - `v0.74.0` <br> |
 | promtail-mixin | https://github.com/grafana/grafonnet-lib.git - `master` <br> https://github.com/grafana/loki.git - `v3.0.0` <br> https://github.com/grafana/loki.git - `v3.0.0` <br> |
 | pyroscope-mixin | https://github.com/grafana/pyroscope.git - `v1.5.0` <br> |
 | rabbitmq-mixin | https://github.com/grafana/jsonnet-libs.git - `master` <br> |
 | sealed-secrets-mixin | https://github.com/bitnami-labs/sealed-secrets.git - `v0.26.2` <br> |
-| tempo-mixin | https://github.com/grafana/tempo.git - `v2.4.1` <br> |
+| tempo-mixin | https://github.com/grafana/tempo.git - `v2.4.2` <br> |
 | thanos-mixin | https://github.com/thanos-io/thanos.git - `v0.35.0` <br> |
 <!-- END_MIXINS_DOC -->

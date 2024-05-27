@@ -22,7 +22,7 @@
             "options": {
                "colorMode": "none"
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -73,7 +73,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -124,7 +124,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -175,7 +175,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -226,7 +226,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -301,7 +301,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -352,7 +352,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -403,7 +403,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -454,7 +454,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -505,7 +505,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v10.4.0",
+            "pluginVersion": "v11.0.0",
             "targets": [
                {
                   "datasource": {
@@ -521,10 +521,10 @@
          }
       ],
       "refresh": "60s",
-      "schemaVersion": 36,
+      "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.9.0"
+         "monitoring-mixins-v1.10.0"
       ],
       "templating": {
          "list": [
