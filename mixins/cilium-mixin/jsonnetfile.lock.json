@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "cilium-enterprise-mixin"
+        }
+      },
+      "version": "5f8a166911d56d0402fd52cbbce47cadfee0e466",
+      "sum": "mWeavqBkiY054bflk+mGgPeKoo8gx0TPFxZGUjQzjvo="
+    }
+  ],
+  "legacyImports": false
+}
