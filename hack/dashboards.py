@@ -17,7 +17,7 @@
 # import abc
 import argparse
 import logging
-from os import path
+# from os import path
 
 import coloredlogs
 import requests
@@ -25,28 +25,31 @@ import requests
 
 logger = logging.getLogger(__name__)
 
+
 class MixinError(Exception):
     """Base class for exceptions in this module."""
 
     pass
 
-class MixinNotFountError(MixinError):
 
+class MixinNotFountError(MixinError):
     def __init__(self, name):
         self.name = name
 
     def __str__(self):
         return "Mixin not found: %s" % self.name
 
-class Mixin():
 
+class Mixin:
     name = ""
     url = ""
     dashboards = []
 
     def __init__(self, name, version, dashboards):
         self.name = name
-        logger.info("Setup mixin: %s [%s]. Dashboards: %s", self.name, version, dashboards)
+        logger.info(
+            "Setup mixin: %s [%s]. Dashboards: %s", self.name, version, dashboards
+        )
 
     def _download_dashboard(self, dashboard):
         logger.info("Download dashboard: %s", dashboard)
@@ -66,7 +69,6 @@ class Mixin():
 
 
 class MixinLinkerd(Mixin):
-
     _repo = "https://raw.githubusercontent.com/linkerd/linkerd2"
     dashboards = [
         "authority",
@@ -83,59 +85,52 @@ class MixinLinkerd(Mixin):
         "route",
         "service",
         "statefulset",
-        "top-line"
+        "top-line",
     ]
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
         self.url = "%s/%s/grafana/dashboards" % (self._repo, self._version)
 
-class MixinLinkerdStable(MixinLinkerd):
 
-    #datasource=github-tags depName=linkerd/linkerd2
+class MixinLinkerdStable(MixinLinkerd):
+    # datasource=github-tags depName=linkerd/linkerd2
     _version = "stable-2.11.4"
 
-class MixinLinkerdEdge(MixinLinkerd):
 
-    #datasource=github-tags depName=linkerd/linkerd2
+class MixinLinkerdEdge(MixinLinkerd):
+    # datasource=github-tags depName=linkerd/linkerd2
     _version = "edge-22.8.2"
 
 
-
 class NginxIngressControllerMixin(Mixin):
-
     _repo = "https://raw.githubusercontent.com/kubernetes/ingress-nginx"
-    dashboards = [
-        "nginx",
-        "request-handling-performance"
-    ]
+    dashboards = ["nginx", "request-handling-performance"]
 
-    #datasource=github-tags depName=kubernetes/ingress-nginx
+    # datasource=github-tags depName=kubernetes/ingress-nginx
     _version = "controller-v1.2.0"
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
         self.url = "%s/%s/deploy/grafana/dashboards" % (self._repo, self._version)
 
+
 class FluxCDMixin(Mixin):
-
     _repo = "https://raw.githubusercontent.com/fluxcd/flux2"
-    dashboards = [
-        "cluster",
-        "control-plane",
-        "logs"
-    ]
+    dashboards = ["cluster", "control-plane", "logs"]
 
-    #datasource=github-tags depName=fluxcd/flux2
+    # datasource=github-tags depName=fluxcd/flux2
     _version = "v0.32.0"
 
     def __init__(self, name):
         super().__init__(name, self._version, self.dashboards)
-        self.url = "%s/%s/manifests/monitoring/monitoring-config/dashboards" % (self._repo, self._version)
+        self.url = "%s/%s/manifests/monitoring/monitoring-config/dashboards" % (
+            self._repo,
+            self._version,
+        )
 
 
 class OsmMixin(Mixin):
-
     _repo = "https://raw.githubusercontent.com/openservicemesh/osm"
     dashboards = [
         "osm-control-plane",
@@ -144,10 +139,10 @@ class OsmMixin(Mixin):
         "osm-pod-to-service",
         "osm-service-to-service",
         "osm-workload-to-service",
-        "osm-workload-to-workload"
+        "osm-workload-to-workload",
     ]
 
-    #datasource=github-tags depName=openservicemesh/osm
+    # datasource=github-tags depName=openservicemesh/osm
     _version = "v1.2.0"
 
     def __init__(self, name):

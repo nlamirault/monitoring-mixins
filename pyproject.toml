@@ -14,20 +14,22 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-[tool.poetry]
+[project]
 name = "monitoring-mixins"
 version = "0.1.0"
-description = ""
-authors = ["Nicolas Lamirault <nicolas.lamirault@gmail.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.25.1"
-coloredlogs = "^15.0"
-black = "^24.0.0"
-
-[tool.poetry.dev-dependencies]
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32.3",
+    "coloredlogs>=15.0.1",
+]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.4",
+]

@@ -72,8 +72,13 @@ clean: ## Clean environment
 
 .PHONY: init
 init: ## Initialize environment
-	poetry install
-	pre-commit install
+	uv venv
+	uv pip install
+	# pre-commit install
+
+.PHONY: fmt
+fmt: ## Format Python
+	uv tool run ruff linter
 
 .PHONY: test
 test: guard-SERVICE ## Test rules (SERVICE=xxx)
