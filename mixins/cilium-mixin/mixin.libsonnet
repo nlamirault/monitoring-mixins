@@ -18,6 +18,6 @@ local agent = import 'cilium-enterprise-mixin/mixin.libsonnet';
 
 agent {
   _config+:: {
-    tags: ['cilium-mixin', 'monitoring-mixins-v1.10.0'],
+    tags: ['cilium-mixin', 'portefaix-0.0.0'],
   },
 }

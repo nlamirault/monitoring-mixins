@@ -57,6 +57,6 @@ alertmanager {
     alertmanagerCriticalIntegrationsRegEx: @'.*',
 
     dashboardNamePrefix: 'Alertmanager / ',
-    dashboardTags: ['alertmanager-mixin', 'monitoring-mixins-v1.10.0'],
+    dashboardTags: ['alertmanager-mixin', 'portefaix-0.0.0'],
   },
 }

@@ -5,11 +5,31 @@
       "source": {
         "git": {
           "remote": "https://github.com/grafana/grafonnet.git",
-          "subdir": "gen/grafonnet-v10.0.0"
+          "subdir": "gen/grafonnet-v11.0.0"
         }
       },
-      "version": "18eb4e529c60ec20ab243e2da3bcb52b2fd0d223",
-      "sum": "xdcrJPJlpkq4+5LpGwN4tPAuheNNLXZjE6tDcyvFjr0="
+      "version": "733beadbc8dab55c5fe1bcdcf0d8a2d215759a55",
+      "sum": "0BvzR0i4bS4hc2O3xDv6i9m52z7mPrjvqxtcPrGhynA="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "common-lib"
+        }
+      },
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "tfvNQmtjIkqbgy7FU3FDy34OYoZhWskDCQanbiScaHU="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "jvm-observ-lib"
+        }
+      },
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "WCAeCaYAdanU0pkXL4qJHX51Oqfr/9yTzwE3GtBUYec="
     },
     {
       "source": {
@@ -18,8 +38,38 @@
           "subdir": "kafka-mixin"
         }
       },
-      "version": "5f8a166911d56d0402fd52cbbce47cadfee0e466",
-      "sum": "N7IX3Z334VGyLgGcj1U6hnH5rrU9Ri+jOdBMH1ghsD8="
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "VGfYNhHiMr5XOQIZVM+G10Djpi+VnN5bpKn33ggYMhw="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "kafka-observ-lib"
+        }
+      },
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "Y2TNp/UoxHbo0zDB20GLq4RlzlWmwBfLfT8P5OdYKqU="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "process-observ-lib"
+        }
+      },
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "lZjpJXI8iyNKb8dmVbNzWh9t00ou3pMwhEAbhqQfBAs="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "zookeeper-observ-lib"
+        }
+      },
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "JjVuiFUJHtf0GAjQ/k+jW+qg2RS2SJgVOoCHYMeHgCU="
     },
     {
       "source": {
@@ -40,6 +90,16 @@
       },
       "version": "63d430b69a95741061c2f7fc9d84b1a778511d9c",
       "sum": "qiZi3axUSXCVzKUF83zSAxklwrnitMmrDK4XAfjPMdE="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/yugui/jsonnetunit.git",
+          "subdir": "jsonnetunit"
+        }
+      },
+      "version": "6927c58cae7624a00f368b977ccc477d4f74071f",
+      "sum": "9FFqqln65hooRF0l6rjICDtnTxUlmDj34+sKMh4sjPI="
     }
   ],
   "legacyImports": false

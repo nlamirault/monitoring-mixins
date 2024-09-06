@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "pyroscope-mixin",
-               "monitoring-mixins-v1.10.0"
+               "portefaix-0.0.0"
             ],
             "targetBlank": false,
             "title": "Pyroscope Dashboards",
@@ -392,7 +392,7 @@
       "style": "dark",
       "tags": [
          "pyroscope-mixin",
-         "monitoring-mixins-v1.10.0"
+         "portefaix-0.0.0"
       ],
       "templating": {
          "list": [

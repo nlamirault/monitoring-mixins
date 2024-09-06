@@ -16,7 +16,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.10.0"
+               "portefaix-0.0.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -301,7 +301,8 @@
                            "value": 80
                         }
                      ]
-                  }
+                  },
+                  "unit": "s"
                },
                "overrides": [ ]
             },
@@ -592,7 +593,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.10.0"
+         "portefaix-0.0.0"
       ],
       "templating": {
          "list": [

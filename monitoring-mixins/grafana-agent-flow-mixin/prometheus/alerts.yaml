@@ -3,20 +3,20 @@ groups:
       rules:
         - alert: ClusterNotConverging
           annotations:
-            message: Cluster is not converging.
+            message: 'Cluster is not converging: nodes report different number of peers in the cluster.'
           expr: stddev by (cluster, namespace) (sum without (state) (cluster_node_peers)) != 0
           for: 10m
-        - alert: ClusterSplitBrain
+        - alert: ClusterNodeCountMismatch
           annotations:
-            message: Cluster nodes have entered a split brain state.
+            message: Nodes report different number of peers vs. the count of observed agent metrics. Some agent metrics may be missing or the cluster is in a split brain state.
           expr: |
             sum without (state) (cluster_node_peers) !=
             on (cluster, namespace) group_left
             count by (cluster, namespace) (cluster_node_info)
-          for: 10m
+          for: 15m
         - alert: ClusterNodeUnhealthy
           annotations:
-            message: Cluster node is reporting a health score > 0.
+            message: Cluster node is reporting a gossip protocol health score > 0.
           expr: |
             cluster_node_gossip_health_score > 0
           for: 10m
@@ -43,10 +43,22 @@ groups:
         - alert: SlowComponentEvaluations
           annotations:
             message: Flow component evaluations are taking too long.
-          expr: sum by (cluster, namespace, component_id) (rate(agent_component_evaluation_slow_seconds[10m])) > 0
+          expr: sum by (cluster, namespace, component_path, component_id) (rate(agent_component_evaluation_slow_seconds[10m])) > 0
           for: 15m
         - alert: UnhealthyComponents
           annotations:
             message: Unhealthy Flow components detected.
           expr: sum by (cluster, namespace) (agent_component_controller_running_components{health_type!="healthy"}) > 0
           for: 15m
+    - name: otelcol
+      rules:
+        - alert: OtelcolReceiverRefusedSpans
+          annotations:
+            message: The receiver could not push some spans to the pipeline.
+          expr: sum by (cluster, namespace) (rate(receiver_refused_spans_ratio_total{}[1m])) > 0
+          for: 5m
+        - alert: OtelcolExporterFailedSpans
+          annotations:
+            message: The exporter failed to send spans to their destination.
+          expr: sum by (cluster, namespace) (rate(exporter_send_failed_spans_ratio_total{}[1m])) > 0
+          for: 5m

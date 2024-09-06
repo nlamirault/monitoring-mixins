@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.10.0"
+               "portefaix-0.0.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -580,7 +580,7 @@
                   "span": 6,
                   "targets": [
                      {
-                        "expr": "sum(rate(loki_compactor_deleted_lines{cluster=~\"$cluster\",job=~\"$namespace/compactor\"}[$__rate_interval])) by (user)",
+                        "expr": "sum(rate(loki_compactor_deleted_lines{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"compactor\"}[$__rate_interval])) by (user)",
                         "format": "time_series",
                         "legendFormat": "{{user}}",
                         "legendLink": null
@@ -640,7 +640,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.10.0"
+         "portefaix-0.0.0"
       ],
       "templating": {
          "list": [
@@ -703,6 +703,16 @@
                "tagsQuery": "",
                "type": "query",
                "useTags": false
+            },
+            {
+               "hide": 0,
+               "label": null,
+               "name": "loki_datasource",
+               "options": [ ],
+               "query": "loki",
+               "refresh": 1,
+               "regex": "",
+               "type": "datasource"
             }
          ]
       },

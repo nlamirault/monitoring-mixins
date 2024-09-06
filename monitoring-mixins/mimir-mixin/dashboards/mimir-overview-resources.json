@@ -22,7 +22,7 @@
             "keepTime": true,
             "tags": [
                "mimir-mixin",
-               "monitoring-mixins-v1.10.0"
+               "portefaix-0.0.0"
             ],
             "targetBlank": false,
             "title": "Mimir dashboards",
@@ -1200,7 +1200,7 @@
       "style": "dark",
       "tags": [
          "mimir-mixin",
-         "monitoring-mixins-v1.10.0"
+         "portefaix-0.0.0"
       ],
       "templating": {
          "list": [

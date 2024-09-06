@@ -4,21 +4,11 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/grafana/grafonnet-lib.git",
-          "subdir": "grafonnet"
-        }
-      },
-      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
-      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
-    },
-    {
-      "source": {
-        "git": {
           "remote": "https://github.com/grafana/grafonnet.git",
           "subdir": "gen/grafonnet-latest"
         }
       },
-      "version": "18eb4e529c60ec20ab243e2da3bcb52b2fd0d223",
+      "version": "733beadbc8dab55c5fe1bcdcf0d8a2d215759a55",
       "sum": "eyuJ0jOXeA4MrobbNgU4/v5a7ASDHslHZ0eS6hDdWoI="
     },
     {
@@ -28,18 +18,8 @@
           "subdir": "gen/grafonnet-v11.0.0"
         }
       },
-      "version": "18eb4e529c60ec20ab243e2da3bcb52b2fd0d223",
-      "sum": "6ycXhBvq/k7j01vaNiDSZcVsKikh01pfNH+2oauHgJg="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/grafana/jsonnet-libs.git",
-          "subdir": "grafana-builder"
-        }
-      },
-      "version": "02db06f540086fa3f67d487bd01e1b314853fb8f",
-      "sum": "B49EzIY2WZsFxNMJcgRxE/gcZ9ltnS8pkOOV6Q5qioc="
+      "version": "733beadbc8dab55c5fe1bcdcf0d8a2d215759a55",
+      "sum": "0BvzR0i4bS4hc2O3xDv6i9m52z7mPrjvqxtcPrGhynA="
     },
     {
       "source": {
@@ -68,8 +48,8 @@
           "subdir": ""
         }
       },
-      "version": "de834e9a291b49396125768f041e2078763f48b5",
-      "sum": "E6z1j4MS6/NnIVZkUuk+gb0m9FvRmZ77H6SSopIZEa8="
+      "version": "50150c585ebee6e4d9cb72218182da8f3c616515",
+      "sum": "0g1pn3gGq2yZyeUTx+zniK/D7jMKbAnqJ83Lke+uJ6o="
     }
   ],
   "legacyImports": false

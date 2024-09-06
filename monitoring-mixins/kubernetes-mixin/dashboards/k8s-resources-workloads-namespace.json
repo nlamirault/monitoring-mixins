@@ -1,5 +1,19 @@
 {
       "editable": false,
+      "links": [
+         {
+            "asDropdown": true,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
+               "kubernetes-mixin",
+               "portefaix-0.0.0"
+            ],
+            "targetBlank": false,
+            "title": "Kubernetes",
+            "type": "dashboards"
+         }
+      ],
       "panels": [
          {
             "datasource": {
@@ -1170,7 +1184,7 @@
       "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.10.0"
+         "portefaix-0.0.0"
       ],
       "templating": {
          "list": [

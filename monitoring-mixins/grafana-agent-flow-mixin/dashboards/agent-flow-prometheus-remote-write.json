@@ -143,9 +143,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum by (instance, component_id) (\n  prometheus_remote_storage_highest_timestamp_in_seconds{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\"}\n  - ignoring(url, remote_name) group_right(instance)\n  prometheus_remote_storage_queue_highest_sent_timestamp_seconds{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
+                  "expr": "sum by (instance, component_path, component_id) (\n  prometheus_remote_storage_highest_timestamp_in_seconds{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\"}\n  - ignoring(url, remote_name) group_right(instance)\n  prometheus_remote_storage_queue_highest_sent_timestamp_seconds{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -176,9 +176,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum without (remote_name, url) (\n    rate(prometheus_remote_storage_bytes_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval]) +\n    rate(prometheus_remote_storage_metadata_bytes_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
+                  "expr": "sum without (remote_name, url) (\n    rate(prometheus_remote_storage_bytes_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval]) +\n    rate(prometheus_remote_storage_metadata_bytes_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -202,21 +202,21 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "histogram_quantile(0.99, sum by (le) (\n  rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n))\n",
+                  "expr": "histogram_quantile(0.99, sum by (le) (\n  rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n))\n",
                   "instant": false,
                   "legendFormat": "99th percentile",
                   "range": true
                },
                {
                   "datasource": "${datasource}",
-                  "expr": "histogram_quantile(0.50, sum by (le) (\n  rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n))\n",
+                  "expr": "histogram_quantile(0.50, sum by (le) (\n  rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n))\n",
                   "instant": false,
                   "legendFormat": "50th percentile",
                   "range": true
                },
                {
                   "datasource": "${datasource}",
-                  "expr": "sum(rate(prometheus_remote_storage_sent_batch_duration_seconds_sum{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_id=~\"$component\"}[$__rate_interval])) /\nsum(rate(prometheus_remote_storage_sent_batch_duration_seconds_count{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_id=~\"$component\"}[$__rate_interval]))\n",
+                  "expr": "sum(rate(prometheus_remote_storage_sent_batch_duration_seconds_sum{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\"}[$__rate_interval])) /\nsum(rate(prometheus_remote_storage_sent_batch_duration_seconds_count{cluster=\"$cluster\",namespace=\"$namespace\",instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\"}[$__rate_interval]))\n",
                   "instant": false,
                   "legendFormat": "Average",
                   "range": true
@@ -304,21 +304,21 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum without (remote_name, url) (\n    prometheus_remote_storage_shards{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
+                  "expr": "sum without (remote_name, url) (\n    prometheus_remote_storage_shards{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                },
                {
                   "datasource": "${datasource}",
-                  "expr": "min (\n    prometheus_remote_storage_shards_min{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
+                  "expr": "min (\n    prometheus_remote_storage_shards_min{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
                   "instant": false,
                   "legendFormat": "Minimum",
                   "range": true
                },
                {
                   "datasource": "${datasource}",
-                  "expr": "max (\n    prometheus_remote_storage_shards_max{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
+                  "expr": "max (\n    prometheus_remote_storage_shards_max{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}\n)\n",
                   "instant": false,
                   "legendFormat": "Maximum",
                   "range": true
@@ -351,9 +351,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum without (url, remote_name) (\n  rate(prometheus_remote_storage_samples_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
+                  "expr": "sum without (url, remote_name) (\n  rate(prometheus_remote_storage_samples_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -384,9 +384,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum without (url,remote_name) (\n  rate(prometheus_remote_storage_samples_failed_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
+                  "expr": "sum without (url,remote_name) (\n  rate(prometheus_remote_storage_samples_failed_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -417,9 +417,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum without (url,remote_name) (\n  rate(prometheus_remote_storage_samples_retried_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
+                  "expr": "sum without (url,remote_name) (\n  rate(prometheus_remote_storage_samples_retried_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}[$__rate_interval])\n)\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -448,7 +448,7 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum(agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"$component\", url=~\"$url\"})\n",
+                  "expr": "sum(agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"})\n",
                   "instant": false,
                   "legendFormat": "Series",
                   "range": true
@@ -474,9 +474,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id!=\"\", component_id=~\"$component\", url=~\"$url\"}\n",
+                  "expr": "agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id!=\"\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"}\n",
                   "instant": false,
-                  "legendFormat": "{{instance}} / {{component_id}}",
+                  "legendFormat": "{{instance}} / {{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -500,9 +500,9 @@
             "targets": [
                {
                   "datasource": "${datasource}",
-                  "expr": "sum by (component_id) (agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id!=\"\", component_id=~\"$component\", url=~\"$url\"})\n",
+                  "expr": "sum by (component_path, component_id) (agent_wal_storage_active_series{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id!=\"\", component_path=~\"$component_path\", component_id=~\"$component\", url=~\"$url\"})\n",
                   "instant": false,
-                  "legendFormat": "{{component_id}}",
+                  "legendFormat": "{{component_path}} {{component_id}}",
                   "range": true
                }
             ],
@@ -567,6 +567,21 @@
                "query": {
                   "query": "label_values(agent_component_controller_running_components{cluster=\"$cluster\", namespace=\"$namespace\"}, instance)\n",
                   "refId": "instance"
+               },
+               "refresh": 2,
+               "sort": 2,
+               "type": "query"
+            },
+            {
+               "allValue": ".*",
+               "datasource": "${datasource}",
+               "includeAll": true,
+               "label": "component_path",
+               "multi": true,
+               "name": "component_path",
+               "query": {
+                  "query": "label_values(agent_wal_samples_appended_total{cluster=\"$cluster\", namespace=\"$namespace\", instance=~\"$instance\", component_id=~\"prometheus\\\\.remote_write\\\\..*\", component_path=~\".*\"}, component_path)\n",
+                  "refId": "component_path"
                },
                "refresh": 2,
                "sort": 2,

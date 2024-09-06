@@ -18,8 +18,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "5f8a166911d56d0402fd52cbbce47cadfee0e466",
-      "sum": "5ku1Hd8UPnjmn8nWyaTFzMpT3Pa+VylBnmposMSVEuU="
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "yxqWcq/N3E/a/XreeU6EuE6X7kYPnG0AspAQFKOjASo="
     },
     {
       "source": {
@@ -28,8 +28,8 @@
           "subdir": "mixin-utils"
         }
       },
-      "version": "5f8a166911d56d0402fd52cbbce47cadfee0e466",
-      "sum": "A0f0G3aJEkdu5sqHXtizHDyU1jOSx6VuEXLRlI9Psp8="
+      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "sum": "LoYq5QxJmUXEtqkEG8CFUBLBhhzDDaNANHc7Gz36ZdM="
     },
     {
       "source": {
@@ -38,7 +38,7 @@
           "subdir": "operations/pyroscope/jsonnet/pyroscope-mixin/pyroscope-mixin"
         }
       },
-      "version": "0bc90947b7fb36d9b71083329040ff9775d47fdf",
+      "version": "3d664fc76af63ce0764ddeabe91ed0908a2455b1",
       "sum": "8ruCWQHfhd+RHAUnFBVl6Seryd9EEqCXZUm/dsSW5Wc="
     }
   ],

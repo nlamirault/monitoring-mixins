@@ -18,6 +18,6 @@ local phlare = import 'phlare-mixin/mixin.libsonnet';
 
 phlare {
   _config+:: {
-    tags: ['phlare-mixin', 'monitoring-mixins-v1.10.0'],
+    tags: ['phlare-mixin', 'portefaix-0.0.0'],
   },
 }

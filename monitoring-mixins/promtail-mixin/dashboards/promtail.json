@@ -218,7 +218,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(promtail_read_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1m]))",
+                        "expr": "sum(rate(promtail_read_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
                         "legendFormat": "logs read",
                         "legendLink": null
@@ -292,7 +292,7 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "sum(rate(promtail_read_lines_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[1m]))",
+                        "expr": "sum(rate(promtail_read_lines_total{cluster=~\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval]))",
                         "format": "time_series",
                         "legendFormat": "lines read",
                         "legendLink": null
@@ -462,19 +462,19 @@
                   "steppedLine": false,
                   "targets": [
                      {
-                        "expr": "job:promtail_request_duration_seconds:99quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
+                        "expr": "job:promtail_request_duration_seconds:99quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail.*\"}",
                         "format": "time_series",
                         "legendFormat": "p99",
                         "legendLink": null
                      },
                      {
-                        "expr": "job:promtail_request_duration_seconds:50quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
+                        "expr": "job:promtail_request_duration_seconds:50quantile{cluster=~\"$cluster\", job=~\"$namespace/promtail.*\"}",
                         "format": "time_series",
                         "legendFormat": "p50",
                         "legendLink": null
                      },
                      {
-                        "expr": "job:promtail_request_duration_seconds:avg{cluster=~\"$cluster\", job=~\"$namespace/promtail\"}",
+                        "expr": "job:promtail_request_duration_seconds:avg{cluster=~\"$cluster\", job=~\"$namespace/promtail.*\"}",
                         "format": "time_series",
                         "legendFormat": "avg",
                         "legendLink": null
