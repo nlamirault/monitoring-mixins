@@ -8,7 +8,7 @@
             "tags": [
                "kubernetes-mixin",
                "k3s",
-               "portefaix-0.0.0"
+               "monitoring-mixins-v1.12.0"
             ],
             "targetBlank": false,
             "title": "Kubernetes",
@@ -41,7 +41,7 @@
                "displayMode": "basic",
                "showUnfilled": false
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -80,7 +80,7 @@
                "displayMode": "basic",
                "showUnfilled": false
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -151,7 +151,7 @@
                "y": 9
             },
             "id": 3,
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -337,7 +337,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -388,7 +388,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -439,7 +439,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -490,7 +490,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -541,7 +541,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -592,7 +592,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -643,7 +643,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -694,7 +694,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -714,7 +714,7 @@
       "tags": [
          "kubernetes-mixin",
          "k3s",
-         "portefaix-0.0.0"
+         "monitoring-mixins-v1.12.0"
       ],
       "templating": {
          "list": [

@@ -8,7 +8,7 @@
             "tags": [
                "kubernetes-mixin",
                "k3s",
-               "portefaix-0.0.0"
+               "monitoring-mixins-v1.12.0"
             ],
             "targetBlank": false,
             "title": "Kubernetes",
@@ -104,7 +104,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -119,7 +119,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "scalar(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"requests.cpu\"})",
+                  "expr": "scalar(max(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=~\"requests.cpu|cpu\"}))",
                   "legendFormat": "quota - requests"
                },
                {
@@ -127,7 +127,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "scalar(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"limits.cpu\"})",
+                  "expr": "scalar(max(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=~\"limits.cpu\"}))",
                   "legendFormat": "quota - limits"
                }
             ],
@@ -191,7 +191,7 @@
                "y": 7
             },
             "id": 2,
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -399,7 +399,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -414,7 +414,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "scalar(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"requests.memory\"})",
+                  "expr": "scalar(max(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=~\"requests.memory|memory\"}))",
                   "legendFormat": "quota - requests"
                },
                {
@@ -422,7 +422,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "scalar(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"limits.memory\"})",
+                  "expr": "scalar(max(kube_resourcequota{cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=~\"limits.memory\"}))",
                   "legendFormat": "quota - limits"
                }
             ],
@@ -489,7 +489,7 @@
                "y": 21
             },
             "id": 4,
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -665,7 +665,7 @@
                "y": 28
             },
             "id": 5,
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -809,7 +809,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -860,7 +860,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -911,7 +911,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -962,7 +962,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -1013,7 +1013,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -1064,7 +1064,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -1115,7 +1115,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -1166,7 +1166,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.1.0",
             "targets": [
                {
                   "datasource": {
@@ -1186,7 +1186,7 @@
       "tags": [
          "kubernetes-mixin",
          "k3s",
-         "portefaix-0.0.0"
+         "monitoring-mixins-v1.12.0"
       ],
       "templating": {
          "list": [
