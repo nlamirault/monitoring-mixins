@@ -192,3 +192,47 @@ groups:
           for: 15m
           labels:
             severity: info
+    - name: Cilium Clustermesh
+      rules:
+        - alert: CiliumAgentRemoteClusterNotReady
+          annotations:
+            description: Agent can't mesh with {{$labels.target_cluster}}
+            summary: Agent can't mesh with remote cluster.
+          expr: count(cilium_clustermesh_remote_cluster_readiness_status < 1) by (source_cluster, target_cluster) > 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: CiliumAgentRemoteClusterFailing
+          annotations:
+            description: Agent fails to mesh with {{$labels.target_cluster}}
+            summary: Agent fails to mesh with remote cluster.
+          expr: sum(rate(cilium_clustermesh_remote_cluster_failures[5m])) by (source_cluster, target_cluster) > 0
+          for: 5m
+          labels:
+            severity: critical
+    - name: Cilium Kvstoremesh
+      rules:
+        - alert: CiliumKvstoremeshRemoteClusterNotReady
+          annotations:
+            description: Kvstoremesh can't mesh with {{$labels.target_cluster}}
+            summary: Kvstoremesh can't mesh with remote cluster.
+          expr: count(cilium_kvstoremesh_remote_cluster_readiness_status < 1) by (source_cluster, target_cluster) > 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: CiliumKvstoremeshRemoteClusterFailing
+          annotations:
+            description: Kvstoremesh fails to mesh with {{$labels.target_cluster}}
+            summary: Kvstoremesh fails to mesh with remote cluster.
+          expr: sum(rate(cilium_kvstoremesh_remote_cluster_failures[5m])) by (source_cluster, target_cluster) > 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: CiliumKvstoremeshErrors
+          annotations:
+            description: Kvstoremesh fails to mesh with {{$labels.target_cluster}}
+            summary: Kvstoremesh fails to mesh with remote cluster.
+          expr: sum(rate(cilium_kvstoremesh_kvstore_sync_errors_total[5m])) by (source_cluster) > 0
+          for: 5m
+          labels:
+            severity: critical

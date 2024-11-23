@@ -29,7 +29,7 @@ alertmanager {
     kubernetesPlugin: false,
     grafana: {
       dashboardNamePrefix: 'Kubernetes / ',
-      dashboardTags: ['coredns-mixin', 'portefaix-0.0.0'],
+      dashboardTags: ['coredns-mixin', 'monitoring-mixins-v1.12.0'],
 
       // The default refresh time for all dashboards, default to 10s
       refresh: '60s',

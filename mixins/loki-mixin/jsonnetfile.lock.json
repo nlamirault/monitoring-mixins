@@ -18,7 +18,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
       "sum": "yxqWcq/N3E/a/XreeU6EuE6X7kYPnG0AspAQFKOjASo="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "mixin-utils"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
       "sum": "LoYq5QxJmUXEtqkEG8CFUBLBhhzDDaNANHc7Gz36ZdM="
     },
     {
@@ -48,8 +48,8 @@
           "subdir": "operations/mimir-mixin"
         }
       },
-      "version": "a791c543568ec837b9e5bfde84bd78c2a2e060c4",
-      "sum": "zTUYAvafVUlkBU8PJzVkxGPJnuvHbrCfdmxOq14zQGc="
+      "version": "bf3d420358d9eb33e4ae4b67bb435497a171c878",
+      "sum": "ta+F2Drtl4N2jDX4LR6ynEGjH0wDXWRSAG+2Om1qGpE="
     },
     {
       "source": {
@@ -58,7 +58,7 @@
           "subdir": "jsonnet/kube-prometheus/lib"
         }
       },
-      "version": "eb7f83a4071ea3aa8f98d0c8129fe6e6ac88bf34",
+      "version": "c503e5cc5403dd5d56b1c0c5933827baee64aeaf",
       "sum": "QKRgrgEZ3k9nLmLCrDBaeIGVqQZf+AvZTcnhdLk3TrA="
     }
   ],

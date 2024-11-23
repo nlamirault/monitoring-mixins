@@ -18,8 +18,18 @@
           "subdir": "gen/grafonnet-v10.0.0"
         }
       },
-      "version": "733beadbc8dab55c5fe1bcdcf0d8a2d215759a55",
+      "version": "82a19822e54a0a12a51e24dbd48fcde717dc0864",
       "sum": "xdcrJPJlpkq4+5LpGwN4tPAuheNNLXZjE6tDcyvFjr0="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet.git",
+          "subdir": "gen/grafonnet-v11.0.0"
+        }
+      },
+      "version": "82a19822e54a0a12a51e24dbd48fcde717dc0864",
+      "sum": "0BvzR0i4bS4hc2O3xDv6i9m52z7mPrjvqxtcPrGhynA="
     },
     {
       "source": {
@@ -28,8 +38,8 @@
           "subdir": "logs-lib/"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "tUeoie1Cc7Ih7eKOX/H9pD4PkDnTzLZzP9fupYIBMwA="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "v1hBizsJAXeUs9/SV4l8LqHNWi73fX4SWpG9FmAUY9I="
     },
     {
       "source": {
@@ -38,8 +48,8 @@
           "subdir": "logs-lib/logs"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "/P3y+jKwI4IDIPT6dUuaNH0PscvYUa/j7iPvyHndLXM="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "ycbLqzt+AizrtaoxbDFsUXKRDwTzKKVfFqnmBl3Vpow="
     },
     {
       "source": {

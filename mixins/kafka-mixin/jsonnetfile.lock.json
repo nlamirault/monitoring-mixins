@@ -8,7 +8,7 @@
           "subdir": "gen/grafonnet-v11.0.0"
         }
       },
-      "version": "733beadbc8dab55c5fe1bcdcf0d8a2d215759a55",
+      "version": "82a19822e54a0a12a51e24dbd48fcde717dc0864",
       "sum": "0BvzR0i4bS4hc2O3xDv6i9m52z7mPrjvqxtcPrGhynA="
     },
     {
@@ -18,8 +18,8 @@
           "subdir": "common-lib"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "tfvNQmtjIkqbgy7FU3FDy34OYoZhWskDCQanbiScaHU="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "Sc/itBm3y9DEuKzT1ZjvEB0ezB5sJ9apgLraQXuUfn0="
     },
     {
       "source": {
@@ -28,8 +28,8 @@
           "subdir": "jvm-observ-lib"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "WCAeCaYAdanU0pkXL4qJHX51Oqfr/9yTzwE3GtBUYec="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "DHITWzPGhgmc5lZJEXhFFBk15qPej57p3d6G9zomiXw="
     },
     {
       "source": {
@@ -38,7 +38,7 @@
           "subdir": "kafka-mixin"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
       "sum": "VGfYNhHiMr5XOQIZVM+G10Djpi+VnN5bpKn33ggYMhw="
     },
     {
@@ -48,8 +48,8 @@
           "subdir": "kafka-observ-lib"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "Y2TNp/UoxHbo0zDB20GLq4RlzlWmwBfLfT8P5OdYKqU="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "QwZGcNDUgrqh4MLBrFItkyI/5D41HL+uF3JNhVylBwo="
     },
     {
       "source": {
@@ -58,8 +58,8 @@
           "subdir": "process-observ-lib"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "lZjpJXI8iyNKb8dmVbNzWh9t00ou3pMwhEAbhqQfBAs="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "C/JfnuppYBiVcF/DfoibQaVcQmG9eq+igtTpRTrcwRA="
     },
     {
       "source": {
@@ -68,8 +68,8 @@
           "subdir": "zookeeper-observ-lib"
         }
       },
-      "version": "52be87fb93edc439b69b550acb893abb51a079c5",
-      "sum": "JjVuiFUJHtf0GAjQ/k+jW+qg2RS2SJgVOoCHYMeHgCU="
+      "version": "51cad60013ea92f856a2ad9c3d676b0dd1fc0f3f",
+      "sum": "APnG6igfR1CsA6pjRcYbhSP7A1Wx4XfA8jQZAwFtM9Q="
     },
     {
       "source": {

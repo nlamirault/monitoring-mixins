@@ -18,6 +18,6 @@ local agent = import 'alloy-mixin/mixin.libsonnet';
 
 agent {
   _config+:: {
-    tags: ['alloy-mixin', 'portefaix-0.0.0'],
+    tags: ['alloy-mixin', 'monitoring-mixins-v1.12.0'],
   },
 }
