@@ -2121,7 +2121,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster) (\n  jvm_memory_pool_bytes_max{pool=\"G1 Old Gen\", job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"} != -1\n)",
+                        "expr": "\n  avg by (job,kafka_cluster) (\n  jvm_memory_pool_bytes_max{pool=\"G1 Old Gen\", job=~\"integrations/kafka-zookeeper|integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}\n)\n != -1",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{kafka_cluster}}: Tenured space (max)",

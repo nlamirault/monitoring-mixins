@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "portefaix-0.0.0"
+               "monitoring-mixins-v1.12.0"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -553,7 +553,7 @@
          },
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
                   "datasource": "$datasource",
@@ -618,7 +618,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 7,
                   "links": [ ],
                   "options": {
@@ -630,6 +629,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"querier\"}[$__rate_interval]))",
@@ -719,7 +719,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 8,
                   "links": [ ],
                   "options": {
@@ -731,6 +730,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"querier\"})",
@@ -781,7 +781,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 9,
                   "links": [ ],
                   "options": {
@@ -793,6 +792,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/querier\"})",
@@ -831,7 +831,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 10,
                   "links": [ ],
                   "options": {
@@ -843,9 +842,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"querier\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"querier\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -878,7 +878,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 11,
                   "links": [ ],
                   "options": {
@@ -890,9 +889,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"querier\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance,device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"querier\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -925,7 +925,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 12,
                   "links": [ ],
                   "options": {
@@ -937,9 +936,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"}) and count by(persistentvolumeclaim) (kube_persistentvolumeclaim_labels{cluster=~\"$cluster\", namespace=~\"$namespace\",label_name=~\"querier.*\"})",
+                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*querier.*\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*querier.*\"})",
                         "format": "time_series",
                         "legendFormat": "{{persistentvolumeclaim}}",
                         "legendLink": null
@@ -954,12 +954,11 @@
             "repeatRowId": null,
             "showTitle": true,
             "title": "Querier",
-            "titleSize": "h6",
-            "type": "row"
+            "titleSize": "h6"
          },
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
                   "datasource": "$datasource",
@@ -1024,7 +1023,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 13,
                   "links": [ ],
                   "options": {
@@ -1036,6 +1034,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\"}[$__rate_interval]))",
@@ -1125,7 +1124,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 14,
                   "links": [ ],
                   "options": {
@@ -1137,6 +1135,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\"})",
@@ -1187,7 +1186,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 15,
                   "links": [ ],
                   "options": {
@@ -1199,6 +1197,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/index-gateway\"})",
@@ -1237,7 +1236,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 16,
                   "links": [ ],
                   "options": {
@@ -1249,9 +1247,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -1284,7 +1283,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 17,
                   "links": [ ],
                   "options": {
@@ -1296,9 +1294,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance, device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"index-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -1331,7 +1330,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 18,
                   "links": [ ],
                   "options": {
@@ -1343,9 +1341,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"}) and count by(persistentvolumeclaim) (kube_persistentvolumeclaim_labels{cluster=~\"$cluster\", namespace=~\"$namespace\",label_name=~\"index-gateway.*\"})",
+                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*index-gateway.*\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*index-gateway.*\"})",
                         "format": "time_series",
                         "legendFormat": "{{persistentvolumeclaim}}",
                         "legendLink": null
@@ -1360,12 +1359,11 @@
             "repeatRowId": null,
             "showTitle": true,
             "title": "Index Gateway",
-            "titleSize": "h6",
-            "type": "row"
+            "titleSize": "h6"
          },
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
                   "datasource": "$datasource",
@@ -1430,7 +1428,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 19,
                   "links": [ ],
                   "options": {
@@ -1442,6 +1439,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"bloom-gateway\"}[$__rate_interval]))",
@@ -1531,7 +1529,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 20,
                   "links": [ ],
                   "options": {
@@ -1543,6 +1540,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"bloom-gateway\"})",
@@ -1593,7 +1591,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 21,
                   "links": [ ],
                   "options": {
@@ -1605,6 +1602,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/bloom-gateway\"})",
@@ -1643,7 +1641,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 22,
                   "links": [ ],
                   "options": {
@@ -1655,9 +1652,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"bloom-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance, device) (rate(node_disk_written_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"bloom-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -1690,7 +1688,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 23,
                   "links": [ ],
                   "options": {
@@ -1702,9 +1699,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "sum by(instance, pod, device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"bloom-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
+                        "expr": "sum by(instance, device) (rate(node_disk_read_bytes_total[$__rate_interval])) + ignoring(pod) group_right() (label_replace(count by(instance, pod, device) (container_fs_writes_bytes_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"bloom-gateway\", device!~\".*sda.*\"}), \"device\", \"$1\", \"device\", \"/dev/(.*)\") * 0)\n",
                         "format": "time_series",
                         "legendFormat": "{{pod}} - {{device}}",
                         "legendLink": null
@@ -1737,7 +1735,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 24,
                   "links": [ ],
                   "options": {
@@ -1749,9 +1746,10 @@
                         "sort": "none"
                      }
                   },
+                  "span": 2,
                   "targets": [
                      {
-                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\"}) and count by(persistentvolumeclaim) (kube_persistentvolumeclaim_labels{cluster=~\"$cluster\", namespace=~\"$namespace\",label_name=~\"bloom-gateway.*\"})",
+                        "expr": "max by(persistentvolumeclaim) (kubelet_volume_stats_used_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*bloom-gateway.*\"} / kubelet_volume_stats_capacity_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", persistentvolumeclaim=~\".*bloom-gateway.*\"})",
                         "format": "time_series",
                         "legendFormat": "{{persistentvolumeclaim}}",
                         "legendLink": null
@@ -1766,8 +1764,7 @@
             "repeatRowId": null,
             "showTitle": true,
             "title": "Bloom Gateway",
-            "titleSize": "h6",
-            "type": "row"
+            "titleSize": "h6"
          },
          {
             "collapse": false,
@@ -1850,19 +1847,19 @@
                   "span": 4,
                   "targets": [
                      {
-                        "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\"}[$__rate_interval]))",
+                        "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\"}[$__rate_interval]))",
                         "format": "time_series",
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      },
                      {
-                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\", resource=\"cpu\"} > 0)",
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\", resource=\"cpu\"} > 0)",
                         "format": "time_series",
                         "legendFormat": "request",
                         "legendLink": null
                      },
                      {
-                        "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\"})",
+                        "expr": "min(container_spec_cpu_quota{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\"} / container_spec_cpu_period{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\"})",
                         "format": "time_series",
                         "legendFormat": "limit",
                         "legendLink": null
@@ -1951,19 +1948,19 @@
                   "span": 4,
                   "targets": [
                      {
-                        "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\"})",
+                        "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\"})",
                         "format": "time_series",
                         "legendFormat": "{{pod}}",
                         "legendLink": null
                      },
                      {
-                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\", resource=\"memory\"} > 0)",
+                        "expr": "min(kube_pod_container_resource_requests{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\", resource=\"memory\"} > 0)",
                         "format": "time_series",
                         "legendFormat": "request",
                         "legendLink": null
                      },
                      {
-                        "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=\"ingester\"} > 0)",
+                        "expr": "min(container_spec_memory_limit_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ingester|partition-ingester\"} > 0)",
                         "format": "time_series",
                         "legendFormat": "limit",
                         "legendLink": null
@@ -2013,7 +2010,7 @@
                   "span": 4,
                   "targets": [
                      {
-                        "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/ingester.+\"})",
+                        "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/(ingester|partition-ingester).*\"})",
                         "format": "time_series",
                         "legendFormat": "{{pod}}",
                         "legendLink": null
@@ -2035,7 +2032,7 @@
          },
          {
             "collapse": false,
-            "collapsed": false,
+            "height": "250px",
             "panels": [
                {
                   "datasource": "$datasource",
@@ -2061,7 +2058,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 28,
                   "links": [ ],
                   "options": {
@@ -2073,6 +2069,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 3,
                   "targets": [
                      {
                         "expr": "sum by(pod) (loki_prometheus_rule_group_rules{cluster=~\"$cluster\", job=~\"($namespace)/ruler\"}) or sum by(pod) (cortex_prometheus_rule_group_rules{cluster=~\"$cluster\", job=~\"($namespace)/ruler\"})",
@@ -2147,7 +2144,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 29,
                   "links": [ ],
                   "options": {
@@ -2159,6 +2155,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 3,
                   "targets": [
                      {
                         "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ruler\"}[$__rate_interval]))",
@@ -2248,7 +2245,6 @@
                         }
                      ]
                   },
-                  "gridPos": { },
                   "id": 30,
                   "links": [ ],
                   "options": {
@@ -2260,6 +2256,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 3,
                   "targets": [
                      {
                         "expr": "max by(pod) (container_memory_working_set_bytes{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"ruler\"})",
@@ -2310,7 +2307,6 @@
                      },
                      "overrides": [ ]
                   },
-                  "gridPos": { },
                   "id": 31,
                   "links": [ ],
                   "options": {
@@ -2322,6 +2318,7 @@
                         "sort": "none"
                      }
                   },
+                  "span": 3,
                   "targets": [
                      {
                         "expr": "sum by(pod) (go_memstats_heap_inuse_bytes{cluster=~\"$cluster\", job=~\"($namespace)/ruler\"})",
@@ -2342,15 +2339,14 @@
             "repeatRowId": null,
             "showTitle": true,
             "title": "Ruler",
-            "titleSize": "h6",
-            "type": "row"
+            "titleSize": "h6"
          }
       ],
       "schemaVersion": 14,
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "portefaix-0.0.0"
+         "monitoring-mixins-v1.12.0"
       ],
       "templating": {
          "list": [
