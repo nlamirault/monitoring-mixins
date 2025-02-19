@@ -18,6 +18,6 @@ local agent = import 'agent-flow-mixin/mixin.libsonnet';
 
 agent {
   _config+:: {
-    tags: ['grafana-agent-flow-mixin', 'monitoring-mixins-v1.12.0'],
+    tags: ['grafana-agent-flow-mixin', 'portefaix-1.0.0'],
   },
 }

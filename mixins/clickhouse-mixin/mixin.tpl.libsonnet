@@ -14,10 +14,9 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-local agent = import 'alloy-mixin/mixin.libsonnet';
+local clickhouse = import 'clickhouse-mixin/mixin.libsonnet';
 
-agent {
+clickhouse {
   _config+:: {
-    tags: ['alloy-mixin', 'portefaix-1.0.0'],
   },
 }
