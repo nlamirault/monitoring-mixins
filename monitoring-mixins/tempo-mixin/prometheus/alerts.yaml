@@ -1,16 +1,6 @@
 groups:
     - name: tempo_alerts
       rules:
-        - alert: TempoRequestLatency
-          annotations:
-            message: |
-                {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}s 99th percentile latency.
-            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoRequestLatency
-          expr: |
-            cluster_namespace_job_route:tempo_request_duration_seconds:99quantile{route!~"metrics|/frontend.Frontend/Process|debug_pprof"} > 3
-          for: 15m
-          labels:
-            severity: critical
         - alert: TempoCompactorUnhealthy
           annotations:
             message: There are {{ printf "%f" $value }} unhealthy compactor(s).
@@ -29,6 +19,24 @@ groups:
           for: 15m
           labels:
             severity: warning
+        - alert: TempoIngesterUnhealthy
+          annotations:
+            message: There are {{ printf "%f" $value }} unhealthy ingester(s).
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoIngesterUnhealthy
+          expr: |
+            max by (cluster, namespace) (tempo_ring_members{state="Unhealthy", name="ingester", namespace=~".*"}) > 0
+          for: 15m
+          labels:
+            severity: critical
+        - alert: TempoMetricsGeneratorUnhealthy
+          annotations:
+            message: There are {{ printf "%f" $value }} unhealthy metric-generator(s).
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoMetricsGeneratorUnhealthy
+          expr: |
+            max by (cluster, namespace) (tempo_ring_members{state="Unhealthy", name="metrics-generator", namespace=~".*"}) > 0
+          for: 15m
+          labels:
+            severity: critical
         - alert: TempoCompactionsFailing
           annotations:
             message: Greater than 2 compactions have failed in the past hour.
@@ -36,7 +44,7 @@ groups:
           expr: |
             sum by (cluster, namespace) (increase(tempodb_compaction_errors_total{}[1h])) > 2 and
             sum by (cluster, namespace) (increase(tempodb_compaction_errors_total{}[5m])) > 0
-          for: 5m
+          for: 1h
           labels:
             severity: critical
         - alert: TempoIngesterFlushesUnhealthy
@@ -101,7 +109,7 @@ groups:
             message: Tempo block list length is up 40 percent over the last 7 days.  Consider scaling compactors.
             runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoBlockListRisingQuickly
           expr: |
-            avg(tempodb_blocklist_length{namespace=".*"}) / avg(tempodb_blocklist_length{namespace=".*", job=~"$namespace/$component"} offset 7d) > 1.4
+            avg(tempodb_blocklist_length{namespace=~".*", container="compactor"}) / avg(tempodb_blocklist_length{namespace=~".*", container="compactor"} offset 7d) by (cluster, namespace) > 1.4
           for: 15m
           labels:
             severity: critical
@@ -159,3 +167,60 @@ groups:
           for: 5m
           labels:
             severity: critical
+        - alert: TempoPartitionLagWarning
+          annotations:
+            message: Tempo partition {{ $labels.partition }} in consumer group {{ $labels.group }} is lagging by more than 300 seconds in {{ $labels.cluster }}/{{ $labels.namespace }}.
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoPartitionLag
+          expr: |
+            max by (cluster, namespace, group, partition) (tempo_ingest_group_partition_lag_seconds{namespace=~".*", group=~"metrics-generator|block-builder"}) > 300
+          for: 5m
+          labels:
+            severity: warning
+        - alert: TempoPartitionLagCritical
+          annotations:
+            message: Tempo partition {{ $labels.partition }} in consumer group {{ $labels.group }} is lagging by more than 900 seconds in {{ $labels.cluster }}/{{ $labels.namespace }}.
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoPartitionLag
+          expr: |
+            max by (cluster, namespace, group, partition) (tempo_ingest_group_partition_lag_seconds{namespace=~".*", group=~"metrics-generator|block-builder"}) > 900
+          for: 5m
+          labels:
+            severity: critical
+        - alert: TempoBackendSchedulerJobsFailureRateHigh
+          annotations:
+            message: Tempo backend scheduler job failure rate is {{ printf "%0.2f" $value }} (threshold 0.1) in {{ $labels.cluster }}/{{ $labels.namespace }}
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoBackendSchedulerJobsFailureRateHigh
+          expr: |
+            sum(increase(tempo_backend_scheduler_jobs_failed_total{namespace=~".*"}[5m])) by (cluster, namespace)
+            /
+            sum(increase(tempo_backend_scheduler_jobs_created_total{namespace=~".*"}[5m])) by (cluster, namespace)
+            > 0.05
+          for: 10m
+          labels:
+            severity: critical
+        - alert: TempoBackendSchedulerRetryRateHigh
+          annotations:
+            message: Tempo backend scheduler retry rate is high ({{ printf "%0.2f" $value }} retries/minute) in {{ $labels.cluster }}/{{ $labels.namespace }}
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoBackendSchedulerRetryRateHigh
+          expr: |
+            sum(increase(tempo_backend_scheduler_jobs_retry_total{namespace=~".*"}[1m])) by (cluster, namespace) > 20
+          for: 10m
+          labels:
+            severity: warning
+        - alert: TempoBackendWorkerBadJobsRateHigh
+          annotations:
+            message: Tempo backend worker bad jobs rate is high ({{ printf "%0.2f" $value }} bad jobs/minute) in {{ $labels.cluster }}/{{ $labels.namespace }}
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoBackendWorkerBadJobsRateHigh
+          expr: |
+            sum(increase(tempo_backend_worker_bad_jobs_received_total{namespace=~".*"}[1m])) by (cluster, namespace) > 0
+          for: 10m
+          labels:
+            severity: warning
+        - alert: TempoBackendWorkerCallRetriesHigh
+          annotations:
+            message: Tempo backend worker call retries rate is high ({{ printf "%0.2f" $value }} retries/minute) in {{ $labels.cluster }}/{{ $labels.namespace }}
+            runbook_url: https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoBackendWorkerCallRetriesHigh
+          expr: |
+            sum(increase(tempo_backend_worker_call_retries_total{namespace=~".*"}[1m])) by (cluster, namespace) > 5
+          for: 10m
+          labels:
+            severity: warning
