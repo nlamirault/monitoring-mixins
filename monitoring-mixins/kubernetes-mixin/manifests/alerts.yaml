@@ -85,7 +85,7 @@ spec:
               (
                 kube_statefulset_status_replicas_ready{job="kube-state-metrics"}
                   !=
-                kube_statefulset_status_replicas{job="kube-state-metrics"}
+                kube_statefulset_replicas{job="kube-state-metrics"}
               ) and (
                 changes(kube_statefulset_status_replicas_updated{job="kube-state-metrics"}[10m])
                   ==
@@ -118,13 +118,13 @@ spec:
                     unless
                   kube_statefulset_status_update_revision{job="kube-state-metrics"}
                 )
-                  *
+                  * on(namespace, statefulset, job, cluster)
                 (
                   kube_statefulset_replicas{job="kube-state-metrics"}
                     !=
                   kube_statefulset_status_replicas_updated{job="kube-state-metrics"}
                 )
-              )  and (
+              )  and on(namespace, statefulset, job, cluster) (
                 changes(kube_statefulset_status_replicas_updated{job="kube-state-metrics"}[5m])
                   ==
                 0
@@ -134,26 +134,26 @@ spec:
               severity: warning
           - alert: KubeDaemonSetRolloutStuck
             annotations:
-              description: DaemonSet {{ $labels.namespace }}/{{ $labels.daemonset }} has not finished or progressed for at least 15 minutes.
+              description: DaemonSet {{ $labels.namespace }}/{{ $labels.daemonset }} has not finished or progressed for at least 15m.
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubedaemonsetrolloutstuck
               summary: DaemonSet rollout is stuck.
             expr: |
               (
                 (
                   kube_daemonset_status_current_number_scheduled{job="kube-state-metrics"}
-                   !=
+                    !=
                   kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
                 ) or (
                   kube_daemonset_status_number_misscheduled{job="kube-state-metrics"}
-                   !=
+                    !=
                   0
                 ) or (
                   kube_daemonset_status_updated_number_scheduled{job="kube-state-metrics"}
-                   !=
+                    !=
                   kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
                 ) or (
                   kube_daemonset_status_number_available{job="kube-state-metrics"}
-                   !=
+                    !=
                   kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
                 )
               ) and (
@@ -251,17 +251,53 @@ spec:
             for: 15m
             labels:
               severity: warning
+          - alert: KubePdbNotEnoughHealthyPods
+            annotations:
+              description: PDB {{ $labels.namespace }}/{{ $labels.poddisruptionbudget }} expects {{ $value }} more healthy pods. The desired number of healthy pods has not been met for at least 15m.
+              runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubepdbnotenoughhealthypods
+              summary: PDB does not have enough healthy pods.
+            expr: |
+              (
+                kube_poddisruptionbudget_status_desired_healthy{job="kube-state-metrics"}
+                -
+                kube_poddisruptionbudget_status_current_healthy{job="kube-state-metrics"}
+              )
+              > 0
+            for: 15m
+            labels:
+              severity: warning
       - name: kubernetes-resources
         rules:
           - alert: KubeCPUOvercommit
             annotations:
-              description: Cluster has overcommitted CPU resource requests for Pods by {{ $value }} CPU shares and cannot tolerate node failure.
+              description: Cluster has overcommitted CPU resource requests for Pods by {{ printf "%.2f" $value }} CPU shares and cannot tolerate node failure.
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubecpuovercommit
               summary: Cluster has overcommitted CPU resource requests.
             expr: |
-              sum(namespace_cpu:kube_pod_container_resource_requests:sum{}) - (sum(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"}) - max(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"})) > 0
-              and
-              (sum(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"}) - max(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"})) > 0
+              # Non-HA clusters.
+              (
+                (
+                  sum(namespace_cpu:kube_pod_container_resource_requests:sum{})
+                  -
+                  sum(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"}) > 0
+                )
+                and
+                count(max by (node) (kube_node_role{job="kube-state-metrics", role="control-plane"})) < 3
+              )
+              or
+              # HA clusters.
+              (
+                sum(namespace_cpu:kube_pod_container_resource_requests:sum{})
+                -
+                (
+                  # Skip clusters with only one allocatable node.
+                  (
+                    sum(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"})
+                    -
+                    max(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"})
+                  ) > 0
+                ) > 0
+              )
             for: 10m
             labels:
               severity: warning
@@ -271,9 +307,30 @@ spec:
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubememoryovercommit
               summary: Cluster has overcommitted memory resource requests.
             expr: |
-              sum(namespace_memory:kube_pod_container_resource_requests:sum{}) - (sum(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"}) - max(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"})) > 0
-              and
-              (sum(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"}) - max(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"})) > 0
+              # Non-HA clusters.
+              (
+                (
+                  sum(namespace_memory:kube_pod_container_resource_requests:sum{})
+                  -
+                  sum(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"}) > 0
+                )
+                and
+                count(max by (node) (kube_node_role{job="kube-state-metrics", role="control-plane"})) < 3
+              )
+              or
+              # HA clusters.
+              (
+                sum(namespace_memory:kube_pod_container_resource_requests:sum{})
+                -
+                (
+                  # Skip clusters with only one allocatable node.
+                  (
+                    sum(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"})
+                    -
+                    max(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"})
+                  ) > 0
+                ) > 0
+              )
             for: 10m
             labels:
               severity: warning
@@ -283,10 +340,13 @@ spec:
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubecpuquotaovercommit
               summary: Cluster has overcommitted CPU resource requests.
             expr: |
-              sum(min without(resource) (kube_resourcequota{job="kube-state-metrics", type="hard", resource=~"(cpu|requests.cpu)"}))
-                /
-              sum(kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"})
-                > 1.5
+              sum (
+                min without(resource) (kube_resourcequota{job="kube-state-metrics", type="hard", resource=~"(cpu|requests.cpu)"})
+              )
+              /
+              sum (
+                kube_node_status_allocatable{resource="cpu", job="kube-state-metrics"}
+              ) > 1.5
             for: 5m
             labels:
               severity: warning
@@ -296,10 +356,13 @@ spec:
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubememoryquotaovercommit
               summary: Cluster has overcommitted memory resource requests.
             expr: |
-              sum(min without(resource) (kube_resourcequota{job="kube-state-metrics", type="hard", resource=~"(memory|requests.memory)"}))
-                /
-              sum(kube_node_status_allocatable{resource="memory", job="kube-state-metrics"})
-                > 1.5
+              sum (
+                min without(resource) (kube_resourcequota{job="kube-state-metrics", type="hard", resource=~"(memory|requests.memory)"})
+              )
+              /
+              sum (
+                kube_node_status_allocatable{resource="memory", job="kube-state-metrics"}
+              ) > 1.5
             for: 5m
             labels:
               severity: warning
@@ -349,7 +412,7 @@ spec:
               summary: Processes experience elevated CPU throttling.
             expr: |
               sum(increase(container_cpu_cfs_throttled_periods_total{container!="", job="kubelet", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
-                /
+                / on (cluster, namespace, pod, container, instance) group_left
               sum(increase(container_cpu_cfs_periods_total{job="kubelet", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
                 > ( 25 / 100 )
             for: 15m
@@ -465,7 +528,7 @@ spec:
               severity: warning
           - alert: KubeClientErrors
             annotations:
-              description: Kubernetes API server client '{{ $labels.job }}/{{ $labels.instance }}' is experiencing {{ $value | humanizePercentage }} errors.'
+              description: Kubernetes API server client '{{ $labels.job }}/{{ $labels.instance }}' is experiencing {{ $value | humanizePercentage }} errors.
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeclienterrors
               summary: Kubernetes API server client is experiencing errors.
             expr: |
@@ -562,11 +625,12 @@ spec:
               severity: critical
           - alert: KubeAggregatedAPIErrors
             annotations:
-              description: Kubernetes aggregated API {{ $labels.name }}/{{ $labels.namespace }} has reported errors. It has appeared unavailable {{ $value | humanize }} times averaged over the past 10m.
+              description: Kubernetes aggregated API {{ $labels.instance }}/{{ $labels.name }} has reported {{ $labels.reason }} errors.
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeaggregatedapierrors
               summary: Kubernetes aggregated API has reported errors.
             expr: |
-              sum by(name, namespace, cluster)(increase(aggregator_unavailable_apiservice_total{job="kube-apiserver"}[10m])) > 4
+              sum by(cluster, instance, name, reason)(increase(aggregator_unavailable_apiservice_total{job="kube-apiserver"}[1m])) > 0
+            for: 10m
             labels:
               severity: warning
           - alert: KubeAggregatedAPIDown
@@ -608,9 +672,23 @@ spec:
               summary: Node is not ready.
             expr: |
               kube_node_status_condition{job="kube-state-metrics",condition="Ready",status="true"} == 0
+              and on (cluster, node)
+              kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
             for: 15m
             labels:
               severity: warning
+          - alert: KubeNodePressure
+            annotations:
+              description: '{{ $labels.node }} has active Condition {{ $labels.condition }}. This is caused by resource usage exceeding eviction thresholds.'
+              runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubenodepressure
+              summary: Node has as active Condition.
+            expr: |
+              kube_node_status_condition{job="kube-state-metrics",condition=~"(MemoryPressure|DiskPressure|PIDPressure)",status="true"} == 1
+              and on (cluster, node)
+              kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
+            for: 10m
+            labels:
+              severity: info
           - alert: KubeNodeUnreachable
             annotations:
               description: '{{ $labels.node }} is unreachable and some workloads may be rescheduled.'
@@ -627,12 +705,18 @@ spec:
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubelettoomanypods
               summary: Kubelet is running at capacity.
             expr: |
-              count by(cluster, node) (
-                (kube_pod_status_phase{job="kube-state-metrics",phase="Running"} == 1) * on(instance,pod,namespace,cluster) group_left(node) topk by(instance,pod,namespace,cluster) (1, kube_pod_info{job="kube-state-metrics"})
+              (
+                max by (cluster, instance) (
+                  kubelet_running_pods{job="kubelet"} > 1
+                )
+                * on (cluster, instance) group_left(node)
+                max by (cluster, instance, node) (
+                  kubelet_node_name{job="kubelet"}
+                )
               )
-              /
-              max by(cluster, node) (
-                kube_node_status_capacity{job="kube-state-metrics",resource="pods"} != 1
+              / on (cluster, node) group_left()
+              max by (cluster, node) (
+                kube_node_status_capacity{job="kube-state-metrics", resource="pods"} != 1
               ) > 0.95
             for: 15m
             labels:
@@ -644,9 +728,26 @@ spec:
               summary: Node readiness status is flapping.
             expr: |
               sum(changes(kube_node_status_condition{job="kube-state-metrics",status="true",condition="Ready"}[15m])) by (cluster, node) > 2
+              and on (cluster, node)
+              kube_node_spec_unschedulable{job="kube-state-metrics"} == 0
             for: 15m
             labels:
               severity: warning
+          - alert: KubeNodeEviction
+            annotations:
+              description: Node {{ $labels.node }} is evicting Pods due to {{ $labels.eviction_signal }}.  Eviction occurs when eviction thresholds are crossed, typically caused by Pods exceeding RAM/ephemeral-storage limits.
+              runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubenodeeviction
+              summary: Node is evicting pods.
+            expr: |
+              sum(rate(kubelet_evictions{job="kubelet"}[15m])) by(cluster, eviction_signal, instance)
+              * on (cluster, instance) group_left(node)
+              max by (cluster, instance, node) (
+                kubelet_node_name{job="kubelet"}
+              )
+              > 0
+            for: 0s
+            labels:
+              severity: info
           - alert: KubeletPlegDurationHigh
             annotations:
               description: The Kubelet Pod Lifecycle Event Generator has a 99th percentile duration of {{ $value }} seconds on node {{ $labels.node }}.
@@ -663,7 +764,18 @@ spec:
               runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeletpodstartuplatencyhigh
               summary: Kubelet Pod startup latency is too high.
             expr: |
-              histogram_quantile(0.99, sum(rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet"}[5m])) by (cluster, instance, le)) * on(cluster, instance) group_left(node) kubelet_node_name{job="kubelet"} > 60
+              histogram_quantile(0.99,
+                sum by (cluster, instance, le) (
+                  topk by (cluster, instance, le, operation_type) (1,
+                    rate(kubelet_pod_worker_duration_seconds_bucket{job="kubelet"}[5m])
+                  )
+                )
+              )
+              * on(cluster, instance) group_left(node)
+              topk by (cluster, instance, node) (1,
+                kubelet_node_name{job="kubelet"}
+              )
+              > 60
             for: 15m
             labels:
               severity: warning

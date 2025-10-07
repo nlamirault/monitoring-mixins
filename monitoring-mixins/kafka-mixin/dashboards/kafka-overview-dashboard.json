@@ -45,10 +45,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -108,10 +104,6 @@
                         "options": "Brokers count"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "short"
@@ -173,10 +165,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -228,10 +216,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -279,6 +263,7 @@
                      "showPoints": "never"
                   },
                   "decimals": 1,
+                  "noValue": "No traffic",
                   "unit": "bps"
                },
                "overrides": [
@@ -301,10 +286,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "Bps"
                         }
@@ -316,10 +297,6 @@
                         "options": "Cluster bytes out"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "Bps"
@@ -387,6 +364,7 @@
                      "showPoints": "never"
                   },
                   "decimals": 1,
+                  "noValue": "No packets",
                   "unit": "pps"
                },
                "overrides": [
@@ -396,10 +374,6 @@
                         "options": "Cluster messages in"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "mps"
@@ -462,10 +436,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -516,10 +486,6 @@
                         "options": "Offline partitions"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "short"
@@ -572,10 +538,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -626,10 +588,6 @@
                         "options": "Under min ISR partitions"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "short"
@@ -847,6 +805,7 @@
                      "showPoints": "never"
                   },
                   "decimals": 1,
+                  "noValue": "No traffic",
                   "unit": "bps"
                },
                "overrides": [
@@ -869,10 +828,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "Bps"
                         }
@@ -884,10 +839,6 @@
                         "options": "Broker bytes out"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "Bps"
@@ -955,6 +906,7 @@
                      "showPoints": "never"
                   },
                   "decimals": 1,
+                  "noValue": "No packets",
                   "unit": "pps"
                },
                "overrides": [
@@ -964,10 +916,6 @@
                         "options": "Broker messages in"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "mps"
@@ -1045,10 +993,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -1121,10 +1065,6 @@
                         "options": "Offline partitions"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "short"
@@ -1200,10 +1140,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -1278,10 +1214,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -1347,10 +1279,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "short"
                         }
@@ -1414,10 +1342,6 @@
                         "options": "ISR expands"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "short"
@@ -1495,10 +1419,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1510,10 +1430,6 @@
                               "options": "Produce follower local time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1527,10 +1443,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1543,10 +1455,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1558,10 +1466,6 @@
                               "options": "Produce follower response time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1595,7 +1499,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "request queue time",
@@ -1606,7 +1510,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "local time",
@@ -1617,7 +1521,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "remote time",
@@ -1628,7 +1532,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response queue time",
@@ -1639,7 +1543,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Produce\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response time",
@@ -1676,10 +1580,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1691,10 +1591,6 @@
                               "options": "Fetch-follower local time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1708,10 +1604,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1724,10 +1616,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1739,10 +1627,6 @@
                               "options": "Fetch-follower response time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1776,7 +1660,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "request queue time",
@@ -1787,7 +1671,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "local time",
@@ -1798,7 +1682,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "remote time",
@@ -1809,7 +1693,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response queue time",
@@ -1820,7 +1704,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"FetchFollower\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response time",
@@ -1857,10 +1741,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1872,10 +1752,6 @@
                               "options": "Fetch-consumer local time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1889,10 +1765,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1905,10 +1777,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -1920,10 +1788,6 @@
                               "options": "Fetch-consumer response time"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "ms"
@@ -1957,7 +1821,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_requestqueuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "request queue time",
@@ -1968,7 +1832,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_localtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "local time",
@@ -1979,7 +1843,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_remotetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "remote time",
@@ -1990,7 +1854,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsequeuetimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response queue time",
@@ -2001,7 +1865,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_network_requestmetrics_responsesendtimems{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\", request=\"Fetch\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "response time",
@@ -2047,10 +1911,6 @@
                               "options": "Message conversion (producer)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "mps"
@@ -2115,10 +1975,6 @@
                               "options": "Message conversion (consumer)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "mps"
@@ -2197,10 +2053,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "ms"
                               }
@@ -2231,7 +2083,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_server_zookeeperclientmetrics_zookeeperrequestlatencyms{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  kafka_server_zookeeperclientmetrics_zookeeperrequestlatencyms{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{instance}}: Zookeeper request latency",
@@ -2265,12 +2117,8 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
-                                 "value": "/s"
+                                 "value": "short"
                               }
                            ]
                         },
@@ -2281,12 +2129,8 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
-                                 "value": "/s"
+                                 "value": "short"
                               }
                            ]
                         },
@@ -2297,12 +2141,8 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
-                                 "value": "/s"
+                                 "value": "short"
                               }
                            ]
                         },
@@ -2313,12 +2153,8 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
-                                 "value": "/s"
+                                 "value": "short"
                               }
                            ]
                         }
@@ -2347,7 +2183,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeepersyncconnectspersec{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeepersyncconnectspersec{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{instance}}: Zookeeper connections",
@@ -2358,7 +2194,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperexpirespersec{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperexpirespersec{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{instance}}: Zookeeper expired connections",
@@ -2369,7 +2205,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperdisconnectspersec{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperdisconnectspersec{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{instance}}: Zookeeper disconnects",
@@ -2380,7 +2216,7 @@
                            "type": "prometheus",
                            "uid": "${datasource}"
                         },
-                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperauthfailurespersec{job=\"integrations/kafka\", quantile=\"0.95\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
+                        "expr": "avg by (job,kafka_cluster,instance) (\n  rate(kafka_server_sessionexpirelistener_zookeeperauthfailurespersec{quantile=\"0.95\",job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}[$__rate_interval])\n)",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{instance}}: Zookeeper auth failures",
@@ -2442,10 +2278,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "dtdurations"
                         }
@@ -2500,10 +2332,6 @@
                         "options": "Process start time"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "dateTimeAsIso"
@@ -2647,10 +2475,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": "percent"
                         }
@@ -2716,10 +2540,6 @@
                         "options": "Process memory used (rss)"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": "bytes"
@@ -2814,10 +2634,6 @@
                      },
                      "properties": [
                         {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
-                        {
                            "id": "unit",
                            "value": ""
                         }
@@ -2829,10 +2645,6 @@
                         "options": "Process files max"
                      },
                      "properties": [
-                        {
-                           "id": "mappings",
-                           "value": [ ]
-                        },
                         {
                            "id": "unit",
                            "value": ""
@@ -3013,10 +2825,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "short"
                               }
@@ -3067,10 +2875,6 @@
                               "options": "Classes loaded"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "short"
@@ -3141,10 +2945,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "bytes"
                               }
@@ -3186,10 +2986,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "bytes"
                               }
@@ -3201,10 +2997,6 @@
                               "options": "JVM memory committed(heap)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "bytes"
@@ -3296,10 +3088,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "bytes"
                               }
@@ -3341,10 +3129,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "bytes"
                               }
@@ -3356,10 +3140,6 @@
                               "options": "JVM memory committed(nonheap)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "bytes"
@@ -3462,10 +3242,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "short"
                               }
@@ -3478,10 +3254,6 @@
                            },
                            "properties": [
                               {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
-                              {
                                  "id": "unit",
                                  "value": "short"
                               }
@@ -3493,10 +3265,6 @@
                               "options": "Threads (peak)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "short"
@@ -3538,10 +3306,6 @@
                               "options": "Threads (deadlocked)"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "short"
@@ -3639,10 +3403,6 @@
                               "options": "Threads states"
                            },
                            "properties": [
-                              {
-                                 "id": "mappings",
-                                 "value": [ ]
-                              },
                               {
                                  "id": "unit",
                                  "value": "short"

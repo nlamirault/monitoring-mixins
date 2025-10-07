@@ -7,7 +7,7 @@
             "keepTime": true,
             "tags": [
                "kubernetes-mixin",
-               "monitoring-mixins-v1.12.0"
+               "monitoring-mixins-v1.13.0"
             ],
             "targetBlank": false,
             "title": "Kubernetes",
@@ -54,7 +54,8 @@
                "y": 0
             },
             "id": 1,
-            "pluginVersion": "v11.1.0",
+            "interval": "1m",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -107,7 +108,8 @@
                "y": 0
             },
             "id": 2,
-            "pluginVersion": "v11.1.0",
+            "interval": "1m",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -178,7 +180,7 @@
                "y": 9
             },
             "id": 3,
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -317,7 +319,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -363,7 +365,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -409,7 +411,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -455,7 +457,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -501,7 +503,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -547,7 +549,7 @@
                   "mode": "single"
                }
             },
-            "pluginVersion": "v11.1.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -566,7 +568,7 @@
       "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.12.0"
+         "monitoring-mixins-v1.13.0"
       ],
       "templating": {
          "list": [
