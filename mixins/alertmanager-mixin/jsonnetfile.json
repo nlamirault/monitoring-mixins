@@ -8,7 +8,7 @@
           "subdir": "doc/alertmanager-mixin"
         }
       },
-      "version": "v0.28.1"
+      "version": "v0.29.0"
     }
   ],
   "legacyImports": true
