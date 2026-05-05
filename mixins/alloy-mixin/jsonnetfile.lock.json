@@ -8,18 +8,18 @@
           "subdir": "operations/alloy-mixin"
         }
       },
-      "version": "f7c5034199e91fc9dc9579007a652ec757cebdf4",
-      "sum": "5P3W24eINzSOmpt4XwvRRiqc1DS0KfQ/T+Kzs9K2Qxo="
+      "version": "89d82370454dcee7b07d719ba632810e207a6de9",
+      "sum": "/FTpnsFO9AYYYLWkObOUnJFxwLdCrNoOuUoypm2pKi0="
     },
     {
       "source": {
         "git": {
           "remote": "https://github.com/grafana/grafonnet.git",
-          "subdir": "gen/grafonnet-v10.0.0"
+          "subdir": "gen/grafonnet-latest"
         }
       },
-      "version": "42d098fae987f25f08480e203ca6ddc548c6efbf",
-      "sum": "xdcrJPJlpkq4+5LpGwN4tPAuheNNLXZjE6tDcyvFjr0="
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
+      "sum": "V9vAj21qJOc2DlMPDgB1eEjSQU4A+sAA4AXuJ6bd4xc="
     },
     {
       "source": {
@@ -30,6 +30,16 @@
       },
       "version": "42d098fae987f25f08480e203ca6ddc548c6efbf",
       "sum": "0BvzR0i4bS4hc2O3xDv6i9m52z7mPrjvqxtcPrGhynA="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/grafonnet.git",
+          "subdir": "gen/grafonnet-v11.4.0"
+        }
+      },
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
+      "sum": "aVAX09paQYNOoCSKVpuk1exVIyBoMt/C50QJI+Q/3nA="
     },
     {
       "source": {
