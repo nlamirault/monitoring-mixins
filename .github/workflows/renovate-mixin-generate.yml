@@ -132,24 +132,38 @@ jobs:
       run: |
         make mixin MIXIN="${MIXIN}" APP=monitoring-mixins VERSION=auto
 
-    - name: Commit to Renovate branch
-      if: steps.detect.outputs.skip != 'true' && github.event_name == 'pull_request'
+    - name: Commit to branch
+      if: >-
+        steps.detect.outputs.skip != 'true' &&
+        (github.event_name == 'pull_request' ||
+         (github.event_name == 'workflow_dispatch' &&
+          startsWith(github.ref, 'refs/heads/renovate/')))
       env:
         MIXIN: ${{ steps.detect.outputs.mixin }}
         HEAD_REF: ${{ github.head_ref }}
+        GITHUB_REF: ${{ github.ref }}
+        EVENT_NAME: ${{ github.event_name }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add monitoring-mixins/
         if git diff --staged --quiet; then
           echo "No changes to commit"
-        else
-          git commit -s -m "chore: generate ${MIXIN}"
+          exit 0
+        fi
+        git commit -s -m "chore: generate ${MIXIN}"
+        if [ "${EVENT_NAME}" = "pull_request" ]; then
           git push origin "HEAD:${HEAD_REF}"
+        else
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          git push origin "HEAD:${BRANCH}"
         fi
 
     - name: Create pull request
-      if: steps.detect.outputs.skip != 'true' && github.event_name == 'workflow_dispatch'
+      if: >-
+        steps.detect.outputs.skip != 'true' &&
+        github.event_name == 'workflow_dispatch' &&
+        startsWith(github.ref, 'refs/heads/renovate/') == false
       uses: peter-evans/create-pull-request@v7.0.6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
