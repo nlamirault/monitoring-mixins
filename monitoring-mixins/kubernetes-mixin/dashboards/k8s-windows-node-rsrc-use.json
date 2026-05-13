@@ -1,5 +1,19 @@
 {
       "editable": false,
+      "links": [
+         {
+            "asDropdown": true,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
+               "kubernetes-mixin",
+               "monitoring-mixins-v1.14.0"
+            ],
+            "targetBlank": false,
+            "title": "Kubernetes",
+            "type": "dashboards"
+         }
+      ],
       "panels": [
          {
             "datasource": {
@@ -467,7 +481,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -518,7 +532,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -562,7 +576,7 @@
       "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.13.0"
+         "monitoring-mixins-v1.14.0"
       ],
       "templating": {
          "list": [
@@ -610,7 +624,7 @@
          "from": "now-1h",
          "to": "now"
       },
-      "timezone": "utc",
+      "timezone": "UTC",
       "title": "Kubernetes / USE Method / Node(Windows)",
       "uid": "96e7484b0bb53b74fbc2bcb7723cd40b"
    }

@@ -17,10 +17,10 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubepodnotready
             summary: Pod has been in a non-ready state for more than 15 minutes.
           expr: |
-            sum by (namespace, pod, cluster) (
-              max by(namespace, pod, cluster) (
-                kube_pod_status_phase{job="kube-state-metrics", phase=~"Pending|Unknown|Failed"}
-              ) * on(namespace, pod, cluster) group_left(owner_kind) topk by(namespace, pod, cluster) (
+            sum by (namespace, pod, job, cluster) (
+              max by(namespace, pod, job, cluster) (
+                kube_pod_status_phase{job="kube-state-metrics", phase=~"Pending|Unknown"}
+              ) * on(namespace, pod, cluster) group_left() topk by(namespace, pod, cluster) (
                 1, max by(namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!="Job"})
               )
             ) > 0
@@ -237,9 +237,16 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubehpamaxedout
             summary: HPA is running at max replicas
           expr: |
-            kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}
-              ==
-            kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics"}
+            (
+              kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}
+                ==
+              kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics"}
+            )
+            and on(namespace, horizontalpodautoscaler, cluster) (
+              kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics"}
+                !=
+              kube_horizontalpodautoscaler_spec_min_replicas{job="kube-state-metrics"}
+            )
           for: 15m
           labels:
             severity: warning
@@ -364,10 +371,18 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubequotaalmostfull
             summary: Namespace quota is going to be full.
           expr: |
-            kube_resourcequota{job="kube-state-metrics", type="used"}
-              / ignoring(instance, job, type)
-            (kube_resourcequota{job="kube-state-metrics", type="hard"} > 0)
-              > 0.9 < 1
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="used"}
+              )
+            )
+            / on (cluster, namespace, resource, resourcequota) group_left()
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="hard"}
+              ) > 0
+            )
+            > 0.9 < 1
           for: 15m
           labels:
             severity: info
@@ -377,10 +392,18 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubequotafullyused
             summary: Namespace quota is fully used.
           expr: |
-            kube_resourcequota{job="kube-state-metrics", type="used"}
-              / ignoring(instance, job, type)
-            (kube_resourcequota{job="kube-state-metrics", type="hard"} > 0)
-              == 1
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="used"}
+              )
+            )
+            / on (cluster, namespace, resource, resourcequota) group_left()
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="hard"}
+              ) > 0
+            )
+            == 1
           for: 15m
           labels:
             severity: info
@@ -390,10 +413,17 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubequotaexceeded
             summary: Namespace quota has exceeded the limits.
           expr: |
-            kube_resourcequota{job="kube-state-metrics", type="used"}
-              / ignoring(instance, job, type)
-            (kube_resourcequota{job="kube-state-metrics", type="hard"} > 0)
-              > 1
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="used"}
+              )
+            )
+            / on (cluster, namespace, resource, resourcequota) group_left()
+            topk by (cluster, namespace, resource, resourcequota) (1,
+              max without (instance, job, type) (
+                kube_resourcequota{job="kube-state-metrics", type="hard"}
+              ) > 0
+            ) > 1
           for: 15m
           labels:
             severity: warning
@@ -403,10 +433,22 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-cputhrottlinghigh
             summary: Processes experience elevated CPU throttling.
           expr: |
-            sum(increase(container_cpu_cfs_throttled_periods_total{container!="", job="kubelet", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
-              / on (cluster, namespace, pod, container, instance) group_left
-            sum(increase(container_cpu_cfs_periods_total{job="kubelet", }[5m])) without (id, metrics_path, name, image, endpoint, job, node)
-              > ( 25 / 100 )
+            sum without (id, metrics_path, name, image, endpoint, job, node) (
+              topk by (cluster, namespace, pod, container, instance) (1,
+                increase(
+                  container_cpu_cfs_throttled_periods_total{container!="", job="kubelet", }
+                [5m])
+              )
+            )
+            / on (cluster, namespace, pod, container, instance) group_left
+            sum without (id, metrics_path, name, image, endpoint, job, node) (
+              topk by (cluster, namespace, pod, container, instance) (1,
+                increase(
+                  container_cpu_cfs_periods_total{job="kubelet", }
+                [5m])
+              )
+            )
+            > ( 25 / 100 )
           for: 15m
           labels:
             severity: info
@@ -641,10 +683,20 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeapidown
             summary: Target disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="kube-apiserver"} == 1)
+            absent(up{job="kube-apiserver"})
           for: 15m
           labels:
             severity: critical
+        - alert: KubeAPIInstanceUnreachable
+          annotations:
+            description: A KubeAPI instance has been unreachable for more than 15 minutes.
+            runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeapiinstanceunreachable
+            summary: KubeAPI instance is unreachable.
+          expr: |
+            up{job="kube-apiserver"} == 0
+          for: 15m
+          labels:
+            severity: warning
         - alert: KubeAPITerminatedRequests
           annotations:
             description: The kubernetes apiserver has terminated {{ $value | humanizePercentage }} of its incoming requests.
@@ -827,13 +879,25 @@ groups:
           for: 15m
           labels:
             severity: warning
+        - alert: KubeletInstanceUnreachable
+          annotations:
+            description: A Kubelet instance has been unreachable for more than 15 minutes.
+            runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeletinstanceunreachable
+            summary: Kubelet instance is unreachable.
+          expr: |
+            up{job="kubelet"} == 0
+          for: 15m
+          labels:
+            severity: warning
         - alert: KubeletDown
           annotations:
             description: Kubelet has disappeared from Prometheus target discovery.
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeletdown
             summary: Target disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="kubelet"} == 1)
+            count by (cluster) (kube_node_info{job="kube-state-metrics"})
+            unless on (cluster)
+            count by (cluster) (up{job="kubelet"} == 1)
           for: 15m
           labels:
             severity: critical
@@ -845,10 +909,20 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeschedulerdown
             summary: Target disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="kube-scheduler"} == 1)
+            absent(up{job="kube-scheduler"})
           for: 15m
           labels:
             severity: critical
+        - alert: KubeSchedulerInstanceUnreachable
+          annotations:
+            description: A KubeScheduler instance has been unreachable for more than 15 minutes.
+            runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeschedulerinstanceunreachable
+            summary: KubeScheduler instance is unreachable.
+          expr: |
+            up{job="kube-scheduler"} == 0
+          for: 15m
+          labels:
+            severity: warning
     - name: kubernetes-system-controller-manager
       rules:
         - alert: KubeControllerManagerDown
@@ -857,10 +931,20 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubecontrollermanagerdown
             summary: Target disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="kube-controller-manager"} == 1)
+            absent(up{job="kube-controller-manager"})
           for: 15m
           labels:
             severity: critical
+        - alert: KubeControllerManagerInstanceUnreachable
+          annotations:
+            description: A KubeControllerManager instance has been unreachable for more than 15 minutes.
+            runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubecontrollermanagerinstanceunreachable
+            summary: KubeControllerManager instance is unreachable.
+          expr: |
+            up{job="kube-controller-manager"} == 0
+          for: 15m
+          labels:
+            severity: warning
     - name: kubernetes-system-kube-proxy
       rules:
         - alert: KubeProxyDown
@@ -869,7 +953,17 @@ groups:
             runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeproxydown
             summary: Target disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="kube-proxy"} == 1)
+            absent(up{job="kube-proxy"})
           for: 15m
           labels:
             severity: critical
+        - alert: KubeProxyInstanceUnreachable
+          annotations:
+            description: A KubeProxy instance has been unreachable for more than 15 minutes.
+            runbook_url: https://github.com/nlamirault/monitoring-mixins/tree/master/runbooks/kubernetes-mixin-runbook.md#alert-name-kubeproxyinstanceunreachable
+            summary: KubeProxy instance is unreachable.
+          expr: |
+            up{job="kube-proxy"} == 0
+          for: 15m
+          labels:
+            severity: warning

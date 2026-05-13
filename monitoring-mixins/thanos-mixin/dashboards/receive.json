@@ -2879,7 +2879,7 @@
       "style": "dark",
       "tags": [
          "thanos-mixin",
-         "monitoring-mixins-v1.13.0"
+         "monitoring-mixins-v1.14.0"
       ],
       "templating": {
          "list": [
