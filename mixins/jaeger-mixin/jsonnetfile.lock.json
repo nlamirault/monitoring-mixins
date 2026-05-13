@@ -4,32 +4,12 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/grafana/jsonnet-libs.git",
-          "subdir": "grafana-builder"
-        }
-      },
-      "version": "874d8f2a0b855078c8a3e0079c96c4460809cc8a",
-      "sum": "G7B6E5sqWirDbMWRhifbLRfGgRFbIh9WCYa6X3kMh6g="
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/grafana/jsonnet-libs.git",
-          "subdir": "mixin-utils"
-        }
-      },
-      "version": "874d8f2a0b855078c8a3e0079c96c4460809cc8a",
-      "sum": "VAik6Sh5MD5H1Km1gSIXG4rwQ4m4zyw7odP5TKu3bGo="
-    },
-    {
-      "source": {
-        "git": {
           "remote": "https://github.com/jaegertracing/jaeger.git",
           "subdir": "monitoring/jaeger-mixin"
         }
       },
-      "version": "d054473f16f1c3a82aaff2c440fe4c5bf1c24d47",
-      "sum": "EUxyW9wXZ3Dmf1b+ZOo+8tYjcZP4NRrAebAonqkdr6k="
+      "version": "b5be18b10053a087a9bb272a1d9a0c71bcaac2c7",
+      "sum": "aP5DQPovLKWfMJxohlIdPWCVLMDpkKmP14+fWTywFD0="
     }
   ],
   "legacyImports": false
