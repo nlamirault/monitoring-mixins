@@ -1,0 +1,176 @@
+# Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Renovate / Mixin Generate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      mixin:
+        description: "Mixin to generate"
+        required: true
+        type: choice
+        options:
+          - alertmanager-mixin
+          - alloy-mixin
+          - apollo-server-mixin
+          - cert-manager-mixin
+          - cilium-mixin
+          - coredns-mixin
+          - elasticsearch-mixin
+          - fluxcd-mixin
+          - grafana-agent-flow-mixin
+          - grafana-mixin
+          - istio-mixin
+          - jaeger-mixin
+          - kafka-mixin
+          - kube-state-metrics-mixin
+          - kubernetes-mixin
+          - linkerd-edge-mixin
+          - linkerd-stable-mixin
+          - loki-mixin
+          - memcached-mixin
+          - mimir-mixin
+          - nginx-ingress-controller-mixin
+          - node-exporter-mixin
+          - osm-mixin
+          - phlare-mixin
+          - postgres-mixin
+          - prometheus-mixin
+          - prometheus-operator-mixin
+          - promtail-mixin
+          - pyroscope-mixin
+          - rabbitmq-mixin
+          - sealed-secrets-mixin
+          - tempo-mixin
+          - thanos-mixin
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'renovate/')
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      with:
+        ref: ${{ github.head_ref || github.ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Resolve mixin
+      id: detect
+      env:
+        INPUT_MIXIN: ${{ github.event.inputs.mixin }}
+        BASE_REF: ${{ github.base_ref }}
+        EVENT_NAME: ${{ github.event_name }}
+      run: |
+        if [ "${EVENT_NAME}" = "workflow_dispatch" ]; then
+          echo "mixin=${INPUT_MIXIN}" >> "${GITHUB_OUTPUT}"
+          echo "skip=false" >> "${GITHUB_OUTPUT}"
+        else
+          CHANGED=$(git diff --name-only "origin/${BASE_REF}...HEAD")
+          MIXIN=$(echo "${CHANGED}" | grep '^mixins/' | sed 's|mixins/\([^/]*\)/.*|\1|' | sort -u | head -1)
+          if [ -z "${MIXIN}" ]; then
+            echo "No mixin source changes detected, skipping"
+            echo "skip=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "Detected mixin: ${MIXIN}"
+            echo "mixin=${MIXIN}" >> "${GITHUB_OUTPUT}"
+            echo "skip=false" >> "${GITHUB_OUTPUT}"
+          fi
+        fi
+
+    - name: Install go-jsonnet
+      if: steps.detect.outputs.skip != 'true'
+      env:
+        JSONNET_VERSION: "0.20.0"
+      run: |
+        curl -fsSL "https://github.com/google/go-jsonnet/releases/download/v${JSONNET_VERSION}/go-jsonnet_${JSONNET_VERSION}_Linux_x86_64.tar.gz" \
+          | tar xz -C /tmp
+        sudo mv /tmp/jsonnet /tmp/jsonnetfmt /usr/local/bin/
+
+    - name: Install jsonnet-bundler
+      if: steps.detect.outputs.skip != 'true'
+      env:
+        JB_VERSION: "v0.5.1"
+      run: |
+        sudo curl -fsSL -o /usr/local/bin/jb \
+          "https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/${JB_VERSION}/jb-linux-amd64"
+        sudo chmod +x /usr/local/bin/jb
+
+    - name: Install mixtool
+      if: steps.detect.outputs.skip != 'true'
+      run: |
+        go install github.com/monitoring-mixins/mixtool/cmd/mixtool@latest
+        echo "${HOME}/go/bin" >> "${GITHUB_PATH}"
+
+    - name: Generate mixin
+      if: steps.detect.outputs.skip != 'true'
+      env:
+        MIXIN: ${{ steps.detect.outputs.mixin }}
+      run: |
+        make mixin MIXIN="${MIXIN}" APP=monitoring-mixins VERSION=auto
+
+    - name: Commit to Renovate branch
+      if: steps.detect.outputs.skip != 'true' && github.event_name == 'pull_request'
+      env:
+        MIXIN: ${{ steps.detect.outputs.mixin }}
+        HEAD_REF: ${{ github.head_ref }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add monitoring-mixins/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -s -m "chore: generate ${MIXIN}"
+          git push origin "HEAD:${HEAD_REF}"
+        fi
+
+    - name: Create pull request
+      if: steps.detect.outputs.skip != 'true' && github.event_name == 'workflow_dispatch'
+      uses: peter-evans/create-pull-request@v7.0.6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: "chore/generate-${{ steps.detect.outputs.mixin }}"
+        delete-branch: true
+        title: "chore: generate ${{ steps.detect.outputs.mixin }}"
+        signoff: true
+        draft: false
+        committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+        author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+        assignees: "nlamirault"
+        commit-message: "chore: generate ${{ steps.detect.outputs.mixin }}"
+        labels: |
+          kind/feature
+          lifecycle/active
+          status/review_needed
+        body: |
+          Generate alerts, records and dashboards for `${{ steps.detect.outputs.mixin }}`.
+
+          Auto-generated by [create-pull-request][1].
+
+          [1]: https://github.com/peter-evans/create-pull-request
+
+          Signed-off-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
