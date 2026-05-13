@@ -7,7 +7,7 @@
             "keepTime": true,
             "tags": [
                "kubernetes-mixin",
-               "monitoring-mixins-v1.13.0"
+               "monitoring-mixins-v1.14.0"
             ],
             "targetBlank": false,
             "title": "Kubernetes",
@@ -268,7 +268,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"})) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -305,7 +305,7 @@
                            "value": [
                               {
                                  "title": "Drill down to pods",
-                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e/k8s-resources-namespace?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
+                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
                               }
                            ]
                         }
@@ -345,7 +345,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"})) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -363,7 +363,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"}) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_requests:sum{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"})) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_requests:sum{cluster=\"$cluster\"}) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -381,7 +381,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"}) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_limits:sum{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\"})) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_limits:sum{cluster=\"$cluster\"}) by (namespace)",
                   "format": "table",
                   "instant": true
                }
@@ -484,7 +484,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"})) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -557,7 +557,7 @@
                            "value": [
                               {
                                  "title": "Drill down to pods",
-                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e/k8s-resources-namespace?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
+                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
                               }
                            ]
                         }
@@ -597,7 +597,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"})) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -615,7 +615,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"}) by (namespace) / sum(namespace_memory:kube_pod_container_resource_requests:sum{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"})) by (namespace) / sum(namespace_memory:kube_pod_container_resource_requests:sum{cluster=\"$cluster\"}) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -633,7 +633,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"}) by (namespace) / sum(namespace_memory:kube_pod_container_resource_limits:sum{cluster=\"$cluster\"}) by (namespace)",
+                  "expr": "sum(max by (cluster, namespace, pod, container)(container_memory_rss{job=\"kubelet\", cluster=\"$cluster\", container!=\"\"})) by (namespace) / sum(namespace_memory:kube_pod_container_resource_limits:sum{cluster=\"$cluster\"}) by (namespace)",
                   "format": "table",
                   "instant": true
                }
@@ -707,7 +707,7 @@
                      "properties": [
                         {
                            "id": "unit",
-                           "value": "Bps"
+                           "value": "bps"
                         }
                      ]
                   },
@@ -734,7 +734,7 @@
                            "value": [
                               {
                                  "title": "Drill down to pods",
-                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e/k8s-resources-namespace?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
+                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
                               }
                            ]
                         }
@@ -756,7 +756,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(rate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum((8 * rate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -765,7 +765,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(rate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum((8 * rate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "format": "table",
                   "instant": true
                },
@@ -868,7 +868,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -900,7 +900,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(rate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum((8 * rate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -919,7 +919,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -951,7 +951,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(rate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum((8 * rate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -970,7 +970,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -1002,7 +1002,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "avg(irate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "avg((8 * rate(container_network_receive_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1021,7 +1021,7 @@
                      "showPoints": "never",
                      "spanNulls": true
                   },
-                  "unit": "Bps"
+                  "unit": "bps"
                }
             },
             "gridPos": {
@@ -1053,7 +1053,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "avg(irate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "avg((8 * rate(container_network_transmit_bytes_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval]))) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1104,7 +1104,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(irate(container_network_receive_packets_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum(rate(container_network_receive_packets_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1155,7 +1155,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(irate(container_network_transmit_packets_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum(rate(container_network_transmit_packets_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1206,7 +1206,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(irate(container_network_receive_packets_dropped_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum(rate(container_network_receive_packets_dropped_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1257,7 +1257,7 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "expr": "sum(irate(container_network_transmit_packets_dropped_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
+                  "expr": "sum(rate(container_network_transmit_packets_dropped_total{job=\"kubelet\", cluster=\"$cluster\", namespace=~\".+\"}[$__rate_interval])) by (namespace)",
                   "legendFormat": "__auto"
                }
             ],
@@ -1393,7 +1393,7 @@
                      "properties": [
                         {
                            "id": "unit",
-                           "value": "Bps"
+                           "value": "bps"
                         }
                      ]
                   },
@@ -1408,7 +1408,7 @@
                            "value": [
                               {
                                  "title": "Drill down to pods",
-                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e/k8s-resources-namespace?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
+                                 "url": "./d/85a562078cdf77779eaa1add43ccec1e?${datasource:queryparam}&var-cluster=$cluster&var-namespace=${__data.fields.Namespace}"
                               }
                            ]
                         }
@@ -1535,7 +1535,7 @@
       "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.13.0"
+         "monitoring-mixins-v1.14.0"
       ],
       "templating": {
          "list": [
@@ -1557,10 +1557,10 @@
                   "type": "prometheus",
                   "uid": "${datasource}"
                },
-               "hide": 2,
+               "hide": 0,
                "label": "cluster",
                "name": "cluster",
-               "query": "label_values(up{job=\"kubelet\"}, cluster)",
+               "query": "label_values(up{job=\"kube-state-metrics\"}, cluster)",
                "refresh": 2,
                "sort": 1,
                "type": "query"

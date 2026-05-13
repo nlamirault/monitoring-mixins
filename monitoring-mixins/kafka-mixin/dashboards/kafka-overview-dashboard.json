@@ -29,13 +29,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Active kafka controllers count.\n",
+            "description": "Number of active controllers in the cluster. Should always be exactly 1.  \nZero indicates no controller elected, preventing cluster operations.  \nMore than one indicates split-brain requiring immediate attention.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
                      "fixedColor": "text",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -59,7 +69,6 @@
                "y": 1
             },
             "options": {
-               "colorMode": "fixed",
                "graphMode": "none",
                "reduceOptions": {
                   "calcs": [
@@ -67,7 +76,7 @@
                   ]
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -89,13 +98,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Active brokers count.\n",
+            "description": "Total number of active brokers currently registered and reporting in the cluster.  \n",
             "fieldConfig": {
                "defaults": {
                   "color": {
                      "fixedColor": "text",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -119,7 +138,6 @@
                "y": 1
             },
             "options": {
-               "colorMode": "fixed",
                "graphMode": "none",
                "reduceOptions": {
                   "calcs": [
@@ -127,7 +145,7 @@
                   ]
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -149,13 +167,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Unclean leader election rate.\n",
+            "description": "Rate of unclean leader elections occurring in the cluster. An unclean leader election happens\nwhen a partition leader fails and a replica that was not fully in-sync (not in the ISR) is\nelected as the new leader. This results in potential data loss as the new leader may be missing\nmessages that were committed to the previous leader. Unclean elections occur when unclean.leader.election.enable\nis set to true and there are no in-sync replicas available. Any occurrence of unclean elections\nindicates a serious problem with cluster availability and replication health that risks data integrity.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -178,7 +206,7 @@
                "x": 6,
                "y": 1
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -200,19 +228,29 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "The count of topic partitions for which the leader is not the preferred leader.\n",
+            "description": "The count of topic partitions for which the leader is not the preferred leader. In Kafka,\neach partition has a preferred leader replica (typically the first replica in the replica list).\nWhen leadership is not on the preferred replica, the cluster may experience uneven load distribution\nacross brokers, leading to performance imbalances. This can occur after broker failures and restarts,\nor during cluster maintenance. Running the preferred replica election can help rebalance leadership\nand optimize cluster performance. A consistently high imbalance may indicate issues with automatic\nleader rebalancing or the need for manual intervention.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
                      "matcher": {
                         "id": "byFrameRefID",
-                        "options": "Preferred replica inbalance"
+                        "options": "Preferred replica imbalance"
                      },
                      "properties": [
                         {
@@ -229,7 +267,7 @@
                "x": 9,
                "y": 1
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -239,11 +277,11 @@
                   "expr": "sum by (job,kafka_cluster) (\n  kafka_controller_kafkacontroller_preferredreplicaimbalancecount{job=\"integrations/kafka\",job=~\"$job\",kafka_cluster=~\"$kafka_cluster\",instance=~\"$instance\"}\n)",
                   "format": "time_series",
                   "instant": false,
-                  "legendFormat": "{{kafka_cluster}}: Preferred replica inbalance",
-                  "refId": "Preferred replica inbalance"
+                  "legendFormat": "{{kafka_cluster}}: Preferred replica imbalance",
+                  "refId": "Preferred replica imbalance"
                }
             ],
-            "title": "Preferred replica inbalance",
+            "title": "Preferred replica imbalance",
             "type": "stat"
          },
          {
@@ -251,8 +289,13 @@
                "type": "datasource",
                "uid": "-- Mixed --"
             },
+            "description": "Cluster bytes in (sum): Aggregate rate of incoming data in bytes across all brokers from producers.  \nMeasures total network ingress and storage write load.  \n  \n\nCluster bytes out (sum): Aggregate rate of outgoing data in bytes across all brokers to consumers and followers.  \nMeasures total network egress load and consumer throughput.  \n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "axisCenteredZero": false,
                      "axisLabel": "out(-) | in(+)",
@@ -264,13 +307,17 @@
                   },
                   "decimals": 1,
                   "noValue": "No traffic",
-                  "unit": "bps"
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "Bps"
                },
                "overrides": [
                   {
                      "matcher": {
                         "id": "byRegexp",
-                        "options": "/transmit|tx|out/"
+                        "options": "/transmit|tx|Tx|out/"
                      },
                      "properties": [
                         {
@@ -354,8 +401,13 @@
                "type": "datasource",
                "uid": "-- Mixed --"
             },
+            "description": "Cluster messages in (sum): Aggregate rate of incoming messages across all brokers and topics in the cluster.  \nRepresents total producer throughput and write workload.  \n  \n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
@@ -365,7 +417,11 @@
                   },
                   "decimals": 1,
                   "noValue": "No packets",
-                  "unit": "pps"
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "mps"
                },
                "overrides": [
                   {
@@ -420,13 +476,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Online partitions.\n",
+            "description": "Number of partitions that are currently online and available on this broker. This includes\npartitions where this broker is either the leader or a follower replica. The total count\nreflects the broker's share of the topic partitions across the cluster. A sudden drop in\nonline partitions may indicate broker issues, partition reassignments, or cluster rebalancing.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -449,7 +515,7 @@
                "x": 0,
                "y": 5
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -471,13 +537,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Number of partitions that dont have an active leader and are hence not writable or readable.\n",
+            "description": "Number of partitions that don't have an active leader and are hence not writable or readable.\nOffline partitions indicate a critical availability issue as producers cannot write to these\npartitions and consumers cannot read from them. This typically occurs when all replicas for\na partition are down or when there are not enough in-sync replicas to elect a new leader.\nAny non-zero value requires immediate investigation and remediation to restore service availability.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -500,7 +576,7 @@
                "x": 3,
                "y": 5
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -522,13 +598,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Number of under replicated partitions (| ISR | < | all replicas |).\n",
+            "description": "Number of partitions that have fewer in-sync replicas (ISR) than the configured replication factor.\nUnder-replicated partitions indicate potential data availability issues, as there are fewer copies\nof the data than desired. This could be caused by broker failures, network issues, or brokers\nfalling behind in replication. A high number of under-replicated partitions poses a risk to\ndata durability and availability, as the loss of additional brokers could result in data loss.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -551,7 +637,7 @@
                "x": 6,
                "y": 5
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -573,13 +659,23 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Under min ISR(In-Sync replicas) partitions.\n",
+            "description": "Number of partitions that have fewer in-sync replicas (ISR) than the configured minimum ISR threshold.\nWhen the number of ISRs for a partition falls below the min.insync.replicas setting, the partition\nbecomes unavailable for writes (if acks=all is configured), which helps prevent data loss but impacts\navailability. This metric indicates potential issues with broker availability, network connectivity,\nor replication lag that need immediate attention to restore write availability.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -602,7 +698,7 @@
                "x": 9,
                "y": 5
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -624,12 +720,18 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "0 - follower, 1 - controller.\n",
+            "description": "Current role (sum): Broker's current controller role: 0 indicates follower, 1 indicates active controller.  \nOnly one broker should have value 1 at any time.  \nUsed to identify which broker is managing cluster metadata and leadership.\nCurrent controller role: 0 - follower, 1 - controller.\n  \n\nCurrent zookeeper role (sum): 0 - zookeeper, 1 - zookeeper(leader).\n  \n\nCurrent role (kraft) (sum): Broker state in KRaft mode (Kafka without ZooKeeper).  \nAny value indicates the broker is running in KRaft mode.  \nUsed to identify KRaft-enabled brokers in the cluster.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "mode": "fixed"
-                  }
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -728,16 +830,16 @@
                ]
             },
             "gridPos": {
-               "h": 7,
+               "h": 10,
                "w": 24,
                "x": 0,
-               "y": 12
+               "y": 15
             },
             "maxDataPoints": 100,
             "options": {
                "showValue": "never"
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -782,7 +884,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 20
+               "y": 25
             },
             "panels": [ ],
             "title": "Throughput",
@@ -793,8 +895,13 @@
                "type": "datasource",
                "uid": "-- Mixed --"
             },
+            "description": "Broker bytes in (sum): Rate of incoming data in bytes published to this broker from producers.  \nMeasures network and storage write load.  \n  \n\nBroker bytes out (sum): Rate of outgoing data in bytes sent from this broker to consumers and followers.  \nMeasures network read load and consumer throughput.  \n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "axisCenteredZero": false,
                      "axisLabel": "out(-) | in(+)",
@@ -806,13 +913,17 @@
                   },
                   "decimals": 1,
                   "noValue": "No traffic",
-                  "unit": "bps"
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "Bps"
                },
                "overrides": [
                   {
                      "matcher": {
                         "id": "byRegexp",
-                        "options": "/transmit|tx|out/"
+                        "options": "/transmit|tx|Tx|out/"
                      },
                      "properties": [
                         {
@@ -851,7 +962,7 @@
                "h": 8,
                "w": 12,
                "x": 0,
-               "y": 21
+               "y": 26
             },
             "options": {
                "legend": {
@@ -896,8 +1007,13 @@
                "type": "datasource",
                "uid": "-- Mixed --"
             },
+            "description": "Broker messages in (sum): Rate of incoming messages published to this broker across all topics.  \nTracks producer throughput and write workload.  \n  \n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
@@ -907,7 +1023,11 @@
                   },
                   "decimals": 1,
                   "noValue": "No packets",
-                  "unit": "pps"
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "mps"
                },
                "overrides": [
                   {
@@ -928,7 +1048,7 @@
                "h": 8,
                "w": 12,
                "x": 12,
-               "y": 21
+               "y": 26
             },
             "options": {
                "legend": {
@@ -963,7 +1083,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 29
+               "y": 34
             },
             "panels": [ ],
             "title": "Replication",
@@ -974,16 +1094,25 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Online partitions.\n",
+            "description": "Number of partitions that are currently online and available on this broker. This includes\npartitions where this broker is either the leader or a follower replica. The total count\nreflects the broker's share of the topic partitions across the cluster. A sudden drop in\nonline partitions may indicate broker issues, partition reassignments, or cluster rebalancing.\n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
                      "lineInterpolation": "smooth",
                      "lineWidth": 2,
                      "showPoints": "never"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1004,7 +1133,7 @@
                "h": 6,
                "w": 12,
                "x": 0,
-               "y": 30
+               "y": 35
             },
             "options": {
                "legend": {
@@ -1016,7 +1145,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1038,12 +1167,12 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Number of partitions that dont have an active leader and are hence not writable or readable.\n",
+            "description": "Number of partitions that don't have an active leader and are hence not writable or readable.\nOffline partitions indicate a critical availability issue as producers cannot write to these\npartitions and consumers cannot read from them. This typically occurs when all replicas for\na partition are down or when there are not enough in-sync replicas to elect a new leader.\nAny non-zero value requires immediate investigation and remediation to restore service availability.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "light-red",
-                     "mode": "fixed"
+                     "fixedColor": "#ff7383",
+                     "mode": "shades"
                   },
                   "custom": {
                      "drawStyle": "bars",
@@ -1056,7 +1185,12 @@
                         "mode": "normal"
                      }
                   },
-                  "noValue": "No errors"
+                  "noValue": "No errors",
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1077,7 +1211,7 @@
                "h": 6,
                "w": 12,
                "x": 12,
-               "y": 30
+               "y": 35
             },
             "maxDataPoints": 100,
             "options": {
@@ -1090,7 +1224,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1112,12 +1246,12 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Number of under replicated partitions (| ISR | < | all replicas |).\n",
+            "description": "Number of partitions that have fewer in-sync replicas (ISR) than the configured replication factor.\nUnder-replicated partitions indicate potential data availability issues, as there are fewer copies\nof the data than desired. This could be caused by broker failures, network issues, or brokers\nfalling behind in replication. A high number of under-replicated partitions poses a risk to\ndata durability and availability, as the loss of additional brokers could result in data loss.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "light-red",
-                     "mode": "fixed"
+                     "fixedColor": "#ff7383",
+                     "mode": "shades"
                   },
                   "custom": {
                      "drawStyle": "bars",
@@ -1130,7 +1264,12 @@
                         "mode": "normal"
                      }
                   },
-                  "noValue": "No errors"
+                  "noValue": "No errors",
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1151,7 +1290,7 @@
                "h": 6,
                "w": 12,
                "x": 0,
-               "y": 36
+               "y": 41
             },
             "maxDataPoints": 100,
             "options": {
@@ -1164,7 +1303,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1186,12 +1325,12 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Under min ISR(In-Sync replicas) partitions.\n",
+            "description": "Number of partitions that have fewer in-sync replicas (ISR) than the configured minimum ISR threshold.\nWhen the number of ISRs for a partition falls below the min.insync.replicas setting, the partition\nbecomes unavailable for writes (if acks=all is configured), which helps prevent data loss but impacts\navailability. This metric indicates potential issues with broker availability, network connectivity,\nor replication lag that need immediate attention to restore write availability.\n",
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "light-red",
-                     "mode": "fixed"
+                     "fixedColor": "#ff7383",
+                     "mode": "shades"
                   },
                   "custom": {
                      "drawStyle": "bars",
@@ -1204,7 +1343,12 @@
                         "mode": "normal"
                      }
                   },
-                  "noValue": "No errors"
+                  "noValue": "No errors",
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1225,7 +1369,7 @@
                "h": 6,
                "w": 12,
                "x": 12,
-               "y": 36
+               "y": 41
             },
             "maxDataPoints": 100,
             "options": {
@@ -1238,7 +1382,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1263,13 +1407,22 @@
             "description": "The number of in-sync replicas (ISRs) for a particular partition should remain fairly static,\nthe only exceptions are when you are expanding your broker cluster or removing partitions.\nIn order to maintain high availability, a healthy Kafka cluster requires a minimum number of ISRs for failover. \n\nA replica could be removed from the ISR pool for a couple of reasons: it is too far behind the leaders offset\n(user-configurable by setting the replica.lag.max.messages configuration parameter),\nor it has not contacted the leader for some time (configurable with the replica.socket.timeout.ms parameter). No matter the reason,\nan increase in IsrShrinksPerSec without a corresponding increase in IsrExpandsPerSec shortly thereafter is cause for concern and requires user intervention.\n\nThe Kafka documentation provides a wealth of information on the user-configurable parameters for brokers.\n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
                      "lineInterpolation": "smooth",
                      "lineWidth": 2,
                      "showPoints": "never"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1290,7 +1443,7 @@
                "h": 6,
                "w": 12,
                "x": 0,
-               "y": 42
+               "y": 47
             },
             "options": {
                "legend": {
@@ -1302,7 +1455,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1327,13 +1480,22 @@
             "description": "The number of in-sync replicas (ISRs) for a particular partition should remain fairly static,\nthe only exceptions are when you are expanding your broker cluster or removing partitions.\nIn order to maintain high availability, a healthy Kafka cluster requires a minimum number of ISRs for failover. \n\nA replica could be removed from the ISR pool for a couple of reasons: it is too far behind the leaders offset\n(user-configurable by setting the replica.lag.max.messages configuration parameter),\nor it has not contacted the leader for some time (configurable with the replica.socket.timeout.ms parameter). No matter the reason,\nan increase in IsrShrinksPerSec without a corresponding increase in IsrExpandsPerSec shortly thereafter is cause for concern and requires user intervention.\n\nThe Kafka documentation provides a wealth of information on the user-configurable parameters for brokers.\n",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
                      "lineInterpolation": "smooth",
                      "lineWidth": 2,
                      "showPoints": "never"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": "short"
                },
                "overrides": [
                   {
@@ -1354,7 +1516,7 @@
                "h": 6,
                "w": 12,
                "x": 12,
-               "y": 42
+               "y": 47
             },
             "options": {
                "legend": {
@@ -1366,7 +1528,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -1389,7 +1551,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 48
+               "y": 53
             },
             "panels": [
                {
@@ -1397,9 +1559,13 @@
                      "type": "datasource",
                      "uid": "-- Mixed --"
                   },
-                  "description": "Total time breakdown for producer requests.\nquantile: 0.95\n\n- `Request queue`: Time spent waiting in the request queue.\n- `Local time`: Time spent being processed by leader.\n- `Remote time`: Time spent waiting for follower response (only when 'require acks' is set).\n- `Response queue`: Time spent waiting in the response queue.\n- `Response time`: Time to send the response.\n\n",
+                  "description": "Produce follower queue time (avg): Time spent waiting in the request queue.\nHigh values indicate insufficient IO threads, CPU bottlenecks, or undersized request queue.  \nQueue size should match connection count.\n  \n\nProduce follower local time (avg): Time spent being processed by leader.\nHigh values often indicate slow storage or disk bottlenecks.  \nCheck LogFlushRateAndTimeMs for disk performance issues.\n  \n\nProduce follower remote time (avg): Time spent waiting for follower response (only when 'require acks' is set).\nFor fetch requests, high values may indicate caught-up consumers with no new data (normal if near max wait time).  \nConfigure via replica.fetch.wait.max.ms and fetch.max.wait.ms.\n  \n\nProduce follower response queue time (avg): Time spent waiting in the response queue.\nHigh values indicate insufficient network threads or slow network dequeue causing backpressure.\n  \n\nProduce follower response time (avg): Time to send the response.\nHigh values indicate slow zero-copy operations or network saturation.  \nNetwork buffer fullness can cause Kafka to block.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "none",
@@ -1409,7 +1575,12 @@
                            "stacking": {
                               "mode": "normal"
                            }
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "ms"
                      },
                      "overrides": [
                         {
@@ -1478,7 +1649,7 @@
                      "h": 6,
                      "w": 8,
                      "x": 0,
-                     "y": 49
+                     "y": 54
                   },
                   "options": {
                      "legend": {
@@ -1558,9 +1729,13 @@
                      "type": "datasource",
                      "uid": "-- Mixed --"
                   },
-                  "description": "Total time breakdown for fetch-follower requests.\nquantile: 0.95\n\n- `Request queue`: Time spent waiting in the request queue.\n- `Local time`: Time spent being processed by leader.\n- `Remote time`: Time spent waiting for follower response (only when 'require acks' is set).\n- `Response queue`: Time spent waiting in the response queue.\n- `Response time`: Time to send the response.\n\n",
+                  "description": "Fetch-follower queue time (avg): Time spent waiting in the request queue.\nHigh values indicate insufficient IO threads, CPU bottlenecks, or undersized request queue.  \nQueue size should match connection count.\n  \n\nFetch-follower local time (avg): Time spent being processed by leader.\nHigh values often indicate slow storage or disk bottlenecks.  \nCheck LogFlushRateAndTimeMs for disk performance issues.\n  \n\nFetch-follower remote time (avg): Time spent waiting for follower response (only when 'require acks' is set).\nFor fetch requests, high values may indicate caught-up consumers with no new data (normal if near max wait time).  \nConfigure via replica.fetch.wait.max.ms and fetch.max.wait.ms.\n  \n\nFetch-follower response queue time (avg): Time spent waiting in the response queue.\nHigh values indicate insufficient network threads or slow network dequeue causing backpressure.\n  \n\nFetch-follower response time (avg): Time to send the response.\nHigh values indicate slow zero-copy operations or network saturation.  \nNetwork buffer fullness can cause Kafka to block.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "none",
@@ -1570,7 +1745,12 @@
                            "stacking": {
                               "mode": "normal"
                            }
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "ms"
                      },
                      "overrides": [
                         {
@@ -1639,7 +1819,7 @@
                      "h": 6,
                      "w": 8,
                      "x": 8,
-                     "y": 49
+                     "y": 54
                   },
                   "options": {
                      "legend": {
@@ -1719,9 +1899,13 @@
                      "type": "datasource",
                      "uid": "-- Mixed --"
                   },
-                  "description": "Total time breakdown for fetch requests.\nquantile: 0.95\n\n- `Request queue`: Time   spent waiting in the request queue.\n- `Local time`: Time spent being processed by leader.\n- `Remote time`: Time spent waiting for follower response (only when 'require acks' is set).\n- `Response queue`: Time spent waiting in the response queue.\n- `Response time`: Time to send the response.\n\n",
+                  "description": "Fetch-consumer queue time (avg): Time spent waiting in the request queue.\nHigh values indicate insufficient IO threads, CPU bottlenecks, or undersized request queue.  \nQueue size should match connection count.\n  \n\nFetch-consumer local time (avg): Time spent being processed by leader.\nHigh values often indicate slow storage or disk bottlenecks.  \nCheck LogFlushRateAndTimeMs for disk performance issues.\n  \n\nFetch-consumer remote time (avg): Time spent waiting for follower response (only when 'require acks' is set).\nFor fetch requests, high values may indicate caught-up consumers with no new data (normal if near max wait time).  \nConfigure via replica.fetch.wait.max.ms and fetch.max.wait.ms.\n  \n\nFetch-consumer response queue time (avg): Time spent waiting in the response queue.\nHigh values indicate insufficient network threads or slow network dequeue causing backpressure.\n  \n\nFetch-consumer response time (avg): Time to send the response.\nHigh values indicate slow zero-copy operations or network saturation.  \nNetwork buffer fullness can cause Kafka to block.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "none",
@@ -1731,7 +1915,12 @@
                            "stacking": {
                               "mode": "normal"
                            }
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "ms"
                      },
                      "overrides": [
                         {
@@ -1800,7 +1989,7 @@
                      "h": 6,
                      "w": 8,
                      "x": 16,
-                     "y": 49
+                     "y": 54
                   },
                   "options": {
                      "legend": {
@@ -1885,7 +2074,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 55
+               "y": 60
             },
             "panels": [
                {
@@ -1893,16 +2082,25 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "The number of messages produced converted to match the log.message.format.version.",
+                  "description": "Rate of producer messages requiring format conversion to match broker's log.message.format.version.  \nConversions add CPU overhead and latency.  \nNon-zero values suggest producer and broker version mismatches requiring alignment.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "mps"
                      },
                      "overrides": [
                         {
@@ -1923,7 +2121,7 @@
                      "h": 6,
                      "w": 12,
                      "x": 0,
-                     "y": 56
+                     "y": 61
                   },
                   "options": {
                      "legend": {
@@ -1935,7 +2133,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -1957,16 +2155,25 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "The number of messages consumed converted at consumer to match the log.message.format.version.",
+                  "description": "Rate of messages requiring format conversion during consumer fetch to match log.message.format.version.  \nConversions impact broker CPU and consumer latency.  \nIndicates version mismatch between stored messages and consumer expectations.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "mps"
                      },
                      "overrides": [
                         {
@@ -1987,7 +2194,7 @@
                      "h": 6,
                      "w": 12,
                      "x": 12,
-                     "y": 56
+                     "y": 61
                   },
                   "options": {
                      "legend": {
@@ -1999,7 +2206,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2026,7 +2233,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 62
+               "y": 67
             },
             "panels": [
                {
@@ -2034,16 +2241,25 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "Latency in millseconds for ZooKeeper requests from broker.",
+                  "description": "Latency in milliseconds for ZooKeeper requests from broker to ZooKeeper ensemble.  \nHigh latency indicates ZooKeeper performance issues or network problems.  \nCritical for broker operations like leader election and metadata updates.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "ms"
                      },
                      "overrides": [
                         {
@@ -2064,7 +2280,7 @@
                      "h": 6,
                      "w": 8,
                      "x": 0,
-                     "y": 63
+                     "y": 68
                   },
                   "options": {
                      "legend": {
@@ -2076,7 +2292,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2098,16 +2314,25 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "Zookeeper connections rate.",
+                  "description": "Zookeeper connections (avg): Rate of successful ZooKeeper connections established by broker.  \nFrequent connections may indicate session instability or network issues.  \nShould be stable in healthy clusters with occasional reconnections during maintenance.\n  \n\nZookeeper expired connections (avg): Rate of ZooKeeper session expirations from broker.  \nExpirations cause broker to lose cluster membership temporarily.  \nIndicates GC pauses, network issues, or ZooKeeper overload requiring investigation.\n  \n\nZookeeper disconnects (avg): Rate of ZooKeeper disconnections from broker.  \nFrequent disconnects indicate unstable ZooKeeper connectivity or network problems.  \nCan lead to ISR changes and performance degradation if persistent.\n  \n\nZookeeper auth failures (avg): Rate of ZooKeeper authentication failures from broker.  \nIndicates incorrect credentials, ACL issues, or security configuration problems.  \nPrevents broker from accessing ZooKeeper data and requires immediate security review.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "short"
                      },
                      "overrides": [
                         {
@@ -2164,7 +2389,7 @@
                      "h": 6,
                      "w": 8,
                      "x": 8,
-                     "y": 63
+                     "y": 68
                   },
                   "options": {
                      "legend": {
@@ -2176,7 +2401,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2236,7 +2461,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 69
+               "y": 74
             },
             "panels": [ ],
             "title": "Process overview",
@@ -2251,7 +2476,7 @@
             "fieldConfig": {
                "defaults": {
                   "color": {
-                     "fixedColor": "text",
+                     "fixedColor": "#5794f2",
                      "mode": "thresholds"
                   },
                   "decimals": 1,
@@ -2289,13 +2514,13 @@
                "h": 6,
                "w": 8,
                "x": 0,
-               "y": 70
+               "y": 75
             },
             "options": {
                "colorMode": "value",
                "graphMode": "none"
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -2323,7 +2548,17 @@
                   "color": {
                      "fixedColor": "text",
                      "mode": "fixed"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [
+                        {
+                           "color": "#5794f2",
+                           "value": null
+                        }
+                     ]
+                  },
+                  "unit": "dateTimeAsIso"
                },
                "overrides": [
                   {
@@ -2344,10 +2579,9 @@
                "h": 6,
                "w": 8,
                "x": 8,
-               "y": 70
+               "y": 75
             },
             "options": {
-               "colorMode": "fixed",
                "graphMode": "none",
                "reduceOptions": {
                   "calcs": [
@@ -2355,7 +2589,7 @@
                   ]
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -2380,6 +2614,10 @@
             "description": "Load average: Signal not found.",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 0,
                      "gradientMode": "opacity",
@@ -2388,6 +2626,10 @@
                      "showPoints": "never"
                   },
                   "min": 0,
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
                   "unit": "short"
                },
                "overrides": [
@@ -2400,7 +2642,7 @@
                         {
                            "id": "color",
                            "value": {
-                              "fixedColor": "light-orange",
+                              "fixedColor": "#ffb357",
                               "mode": "fixed"
                            }
                         },
@@ -2426,7 +2668,7 @@
                "h": 6,
                "w": 8,
                "x": 16,
-               "y": 70
+               "y": 75
             },
             "options": {
                "content": "",
@@ -2439,7 +2681,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "title": "",
             "transparent": true,
             "type": "text"
@@ -2453,6 +2695,7 @@
             "fieldConfig": {
                "defaults": {
                   "color": {
+                     "fixedColor": "#5794f2",
                      "mode": "continuous-BlYlRd"
                   },
                   "custom": {
@@ -2465,6 +2708,10 @@
                   "decimals": 1,
                   "max": 100,
                   "min": 0,
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
                   "unit": "percent"
                },
                "overrides": [
@@ -2486,7 +2733,7 @@
                "h": 6,
                "w": 8,
                "x": 0,
-               "y": 76
+               "y": 81
             },
             "options": {
                "legend": {
@@ -2498,7 +2745,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -2523,6 +2770,10 @@
             "description": "Process resident memory size in bytes.",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
@@ -2531,6 +2782,10 @@
                      "showPoints": "never"
                   },
                   "min": 0,
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
                   "unit": "bytes"
                },
                "overrides": [
@@ -2555,7 +2810,7 @@
                         {
                            "id": "color",
                            "value": {
-                              "fixedColor": "light-orange",
+                              "fixedColor": "#ffb357",
                               "mode": "fixed"
                            }
                         },
@@ -2581,7 +2836,7 @@
                "h": 6,
                "w": 8,
                "x": 8,
-               "y": 76
+               "y": 81
             },
             "options": {
                "legend": {
@@ -2593,7 +2848,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -2615,16 +2870,25 @@
                "type": "prometheus",
                "uid": "${datasource}"
             },
-            "description": "Process files opened.",
+            "description": "Process files open (avg): Process files opened.  \n\nProcess files max (avg): Process files opened limit.",
             "fieldConfig": {
                "defaults": {
+                  "color": {
+                     "fixedColor": "#5794f2",
+                     "mode": "palette-classic"
+                  },
                   "custom": {
                      "fillOpacity": 30,
                      "gradientMode": "opacity",
                      "lineInterpolation": "smooth",
                      "lineWidth": 2,
                      "showPoints": "never"
-                  }
+                  },
+                  "thresholds": {
+                     "mode": "absolute",
+                     "steps": [ ]
+                  },
+                  "unit": ""
                },
                "overrides": [
                   {
@@ -2657,7 +2921,7 @@
                "h": 6,
                "w": 8,
                "x": 16,
-               "y": 76
+               "y": 81
             },
             "options": {
                "legend": {
@@ -2669,7 +2933,7 @@
                   "sort": "desc"
                }
             },
-            "pluginVersion": "v11.0.0",
+            "pluginVersion": "v11.4.0",
             "targets": [
                {
                   "datasource": {
@@ -2703,7 +2967,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 82
+               "y": 87
             },
             "panels": [
                {
@@ -2715,12 +2979,21 @@
                   "fieldConfig": {
                      "defaults": {
                         "color": {
-                           "fixedColor": "text",
+                           "fixedColor": "#5794f2",
                            "mode": "continuous-BlYlRd"
                         },
                         "decimals": 1,
                         "max": 100,
                         "min": 0,
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [
+                              {
+                                 "color": "#5794f2",
+                                 "value": null
+                              }
+                           ]
+                        },
                         "unit": "percent"
                      }
                   },
@@ -2728,7 +3001,7 @@
                      "h": 4,
                      "w": 4,
                      "x": 0,
-                     "y": 83
+                     "y": 88
                   },
                   "options": {
                      "colorMode": "value",
@@ -2738,7 +3011,7 @@
                         ]
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2764,12 +3037,21 @@
                   "fieldConfig": {
                      "defaults": {
                         "color": {
-                           "fixedColor": "text",
+                           "fixedColor": "#5794f2",
                            "mode": "continuous-BlYlRd"
                         },
                         "decimals": 1,
                         "max": 100,
                         "min": 0,
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [
+                              {
+                                 "color": "#5794f2",
+                                 "value": null
+                              }
+                           ]
+                        },
                         "unit": "percent"
                      }
                   },
@@ -2777,7 +3059,7 @@
                      "h": 4,
                      "w": 4,
                      "x": 4,
-                     "y": 83
+                     "y": 88
                   },
                   "options": {
                      "colorMode": "value",
@@ -2787,7 +3069,7 @@
                         ]
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2813,9 +3095,19 @@
                   "fieldConfig": {
                      "defaults": {
                         "color": {
-                           "fixedColor": "text",
+                           "fixedColor": "#5794f2",
                            "mode": "fixed"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [
+                              {
+                                 "color": "#5794f2",
+                                 "value": null
+                              }
+                           ]
+                        },
+                        "unit": "short"
                      },
                      "overrides": [
                         {
@@ -2836,9 +3128,9 @@
                      "h": 4,
                      "w": 4,
                      "x": 8,
-                     "y": 83
+                     "y": 88
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2864,9 +3156,19 @@
                   "fieldConfig": {
                      "defaults": {
                         "color": {
-                           "fixedColor": "text",
+                           "fixedColor": "#5794f2",
                            "mode": "fixed"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [
+                              {
+                                 "color": "#5794f2",
+                                 "value": null
+                              }
+                           ]
+                        },
+                        "unit": "short"
                      },
                      "overrides": [
                         {
@@ -2887,9 +3189,9 @@
                      "h": 4,
                      "w": 4,
                      "x": 12,
-                     "y": 83
+                     "y": 88
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -2916,7 +3218,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 87
+               "y": 92
             },
             "panels": [
                {
@@ -2924,9 +3226,13 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "The used space is the amount of memory that is currently occupied by Java objects.",
+                  "description": "JVM memory used(heap) (avg): The used space is the amount of memory that is currently occupied by Java objects.  \n\nJVM memory max(heap) (avg): The max heap size is the size specified via the -Xmx flag.\nReturns -1 if the maximum memory size is undefined.\n\nThis amount of memory is not guaranteed to be available for memory management\nif it is greater than the amount of committed memory.\nThe Java virtual machine may fail to allocate memory even if the amount of used memory does not exceed this maximum size.\n\nSee also: https://docs.oracle.com/javase/10/docs/api/java/lang/management/MemoryUsage.html\n  \n\nJVM memory committed(heap) (avg): The committed size is the amount of memory guaranteed to be available for use by the Java virtual machine.\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
@@ -2935,6 +3241,10 @@
                            "showPoints": "never"
                         },
                         "min": 0,
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
                         "unit": "bytes"
                      },
                      "overrides": [
@@ -2959,7 +3269,7 @@
                               {
                                  "id": "color",
                                  "value": {
-                                    "fixedColor": "light-orange",
+                                    "fixedColor": "#ffb357",
                                     "mode": "fixed"
                                  }
                               },
@@ -3009,7 +3319,7 @@
                      "h": 8,
                      "w": 8,
                      "x": 0,
-                     "y": 88
+                     "y": 93
                   },
                   "h": 6,
                   "options": {
@@ -3022,7 +3332,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -3067,9 +3377,13 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "The amount of memory that is currently in non-heap.",
+                  "description": "JVM memory used(nonheap) (avg): The amount of memory that is currently in non-heap.  \n\nJVM memory max(nonheap) (avg): Measure of memory max possible (non-heap). Returns -1 if the maximum memory size is undefined.  \n\nJVM memory committed(nonheap) (avg): The committed size is the amount of memory guaranteed to be available for use by the Java virtual machine(non-heap).\n",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
@@ -3078,6 +3392,10 @@
                            "showPoints": "never"
                         },
                         "min": 0,
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
                         "unit": "bytes"
                      },
                      "overrides": [
@@ -3102,7 +3420,7 @@
                               {
                                  "id": "color",
                                  "value": {
-                                    "fixedColor": "light-orange",
+                                    "fixedColor": "#ffb357",
                                     "mode": "fixed"
                                  }
                               },
@@ -3152,7 +3470,7 @@
                      "h": 8,
                      "w": 8,
                      "x": 8,
-                     "y": 88
+                     "y": 93
                   },
                   "h": 6,
                   "options": {
@@ -3165,7 +3483,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -3215,7 +3533,7 @@
                "h": 1,
                "w": 0,
                "x": 0,
-               "y": 96
+               "y": 101
             },
             "panels": [
                {
@@ -3223,16 +3541,25 @@
                      "type": "prometheus",
                      "uid": "${datasource}"
                   },
-                  "description": "The current number of live threads including both daemon and non-daemon threads.",
+                  "description": "Threads (avg): The current number of live threads including both daemon and non-daemon threads.  \n\nThreads (daemon) (avg): Daemon thread count of a JVM.  \n\nThreads (peak) (avg): Peak thread count of a JVM.  \n\nThreads (deadlocked) (avg): Cycles of JVM-threads that are in deadlock waiting to acquire object monitors or ownable synchronizers.",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "short"
                      },
                      "overrides": [
                         {
@@ -3280,7 +3607,7 @@
                               {
                                  "id": "color",
                                  "value": {
-                                    "fixedColor": "light-orange",
+                                    "fixedColor": "#ffb357",
                                     "mode": "fixed"
                                  }
                               },
@@ -3318,7 +3645,7 @@
                      "h": 8,
                      "w": 8,
                      "x": 0,
-                     "y": 97
+                     "y": 102
                   },
                   "options": {
                      "legend": {
@@ -3330,7 +3657,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {
@@ -3388,13 +3715,22 @@
                   "description": "Threads by current state.",
                   "fieldConfig": {
                      "defaults": {
+                        "color": {
+                           "fixedColor": "#5794f2",
+                           "mode": "palette-classic"
+                        },
                         "custom": {
                            "fillOpacity": 30,
                            "gradientMode": "opacity",
                            "lineInterpolation": "smooth",
                            "lineWidth": 2,
                            "showPoints": "never"
-                        }
+                        },
+                        "thresholds": {
+                           "mode": "absolute",
+                           "steps": [ ]
+                        },
+                        "unit": "short"
                      },
                      "overrides": [
                         {
@@ -3415,7 +3751,7 @@
                      "h": 8,
                      "w": 8,
                      "x": 8,
-                     "y": 97
+                     "y": 102
                   },
                   "options": {
                      "legend": {
@@ -3427,7 +3763,7 @@
                         "sort": "desc"
                      }
                   },
-                  "pluginVersion": "v11.0.0",
+                  "pluginVersion": "v11.4.0",
                   "targets": [
                      {
                         "datasource": {

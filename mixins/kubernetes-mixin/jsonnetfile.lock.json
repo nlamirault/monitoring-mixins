@@ -8,7 +8,7 @@
           "subdir": "gen/grafonnet-latest"
         }
       },
-      "version": "42d098fae987f25f08480e203ca6ddc548c6efbf",
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
       "sum": "V9vAj21qJOc2DlMPDgB1eEjSQU4A+sAA4AXuJ6bd4xc="
     },
     {
@@ -18,7 +18,7 @@
           "subdir": "gen/grafonnet-v11.4.0"
         }
       },
-      "version": "42d098fae987f25f08480e203ca6ddc548c6efbf",
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
       "sum": "aVAX09paQYNOoCSKVpuk1exVIyBoMt/C50QJI+Q/3nA="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "doc-util"
         }
       },
-      "version": "6ac6c69685b8c29c54515448eaca583da2d88150",
+      "version": "bf6f08ae02a51c48bdcec4629b1c1a5a62c6f803",
       "sum": "BrAL/k23jq+xy9oA7TWIhUx07dsA/QLm3g7ktCwe//U="
     },
     {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "4eee017d21cb63a303925d1dcd9fc5c496809b46",
-      "sum": "Kh0GbIycNmJPzk6IOMXn1BbtLNyaiiimclYk7+mvsns="
+      "version": "4d7f8cb24d613430799f9d56809cc6964f35cea9",
+      "sum": "hOrwkOx34tOXqoDVnwuI/Uf/dr9HFFSPWpDPOvnEGrk="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": ""
         }
       },
-      "version": "d6556e52d2762de47dc28ac0f9f2ffe93a50e785",
-      "sum": "jLkq96mnGjid6+aQFvT16Fspnvud7NM1edY33kDSpIE="
+      "version": "d94ceca0b5c8fb2daec91f02cf5eb948ff4f9528",
+      "sum": "W+/c+wrDtdDPnjURNpHmUjo/00W3guCQqNXJUjLztFs="
     }
   ],
   "legacyImports": false

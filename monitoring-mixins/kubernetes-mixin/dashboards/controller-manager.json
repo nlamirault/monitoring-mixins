@@ -7,7 +7,7 @@
             "keepTime": true,
             "tags": [
                "kubernetes-mixin",
-               "monitoring-mixins-v1.13.0"
+               "monitoring-mixins-v1.14.0"
             ],
             "targetBlank": false,
             "title": "Kubernetes",
@@ -538,7 +538,7 @@
       "schemaVersion": 39,
       "tags": [
          "kubernetes-mixin",
-         "monitoring-mixins-v1.13.0"
+         "monitoring-mixins-v1.14.0"
       ],
       "templating": {
          "list": [
