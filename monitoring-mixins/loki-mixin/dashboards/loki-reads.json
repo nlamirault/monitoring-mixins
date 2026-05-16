@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "loki-mixin",
-               "monitoring-mixins-v1.14.0"
+               "monitoring-mixins-auto"
             ],
             "targetBlank": false,
             "title": "Loki Dashboards",
@@ -2393,7 +2393,7 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": true,
-            "title": "TSBD Index",
+            "title": "TSDB Index",
             "titleSize": "h6"
          },
          {
@@ -2740,7 +2740,7 @@
       "style": "dark",
       "tags": [
          "loki-mixin",
-         "monitoring-mixins-v1.14.0"
+         "monitoring-mixins-auto"
       ],
       "templating": {
          "list": [
