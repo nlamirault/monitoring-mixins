@@ -17,7 +17,7 @@
           "subdir": "production/loki-mixin"
         }
       },
-      "version": "v3.7.4"
+      "version": "v3.7.7"
     }
   ],
   "legacyImports": true
