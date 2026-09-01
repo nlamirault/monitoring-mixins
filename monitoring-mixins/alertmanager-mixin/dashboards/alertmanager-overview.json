@@ -47,7 +47,7 @@
                   "mode": "multi"
                }
             },
-            "pluginVersion": "v11.4.0",
+            "pluginVersion": "v13.0.0",
             "targets": [
                {
                   "datasource": {
@@ -95,7 +95,7 @@
                   "mode": "multi"
                }
             },
-            "pluginVersion": "v11.4.0",
+            "pluginVersion": "v13.0.0",
             "targets": [
                {
                   "datasource": {
@@ -165,7 +165,7 @@
                   "mode": "multi"
                }
             },
-            "pluginVersion": "v11.4.0",
+            "pluginVersion": "v13.0.0",
             "repeat": "integration",
             "targets": [
                {
@@ -223,7 +223,7 @@
                   "mode": "multi"
                }
             },
-            "pluginVersion": "v11.4.0",
+            "pluginVersion": "v13.0.0",
             "repeat": "integration",
             "targets": [
                {
@@ -261,7 +261,7 @@
       "schemaVersion": 39,
       "tags": [
          "alertmanager-mixin",
-         "monitoring-mixins-v1.14.0"
+         "monitoring-mixins-auto"
       ],
       "templating": {
          "list": [
