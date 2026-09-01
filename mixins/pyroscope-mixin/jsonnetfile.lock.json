@@ -38,8 +38,8 @@
           "subdir": "operations/pyroscope/jsonnet/pyroscope-mixin/pyroscope-mixin"
         }
       },
-      "version": "d969f943947df3a22525418ac3f9f1ae86b5c13f",
-      "sum": "8ruCWQHfhd+RHAUnFBVl6Seryd9EEqCXZUm/dsSW5Wc="
+      "version": "3946e6e9c7bdae5f2666a9ddabbd7de385f0afe9",
+      "sum": "++5mN0tRsOPUzw5XSQ4U4A056bTp7blRIJYse4nHsVA="
     }
   ],
   "legacyImports": false
