@@ -14,7 +14,7 @@
             "keepTime": true,
             "tags": [
                "pyroscope-mixin",
-               "monitoring-mixins-v1.14.0"
+               "monitoring-mixins-auto"
             ],
             "targetBlank": false,
             "title": "Pyroscope Dashboards",
@@ -738,7 +738,7 @@
       "style": "dark",
       "tags": [
          "pyroscope-mixin",
-         "monitoring-mixins-v1.14.0"
+         "monitoring-mixins-auto"
       ],
       "templating": {
          "list": [
