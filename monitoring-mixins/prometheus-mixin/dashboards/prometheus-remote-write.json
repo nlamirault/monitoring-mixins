@@ -703,6 +703,91 @@
             ],
             "title": "Enqueue Retries",
             "type": "timeseries"
+         },
+         {
+            "collapsed": false,
+            "gridPos": {
+               "h": 1,
+               "w": 24,
+               "x": 0,
+               "y": 48
+            },
+            "id": 22,
+            "panels": [ ],
+            "title": "Latencies",
+            "type": "row"
+         },
+         {
+            "datasource": {
+               "type": "prometheus",
+               "uid": "$datasource"
+            },
+            "fieldConfig": {
+               "defaults": {
+                  "custom": {
+                     "fillOpacity": 10,
+                     "showPoints": "never"
+                  },
+                  "unit": "s"
+               }
+            },
+            "gridPos": {
+               "h": 7,
+               "w": 24,
+               "x": 0,
+               "y": 49
+            },
+            "id": 23,
+            "options": {
+               "tooltip": {
+                  "mode": "multi"
+               }
+            },
+            "pluginVersion": "v13.0.0",
+            "targets": [
+               {
+                  "datasource": {
+                     "type": "prometheus",
+                     "uid": "$datasource"
+                  },
+                  "expr": "histogram_quantile(0.95, sum by (le, cluster, instance, remote_name, url) (rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=~\"$cluster\", instance=~\"$instance\", url=~\"$url\"}[5m])))\n",
+                  "format": "time_series",
+                  "intervalFactor": 2,
+                  "legendFormat": "{{cluster}}:{{instance}} {{remote_name}}:{{url}} p95"
+               },
+               {
+                  "datasource": {
+                     "type": "prometheus",
+                     "uid": "$datasource"
+                  },
+                  "expr": "histogram_quantile(0.99, sum by (le, cluster, instance, remote_name, url) (rate(prometheus_remote_storage_sent_batch_duration_seconds_bucket{cluster=~\"$cluster\", instance=~\"$instance\", url=~\"$url\"}[5m])))\n",
+                  "format": "time_series",
+                  "intervalFactor": 2,
+                  "legendFormat": "{{cluster}}:{{instance}} {{remote_name}}:{{url}} p99"
+               },
+               {
+                  "datasource": {
+                     "type": "prometheus",
+                     "uid": "$datasource"
+                  },
+                  "expr": "histogram_quantile(0.95, sum by (cluster, instance, remote_name, url) (rate(prometheus_remote_storage_sent_batch_duration_seconds{cluster=~\"$cluster\", instance=~\"$instance\", url=~\"$url\"}[5m])))\n",
+                  "format": "time_series",
+                  "intervalFactor": 2,
+                  "legendFormat": "{{cluster}}:{{instance}} {{remote_name}}:{{url}} p95 (native)"
+               },
+               {
+                  "datasource": {
+                     "type": "prometheus",
+                     "uid": "$datasource"
+                  },
+                  "expr": "histogram_quantile(0.99, sum by (cluster, instance, remote_name, url) (rate(prometheus_remote_storage_sent_batch_duration_seconds{cluster=~\"$cluster\", instance=~\"$instance\", url=~\"$url\"}[5m])))\n",
+                  "format": "time_series",
+                  "intervalFactor": 2,
+                  "legendFormat": "{{cluster}}:{{instance}} {{remote_name}}:{{url}} p99 (native)"
+               }
+            ],
+            "title": "Send Batch Duration (p95 / p99)",
+            "type": "timeseries"
          }
       ],
       "schemaVersion": 39,
