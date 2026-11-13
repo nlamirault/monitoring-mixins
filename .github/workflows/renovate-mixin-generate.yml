@@ -125,7 +125,7 @@ jobs:
     - name: Install mixtool
       if: steps.detect.outputs.skip != 'true'
       run: |
-        go install github.com/monitoring-mixins/mixtool/cmd/mixtool@latest
+        go install github.com/monitoring-mixins/mixtool/cmd/mixtool@main 
         echo "${HOME}/go/bin" >> "${GITHUB_PATH}"
 
     - name: Generate mixin
